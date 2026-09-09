@@ -262,9 +262,62 @@
   footer{text-align:center;color:var(--ink-3);font-size:12px;padding:18px 0 28px;border-top:1px solid var(--line);margin-top:10px;line-height:1.8}
   @media(max-width:1024px){.flow-steps{grid-template-columns:repeat(4,1fr)}.stats{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:680px){.flow-steps{grid-template-columns:repeat(2,1fr)}.top-title h1{font-size:17px}}
+
+  /* ===== 四大系统一级导航 ===== */
+  .systabs{display:flex;gap:9px;flex-wrap:wrap;padding:16px 22px 4px;max-width:1240px;margin:0 auto}
+  .systabs button{border:1.5px solid var(--line);background:#fff;color:var(--ink-2);border-radius:14px;padding:11px 15px;cursor:pointer;font-family:inherit;text-align:left;transition:.18s;display:flex;gap:10px;align-items:center;min-width:236px}
+  .systabs button .st-no{flex:none;width:26px;height:26px;border-radius:8px;color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .systabs button .st-info{display:flex;flex-direction:column;gap:2px}
+  .systabs button .st-name{font-size:13.5px;font-weight:800;color:var(--ink-1)}
+  .systabs button .st-sub{font-size:11px;color:var(--ink-3);font-weight:400}
+  .systabs button:hover{border-color:#bcd0ee;box-shadow:0 6px 18px rgba(30,64,140,.07)}
+  .systabs button.on{background:linear-gradient(135deg,var(--header),#35548f);color:#fff;border-color:transparent}
+  .systabs button.on .st-name{color:#fff}
+  .systabs button.on .st-sub{color:rgba(255,255,255,.85)}
+  .sysview{display:none}
+  .sysview.on{display:block}
+  body[data-sys="1"] nav.tabs,body[data-sys="1"] .wrap,
+  body[data-sys="2"] nav.tabs,body[data-sys="2"] .wrap,
+  body[data-sys="3"] nav.tabs,body[data-sys="3"] .wrap{display:none}
+  /* 系统面板通用 */
+  .sys-hero{max-width:1240px;margin:18px auto 0;padding:0 22px}
+  .sys-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin-bottom:18px}
+  .sys-card h3{font-size:16px;margin:0 0 4px;font-weight:800;color:var(--header);display:flex;align-items:center;gap:8px}
+  .sys-card h3 .bar{width:4px;height:16px;border-radius:3px;background:var(--header)}
+  .sys-card .hint{font-size:12.5px;color:var(--ink-3);font-weight:400;margin-left:2px}
+  .sys-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:16px}
+  /* 系统一：项目全景 */
+  .projcard{border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:#fbfcff;position:relative}
+  .projcard .ph{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
+  .projcard .ph .nm{font-size:14px;font-weight:800;color:var(--ink-1)}
+  .projcard .ph .meta{font-size:11.5px;color:var(--ink-3)}
+  .gateflow{display:flex;gap:5px;margin:10px 0 12px}
+  .gateflow .g{flex:1;height:30px;border-radius:7px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;line-height:1.1;background:#eef1f7;color:#9aa3b5;border:1px solid #e1e6ef}
+  .gateflow .g b{font-size:10.5px}
+  .gateflow .g small{font-size:9px;font-weight:400;margin-top:1px;color:inherit}
+  .gateflow .g.done{background:linear-gradient(135deg,#34d399,#10b981);color:#fff;border-color:transparent}
+  .gateflow .g.cur{background:linear-gradient(135deg,#60a5fa,#3b82f6);color:#fff;border-color:transparent;box-shadow:0 0 0 2px rgba(59,130,246,.25)}
+  .gateflow .g.lock{background:#f1f3f8;color:#b0b8c5;border:1px dashed #d5dbe6}
+  .projmeta{font-size:12px;color:var(--ink-2);line-height:1.7}
+  .projmeta .tagp{display:inline-block;font-size:10.5px;font-weight:800;padding:1px 8px;border-radius:12px;margin-right:4px}
+  .gateverdict{margin-top:10px;font-size:12.5px;padding:9px 12px;border-radius:9px;background:#f4f7fc;border:1px solid #e3e9f4}
+  .gateverdict.ok{background:#eafaf2;border-color:#bfe9d3;color:#186b3a}
+  .gateverdict.warn{background:#fff8ec;border-color:#f1dfb4;color:#8a6116}
+  .gateverdict.block{background:#fdf0f0;border-color:#f0c9c9;color:#9c2f2f}
+  /* 系统二：设计审查 */
+  .drstep{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:11px;padding:11px 14px;background:#fafbff;margin-bottom:8px}
+  .drstep .ico{flex:none;width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;background:#e8eefb;color:var(--header)}
+  .drstep .bd{flex:1;font-size:13px;color:var(--ink-2);line-height:1.6}
+  .drstep .bd b{color:var(--ink-1)}
+  /* 系统三：MP 反馈 */
+  .mpstat{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+  .mpstat .ms{flex:1;min-width:130px;background:#fbfcff;border:1px solid var(--line);border-radius:13px;padding:14px 16px;text-align:center}
+  .mpstat .ms b{display:block;font-size:24px;font-weight:800;color:var(--header)}
+  .mpstat .ms span{font-size:12px;color:var(--ink-3)}
+  .feedbackitem{border:1px solid var(--line);border-radius:11px;padding:11px 14px;margin-bottom:8px;background:#fbfcff;font-size:12.5px;color:var(--ink-2);line-height:1.6}
 </style>
 </head>
-<body>
+<body data-sys="4">
 
 <header class="topbar">
   <div class="topbar-in">
@@ -277,6 +330,20 @@
 </header>
 
 <div class="connbar"><div class="conn-inner" id="connbar"><span class="dot"></span><span id="conntxt">正在检查与 Supabase 云数据库的连接…</span></div></div>
+
+<nav class="systabs" id="systabs">
+  <button data-sys="1"><span class="st-no" style="background:#2563eb">一</span><span class="st-info"><span class="st-name">项目审查与阶段控制</span><span class="st-sub">DR1-DR7 关卡 · 门禁放行</span></span></button>
+  <button data-sys="2"><span class="st-no" style="background:#7c3aed">二</span><span class="st-info"><span class="st-name">基于检查表的设计审查系统</span><span class="st-sub">专家 · 任务控制 · 逐步</span></span></button>
+  <button data-sys="3"><span class="st-no" style="background:#0f6e56">三</span><span class="st-info"><span class="st-name">MP 和设计反馈</span><span class="st-sub">MP情报库 · 标准 · 产品规格</span></span></button>
+  <button data-sys="4" class="on"><span class="st-no" style="background:#d97706">四</span><span class="st-info"><span class="st-name">方法和工具</span><span class="st-sub">QFD · DOE · FMEA · TT&amp;T</span></span></button>
+</nav>
+
+<!-- ============ 系统一：项目审查与阶段控制 ============ -->
+<section class="sysview" id="sysview-1"></section>
+<!-- ============ 系统二：基于检查表的设计审查系统 ============ -->
+<section class="sysview" id="sysview-2"></section>
+<!-- ============ 系统三：MP 和设计反馈 ============ -->
+<section class="sysview" id="sysview-3"></section>
 
 <nav class="tabs">
   <button data-tab="tools" class="on">🧭 工具导航</button>
@@ -826,6 +893,30 @@ const PHASES=[
  {p:"标准化与日常管理",c:"#4f46e5",c2:"#818cf8",d:"固化 · 日清 · 目标"}
 ];
 const $=s=>document.querySelector(s);
+
+/* ================= 四大系统一级导航切换 ================= */
+const SYS_META={
+ 1:{name:'项目审查与阶段控制',load:loadSys1},
+ 2:{name:'基于检查表的设计审查系统',load:loadSys2},
+ 3:{name:'MP 和设计反馈',load:loadSys3},
+ 4:{name:'方法和工具',load:null}
+};
+function showSystem(n){
+  document.body.setAttribute('data-sys',String(n));
+  document.querySelectorAll('#systabs button').forEach(b=>b.classList.toggle('on',+b.dataset.sys===n));
+  document.querySelectorAll('section.sysview').forEach(s=>s.classList.remove('on'));
+  if(n>=1&&n<=3){
+    const sv=document.getElementById('sysview-'+n);
+    sv.classList.add('on');
+    sv.innerHTML='<div class="sys-hero"></div>'; /* 清空，避免二次渲染重影 */
+    SYS_META[n].load();
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('#systabs button').forEach(b=>{
+  b.addEventListener('click',()=>showSystem(+b.dataset.sys));
+});
+
 
 /* ---------- 渲染工具导航 ---------- */
 $("#flowSteps").innerHTML=PHASES.map(ph=>{
@@ -3024,10 +3115,241 @@ concl(c){
   html+='<p style="font-size:13px;color:var(--ink-3)">填入年效益后自动测算投资回收期与评级。</p>';
  }
  if(c.bdetail)html+='<table><tr><th style="width:150px">效益明细</th><td>'+gesc(c.bdetail)+'</td></tr></table>';
- if(vals[0]&&vals[0].v>0)html+='<p style="font-size:12.5px;color:var(--ink-3)">最大成本项：'+vals[0].k+'（'+vals[0].v+' 万，'+(tot?Math.round(vals[0].v/tot*100):0)+'%）——优化 LCC 优先从它下手。正式登记请到「计算型工具 → LCC 成本统计」。</p>';
+  if(vals[0]&&vals[0].v>0)html+='<p style="font-size:12.5px;color:var(--ink-3)">最大成本项：'+vals[0].k+'（'+vals[0].v+' 万，'+(tot?Math.round(vals[0].v/tot*100):0)+'%）——优化 LCC 优先从它下手。正式登记请到「计算型工具 → LCC 成本统计」。</p>';
  return html;
 }};
 
+/* ================= 系统一：项目审查与阶段控制 ================= */
+async function loadSys1(){
+  const root=document.getElementById('sysview-1');
+  root.innerHTML='<div class="sys-hero"></div>';
+  const hero=root.querySelector('.sys-hero');
+  let projects=[],drAll=[];
+  if(tableOK.em_projects&&PROJECTS.length){projects=PROJECTS.slice();}
+  else if(tableOK.em_projects){try{projects=await api("em_projects?select=*&order=created_at.desc");PROJECTS=projects.slice();refreshProjectSelects();}catch(e){}}
+  if(tableOK.em_dr_records){try{drAll=await api("em_dr_records?select=*");}catch(e){}}
+  const drMap={};
+  drAll.forEach(r=>{if(!drMap[r.project_id])drMap[r.project_id]=[];drMap[r.project_id].push(r);});
+  const active=projects.filter(p=>p.status!=="closed");
+  const closed=projects.filter(p=>p.status==="closed");
+  let gateSum=0;
+  projects.forEach(p=>{const recs=drMap[p.id]||[];let lp=0;[1,2,3,4,5,6,7].forEach(n=>{const r=recs.filter(x=>x.dr_no===n)[0];if(r&&(r.result==="pass"||r.result==="conditional_pass"))lp=n;});gateSum+=lp;});
+  const gatePct=(projects.length&&projects.length>0)?(gateSum/(projects.length*7)*100):0;
+  hero.innerHTML=
+   '<div class="sys-card">'+
+   '<h3><span class="bar"></span>项目审查与阶段控制 <span class="hint">DR1-DR7 关卡门禁 · 未通过不放行下一阶段</span></h3>'+
+   '<div style="font-size:13px;color:var(--ink-2);line-height:1.9;margin-top:4px">'+
+   'EM 项目按 <b>DR1 早期调研 → DR7 反馈</b> 七步推进，每阶段末端设<b>设计评审关卡</b>（DR 门禁）。A 类项目（1 级优先）要求<b>逐关评审、不可跳关</b>；B/C 类相邻关卡可合并。'+
+   '下方「打开关卡登记」复用项目台账的 DR 评审弹窗，登记通过后系统自动推进项目阶段。</div>'+
+   '<div class="mpstat" style="margin-top:14px">'+
+   '<div class="ms"><b>'+projects.length+'</b><span>在管项目</span></div>'+
+   '<div class="ms"><b>'+active.length+'</b><span>进行中</span></div>'+
+   '<div class="ms"><b>'+closed.length+'</b><span>已结案</span></div>'+
+   '<div class="ms"><b>'+Math.round(gatePct)+'%</b><span>平均关卡进度</span></div>'+
+   '</div></div>'+
+   '<div class="sys-card"><h3><span class="bar"></span>项目全景看板 <span class="hint">点击「打开关卡登记」记录该项目的 DR 评审</span></h3>'+
+   '<div class="sys-grid" id="s1_cards"></div></div>';
+  const cw=hero.querySelector('#s1_cards');
+  if(!projects.length){cw.innerHTML='<div class="nodata2">暂无项目。请到「系统四 → EM项目台账」登记第一个 EM 项目。</div>';return;}
+  cw.innerHTML=projects.map(p=>{
+    const recs=drMap[p.id]||[];
+    const curStage=p.dr_stage||1;
+    let gates='';let preOk=true;
+    for(let n=1;n<=7;n++){
+      const r=recs.filter(x=>x.dr_no===n)[0];
+      const passed=r&&(r.result==="pass"||r.result==="conditional_pass");
+      const isCur=(n===curStage);
+      let cls;
+      if(passed)cls="done";
+      else if(isCur)cls="cur";
+      else cls="lock";
+      if(n<curStage&&!passed)preOk=false;
+      gates+='<div class="g '+cls+'" title="DR'+n+' '+DR_META[n]+'"><b>DR'+n+'</b><small>'+DR_META[n].slice(0,4)+'</small></div>';
+    }
+    let verdict;
+    if(p.status==="closed"){verdict='<div class="gateverdict ok">✅ 项目已结案，DR7 反馈完成，产出 MP 情报回传。</div>';}
+    else if(preOk){verdict='<div class="gateverdict ok">✅ 前序关卡已放行，可推进至 <b>'+DR_META[curStage]+'</b>。</div>';}
+    else{verdict='<div class="gateverdict block">⛔ 存在未通过的前序关卡，按门禁控制<b>不得放行</b>下一阶段（A 类须逐关评审）。</div>';}
+    const acBadge=(p.abc_class&&ABC_CLASS[p.abc_class])?('<span class="tagp" style="background:'+(p.abc_class==="A"?"#fde8e8;color:#b02a2a":p.abc_class==="B"?"#fff3e0;color:#b07b1e":"#e7f6ec;color:#1d7a3a")+'">'+p.abc_class+' 类</span>'):'<span class="tagp" style="background:#eef1f7;color:#7c8698">未分级</span>';
+    return '<div class="projcard">'+
+     '<div class="ph"><div style="min-width:0"><div class="nm">'+esc(p.name)+'</div><div class="meta">'+esc(p.code||"—")+' · '+esc(p.ptype)+' · 负责：'+esc(p.leader||"—")+'</div></div>'+acBadge+'</div>'+
+     '<div class="gateflow">'+gates+'</div>'+
+     '<div class="projmeta">当前阶段：<b>'+DR_META[curStage]+'（DR'+curStage+'）</b></div>'+
+     verdict+
+     '<div class="fbtns" style="margin-top:10px"><button class="btn sm primary" onclick="openDr('+p.id+')">🔓 打开关卡登记</button><button class="btn sm ghost" onclick="gotoProjTab()">📁 项目台账</button></div></div>';
+  }).join("");
+}
+function gotoProjTab(){showSystem(4);setTimeout(function(){var b=document.querySelector('.tabs button[data-tab="projects"]');if(b)b.click();},60);}
+
+/* ================= 系统二：基于检查表的设计审查系统 ================= */
+function dsrGet(pid,dr){try{return JSON.parse(localStorage.getItem('dsr_'+pid+'_'+dr)||'null');}catch(e){return null;}}
+function dsrSet(pid,dr,obj){localStorage.setItem('dsr_'+pid+'_'+dr,JSON.stringify(obj));}
+function dsrLocked(p,dr){
+  // 若该关卡未到达（dr>当前阶段且不能跳关），A类不可提前审查
+  if(dr>p.dr_stage&&p.abc_class===undefined)return false;
+  return false;
+}
+async function loadSys2(){
+  const root=document.getElementById('sysview-2');
+  root.innerHTML='<div class="sys-hero"></div>';
+  const hero=root.querySelector('.sys-hero');
+  let projects=[];
+  if(tableOK.em_projects&&PROJECTS.length)projects=PROJECTS.slice();
+  else if(tableOK.em_projects){try{projects=await api("em_projects?select=*&order=created_at.desc");}catch(e){}}
+  // 统计已审查关卡
+  let reviewed=0,failed=0;
+  projects.forEach(p=>{[1,2,3,4,5,6,7].forEach(n=>{const r=dsrGet(p.id,n);if(r)reviewed++;if(r&&r.verdict==="fail")failed++;});});
+  const optP='<option value="">（选择项目）</option>'+projects.map(p=>'<option value="'+p.id+'">'+esc(p.name)+'</option>').join("");
+  const optD=[1,2,3,4,5,6,7].map(n=>'<option value="'+n+'">DR'+n+' '+DR_META[n]+'</option>').join("");
+  hero.innerHTML=
+   '<div class="sys-card">'+
+   '<h3><span class="bar"></span>基于检查表的设计审查系统 <span class="hint">每关卡配检查表 · 专家 + 任务控制 + 逐步三要素审查</span></h3>'+
+   '<div style="font-size:13px;color:var(--ink-2);line-height:1.9;margin-top:4px">'+
+   '设计审查系统在 <b>每个 DR 关卡</b> 配备一套<b>检查表</b>，从三个控制维度把关：<b>专家</b>（跨职能专家评审，覆盖研发/品控/生产/EM）、<b>任务控制</b>（确认该关卡交付物与标准任务完成情况）、<b>逐步</b>（按七步逐关推进，形成可追溯的评审台账）。'+
+   '审查记录存本地浏览器；正式 DR 评审放行请到「系统四 → 项目台账 → DR关卡」登记。</div>'+
+   '<div class="mpstat" style="margin-top:14px">'+
+   '<div class="ms"><b>'+reviewed+'</b><span>已审查关卡</span></div>'+
+   '<div class="ms"><b>'+failed+'</b><span>发现问题关</span></div>'+
+   '<div class="ms"><b>'+projects.length+'</b><span>在管项目</span></div>'+
+   '</div></div>'+
+   '<div class="sys-card"><h3><span class="bar"></span>设计审查表单 <span class="hint">选择项目与关卡 → 三要素审查 → 自动判定</span></h3>'+
+   '<div class="fgrid">'+
+   '<div class="fld"><label>关联项目 <i>*</i></label><select id="ds2_prj" onchange="ds2Load()">'+optP+'</select></div>'+
+   '<div class="fld"><label>审查关卡 <i>*</i></label><select id="ds2_dr" onchange="ds2Load()">'+optD+'</select></div>'+
+   '</div><div id="ds2_body"></div></div>'+
+   '<div class="sys-card"><h3><span class="bar"></span>审查记录汇总 <span class="hint">所有已审查关卡</span></h3><div id="ds2_recs">暂无记录</div></div>';
+  // 渲染记录汇总
+  const recBox=hero.querySelector('#ds2_recs');
+  let allRecs=[];
+  projects.forEach(p=>{[1,2,3,4,5,6,7].forEach(n=>{const r=dsrGet(p.id,n);if(r)allRecs.push({p:p,dr:n,r:r});});});
+  if(allRecs.length){
+    allRecs.sort((a,b)=>b.r.ts-a.r.ts);
+    recBox.innerHTML=allRecs.map(x=>{
+      const vc=x.r.verdict==="pass"?['✅ 放行','#1d7a3a']:(x.r.verdict==="conditional"?['⚠️ 有条件放行','#b07b1e']:['⛔ 未通过','#9c2f2f']);
+      return '<div class="feedbackitem"><b>'+esc(x.p.name)+'</b> · DR'+x.dr+' '+DR_META[x.dr]+'　<span style="font-weight:800;color:'+vc[1]+'">'+vc[0]+'</span>'+
+       (x.r.experts?'<br><b>专家评审：</b>'+esc(x.r.experts):'')+
+       (x.r.tasks?'<br><b>任务控制：</b>'+esc(x.r.tasks):'')+
+       (x.r.issues?'<br><b>问题点：</b>'+esc(x.r.issues):'')+
+       (x.r.actions?'<br><b>措施：</b>'+esc(x.r.actions):'')+
+       '<div style="font-size:11.5px;color:var(--ink-3);margin-top:4px">'+new Date(x.r.ts).toLocaleString('zh-CN')+'</div></div>';
+    }).join("");
+  }
+}
+function ds2Load(){
+  const pid=$('#ds2_prj').value,dr=$('#ds2_dr').value;
+  const body=$('#ds2_body');if(!pid||!dr){body.innerHTML='<p style="font-size:13px;color:var(--ink-3);margin-top:14px">请选择项目与关卡，开始设计审查。</p>';return;}
+  const p=PROJECTS.find(x=>x.id===+pid)||(tableOK.em_projects?PROJECTS.find(x=>x.id===pid):null);
+  const tasks=DR_TASKS[+dr]||[];
+  const saved=dsrGet(pid,dr)||{};
+  const chip=T=>'<span style="display:inline-block;font-size:11.5px;color:var(--ink-2);background:#f0f4fa;border-radius:5px;padding:2px 8px;margin:2px 4px 0 0">'+T+'</span>';
+  body.innerHTML=
+   '<div class="drstep"><div class="ico">👥</div><div class="bd"><b>① 专家评审</b>（跨职能：研发/品控/生产/EM）<br>填参与评审的专家与评审结论。</div></div>'+
+   '<div class="fld"><label>评审专家</label><input id="d2_exp" value="'+esc(saved.experts||'')+'" placeholder="如：研发张工、品控李工、生产王工、EM 赵工"></div>'+
+   '<div class="drstep"><div class="ico">🎯</div><div class="bd"><b>② 任务控制</b>（确认本关卡标准任务交付情况）<br>下方为 DR'+dr+' 官方标准任务清单，逐项确认完成。</div></div>'+
+   '<div style="margin:8px 0 12px">'+tasks.map(chip).join("")+'</div>'+
+   '<div class="fld"><label>任务完成情况</label><textarea id="d2_tasks" rows="2" placeholder="如：'+tasks[0]+' 已完成；'+tasks[1]+' 待补验证报告">'+esc(saved.tasks||'')+'</textarea></div>'+
+   (saved&&saved.check?'':'')+
+   '<div class="drstep"><div class="ico">🧭</div><div class="bd"><b>③ 逐步控制</b>（记录问题点与改善措施，问题未闭环不得放行）</div></div>'+
+   '<div class="fld"><label>问题点</label><textarea id="d2_issue" rows="2" placeholder="本关卡发现的未闭环问题">'+esc(saved.issues||'')+'</textarea></div>'+
+   '<div class="fld"><label>改善措施</label><textarea id="d2_act" rows="2" placeholder="对应措施 / 责任 / 期限">'+esc(saved.actions||'')+'</textarea></div>'+
+   '<div class="fld"><label>审查结论</label><select id="d2_verdict">'+
+   '<option value="">— 请选择 —</option>'+
+   '<option value="pass"'+(saved.verdict==="pass"?" selected":"")+'>✅ 通过，放行</option>'+
+   '<option value="conditional"'+(saved.verdict==="conditional"?" selected":"")+'>⚠️ 有条件通过（附条件）</option>'+
+   '<option value="fail"'+(saved.verdict==="fail"?" selected":"")+'>⛔ 不通过，需整改</option></select></div>'+
+   '<div class="fbtns"><button class="btn primary" onclick="ds2Save()">保存审查记录</button></div>'+
+   '<div id="ds2_auto" style="margin-top:12px"></div>';
+  ds2Auto();
+}
+function ds2Auto(){
+  const pid=$('#ds2_prj').value,dr=$('#ds2_dr').value;if(!pid||!dr)return;
+  const issue=($('#d2_issue').value||'').trim(),act=($('#d2_act').value||'').trim();
+  const box=$('#ds2_auto');
+  let advice='';
+  if(issue&&!act){advice='<div class="gateverdict warn">🚧 已记录问题点，但未填改善措施——按门禁控制，<b>问题未闭环不得放行</b>。</div>';}
+  else if(issue&&act){advice='<div class="gateverdict ok">✅ 问题已填措施，闭环后可放行；审查通过后请到「项目台账 → DR关卡」登记正式放行。</div>';}
+  box.innerHTML=advice||'';
+}
+function ds2Save(){
+  const pid=$('#ds2_prj').value,dr=$('#ds2_dr').value;
+  if(!pid||!dr){toast('请先选择项目与关卡','err');return;}
+  const verdict=$('#d2_verdict').value;
+  if(!verdict){toast('请选择审查结论（通过 / 有条件 / 不通过）','err');return;}
+  const obj={experts:($('#d2_exp').value||'').trim(),tasks:($('#d2_tasks').value||'').trim(),issues:($('#d2_issue').value||'').trim(),actions:($('#d2_act').value||'').trim(),verdict,ts:Date.now()};
+  dsrSet(pid,dr,obj);
+  toast('设计审查记录已保存（DR'+dr+'）✓','ok');
+  loadSys2();
+}
+
+/* ================= 系统三：MP 和设计反馈 ================= */
+const MP_STD_CAT=["设备","能源","安全","品质","环境","卫生","绩效","土建","制度","流程","成本","异物"];
+function fbGet(k){try{return JSON.parse(localStorage.getItem(k)||'[]');}catch(e){return [];}}
+function fbSet(k,a){localStorage.setItem(k,JSON.stringify(a));}
+function fbGenId(prefix){return prefix+Date.now().toString(36).toUpperCase();}
+async function loadSys3(){
+  const root=document.getElementById('sysview-3');
+  root.innerHTML='<div class="sys-hero"></div>';
+  const hero=root.querySelector('.sys-hero');
+  const mpRow=!tableOK.em_mp_info?await fbGet('fb_mp'):[];// 兜底
+  let mpList=[];
+  if(tableOK.em_mp_info){try{mpList=await api("em_mp_info?select=*&order=created_at.desc");PROJECTS; }catch(e){}}
+  else mpList=mpRow;
+  const stds=fbGet('fb_std');
+  const specs=fbGet('fb_spec');
+  const mpStd=Math.round(MP_STD_CAT.length)+1;
+  const fmtBenefit=x=>x?((+x)>=10000?((+x/10000).toFixed(1)+' 万'):x+' 元'):'—';
+  hero.innerHTML=
+   '<div class="sys-card">'+
+   '<h3><span class="bar"></span>MP 和设计反馈 <span class="hint">问题→改善→沉淀为可复用标准 · 设计缺陷回传 MP 闭环</span></h3>'+
+   '<div style="font-size:13px;color:var(--ink-2);line-height:1.9;margin-top:4px">'+
+   '<b>MP（Maintainability Prevention）</b>是设备变更与改善的<b>沉淀系统</b>：把项目/设备上发现的问题，转化为可复用的工程标准（MP情报库 → 标准 → 产品规格 → MP数据表）。'+
+   'DR7 结案时把项目缺陷<b>回传 MP 情报库</b>（7.2 MP 信息上传），完成「设计反馈」闭环——同类设备选型即可复用，避免重蹈覆辙。</div>'+
+   '<div class="mpstat" style="margin-top:14px">'+
+   '<div class="ms"><b>'+mpList.length+'</b><span>MP 情报</span></div>'+
+   '<div class="ms"><b>'+stds.length+'</b><span>标准载体</span></div>'+
+   '<div class="ms"><b>'+specs.length+'</b><span>产品规格</span></div>'+
+   '<div class="ms"><b>'+mpStd+'</b><span>情报类别</span></div>'+
+   '</div></div>'+
+   '<div class="sys-card"><h3><span class="bar"></span>① MP 情报库 <span class="hint">从「系统四 → 计算型工具 → MP 情报库」登记正式情报，此处汇总展示</span></h3>'+
+   (mpList.length?('<div class="tblwrap" style="max-height:340px;overflow:auto"><table class="tbl"><thead><tr><th>情报ID</th><th>名称</th><th>类别</th><th>部门/线</th><th>设备</th><th>投入/收益</th><th>状态</th></tr></thead><tbody>'+
+     mpList.slice(0,30).map(r=>'<tr><td>'+esc(r.info_no||'—')+'</td><td><b>'+esc(r.name||r.mp_name||'')+'</b></td><td>'+esc(r.category||'')+'</td><td>'+esc(r.dept||'')+'/'+esc(r.line||'')+'</td><td>'+esc(r.machine||'')+'</td><td>'+esc(r.cost||'0')+'/'+fmtBenefit(r.benefit)+'</td><td>'+esc(r.status||'')+'</td></tr>').join("")+
+     '</tbody></table></div>')
+   :'<div style="font-size:13px;color:var(--ink-3)">暂无 MP 情报。到「系统四 → 计算型工具 → MP 情报库」登记第一条。</div>')+
+   '</div>'+
+   '<div class="sys-grid" style="grid-template-columns:1fr 1fr;gap:16px">'+
+   '<div class="sys-card" style="margin-bottom:0"><h3><span class="bar"></span>② 标准载体 <span class="hint">OPL / CIL / SOP / 标准卡</span></h3>'+
+   '<div class="fgrid">'+
+   '<div class="fld"><label>载体类型</label><select id="fb_stdtype"><option>OPL 一点课程</option><option>CIL 清洁点检润滑</option><option>SOP 标准作业</option><option>工艺标准卡</option></select></div>'+
+   '<div class="fld"><label>载体名称</label><input id="fb_stdname" placeholder="如：充填压力标准卡"></div>'+
+   '<div class="fld wide"><label>关联设备/项目</label><input id="fb_stdref" placeholder="如：灌装机#3 / 果冻爽项目"></div>'+
+   '<div class="fld wide"><label>要点</label><textarea id="fb_stdnote" rows="2" placeholder="标准要点 / 适用范围"></textarea></div>'+
+   '<div class="fbtns"><button class="btn primary" onclick="fbSaveStd()">保存标准</button></div></div>'+
+   '<div id="fb_stdlist" style="margin-top:8px;font-size:12.5px;color:var(--ink-2)">'+(stds.length?stds.map((s,i)=>'<div class="feedbackitem"><b>'+esc(s.type)+'</b> · '+esc(s.name)+(s.ref?'<br>关联：'+esc(s.ref):'')+(s.note?'<br>'+esc(s.note):'')+'<div style="margin-top:4px"><button class="btn sm danger" onclick="fbDelStd('+i+')">删除</button></div></div>').join(""):'暂无标准载体')+'</div></div>'+
+   '<div class="sys-card" style="margin-bottom:0"><h3><span class="bar"></span>③ 产品规格 <span class="hint">新产品/新工艺的规格定义</span></h3>'+
+   '<div class="fgrid">'+
+   '<div class="fld"><label>规格名称</label><input id="fb_spname" placeholder="如：无菌灌装机·夹心重量规格"></div>'+
+   '<div class="fld"><label>产品</label><input id="fb_spprod" placeholder="如：果冻爽 200g"></div>'+
+   '<div class="fld wide"><label>规格参数</label><textarea id="fb_spnote" rows="2" placeholder="关键规格 / 公差 / 检验标准"></textarea></div>'+
+   '<div class="fbtns"><button class="btn primary" onclick="fbSaveSpec()">保存规格</button></div></div>'+
+   '<div id="fb_speclist" style="margin-top:8px;font-size:12.5px;color:var(--ink-2)">'+(specs.length?specs.map((s,i)=>'<div class="feedbackitem"><b>'+esc(s.name)+'</b> · '+esc(s.prod||'—')+(s.note?'<br>'+esc(s.note):'')+'<div style="margin-top:4px"><button class="btn sm danger" onclick="fbDelSpec('+i+')">删除</button></div></div>').join(""):'暂无产品规格')+'</div></div>'+
+   '</div>'+
+   '<div class="sys-card"><h3><span class="bar"></span>④ 设计反馈闭环 <span class="hint">项目缺陷 → 回传 MP，同类设备可复用</span></h3>'+
+   '<div style="font-size:13px;color:var(--ink-2);line-height:1.9;margin-bottom:10px">'+
+   '把「系统二设计审查」与「系统四 PDA 缺陷分析」发现的问题，回传为 MP 情报——DR7 结案时（7.2 MP 信息上传）即可沉淀为可复用经验。</div>'+
+   '<div id="fb_loop" style="font-size:13px;color:var(--ink-2)">'+(mpList.length?'当前 MP 情报库已有 <b>'+mpList.length+'</b> 条可复用经验，新设备 DR1-DR2 立项时应优先检索复用。<br><span style="color:var(--ink-3)">提示：到「系统四 → 计算型工具 → DR 关卡/项目台账」完成正式评审与缺陷回传。</span>':'当前情报库较空，建议在项目推进中持续回传改善经验。')+'</div></div>';
+}
+function fbSaveStd(){
+  const name=$('#fb_stdname').value.trim();if(!name){toast('请填写载体名称','err');return;}
+  const a=fbGet('fb_std');a.push({type:$('#fb_stdtype').value,name,ref:$('#fb_stdref').value.trim(),note:$('#fb_stdnote').value.trim(),ts:Date.now()});fbSet('fb_std',a);
+  toast('标准载体已保存 ✓','ok');loadSys3();
+}
+function fbDelStd(i){const a=fbGet('fb_std');a.splice(i,1);fbSet('fb_std',a);loadSys3();}
+function fbSaveSpec(){
+  const name=$('#fb_spname').value.trim();if(!name){toast('请填写规格名称','err');return;}
+  const a=fbGet('fb_spec');a.push({name,prod:$('#fb_spprod').value.trim(),note:$('#fb_spnote').value.trim(),ts:Date.now()});fbSet('fb_spec',a);
+  toast('产品规格已保存 ✓','ok');loadSys3();
+}
+function fbDelSpec(i){const a=fbGet('fb_spec');a.splice(i,1);fbSet('fb_spec',a);loadSys3();}
 
 </script>
 </body>
