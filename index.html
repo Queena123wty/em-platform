@@ -149,6 +149,8 @@
   .gcase h4{font-size:13.5px;margin:0 0 6px;color:#8a6116;display:flex;align-items:center;gap:7px;cursor:pointer;user-select:none}
   .gcase .gcase-bd{font-size:13px;color:var(--ink-2);line-height:1.8}
   .gcase .gcase-bd b{color:#8a6116}
+  .gstep input.demo,.gstep select.demo,.gstep textarea.demo{color:#9aa7b5!important;background:#f8fafc;border-style:dashed;font-style:italic}
+  .gconcl .demo-badge{font-size:11.5px;background:#fff3d6;color:#8a6116;border:1px solid #f0d9a8;border-radius:20px;padding:2px 10px;font-weight:600;margin-left:8px;vertical-align:middle}
   .gstep{background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px 16px;margin-bottom:10px;transition:box-shadow .2s}
   .gstep.done{border-color:#bfe3c8;box-shadow:0 0 0 1px #bfe3c8 inset}
   .gstep .ghd{display:flex;align-items:center;gap:9px;margin-bottom:7px}
@@ -711,13 +713,16 @@
 <!-- ============ Tab 7: 引导式套表（37 工具） ============ -->
 <section class="tab" id="tab-guide">
   <div class="g-top">
-    <div class="g-desc"><b style="color:var(--header)">🧭 引导式电子套表</b>：每个工具一张标准在线表单——先看 <b>📖 案例</b>，再跟着 <b>🧭 分步引导</b> 逐项填写（每填一步，自动告诉你下一步怎么填、并智能检查填写质量），填完自动生成 <b>✅ 结论</b>，可打印存档。<span style="background:#eef2f7;border:1px solid #d7e0ea;color:var(--header);font-size:11.5px;font-weight:600;padding:1px 9px;border-radius:20px;margin-left:8px;vertical-align:middle">v2.1</span></div>
-    <select id="g_tool" onchange="gSelect(this.value)"></select>
+    <div class="g-desc"><b style="color:var(--header)">🧭 引导式电子套表</b>：打开即是示例——表单里<b>灰色斜体为案例示例数据</b>，逐项替换为你的实际数据（替换后自动变黑）；填完自动生成结论，并<b>自动登记使用记录</b>（关联项目与实际数据）。<span style="background:#eef2f7;border:1px solid #d7e0ea;color:var(--header);font-size:11.5px;font-weight:600;padding:1px 9px;border-radius:20px;margin-left:8px;vertical-align:middle">v2.2</span></div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <input id="g_user" placeholder="记录人（自动登记用）" onchange="gSetUser(this.value)" style="border:1px solid var(--line);border-radius:9px;padding:9px 12px;font-size:13px;font-family:inherit;width:158px;color:var(--ink-1);background:#fff">
+      <select id="g_tool" onchange="gSelect(this.value)"></select>
+    </div>
   </div>
   <div id="g_wrap"></div>
 </section>
 
-<footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥<br><span style="color:var(--ink-3)">当前版本 v2.1 · 提示：若页面仍显示旧版，请强制刷新（Mac: ⌘+Shift+R / Windows: Ctrl+F5）</span></footer>
+<footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥<br><span style="color:var(--ink-3)">当前版本 v2.2 · 提示：若页面仍显示旧版，请强制刷新（Mac: ⌘+Shift+R / Windows: Ctrl+F5）</span></footer>
 </div>
 
 <!-- 工具详情弹窗 -->
@@ -1841,7 +1846,7 @@ checkTables().then(()=>{loadProjects();setupRealtime();});
 <script>
 /* ==================== 引导式套表引擎（37 工具） ==================== */
 const GUIDES={};
-let GS={tool:24,vals:{}};
+let GS={tool:24,vals:{},dirty:{},demo:true,savedKey:null,wasDone:false};
 let gInited=false;
 
 function gN(v){const n=parseFloat(String(v).replace(/[^\d.\-]/g,''));return isNaN(n)?null:n;}
@@ -1877,23 +1882,40 @@ function gInit(){
     html+='<option value="'+t.n+'">#'+t.n+' '+gesc(t.name)+'</option>';
   });
   html+='</optgroup>';sel.innerHTML=html;sel.value=GS.tool;
-  renderGuide();
+  const gu=document.getElementById('g_user');
+  if(gu&&!gu.value)gu.value=localStorage.getItem('em_guser')||'';
+  gPrefill();renderGuide();
 }
-function gSelect(n){GS.tool=+n;GS.vals={};const sel=document.getElementById('g_tool');if(sel)sel.value=n;renderGuide();window.scrollTo({top:0,behavior:'smooth'});}
+/* 预填示例数据（灰色）：打开套表默认就是案例，提示替换为实际数据 */
+function gPrefill(){
+  const spec=GUIDES[GS.tool];
+  GS.vals={};GS.dirty={};GS.demo=true;GS.savedKey=null;GS.wasDone=false;
+  if(!spec)return;
+  spec.steps.forEach(st=>{
+    const d=spec.case.data[st.id];
+    let v=(d!==undefined&&d!=='')?String(d):(st.type==='select'&&st.opts?st.opts[0]:'');
+    if(st.type==='select'&&st.opts&&!st.opts.includes(v))v=st.opts[0];
+    if(v)GS.vals[st.id]=v;
+  });
+}
+function gSelect(n){GS.tool=+n;gPrefill();const sel=document.getElementById('g_tool');if(sel)sel.value=n;renderGuide();window.scrollTo({top:0,behavior:'smooth'});}
 function renderGuide(){
   const spec=GUIDES[GS.tool],t=TOOLS.find(x=>x.n===GS.tool);
   const wrap=document.getElementById('g_wrap');
   if(!spec){wrap.innerHTML='<div class="nodata">该工具的引导式套表建设中。</div>';return;}
   wrap.innerHTML=
-   '<div class="gcase"><h4 onclick="var d=this.nextElementSibling;d.style.display=(d.style.display===\'none\'?\'block\':\'none\')">📖 案例参考（点我展开 · 看懂案例再跟练）</h4>'+
-   '<div class="gcase-bd" style="display:none">'+spec.case.bg+'<div style="margin-top:10px"><button class="btn primary" onclick="gCase()">📋 一键载入案例数据，跟着练</button></div></div></div>'+
+   '<div class="gcase"><h4 style="cursor:default">📖 示例数据已载入（灰色斜体）——逐项替换为你的实际数据，替换后自动变黑、结论自动更新</h4>'+
+   '<div class="gcase-bd">'+spec.case.bg+'</div></div>'+
    '<div class="gprog"><span id="g_ptxt"></span><div class="bar"><i id="g_pbar" style="width:0%"></i></div></div>'+
    spec.steps.map((st,i)=>gField(st,i)).join('')+
-   '<div class="gbtns"><button class="btn primary" onclick="gCase()">📋 填入示例</button><button class="btn ghost" onclick="gClear()">🗑 清空重填</button><button class="btn ghost" onclick="window.print()">🖨 打印 / 存档</button></div>'+
+   '<div class="gbtns"><button class="btn ghost" onclick="gCase()">↩️ 恢复示例数据</button><button class="btn ghost" onclick="gClear()">🗑 清空为空白</button><button class="btn primary" onclick="gSaveUsage(false)">📌 保存 / 更新使用记录</button><button class="btn ghost" onclick="window.print()">🖨 打印 / 存档</button></div>'+
    '<div class="gconcl" id="g_concl"></div>';
   spec.steps.forEach(st=>{
     const el=document.getElementById('g_'+st.id);
-    if(el&&GS.vals[st.id]!==undefined)el.value=GS.vals[st.id];
+    if(el&&GS.vals[st.id]!==undefined){
+      el.value=GS.vals[st.id];
+      if(GS.demo&&!GS.dirty[st.id])el.classList.add('demo');
+    }
   });
   spec.steps.forEach(st=>{if(GS.vals[st.id])gOnInput(st.id,true);});
   gProg();gConcl();
@@ -1915,6 +1937,7 @@ function gOnInput(id,keep){
   const st=spec.steps.find(s=>s.id===id);if(!st)return;
   const el=document.getElementById('g_'+id);if(!el)return;
   const v=String(el.value).trim();GS.vals[id]=v;
+  if(!keep){GS.dirty[id]=true;el.classList.remove('demo');}
   const gd=document.getElementById('gd_'+id),stepEl=document.getElementById('gs_'+id);
   const warns=(st.check?st.check(v,GS.vals):gDefaultCheck(st,v));
   const guide=st.guide?st.guide(v,GS.vals):null;
@@ -1927,34 +1950,91 @@ function gOnInput(id,keep){
   stepEl.classList.toggle('done',!!v&&!(warns&&warns.length));
   gProg();gConcl();
 }
+/* 步骤是否可留空：显式 opt 或案例数据本身为空（如 ABC 无风险维度留空按 1 分计） */
+function gStepOpt(spec,s){return !!s.opt||String(spec.case.data[s.id]==null?'':spec.case.data[s.id]).trim()==='';}
 function gProg(){
   const spec=GUIDES[GS.tool];if(!spec)return;
-  const filled=spec.steps.filter(s=>GS.vals[s.id]).length;
+  const req=spec.steps.filter(s=>!gStepOpt(spec,s));
+  const real=req.filter(s=>GS.dirty[s.id]&&GS.vals[s.id]).length;
   const pt=document.getElementById('g_ptxt'),pb=document.getElementById('g_pbar');
-  if(pt)pt.textContent='填写进度：'+filled+' / '+spec.steps.length+' 步';
-  if(pb)pb.style.width=(filled/spec.steps.length*100)+'%';
+  if(pt)pt.textContent='实际数据填写进度：'+real+' / '+req.length+' 步'+(real===req.length&&req.length?'　✅ 已全部替换为实际数据，将自动登记使用记录':'');
+  if(pb)pb.style.width=(req.length?real/req.length*100:0)+'%';
 }
 function gConcl(){
   const spec=GUIDES[GS.tool];if(!spec)return;
   const el=document.getElementById('g_concl');if(!el)return;
-  const filled=spec.steps.filter(s=>GS.vals[s.id]).length;
-  if(filled===0){el.innerHTML='<h3>✅ 自动结论</h3><p style="font-size:13px;color:var(--ink-3)">填写上面的步骤，这里会实时生成结论。</p>';return;}
-  el.innerHTML='<h3>✅ 自动结论</h3>'+(spec.concl?spec.concl(GS.vals):gDefaultConcl(spec));
+  const real=spec.steps.filter(s=>GS.dirty[s.id]&&GS.vals[s.id]).length;
+  const anyVal=spec.steps.some(s=>GS.vals[s.id]);
+  if(!anyVal){el.innerHTML='<h3>✅ 自动结论</h3><p style="font-size:13px;color:var(--ink-3)">填写上面的步骤，这里会实时生成结论。</p>';return;}
+  const badge=(real===0)?'<span class="demo-badge">当前为示例结论 · 替换灰色数据后自动更新</span>':'';
+  el.innerHTML='<h3>✅ 自动结论'+badge+'</h3>'+(spec.concl?spec.concl(GS.vals):gDefaultConcl(spec));
+  gAutoSchedule();
 }
 function gDefaultConcl(spec){
   return '<table>'+spec.steps.map(s=>'<tr><th style="width:180px">'+s.label+'</th><td>'+gesc(GS.vals[s.id]||'—').replace(/\n/g,'<br>')+'</td></tr>').join('')+'</table>'+
    '<p style="font-size:12.5px;color:var(--ink-3)">已汇总你的填写内容。对照工具方法要点执行后，可打印本表存档或交 EM 小组评审。</p>';
 }
 function gCase(){
-  const spec=GUIDES[GS.tool];if(!spec)return;
-  spec.steps.forEach(st=>{
-    const el=document.getElementById('g_'+st.id);if(!el)return;
-    const d=spec.case.data[st.id];
-    el.value=(d!==undefined&&d!=='')?d:(st.type==='select'?(st.opts?st.opts[0]:''):'');
-  });
-  spec.steps.forEach(st=>gOnInput(st.id,true));
+  gPrefill();renderGuide();
 }
-function gClear(){GS.vals={};renderGuide();}
+function gClear(){GS.vals={};GS.dirty={};GS.demo=false;GS.wasDone=false;renderGuide();}
+
+/* ---- 使用记录自动登记：跟着示例完成自己的项目 → 结论出来自动记录并关联项目实际数据 ---- */
+function gStripHtml(h){const d=document.createElement('div');d.innerHTML=h;return (d.textContent||'').replace(/\s+/g,' ').trim();}
+function gGetUser(){
+  const gu=document.getElementById('g_user');let n=gu?gu.value.trim():'';
+  if(!n){const uu=document.getElementById('us_user');n=uu?uu.value.trim():'';
+    if(n){if(gu)gu.value=n;localStorage.setItem('em_guser',n);}}
+  if(!n)n=localStorage.getItem('em_guser')||'';
+  return n;
+}
+function gSetUser(v){v=String(v).trim();if(v)localStorage.setItem('em_guser',v);const uu=document.getElementById('us_user');if(uu&&v)uu.value=v;}
+function gMatchProject(){
+  const spec=GUIDES[GS.tool];if(!spec)return null;
+  const PS=(typeof PROJECTS!=='undefined'&&PROJECTS)?PROJECTS:[];
+  const pf=spec.steps.find(s=>s.id==='proj')||spec.steps.find(s=>/项目/.test(s.label));
+  const nm=pf?(GS.vals[pf.id]||''):'';
+  if(!nm)return null;
+  return PS.find(x=>x.name===nm)||PS.find(x=>x.name&&nm.indexOf(x.name)>-1)||PS.find(x=>x.name&&x.name.indexOf(nm)>-1)||null;
+}
+function gIsDone(){
+  const spec=GUIDES[GS.tool];if(!spec)return false;
+  const req=spec.steps.filter(s=>!gStepOpt(spec,s));
+  const filled=req.filter(s=>GS.vals[s.id]).length;
+  const real=req.filter(s=>GS.dirty[s.id]&&GS.vals[s.id]).length;
+  return filled===req.length&&real>0;
+}
+async function gSaveUsage(auto){
+  const spec=GUIDES[GS.tool],t=TOOLS.find(x=>x.n===GS.tool);
+  if(!spec||!t)return;
+  if(!tableOK.em_tool_usage){if(!auto)toast('使用台账表未创建，无法记录（请先执行建表 SQL）','err');return;}
+  if(!gIsDone()){if(!auto)toast('请先完成全部步骤，且至少把一项灰色示例替换为实际数据','err');return;}
+  const key=GS.tool+'|'+JSON.stringify(GS.vals);
+  if(auto&&GS.savedKey===key)return;
+  const p=gMatchProject();
+  const pf=spec.steps.find(s=>s.id==='proj')||spec.steps.find(s=>/项目/.test(s.label));
+  const projName=p?p.name:(pf?gSh(GS.vals[pf.id]||'—',40):'—');
+  const snap=gSh(spec.steps.map(s=>s.label+'：'+(GS.vals[s.id]||'—')).join('；'),500);
+  const conclTxt=gSh(gStripHtml(spec.concl?spec.concl(GS.vals):gDefaultConcl(spec)),260);
+  const body={tool_no:t.n,tool_name:t.name,phase:t.phase,project_id:p?p.id:null,
+    user_name:gGetUser()||'未署名',usage_date:today(),
+    notes:'【引导式套表'+(auto?'·自动':'·手动')+'】项目：'+projName+'｜数据：'+snap+'｜结论：'+conclTxt};
+  try{
+    await api('em_tool_usage','POST',body);
+    GS.savedKey=key;GS.wasDone=true;
+    toast('✅ 已'+(auto?'自动':'')+'登记使用记录：#'+t.n+' '+t.name+(p?' · 已关联项目「'+p.name+'」':''),'ok');
+    loadUsage();
+  }catch(e){if(!auto)toast('保存失败：'+(e.message.includes('Could not find')?'数据表未创建，请先执行建表 SQL':e.message),'err');}
+}
+let gAutoT=null;
+function gAutoSchedule(){
+  if(gIsDone()){
+    if(!GS.wasDone){
+      clearTimeout(gAutoT);
+      gAutoT=setTimeout(()=>{if(gIsDone()&&!GS.wasDone)gSaveUsage(true);},1500);
+    }
+  }else GS.wasDone=false;
+}
 function gotoGuide(n){
   closeM();document.querySelector('.tabs button[data-tab="guide"]').click();
   gSelect(n);
@@ -2088,12 +2168,12 @@ concl(c){
 /* #6 QFD */
 GUIDES[6]={
 case:{bg:'果冻爽案例：两项需求（重量稳定 权重5、封口严密 权重3）展开到三个设计特性，加权后「充填压力控制」重要度 54 分最高，成为设计优先项。',
-data:{demands:'夹心重量稳定,5\n封口严密不漏液,3',chars:'充填压力控制\n封口温度曲线\n杯体厚度设计',rel:'夹心重量稳定→充填压力控制=9\n夹心重量稳定→杯体厚度设计=3\n封口严密不漏液→封口温度曲线=9\n封口严密不漏液→充填压力控制=3'}},
+data:{demands:'夹心重量稳定,5\n封口严密不漏液,3',chars:'充填压力控制\n封口温度曲线\n杯体厚度设计',rel:'夹心重量稳定→充填压力控制=9\n夹心重量稳定→杯体厚度设计=3\n封口严密不漏液→封口温度曲线=9\n封口严密不漏液→充填压力控制=3',comp:'竞品重量 CV=1.2%，我方 2.8%——差距主因是压力波动'}},
 steps:[
  {id:'demands',label:'顾客/法规需求（每行：需求,权重1-5）',type:'textarea',hint:'需求来自客户 VOC、法规（GB/食品卫生）、公司标准；权重 5=必须满足，1=期望',ph:'夹心重量稳定,5\n封口严密不漏液,3'},
  {id:'chars',label:'设计特性（每行一个）',type:'textarea',hint:'把需求翻译成可设计、可测量的技术特性',ph:'充填压力控制\n封口温度曲线\n杯体厚度设计'},
  {id:'rel',label:'需求→特性关系（每行：需求→特性=9/3/1）',type:'textarea',hint:'关系强度：9=强相关，3=中等，1=弱相关；每个需求至少挂一个强相关特性',ph:'夹心重量稳定→充填压力控制=9'},
- {id:'comp',label:'竞品/现状对比（可选）',type:'text',hint:'我方与标杆在该需求上的水平差距',ph:'竞品重量 CV=1.2%，我方 2.8%'}
+ {id:'comp',label:'竞品/现状对比（可选）',type:'text',opt:true,hint:'我方与标杆在该需求上的水平差距',ph:'竞品重量 CV=1.2%，我方 2.8%'}
 ],
 concl(c){
  const ds=gParseList(c.demands).map(d=>({name:d.name,w:gN(d.extra[1])||3}));
