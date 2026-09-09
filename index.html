@@ -131,6 +131,11 @@
   .calc-pane{display:none}.calc-pane.on{display:block}
   .livecalc{font-size:13px;background:#f7f9fd;border:1px dashed #c8d4ec;border-radius:10px;padding:10px 13px;color:var(--ink);font-weight:600}
   .livecalc b{font-size:15px}
+  .abcgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:10px;width:100%}
+  .abcell{display:flex;flex-direction:column;gap:5px}
+  .abcell label{font-size:12px;color:var(--ink-3);font-weight:600}
+  .abcell input,.abcell select{font-size:13px}
+  .abcell .hintb{font-size:11px;color:var(--ink-3);font-weight:400}
 
   /* 使用统计条形(带数据标签) */
   .ubar{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:12.5px}
@@ -205,13 +210,13 @@
 <!-- ============ Tab 1: 工具导航 ============ -->
 <section class="tab on" id="tab-tools">
   <div class="stats">
-    <div class="stat"><div class="ico">🧰</div><div><b>34</b><span>在线工具</span></div></div>
+    <div class="stat"><div class="ico">🧰</div><div><b>36</b><span>在线工具</span></div></div>
     <div class="stat"><div class="ico">🗂️</div><div><b>8</b><span>阶段分组</span></div></div>
     <div class="stat"><div class="ico">🧱</div><div><b>4</b><span>核心子系统</span></div></div>
     <div class="stat"><div class="ico">🎯</div><div><b>7</b><span>设计评审关卡 DR1-DR7</span></div></div>
   </div>
   <div class="flow">
-    <h3>EM 项目推进主线 <span class="hint">按阶段组织 34 个工具，点击分组卡片可快速定位</span></h3>
+    <h3>EM 项目推进主线 <span class="hint">按阶段组织 36 个工具，点击分组卡片可快速定位</span></h3>
     <div class="flow-steps" id="flowSteps"></div>
   </div>
   <div class="toolbar">
@@ -236,6 +241,24 @@
       <div class="fld"><label>开始日期</label><input id="pj_start" type="date"></div>
       <div class="fld"><label>目标日期</label><input id="pj_target" type="date"></div>
       <div class="fld wide"><label>项目说明</label><textarea id="pj_desc" placeholder="项目背景、范围、目标…"></textarea></div>
+      <div class="fld wide" style="border-top:1px dashed #d8e0f0;padding-top:14px">
+        <label>ABC 自动分级（公司评分卡）<span style="font-weight:400;color:var(--ink-3)">　填写分级依据 → 保存后自动判定 A/B/C，并在项目列表显示徽章</span></label>
+        <div id="ab_eem" class="abcgrid">
+          <div class="abcell"><label>环境安全 M 值</label><input id="ab_m" type="number" step="0.1" placeholder="M>100 → 5 分"></div>
+          <div class="abcell"><label>工作安全 LEC D 值</label><input id="ab_lec" type="number" step="1" placeholder="D>320 → 5 分"></div>
+          <div class="abcell"><label>有效客诉（件/年）</label><input id="ab_comp" type="number" step="0.1" placeholder=">2 件 → 5 分"></div>
+          <div class="abcell"><label>不良率（%）</label><input id="ab_def" type="number" step="0.01" placeholder=">0.2% → 5 分"></div>
+          <div class="abcell"><label>OEE（%）</label><input id="ab_oee" type="number" step="0.1" placeholder="<70% → 5 分"></div>
+          <div class="abcell"><label>投资成本（万元）</label><input id="ab_cost" type="number" step="0.1" placeholder=">20 万 → 5 分"></div>
+          <div class="abcell"><label>投资回收期（年）</label><input id="ab_roi" type="number" step="0.1" placeholder="<1 年 → 5 分"></div>
+        </div>
+        <div id="ab_epm" class="abcgrid" style="display:none">
+          <div class="abcell"><label>投资成本（万元）</label><input id="ab_pcost" type="number" step="0.1" placeholder=">100 万 → 5 分"></div>
+          <div class="abcell"><label>产品成熟度</label><select id="ab_mat"><option value="">— 请选择 —</option><option value="5">集团首次生产（5 分）</option><option value="3">基地首次生产（3 分）</option><option value="1">基地已量产 / 复制（1 分）</option></select></div>
+          <div class="abcell"><label>预期年产值（万元）</label><input id="ab_gmv" type="number" step="0.1" placeholder=">500 万 → 5 分"></div>
+        </div>
+        <div class="livecalc" id="ab_result" style="margin-top:10px">—</div>
+      </div>
       <div class="fbtns">
         <button class="btn primary" onclick="saveProject()">保存项目</button>
         <button class="btn ghost" onclick="resetProjectForm()">清空 / 取消编辑</button>
@@ -245,7 +268,7 @@
   <div class="card">
     <h3><span class="bar"></span>项目列表 <span class="hint">点击「DR关卡」登记 DR1-DR7 评审记录</span></h3>
     <div class="tblwrap"><table class="tbl"><thead><tr>
-      <th>编号</th><th>项目名称</th><th>类型</th><th>负责人</th><th>当前阶段</th><th>状态</th><th>起止日期</th><th>操作</th>
+      <th>编号</th><th>项目名称</th><th>类型</th><th>分级</th><th>负责人</th><th>当前阶段</th><th>状态</th><th>起止日期</th><th>操作</th>
     </tr></thead><tbody id="pj_tbody"></tbody></table></div>
   </div>
 </section>
@@ -281,6 +304,8 @@
     <button data-pane="fmea" class="on">⚠️ FMEA 风险分析（RPN 自动计算）</button>
     <button data-pane="vsu">🚀 VSU 垂直启动（α/β 比率）</button>
     <button data-pane="skill">👥 技能矩阵（差距计算）</button>
+    <button data-pane="abc">🏷️ ABC 项目分级（EEM/EPM 自动判定）</button>
+    <button data-pane="mp">📚 MP 情报库（问题/对策/保持措施）</button>
   </div>
 
   <!-- FMEA -->
@@ -359,6 +384,59 @@
       </tr></thead><tbody id="sk_tbody"></tbody></table></div>
     </div>
   </div>
+
+  <!-- ABC 项目分级 -->
+  <div class="calc-pane" id="pane-abc">
+    <div class="card">
+      <h3><span class="bar"></span>ABC 项目分级试算 <span class="hint">公司评分卡口径：EEM = S+Q+P+C（满分 20）；EPM = C+P+G（满分 15）</span></h3>
+      <div class="fgrid">
+        <div class="fld"><label>项目类别</label><select id="ac_type"><option value="EEM">EEM 设备早期管理（新设备）</option><option value="EPM">EPM 产品早期管理（新产品）</option></select></div>
+        <div class="fld wide"><label>分级说明（自动）</label><div class="livecalc" id="ac_result">—</div></div>
+        <div id="ac_eem" class="fld wide abcgrid"></div>
+        <div id="ac_epm" class="fld wide abcgrid" style="display:none"></div>
+        <div class="fld wide"><label>得分明细</label><div id="ac_detail" style="font-size:13px;color:var(--ink-2)">填写左侧数据后自动计算</div></div>
+        <div class="fld wide"><label>判定规则（公司评分卡）</label><div id="ac_rules" style="font-size:12.5px;color:var(--ink-2);line-height:1.8"></div></div>
+        <div class="fld wide"><label>保存到项目台账</label>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+            <select id="ac_prj" style="flex:1;min-width:220px"><option value="">（仅试算，不保存）</option></select>
+            <button class="btn primary" onclick="saveAbcToProject()">保存分级到该项目</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MP 情报库 -->
+  <div class="calc-pane" id="pane-mp">
+    <div class="card">
+      <h3><span class="bar"></span>MP 情报登记（PAD 结构）<span class="hint">问题定义 → 改善描述 → 保持措施 → 成本/收益；一条情报 = 一条可复用的设备改善经验，是新设备设计输入与 MTBF 基线来源</span></h3>
+      <div class="fgrid">
+        <div class="fld"><label>情报编号</label><input id="mp_no" placeholder="如：MPI-2026-001"></div>
+        <div class="fld"><label>来源设备 / 机器类型 <i>*</i></label><input id="mp_machine" placeholder="如：立式包装机 · 横封工段"></div>
+        <div class="fld wide"><label>问题定义（P） <i>*</i></label><textarea id="mp_problem" placeholder="如：横封封口漏气，导致胀袋客诉 3 件/年"></textarea></div>
+        <div class="fld wide"><label>改善描述（A）</label><textarea id="mp_improve" placeholder="改善前 → 改善后：如 更换硅胶垫材质 + 增加温度点检，客诉降至 0"></textarea></div>
+        <div class="fld wide"><label>保持措施（D）</label><textarea id="mp_keep" placeholder="防回退 / 标准化：如 纳入 CIL 点检表 + OPL 一点课程 + 备件更换周期 3 个月"></textarea></div>
+        <div class="fld wide"><label>成本 / 收益</label><input id="mp_cb" placeholder="如有形：年节约 8 万元；无形：客诉归零、客户审核通过"></div>
+        <div class="fld"><label>关联支柱</label><select id="mp_pillar"><option value="">— 请选择 —</option><option>AM</option><option>PM</option><option>QM</option><option>SHE</option><option>FI</option><option>EM</option></select></div>
+        <div class="fld"><label>情报阶段</label><select id="mp_phase"><option value="investigate">立项调研情报（DR1-DR2 收集）</option><option value="feedback">结案沉淀回传（DR7 反馈）</option></select></div>
+        <div class="fld"><label>状态</label><select id="mp_status"><option value="draft">草稿</option><option value="review">评审中</option><option value="approved">已批准</option><option value="deployed">已横展</option></select></div>
+        <div class="fld"><label>关联项目</label><select id="mp_project"><option value="">（不关联项目）</option></select></div>
+        <div class="fld"><label>情报来源</label><input id="mp_src" placeholder="如：旧线 AM 记录 / PM 故障库 / 历史项目报告"></div>
+        <div class="fld"><label>登记人</label><input id="mp_by" placeholder="姓名"></div>
+        <div class="fbtns"><button class="btn primary" onclick="saveMpInfo()">保存 MP 情报</button></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="bar"></span>MP 情报库 <span class="hint">支持关键词检索（问题 / 设备 / 改善 / 支柱）</span></h3>
+      <div class="toolbar" style="margin-bottom:12px">
+        <div class="search"><span class="mag">🔍</span><input id="mp_q" type="text" placeholder="检索：如 横封、漏气、AM、包装机…"></div>
+        <div style="font-size:13px;color:var(--ink-2)">共 <b id="mp_cnt" style="color:var(--header)">0</b> 条情报</div>
+      </div>
+      <div class="tblwrap"><table class="tbl"><thead><tr>
+        <th>编号</th><th>来源设备</th><th>问题定义 P</th><th>改善描述 A</th><th>保持措施 D</th><th>成本/收益</th><th>支柱</th><th>阶段</th><th>状态</th><th>关联项目</th><th>登记人</th><th>操作</th>
+      </tr></thead><tbody id="mp_tbody"></tbody></table></div>
+    </div>
+  </div>
 </section>
 
 <footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥</footer>
@@ -379,8 +457,8 @@
 /* ================= Supabase 连接配置 ================= */
 const SB_URL='https://lgohtkyiltxypvhydlbu.supabase.co';
 const SB_KEY='sb_publishable_KjUwI-HYgDIWgAnObNUdKQ_hcYTH6Bg'; // publishable key（公开，非管理密钥）
-const TABLES=['em_projects','em_dr_records','em_tool_usage','em_fmea','em_vsu','em_skills'];
-const TABLE_NAMES={'em_projects':'项目台账','em_dr_records':'DR关卡','em_tool_usage':'使用台账','em_fmea':'FMEA','em_vsu':'VSU','em_skills':'技能矩阵'};
+const TABLES=['em_projects','em_dr_records','em_tool_usage','em_fmea','em_vsu','em_skills','em_mp_info'];
+const TABLE_NAMES={'em_projects':'项目台账','em_dr_records':'DR关卡','em_tool_usage':'使用台账','em_fmea':'FMEA','em_vsu':'VSU','em_skills':'技能矩阵','em_mp_info':'MP情报'};
 const tableOK={};
 
 async function api(path,method='GET',body=null){
@@ -398,9 +476,10 @@ async function checkTables(){
     try{await api(t+'?select=id&limit=1');tableOK[t]=true;okc++;}
     catch(e){tableOK[t]=false;}
   }
-  if(okc===TABLES.length){el.className='conn-inner ok';txt.innerHTML='✅ 数据库连接正常：6/6 数据表就绪（Supabase · lgohtkyiltxypvhydlbu）';}
-  else if(okc===0){el.className='conn-inner err';txt.innerHTML='❌ 无法连接 Supabase（6/6 表不可用）——请检查网络，或确认 anon key 是否有效';}
-  else{el.className='conn-inner warn';txt.innerHTML='⚠️ 连接正常，但 <b>'+(6-okc)+'</b> 张表未创建：请在 Supabase Dashboard → SQL Editor 粘贴运行《EM数据库建表脚本.sql》（一次性操作）。未创建的功能暂不能保存数据。';}
+  const N=TABLES.length;
+  if(okc===N){el.className='conn-inner ok';txt.innerHTML='✅ 数据库连接正常：'+N+'/'+N+' 数据表就绪（Supabase · lgohtkyiltxypvhydlbu）';}
+  else if(okc===0){el.className='conn-inner err';txt.innerHTML='❌ 无法连接 Supabase（'+N+'/'+N+' 表不可用）——请检查网络，或确认 anon key 是否有效';}
+  else{el.className='conn-inner warn';txt.innerHTML='⚠️ 连接正常，但 <b>'+(N-okc)+'</b> 张表未创建：请在 Supabase Dashboard → SQL Editor 粘贴运行《EM数据库建表脚本.sql》（一次性操作）。未创建的功能暂不能保存数据。';}
   el.insertAdjacentHTML('beforeend',TABLES.map(t=>'<span class="tchip '+(tableOK[t]?'ok':'miss')+'">'+TABLE_NAMES[t]+(tableOK[t]?' ✓':' ✕')+'</span>').join(''));
 }
 
@@ -448,7 +527,9 @@ const TOOLS=[
  {n:31,en:"Standardization OPL / CIL / SOP",name:"标准化（OPL/CIL/SOP）",phase:"标准化与日常管理",brief:"一点课程、清洁点检、作业标准沉淀知识。",detail:["OPL：一点课程（One Point Lesson）","CIL：清洁·点检·润滑","SOP：标准作业程序"],fields:["改善固化与防止回退的关键"]},
  {n:32,en:"5S Workplace",name:"5S 现场管理",phase:"标准化与日常管理",brief:"整理、整顿、清扫、清洁、素养。",detail:["建立可视化现场，消除寻找与浪费","为 AM/MP 体系落地提供基础"],fields:["现场问题可视化"]},
  {n:33,en:"DMS Daily Management System",name:"DMS 日常管理系统",phase:"标准化与日常管理",brief:"以日清会等机制把管理落到每天。",detail:["四级计划管控逐层分解到周/日清会","KPI/KAI 指标逐层跟踪"],fields:["与目标管理、EVM 联动"]},
- {n:34,en:"Goal Management",name:"目标管理（层层分解与跟踪）",phase:"标准化与日常管理",brief:"目标→分解→跟踪→复盘闭环。",detail:["公司级目标逐层分解到班组/岗位","定期复盘纠偏"],fields:["与 KPI/KAI 体系对齐"]}
+ {n:34,en:"Goal Management",name:"目标管理（层层分解与跟踪）",phase:"标准化与日常管理",brief:"目标→分解→跟踪→复盘闭环。",detail:["公司级目标逐层分解到班组/岗位","定期复盘纠偏"],fields:["与 KPI/KAI 体系对齐"]},
+ {n:35,en:"ABC Project Classification · EEM / EPM",name:"ABC 项目分级（自动判定）",phase:"支柱基础与主线",brief:"按公司评分卡自动判定 EEM/EPM 项目为 A/B/C 类，决定管控强度。",detail:["EEM（新设备）：E = S+Q+P+C，满分 20 —— A 类 E≥20、B 类 15<E<20、C 类 E≤15","EPM（新产品）：E = C+P+G（成本/成熟度/产值），满分 15 —— A 类 E≥13、B 类 10≤E<13、C 类 E<10","每个维度按 5 / 3 / 1 三档评分；同一维度含多个子标准时取最高分","A 类：强制执行 EM + 项目追踪；B 类：遵循 EM，规模与报告可灵活；C 类：遵循 EM，规模与报告由本地定"],fields:["→ 前往「计算型工具」在线试算","→ 项目台账登记时同步自动分级并显示徽章"],calc:'abc'},
+ {n:36,en:"MP Information Bank",name:"MP 情报管理",phase:"DR1—DR2 调研与定义",brief:"PAD 结构沉淀设备改善情报，供新设备设计输入与跨项目复用。",detail:["PAD 结构：问题定义（Problem）→ 改善描述（Action）→ 保持措施（Deployment）+ 成本/收益","DR1-DR2 立项调研收集旧设备/同类线问题情报，作为新设备设计输入","DR7 结案后把本项目改善沉淀回传 MP 系统，形成闭环","是 MTBF 基线与检查表（Checklist）的信息来源"],fields:["关联支柱：AM / PM / QM / SHE / FI / EM","→ 前往「计算型工具」的 MP 情报库登记与检索"],calc:'mp'}
 ];
 const PHASES=[
  {p:"支柱基础与主线",c:"#2563eb",c2:"#3b82f6",d:"方法论 · 目标 · 计划"},
@@ -582,6 +663,212 @@ function calcGap(){
 }
 ["sk_target","sk_actual"].forEach(id=>$("#"+id).addEventListener("change",calcGap));calcGap();
 
+/* ================= ABC 项目自动分级（公司评分卡口径） ================= */
+/* 同一维度含多个子标准时的取值方式：
+   max = 取最高分（默认，任一子标准达「高」即该维度记 5 分，偏保守）
+   min = 取最低分   avg = 取平均分后归档
+   若公司制度另有明文，改这里即可全局生效。                                */
+const ABC_DIM_MODE='max';
+const ABC_RULES={
+  EEM:{full:20,dims:[
+    {k:'S',label:'安全',subs:[
+      {id:'m',label:'环境安全 M 值',unit:'M',hint:'M>100→5 分；25<M≤60→3 分；M≤25→1 分',score:v=>v>100?5:(v>25?3:1)},
+      {id:'lec',label:'工作安全 LEC D 值',unit:'D',hint:'D>320→5 分；70<D<320→3 分；0<D<70→1 分',score:v=>v>320?5:(v>70?3:1)}
+    ]},
+    {k:'Q',label:'质量',subs:[
+      {id:'comp',label:'有效客诉',unit:'件/年',hint:'>2 件/年→5 分；<2 件/年→3 分；未发生→1 分',score:v=>v>2?5:(v>0?3:1)},
+      {id:'def',label:'不良率',unit:'%',hint:'>0.2%→5 分；0.05–0.2%→3 分；<0.05%→1 分',score:v=>v>0.2?5:(v>=0.05?3:1)}
+    ]},
+    {k:'P',label:'效率',subs:[
+      {id:'oee',label:'OEE',unit:'%',hint:'<70%→5 分；70–90%→3 分；>90%→1 分',score:v=>v<70?5:(v<=90?3:1)}
+    ]},
+    {k:'C',label:'成本',subs:[
+      {id:'cost',label:'投资成本',unit:'万元',hint:'>20 万→5 分；10–20 万→3 分；<10 万→1 分',score:v=>v>20?5:(v>=10?3:1)},
+      {id:'roi',label:'投资回收期',unit:'年',hint:'<1 年→5 分；1–2 年→3 分；>2 年→1 分',score:v=>v<1?5:(v<=2?3:1)}
+    ]}
+  ],cls:e=>e>=20?'A':(e>15?'B':'C')},
+  EPM:{full:15,dims:[
+    {k:'C',label:'成本',subs:[{id:'pcost',label:'投资成本',unit:'万元',hint:'>100 万→5 分；20–100 万→3 分；<20 万→1 分',score:v=>v>100?5:(v>=20?3:1)}]},
+    {k:'P',label:'产品成熟度',subs:[{id:'mat',label:'产品成熟度',unit:'',hint:'集团首次生产→5 分；基地首次生产→3 分；基地已量产/复制→1 分',score:v=>+v||1,
+      opts:[['5','集团首次生产（5 分）'],['3','基地首次生产（3 分）'],['1','基地已量产 / 复制（1 分）']]}]},
+    {k:'G',label:'产值',subs:[{id:'gmv',label:'预期年产值',unit:'万元',hint:'>500 万→5 分；200–500 万→3 分；<200 万→1 分',score:v=>v>500?5:(v>=200?3:1)}]}
+  ],cls:e=>e>=13?'A':(e>=10?'B':'C')}
+};
+const ABC_CLASS={A:['A 类','b-red','强制执行 EM + 项目追踪'],B:['B 类','b-amber','遵循 EM，规模与报告可灵活'],C:['C 类','b-green','遵循 EM，规模与报告由本地定']};
+
+function abcAgg(scores){
+  if(!scores.length)return 0;
+  if(ABC_DIM_MODE==='min')return Math.min.apply(null,scores);
+  if(ABC_DIM_MODE==='avg'){const a=scores.reduce((x,y)=>x+y,0)/scores.length;return a>=4.34?5:(a>=2?3:1);}
+  return Math.max.apply(null,scores);
+}
+function computeABC(ptype,vals){
+  const R=ABC_RULES[ptype]||ABC_RULES.EEM;
+  const dims=[];let filled=0,total=0;
+  R.dims.forEach(dim=>{
+    const subs=dim.subs.map(s=>{
+      const raw=vals[s.id];const has=raw!==''&&raw!==null&&raw!==undefined&&!isNaN(+raw);
+      const sc=has?s.score(+raw):null;
+      if(has)filled++;
+      return {id:s.id,label:s.label,unit:s.unit,hint:s.hint,raw:has?+raw:null,score:sc};
+    });
+    const got=subs.filter(s=>s.score!==null).map(s=>s.score);
+    const ds=got.length?abcAgg(got):null;
+    if(ds!==null)total+=ds;
+    dims.push({k:dim.k,label:dim.label,score:ds,subs:subs});
+  });
+  if(!filled)return null;
+  const cls=R.cls(total);
+  return {ptype:ptype,score:total,full:R.full,cls:cls,note:ABC_CLASS[cls][2],dims:dims};
+}
+function abcReadForm(pfx){
+  const g=id=>{const el=document.getElementById(pfx+id);return el?el.value:'';};
+  return {m:g('m'),lec:g('lec'),comp:g('comp'),def:g('def'),oee:g('oee'),cost:g('cost'),roi:g('roi'),pcost:g('pcost'),mat:g('mat'),gmv:g('gmv')};
+}
+function abcFactors(r){
+  const o={ptype:r.ptype,score:r.score,cls:r.cls};
+  r.dims.forEach(d=>{o[d.k]={label:d.label,score:d.score,subs:{}};
+    d.subs.forEach(s=>{if(s.raw!==null)o[d.k].subs[s.id]={label:s.label,raw:s.raw,score:s.score};});});
+  return o;
+}
+function renderAbcResult(r,resSel,detSel){
+  const el=$(resSel);
+  if(!r){el.innerHTML='— <span style="font-weight:400;color:var(--ink-3)">填写分级数据后自动判定 A/B/C</span>';if(detSel)$(detSel).innerHTML='填写左侧数据后自动计算';return;}
+  const c=ABC_CLASS[r.cls];
+  el.innerHTML='<b>'+c[0]+'</b>　得分 E = '+r.score+' / '+r.full+'　<span class="badge '+c[1]+'">'+r.cls+' 类</span>　<span style="font-weight:400;color:var(--ink-2)">'+c[2]+'</span>';
+  if(detSel){
+    $(detSel).innerHTML=r.dims.map(d=>{
+      const subs=d.subs.map(s=>s.label+(s.raw===null?'：<span style="color:#9aa6bd">未填</span>':'：<b>'+s.raw+(s.unit?' '+s.unit:'')+'</b> → '+s.score+' 分')).join('　|　');
+      return '<div style="padding:6px 0;border-bottom:1px dashed #e6ebf5"><b>'+d.k+' · '+d.label+'：'+(d.score===null?'—':d.score+' 分')+'</b><div style="font-size:12px;color:var(--ink-3);margin-top:3px">'+subs+'</div></div>';
+    }).join('')+'<div style="margin-top:8px;font-size:12.5px;color:var(--ink-3)">同维度多标准取值：<b>'+(ABC_DIM_MODE==='max'?'取最高分':(ABC_DIM_MODE==='min'?'取最低分':'取平均分'))+'</b>；未填维度不计入总分（公司制度另有明文时可调整规则）</div>';
+  }
+}
+/* --- ABC 计算面板 --- */
+function renderAcInputs(){
+  ['EEM','EPM'].forEach(t=>{
+    const R=ABC_RULES[t],pfx='ac_';
+    const html=R.dims.map(dim=>dim.subs.map(s=>{
+      if(s.opts)return '<div class="abcell"><label>'+s.label+'</label><select id="'+pfx+s.id+'"><option value="">— 请选择 —</option>'+s.opts.map(o=>'<option value="'+o[0]+'">'+o[1]+'</option>').join('')+'</select><span class="hintb">'+s.hint+'</span></div>';
+      return '<div class="abcell"><label>'+s.label+(s.unit?'（'+s.unit+'）':'')+'</label><input id="'+pfx+s.id+'" type="number" step="0.01"><span class="hintb">'+s.hint+'</span></div>';
+    }).join('')).join('');
+    const box=(t==='EEM')?'#ac_eem':'#ac_epm';
+    $(box).innerHTML=html;
+    $(box).querySelectorAll('input,select').forEach(el=>{el.addEventListener('input',calcAc);el.addEventListener('change',calcAc);});
+  });
+}
+function renderAcRules(){
+  const eem=ABC_RULES.EEM,epm=ABC_RULES.EPM;
+  const dimTxt=R=>R.dims.map(d=>'<b>'+d.k+' '+d.label+'</b>：'+d.subs.map(s=>s.label+'（'+s.hint+'）').join('；')).join('<br>');
+  $('#ac_rules').innerHTML=
+   '<b>EEM 新设备</b>：E = S+Q+P+C，满分 20 —— A 类 E≥20、B 类 15&lt;E&lt;20、C 类 E≤15<br>'+dimTxt(eem)+
+   '<div style="height:8px"></div><b>EPM 新产品</b>：E = C+P+G，满分 15 —— A 类 E≥13、B 类 10≤E&lt;13、C 类 E&lt;10<br>'+dimTxt(epm)+
+   '<div style="height:8px"></div><b>管控要求</b>：A 类 '+ABC_CLASS.A[2]+'；B 类 '+ABC_CLASS.B[2]+'；C 类 '+ABC_CLASS.C[2];
+}
+function calcAc(){
+  const t=$('#ac_type').value;
+  $('#ac_eem').style.display=(t==='EEM')?'grid':'none';
+  $('#ac_epm').style.display=(t==='EPM')?'grid':'none';
+  renderAbcResult(computeABC(t,abcReadForm('ac_')),'#ac_result','#ac_detail');
+}
+function refreshAcPrj(){
+  const sel=$('#ac_prj');if(!sel)return;const v=sel.value;
+  sel.innerHTML='<option value="">（仅试算，不保存）</option>'+PROJECTS.map(p=>'<option value="'+p.id+'">'+esc(p.name)+'</option>').join('');
+  if(v)sel.value=v;
+}
+async function saveAbcToProject(){
+  const pid=$('#ac_prj').value;
+  if(!pid){toast('请先选择要保存分级的项目','err');return;}
+  const r=computeABC($('#ac_type').value,abcReadForm('ac_'));
+  if(!r){toast('请先填写分级数据','err');return;}
+  if(!tableOK.em_projects){toast('em_projects 表未创建，请先执行建表 SQL','err');return;}
+  try{
+    await api('em_projects?id=eq.'+pid,'PATCH',{abc_class:r.cls,abc_score:r.score,abc_factors:abcFactors(r),updated_at:new Date().toISOString()});
+    toast('已保存：该项目分级为 '+r.cls+' 类（E='+r.score+'）✓','ok');loadProjects();
+  }catch(e){toast('保存失败：'+e.message,'err');}
+}
+/* --- 项目台账表单联动 --- */
+function syncAbcForm(){
+  const t=$('#pj_ptype').value;
+  $('#ab_eem').style.display=(t==='EEM')?'grid':'none';
+  $('#ab_epm').style.display=(t==='EPM')?'grid':'none';
+  calcAbcForm();
+}
+function calcAbcForm(){renderAbcResult(computeABC($('#pj_ptype').value,abcReadForm('ab_')),'#ab_result',null);}
+function prefillAbc(f){
+  ['m','lec','comp','def','oee','cost','roi','pcost','gmv'].forEach(id=>{const el=$('#ab_'+id);if(el)el.value='';});
+  const mt=$('#ab_mat');if(mt)mt.value='';
+  if(!f)return;
+  Object.keys(f).forEach(k=>{
+    if(k==='ptype'||k==='score'||k==='cls')return;
+    const dim=f[k];if(!dim||!dim.subs)return;
+    Object.keys(dim.subs).forEach(sid=>{const el=$('#ab_'+sid);if(el)el.value=dim.subs[sid].raw;});
+  });
+}
+(function initAbc(){
+  renderAcInputs();renderAcRules();calcAc();syncAbcForm();
+  $('#ac_type').addEventListener('change',calcAc);
+  ['m','lec','comp','def','oee','cost','roi','pcost','gmv'].forEach(id=>{
+    const el=$('#ab_'+id);if(el)el.addEventListener('input',calcAbcForm);
+  });
+  $('#ab_mat').addEventListener('change',calcAbcForm);
+  $('#pj_ptype').addEventListener('change',syncAbcForm);
+})();
+
+/* ================= MP 情报库 ================= */
+let MP_ROWS=[];
+const MP_STATUS={draft:['草稿','b-gray'],review:['评审中','b-blue'],approved:['已批准','b-green'],deployed:['已横展','b-green']};
+async function loadMpInfo(){
+  if(!tableOK.em_mp_info){renderMpInfo([]);return;}
+  try{MP_ROWS=await api('em_mp_info?select=*&order=created_at.desc&limit=200');renderMpInfo(MP_ROWS);}
+  catch(e){}
+}
+function renderMpInfo(rows){
+  const tb=$('#mp_tbody');if(!tb)return;
+  const q=($('#mp_q').value||'').trim().toLowerCase();
+  const list=rows.filter(r=>!q||((r.info_no||'')+(r.machine||'')+(r.problem||'')+(r.improvement||'')+(r.keep_action||'')+(r.pillar||'')+(r.source_name||'')).toLowerCase().includes(q));
+  $('#mp_cnt').textContent=list.length;
+  if(!tableOK.em_mp_info){tb.innerHTML='<tr><td colspan="12" class="empty">⚠️ em_mp_info 表未创建：请在 Supabase Dashboard 执行《EM数据库建表脚本.sql》第 9 节扩展</td></tr>';return;}
+  if(!list.length){tb.innerHTML='<tr><td colspan="12" class="empty">暂无 MP 情报，请在上方登记第一条（旧设备/同类线的问题情报是新设备设计输入的关键来源）</td></tr>';return;}
+  tb.innerHTML=list.map(r=>{
+    const st=MP_STATUS[r.status]||MP_STATUS.draft,pj=PROJECTS.find(p=>p.id===r.project_id);
+    return '<tr>'+
+    '<td>'+esc(r.info_no||'—')+'</td>'+
+    '<td>'+esc(r.machine||'—')+'</td>'+
+    '<td><b>'+esc(r.problem||'—')+'</b></td>'+
+    '<td style="font-size:12.5px">'+esc(r.improvement||'—')+'</td>'+
+    '<td style="font-size:12.5px">'+esc(r.keep_action||'—')+'</td>'+
+    '<td style="font-size:12.5px">'+esc(r.cost_benefit||'—')+'</td>'+
+    '<td>'+(r.pillar?'<span class="badge b-blue">'+esc(r.pillar)+'</span>':'—')+'</td>'+
+    '<td>'+(r.info_phase==='investigate'?'<span class="badge b-blue">立项调研 DR1-2</span>':'<span class="badge b-amber">结案沉淀 DR7</span>')+'</td>'+
+    '<td><span class="badge '+st[1]+'">'+st[0]+'</span></td>'+
+    '<td>'+(pj?esc(pj.name):'—')+'</td>'+
+    '<td>'+esc(r.created_by||'—')+'</td>'+
+    '<td><button class="btn sm danger" onclick="delMpInfo('+r.id+')">删除</button></td></tr>';
+  }).join('');
+}
+async function saveMpInfo(){
+  const machine=$('#mp_machine').value.trim(),problem=$('#mp_problem').value.trim();
+  if(!machine||!problem){toast('请填写「来源设备」与「问题定义」','err');return;}
+  if(!tableOK.em_mp_info){toast('em_mp_info 表未创建，请先执行建表 SQL 第 9 节扩展','err');return;}
+  const body={info_no:$('#mp_no').value.trim()||null,machine:machine,problem:problem,
+    improvement:$('#mp_improve').value.trim()||null,keep_action:$('#mp_keep').value.trim()||null,
+    cost_benefit:$('#mp_cb').value.trim()||null,pillar:$('#mp_pillar').value||null,
+    info_phase:$('#mp_phase').value,status:$('#mp_status').value,
+    project_id:$('#mp_project').value?+$('#mp_project').value:null,
+    source_name:$('#mp_src').value.trim()||null,created_by:$('#mp_by').value.trim()||null};
+  try{
+    await api('em_mp_info','POST',body);toast('MP 情报已登记 ✓','ok');
+    ['mp_no','mp_machine','mp_problem','mp_improve','mp_keep','mp_cb','mp_src'].forEach(id=>$('#'+id).value='');
+    loadMpInfo();
+  }catch(e){toast('保存失败：'+(e.message.indexOf('Could not find')>=0?'em_mp_info 表未创建，请先执行建表 SQL 第 9 节':e.message),'err');}
+}
+async function delMpInfo(id){
+  if(!confirm('确认删除该条 MP 情报？'))return;
+  try{await api('em_mp_info?id=eq.'+id,'DELETE');toast('已删除','ok');loadMpInfo();}
+  catch(e){toast('删除失败：'+e.message,'err');}
+}
+$('#mp_q').addEventListener('input',()=>renderMpInfo(MP_ROWS));
+
 /* ================= 项目台账 ================= */
 let PROJECTS=[];
 async function loadProjects(){
@@ -593,20 +880,25 @@ async function loadProjects(){
 }
 function refreshProjectSelects(){
   const opts='<option value="">（不关联项目）</option>'+PROJECTS.map(p=>'<option value="'+p.id+'">'+esc(p.name)+'</option>').join("");
-  ["us_project","fm_project","vs_project"].forEach(id=>{const v=$("#"+id).value;$("#"+id).innerHTML=opts;if(v)$("#"+id).value=v;});
+  ["us_project","fm_project","vs_project","mp_project"].forEach(id=>{const v=$("#"+id).value;$("#"+id).innerHTML=opts;if(v)$("#"+id).value=v;});
+  refreshAcPrj();
 }
 const STAGE_TXT=["","DR1 早期调研","DR2 范围定义","DR3 详细分析","DR4 方案/制造","DR5 安装/测试","DR6 调试/试产","DR7 反馈/验证"];
 const STATUS_TXT={planning:["规划中","b-gray"],in_progress:["进行中","b-blue"],paused:["暂停","b-amber"],closed:["已结案","b-green"]};
 function renderProjects(){
   const tb=$("#pj_tbody");
-  if(!tableOK.em_projects){tb.innerHTML='<tr><td colspan="8" class="empty">⚠️ em_projects 表未创建：请先在 Supabase Dashboard 执行《EM数据库建表脚本.sql》</td></tr>';return;}
-  if(!PROJECTS.length){tb.innerHTML='<tr><td colspan="8" class="empty">暂无项目，请在上方表单登记第一个 EM 项目</td></tr>';return;}
+  if(!tableOK.em_projects){tb.innerHTML='<tr><td colspan="9" class="empty">⚠️ em_projects 表未创建：请先在 Supabase Dashboard 执行《EM数据库建表脚本.sql》</td></tr>';return;}
+  if(!PROJECTS.length){tb.innerHTML='<tr><td colspan="9" class="empty">暂无项目，请在上方表单登记第一个 EM 项目</td></tr>';return;}
   tb.innerHTML=PROJECTS.map(p=>{
     const st=STATUS_TXT[p.status]||STATUS_TXT.in_progress;
+    const ac=(p.abc_class&&ABC_CLASS[p.abc_class])?
+      '<span class="badge '+ABC_CLASS[p.abc_class][1]+'" title="'+ABC_CLASS[p.abc_class][2]+'">'+p.abc_class+' 类'+(p.abc_score!==null&&p.abc_score!==undefined?' · E'+p.abc_score:'')+'</span>'
+      :'<span class="badge b-gray" title="登记项目时填写分级依据即自动判定">未分级</span>';
     return '<tr>'+
     '<td>'+esc(p.code||"—")+'</td>'+
     '<td><b>'+esc(p.name)+'</b>'+(p.description?'<div style="font-size:12px;color:var(--ink-3);margin-top:2px">'+esc(p.description).slice(0,40)+'</div>':'')+'</td>'+
     '<td><span class="badge '+(p.ptype==="EPM"?"b-amber":"b-blue")+'">'+esc(p.ptype)+'</span></td>'+
+    '<td>'+ac+'</td>'+
     '<td>'+esc(p.leader||"—")+'</td>'+
     '<td><span class="badge b-blue">'+STAGE_TXT[p.dr_stage||1]+'</span></td>'+
     '<td><span class="badge '+st[1]+'">'+st[0]+'</span></td>'+
@@ -622,6 +914,9 @@ async function saveProject(){
   const body={name,code:$("#pj_code").value.trim()||null,ptype:$("#pj_ptype").value,leader:$("#pj_leader").value.trim()||null,
     dr_stage:+$("#pj_stage").value,status:$("#pj_status").value,start_date:$("#pj_start").value||null,target_date:$("#pj_target").value||null,
     description:$("#pj_desc").value.trim()||null,updated_at:new Date().toISOString()};
+  const abc=computeABC($("#pj_ptype").value,abcReadForm('ab_'));
+  if(abc){body.abc_class=abc.cls;body.abc_score=abc.score;body.abc_factors=abcFactors(abc);}
+  else{body.abc_class=null;body.abc_score=null;body.abc_factors=null;}
   try{
     const editId=$("#pj_editid").value;
     if(editId)await api("em_projects?id=eq."+editId,"PATCH",body);
@@ -637,12 +932,14 @@ function editProject(id){
   $("#pj_stage").value=p.dr_stage||1;$("#pj_status").value=p.status||"in_progress";
   $("#pj_start").value=p.start_date||"";$("#pj_target").value=p.target_date||"";
   $("#pj_desc").value=p.description||"";
+  prefillAbc(p.abc_factors);syncAbcForm();
   window.scrollTo({top:0,behavior:"smooth"});
 }
 function resetProjectForm(){
   ["pj_editid","pj_name","pj_code","pj_leader","pj_desc"].forEach(id=>$("#"+id).value="");
   $("#pj_ptype").value="EEM";$("#pj_stage").value="1";$("#pj_status").value="in_progress";
   $("#pj_start").value=today();$("#pj_target").value=today();
+  prefillAbc(null);syncAbcForm();
 }
 async function delProject(id){
   const p=PROJECTS.find(x=>x.id===id);if(!p)return;
@@ -749,7 +1046,7 @@ async function delUsage(id){
 }
 
 /* ================= 计算型工具 ================= */
-async function loadCalc(){loadFmea();loadVsu();loadSkills();}
+async function loadCalc(){loadFmea();loadVsu();loadSkills();loadMpInfo();refreshAcPrj();}
 function pjName(id){const p=PROJECTS.find(x=>x.id===id);return p?p.name:"—";}
 
 /* FMEA */
