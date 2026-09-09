@@ -711,13 +711,13 @@
 <!-- ============ Tab 7: 引导式套表（37 工具） ============ -->
 <section class="tab" id="tab-guide">
   <div class="g-top">
-    <div class="g-desc"><b style="color:var(--header)">🧭 引导式电子套表</b>：每个工具一张标准在线表单——先看 <b>📖 案例</b>，再跟着 <b>🧭 分步引导</b> 逐项填写（每填一步，自动告诉你下一步怎么填、并智能检查填写质量），填完自动生成 <b>✅ 结论</b>，可打印存档。</div>
+    <div class="g-desc"><b style="color:var(--header)">🧭 引导式电子套表</b>：每个工具一张标准在线表单——先看 <b>📖 案例</b>，再跟着 <b>🧭 分步引导</b> 逐项填写（每填一步，自动告诉你下一步怎么填、并智能检查填写质量），填完自动生成 <b>✅ 结论</b>，可打印存档。<span style="background:#eef2f7;border:1px solid #d7e0ea;color:var(--header);font-size:11.5px;font-weight:600;padding:1px 9px;border-radius:20px;margin-left:8px;vertical-align:middle">v2.1</span></div>
     <select id="g_tool" onchange="gSelect(this.value)"></select>
   </div>
   <div id="g_wrap"></div>
 </section>
 
-<footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥</footer>
+<footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥<br><span style="color:var(--ink-3)">当前版本 v2.1 · 提示：若页面仍显示旧版，请强制刷新（Mac: ⌘+Shift+R / Windows: Ctrl+F5）</span></footer>
 </div>
 
 <!-- 工具详情弹窗 -->
@@ -880,7 +880,8 @@ function openItem(n){
    '<div class="m-field"><div class="lb">方法要点</div><ul>'+t.detail.map(x=>'<li>'+x+'</li>').join("")+'</ul></div>'+
    (t.fields?'<div class="m-field"><div class="lb">关联与提示</div><div class="m-chips">'+t.fields.map(f=>'<span class="chip">'+f+'</span>').join("")+'</div></div>':'')+
    '<div class="m-actions">'+
-   '<button class="btn primary" onclick="gotoUsage('+t.n+')">📝 登记使用记录</button>'+
+   '<button class="btn primary" onclick="gotoGuide('+t.n+')">🧭 打开引导式套表</button>'+
+   '<button class="btn ghost" onclick="gotoUsage('+t.n+')">📝 登记使用记录</button>'+
    (t.calc?'<button class="btn ghost" onclick="gotoCalc(\''+t.calc+'\')">🧮 打开在线填报</button>':'')+
    (t.sheet?'<button class="btn ghost" onclick="gotoSheet(\''+t.sheet+'\')">📋 打开标准套表</button>':'')+
    '</div></div>';
