@@ -140,6 +140,41 @@
   .sheettabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
   .sheettabs button{border:1px solid var(--line);background:#fff;color:var(--ink-2);font-size:13px;font-weight:600;padding:8px 16px;border-radius:9px;cursor:pointer;font-family:inherit}
   .sheettabs button.on{background:#e8eefb;border-color:#2557b0;color:#2557b0}
+
+  /* 引导式套表 */
+  .g-top{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:14px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+  .g-top .g-desc{flex:1;min-width:260px;font-size:13px;color:var(--ink-2);line-height:1.7}
+  .g-top select{border:1px solid var(--line);border-radius:9px;padding:9px 12px;font-size:13.5px;font-weight:600;font-family:inherit;color:var(--ink-1);max-width:330px;background:#fff}
+  .gcase{border:1px solid #f0d9a8;background:#fffaf0;border-radius:12px;padding:13px 16px;margin-bottom:14px}
+  .gcase h4{font-size:13.5px;margin:0 0 6px;color:#8a6116;display:flex;align-items:center;gap:7px;cursor:pointer;user-select:none}
+  .gcase .gcase-bd{font-size:13px;color:var(--ink-2);line-height:1.8}
+  .gcase .gcase-bd b{color:#8a6116}
+  .gstep{background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px 16px;margin-bottom:10px;transition:box-shadow .2s}
+  .gstep.done{border-color:#bfe3c8;box-shadow:0 0 0 1px #bfe3c8 inset}
+  .gstep .ghd{display:flex;align-items:center;gap:9px;margin-bottom:7px}
+  .gstep .gno{flex:none;width:26px;height:26px;border-radius:8px;background:#e8eefb;color:#2557b0;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .gstep.done .gno{background:#e3f2e7;color:#1d7a3a}
+  .gstep .glb{font-weight:700;font-size:13.5px}
+  .gstep .ghint{font-size:12px;color:var(--ink-3);line-height:1.7;margin:0 0 8px;padding-left:35px}
+  .gstep .ghint b{color:var(--ink-2)}
+  .gstep input[type=text],.gstep input[type=number],.gstep input[type=date],.gstep select,.gstep textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:9px 12px;font-size:13.5px;font-family:inherit;color:var(--ink-1);background:#fff;box-sizing:border-box}
+  .gstep textarea{resize:vertical;line-height:1.6}
+  .ggd{margin-top:8px;margin-left:35px;font-size:12.5px;line-height:1.7;border-radius:8px;padding:8px 12px;background:#eef7f0;color:#1d6b38;border:1px solid #cfe8d5;display:none}
+  .ggd.warn{background:#fdf0ef;color:#a33;border-color:#f3cfcb}
+  .gprog{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--ink-3);margin-bottom:10px}
+  .gprog .bar{flex:1;height:7px;border-radius:4px;background:#eceff5;overflow:hidden}
+  .gprog .bar i{display:block;height:100%;background:linear-gradient(90deg,#2557b0,#4d8af0);border-radius:4px;transition:width .3s}
+  .gconcl{border:1px solid var(--line);border-radius:12px;background:#fff;padding:15px 18px}
+  .gconcl h3{margin:0 0 10px;font-size:14.5px;display:flex;align-items:center;gap:8px}
+  .gconcl table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0}
+  .gconcl th,.gconcl td{border:1px solid var(--line);padding:6px 10px;text-align:left}
+  .gconcl th{background:#f5f7fb}
+  .gconcl .ccl-big{font-size:26px;font-weight:900;padding:8px 18px;border-radius:10px;color:#fff;display:inline-block;margin:4px 10px 8px 0}
+  .gbtns{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0 4px}
+  .chain{font-size:13px;line-height:2.0}
+  .chain .ln{display:block;padding-left:14px;border-left:2px solid #c9d6ec;margin-left:8px;margin-bottom:6px}
+  .chain .ln b{color:#2557b0}
+  @media print{.tabs,.g-top .g-desc,footer,.gbtns,.ggd{display:none!important}.gcase{display:block!important}}
   .sheet-pane{display:none}.sheet-pane.on{display:block}
   .guide{border:1px solid #d8e0f0;border-radius:10px;background:#f7f9fd;padding:10px 14px;margin-bottom:14px;font-size:13px;color:var(--ink-2)}
   .guide summary{cursor:pointer;font-weight:700;color:var(--header);font-size:13.5px}
@@ -245,6 +280,7 @@
   <button data-tab="tools" class="on">🧭 工具导航</button>
   <button data-tab="projects">📁 EM项目台账</button>
   <button data-tab="sheets">📋 标准套表</button>
+  <button data-tab="guide">🧭 引导式套表</button>
   <button data-tab="usage">📝 工具使用台账</button>
   <button data-tab="calc">🧮 计算型工具</button>
 </nav>
@@ -670,6 +706,15 @@
     </div>
     <div class="card"><h3><span class="bar"></span>练习记录 <span class="hint">存本机浏览器；正式情报请到「计算型工具 → MP 情报库」登记</span></h3><div id="wb_recs_mp" class="wbreclist">暂无记录</div></div>
   </div>
+</section>
+
+<!-- ============ Tab 7: 引导式套表（37 工具） ============ -->
+<section class="tab" id="tab-guide">
+  <div class="g-top">
+    <div class="g-desc"><b style="color:var(--header)">🧭 引导式电子套表</b>：每个工具一张标准在线表单——先看 <b>📖 案例</b>，再跟着 <b>🧭 分步引导</b> 逐项填写（每填一步，自动告诉你下一步怎么填、并智能检查填写质量），填完自动生成 <b>✅ 结论</b>，可打印存档。</div>
+    <select id="g_tool" onchange="gSelect(this.value)"></select>
+  </div>
+  <div id="g_wrap"></div>
 </section>
 
 <footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥</footer>
@@ -1790,6 +1835,1119 @@ function setupRealtime(){
 
 /* ---------- 启动 ---------- */
 checkTables().then(()=>{loadProjects();setupRealtime();});
+</script>
+
+<script>
+/* ==================== 引导式套表引擎（37 工具） ==================== */
+const GUIDES={};
+let GS={tool:24,vals:{}};
+let gInited=false;
+
+function gN(v){const n=parseFloat(String(v).replace(/[^\d.\-]/g,''));return isNaN(n)?null:n;}
+function gesc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function gSh(s,n){s=String(s||'');return s.length>n?s.slice(0,n)+'…':s;}
+function gHumanCheck(v){const a=[];if(v&&/(人为|疏忽|不小心|失误|没注意|员工|责任心|培训不到位)/.test(v))a.push('表述停在「人为因素」——请继续追问：此人为什么会失误？（标准缺失？培训不足？无防呆装置？）把根因改写到系统/流程/装置层面再往下问。');return a;}
+function gDefaultGuide(st,spec,v){
+  const i=spec.steps.indexOf(st),nxt=spec.steps[i+1];
+  let t=v?'✅ 已记录。':'';
+  t+=nxt?('👉 下一步填「'+nxt.label+'」：'+(nxt.hint||'').split('。')[0]+'。'):'👉 已到最后一步，请查看下方「✅ 自动结论」。';
+  return t;
+}
+function gDefaultCheck(st,v){
+  const a=[];
+  if(v){
+    if(st.type==='num'&&gN(v)===null)a.push('此项应填数字。');
+    if((st.type==='text'||st.type==='textarea')&&v.length<4)a.push('内容偏简短：建议写「对象＋现象＋数据」，参考提示示例。');
+  }
+  return a;
+}
+function gParseList(v){
+  return String(v||'').split(/\n+/).map(l=>l.trim()).filter(Boolean).map(l=>{
+    const p=l.split(/[,，:：\t]/).map(x=>x.trim());
+    return {name:p[0],val:parseFloat(p[1])||0,extra:p};
+  });
+}
+
+/* ---------- 渲染 ---------- */
+function gInit(){
+  const sel=document.getElementById('g_tool');let html='',last='';
+  TOOLS.forEach(t=>{
+    if(t.phase!==last){if(last)html+='</optgroup>';html+='<optgroup label="'+gesc(t.phase)+'">';last=t.phase;}
+    html+='<option value="'+t.n+'">#'+t.n+' '+gesc(t.name)+'</option>';
+  });
+  html+='</optgroup>';sel.innerHTML=html;sel.value=GS.tool;
+  renderGuide();
+}
+function gSelect(n){GS.tool=+n;GS.vals={};const sel=document.getElementById('g_tool');if(sel)sel.value=n;renderGuide();window.scrollTo({top:0,behavior:'smooth'});}
+function renderGuide(){
+  const spec=GUIDES[GS.tool],t=TOOLS.find(x=>x.n===GS.tool);
+  const wrap=document.getElementById('g_wrap');
+  if(!spec){wrap.innerHTML='<div class="nodata">该工具的引导式套表建设中。</div>';return;}
+  wrap.innerHTML=
+   '<div class="gcase"><h4 onclick="var d=this.nextElementSibling;d.style.display=(d.style.display===\'none\'?\'block\':\'none\')">📖 案例参考（点我展开 · 看懂案例再跟练）</h4>'+
+   '<div class="gcase-bd" style="display:none">'+spec.case.bg+'<div style="margin-top:10px"><button class="btn primary" onclick="gCase()">📋 一键载入案例数据，跟着练</button></div></div></div>'+
+   '<div class="gprog"><span id="g_ptxt"></span><div class="bar"><i id="g_pbar" style="width:0%"></i></div></div>'+
+   spec.steps.map((st,i)=>gField(st,i)).join('')+
+   '<div class="gbtns"><button class="btn primary" onclick="gCase()">📋 填入示例</button><button class="btn ghost" onclick="gClear()">🗑 清空重填</button><button class="btn ghost" onclick="window.print()">🖨 打印 / 存档</button></div>'+
+   '<div class="gconcl" id="g_concl"></div>';
+  spec.steps.forEach(st=>{
+    const el=document.getElementById('g_'+st.id);
+    if(el&&GS.vals[st.id]!==undefined)el.value=GS.vals[st.id];
+  });
+  spec.steps.forEach(st=>{if(GS.vals[st.id])gOnInput(st.id,true);});
+  gProg();gConcl();
+}
+function gField(st,i){
+  let ctrl;
+  if(st.type==='select'){
+    ctrl='<select id="g_'+st.id+'" onchange="gOnInput(\''+st.id+'\')">'+(st.opts||[]).map(o=>'<option>'+gesc(o)+'</option>').join('')+'</select>';
+  }else if(st.type==='textarea'){
+    ctrl='<textarea id="g_'+st.id+'" rows="'+(st.rows||3)+'" placeholder="'+gesc(st.ph||'')+'" oninput="gOnInput(\''+st.id+'\')"></textarea>';
+  }else{
+    ctrl='<input type="'+(st.type==='num'?'text':(st.type||'text'))+'" id="g_'+st.id+'" placeholder="'+gesc(st.ph||'')+'" oninput="gOnInput(\''+st.id+'\')">';
+  }
+  return '<div class="gstep" id="gs_'+st.id+'"><div class="ghd"><div class="gno">'+(i+1)+'</div><div class="glb">'+st.label+'</div></div>'+
+   '<p class="ghint">💡 '+st.hint+(st.ph?'　<b>示例：</b>'+gesc(st.ph):'')+'</p>'+ctrl+'<div class="ggd" id="gd_'+st.id+'"></div></div>';
+}
+function gOnInput(id,keep){
+  const spec=GUIDES[GS.tool];if(!spec)return;
+  const st=spec.steps.find(s=>s.id===id);if(!st)return;
+  const el=document.getElementById('g_'+id);if(!el)return;
+  const v=String(el.value).trim();GS.vals[id]=v;
+  const gd=document.getElementById('gd_'+id),stepEl=document.getElementById('gs_'+id);
+  const warns=(st.check?st.check(v,GS.vals):gDefaultCheck(st,v));
+  const guide=st.guide?st.guide(v,GS.vals):null;
+  let html='';
+  if(v)html='<div>'+(guide||gDefaultGuide(st,spec,v))+'</div>';
+  else if(!keep)html='<div>⌨️ 请填写本项后，这里会提示下一步怎么填。</div>';
+  if(warns&&warns.length)html+='<div style="margin-top:6px">⚠️ '+warns.join('<br>⚠️ ')+'</div>';
+  gd.innerHTML=html;gd.style.display=html?'block':'none';
+  gd.className='ggd'+((warns&&warns.length)?' warn':'');
+  stepEl.classList.toggle('done',!!v&&!(warns&&warns.length));
+  gProg();gConcl();
+}
+function gProg(){
+  const spec=GUIDES[GS.tool];if(!spec)return;
+  const filled=spec.steps.filter(s=>GS.vals[s.id]).length;
+  const pt=document.getElementById('g_ptxt'),pb=document.getElementById('g_pbar');
+  if(pt)pt.textContent='填写进度：'+filled+' / '+spec.steps.length+' 步';
+  if(pb)pb.style.width=(filled/spec.steps.length*100)+'%';
+}
+function gConcl(){
+  const spec=GUIDES[GS.tool];if(!spec)return;
+  const el=document.getElementById('g_concl');if(!el)return;
+  const filled=spec.steps.filter(s=>GS.vals[s.id]).length;
+  if(filled===0){el.innerHTML='<h3>✅ 自动结论</h3><p style="font-size:13px;color:var(--ink-3)">填写上面的步骤，这里会实时生成结论。</p>';return;}
+  el.innerHTML='<h3>✅ 自动结论</h3>'+(spec.concl?spec.concl(GS.vals):gDefaultConcl(spec));
+}
+function gDefaultConcl(spec){
+  return '<table>'+spec.steps.map(s=>'<tr><th style="width:180px">'+s.label+'</th><td>'+gesc(GS.vals[s.id]||'—').replace(/\n/g,'<br>')+'</td></tr>').join('')+'</table>'+
+   '<p style="font-size:12.5px;color:var(--ink-3)">已汇总你的填写内容。对照工具方法要点执行后，可打印本表存档或交 EM 小组评审。</p>';
+}
+function gCase(){
+  const spec=GUIDES[GS.tool];if(!spec)return;
+  spec.steps.forEach(st=>{
+    const el=document.getElementById('g_'+st.id);if(!el)return;
+    const d=spec.case.data[st.id];
+    el.value=(d!==undefined&&d!=='')?d:(st.type==='select'?(st.opts?st.opts[0]:''):'');
+  });
+  spec.steps.forEach(st=>gOnInput(st.id,true));
+}
+function gClear(){GS.vals={};renderGuide();}
+function gotoGuide(n){
+  closeM();document.querySelector('.tabs button[data-tab="guide"]').click();
+  gSelect(n);
+}
+document.querySelector('.tabs button[data-tab="guide"]').addEventListener("click",()=>{
+  if(!gInited){gInited=true;gInit();}
+});
+
+/* ==================== 套表定义 ==================== */
+
+/* #1 EM 支柱方法论-四个子系统 */
+GUIDES[1]={
+case:{bg:'以「果冻爽调理平台合并改善」EEM 项目为例：DR 关卡覆盖 DR1-DR7、三个关卡配检查表、方法工具用 QFD/LCC/FMEA/VSU、结案回传 3 条 MP 情报——四系统齐备，项目顺利闭环。',
+data:{proj:'果冻爽调理平台合并改善',ptype:'EEM（新设备）',dr:'DR1 立项（已完成）→ DR2 范围定义（已完成）→ DR3 分析（QFD/LCC/FMEA 进行中）→ DR4 方案 → DR5 安装 → DR6 调试（VSU）→ DR7 反馈',chk:'设备选型检查表、卫生设计检查表、安全合规检查表（DR3 各配一份）',tools:'QFD、LCC、FMEA、DFM、VSU、TT&T',mp:'充填阀压力标准缺失、输送带跑偏异响、封箱机切刀磨损快 → 3 条 MP 情报回传'}},
+steps:[
+ {id:'proj',label:'项目名称',type:'text',hint:'填正在推进或拟立项的 EM 项目名称',ph:'果冻爽调理平台合并改善'},
+ {id:'ptype',label:'项目类型',type:'select',opts:['EEM（新设备）','EPM（新产品）'],hint:'EEM=设备早期管理 NEI；EPM=产品早期管理 NPI，两者流程与交付物不同'},
+ {id:'dr',label:'① 阶段控制系统：DR 关卡计划',type:'textarea',hint:'列出 DR1-DR7 各关卡推进安排，标出已完成/进行中',ph:'DR1 立项（已完成）→ DR2 范围（已完成）→ DR3 分析（进行中）…'},
+ {id:'chk',label:'② 检查表系统：配齐检查表',type:'textarea',hint:'每个 DR 关卡配检查表；设备类至少含选型/卫生/安全合规',ph:'设备选型检查表、卫生设计检查表、安全合规检查表'},
+ {id:'tools',label:'③ 方法工具系统：拟用工具',type:'text',hint:'从平台 37 个工具中选配（QFD、LCC、FMEA、DOE、VSU、TT&T…）',ph:'QFD、LCC、FMEA、VSU、TT&T'},
+ {id:'mp',label:'④ MP 数据表系统：沉淀计划',type:'textarea',hint:'计划把哪些问题/改善沉淀为 MP 情报（DR7 结案时 7.2 信息上传）',ph:'充填压力标准缺失 → MP 情报回传'}
+],
+concl(c){
+ const miss=[];
+ if(!c.dr)miss.push('① 阶段控制');if(!c.chk)miss.push('② 检查表');if(!c.tools)miss.push('③ 方法工具');if(!c.mp)miss.push('④ MP 沉淀');
+ return '<table><tr><th style="width:150px">项目</th><td>'+gesc(c.proj||'—')+'（'+gesc(c.ptype||'—')+'）</td></tr>'+
+ '<tr><th>① 阶段控制</th><td>'+gesc(c.dr||'—')+'</td></tr><tr><th>② 检查表</th><td>'+gesc(c.chk||'—')+'</td></tr>'+
+ '<tr><th>③ 方法工具</th><td>'+gesc(c.tools||'—')+'</td></tr><tr><th>④ MP 沉淀</th><td>'+gesc(c.mp||'—')+'</td></tr></table>'+
+ (miss.length?'<p style="color:#a33;font-size:13px">⚠️ 尚缺子系统：'+miss.join('、')+'——补齐后 EM 支柱才能完整运转。</p>':'<p style="color:#1d7a3a;font-size:13px">✅ 四大子系统已全部部署，EM 支柱运转条件齐备。</p>');
+}};
+
+/* #2 EM 项目分类 */
+GUIDES[2]={
+case:{bg:'「小馒头新线导入」投资 185 万、集团首次生产 → 判定 EPM（新产品导入），走 NPI 流程并按 ABC 公式评出 A 类。',
+data:{proj:'小馒头新线导入',obj:'新产品导入',invest:'185',nov:'集团首次',note:'含专属包材与充填装置选型'}},
+steps:[
+ {id:'proj',label:'项目名称',type:'text',hint:'填项目全称',ph:'小馒头新线导入'},
+ {id:'obj',label:'项目对象',type:'select',opts:['全新设备导入','新产品导入','设备改造/移机'],hint:'按导入对象区分：设备→EEM/NEI；产品→EPM/NPI'},
+ {id:'invest',label:'投资额（万元）',type:'num',hint:'填项目总投资（含设备、施工、模具）',ph:'185'},
+ {id:'nov',label:'新颖度',type:'select',opts:['集团首次','基地首次','复制/已量产'],hint:'集团首次=最高风险，需最完整流程'},
+ {id:'note',label:'补充说明',type:'text',hint:'特殊要求（合规、产能、交期）',ph:'含专属包材与充填装置选型'}
+],
+concl(c){
+ const isEem=c.obj==='全新设备导入'||c.obj==='设备改造/移机';
+ const cls=isEem?'EEM（设备早期管理 / NEI）':'EPM（产品早期管理 / NPI）';
+ const risk=c.nov==='集团首次'?'高（集团首次：流程必须完整走 DR1-DR7，重点做 QFD 与 FMEA）':(c.nov==='基地首次'?'中（基地首次：重点做调试验证与 SOP 预发布）':'低（复制类：重点做 ESI 供应商与 MP 情报移植）');
+ return '<div style="font-size:15px;margin-bottom:8px">项目 <b>'+gesc(c.proj||'—')+'</b> 判定为 <span class="ccl-big" style="background:#2557b0">'+cls+'</span></div>'+
+ '<table><tr><th style="width:130px">投资额</th><td>'+(gN(c.invest)!=null?gN(c.invest)+' 万元':'—')+'</td></tr><tr><th>新颖度风险</th><td>'+gesc(c.nov||'—')+' → 风险等级：<b>'+risk+'</b></td></tr>'+
+ '<tr><th>对应工具</th><td>'+(isEem?'设备类：LCC 核算、FMEA、DFM/DFA、调试验证 FAT/SAT→IQ/OQ/PQ、VSU、TT&T':'产品类：QFD、DOE、QA/QM 矩阵、SOP 预发布、5C0D、SUM')+'</td></tr></table>'+
+ '<p style="font-size:12.5px;color:var(--ink-3)">下一步：到「📋 标准套表 → EEM/EPM ABC 评分卡」按官方公式判 A/B/C 类，决定管控强度。</p>';
+}};
+
+/* #3 DR 七步法 */
+GUIDES[3]={
+case:{bg:'果冻爽项目（A 类）当前在 DR3 阶段：官方 3.x 任务 4 项已完成 4 项 → 完成率 100%，可申请 DR3 评审放行进入 DR4。',
+data:{proj:'果冻爽调理平台合并改善',abc:'A',stage:'DR3 详细分析',done:'3.1\n3.2\n3.3\n3.4',issue:'无'}},
+steps:[
+ {id:'proj',label:'项目名称',type:'text',hint:'填项目全称',ph:'果冻爽调理平台合并改善'},
+ {id:'abc',label:'项目 ABC 类别',type:'select',opts:['A','B','C'],hint:'决定评审强度与优先级：A→1 级 / B→2 级 / C→3 级'},
+ {id:'stage',label:'当前阶段',type:'select',opts:['DR1 早期调研','DR2 项目范围定义','DR3 详细分析','DR4 建立行动解决方案','DR5 安装','DR6 调试及试生产','DR7 反馈'],hint:'选项目当前所处的 DR 关卡'},
+ {id:'done',label:'本阶段已完成任务（编号，每行一个）',type:'textarea',hint:'对照官方任务清单填编号，如 DR3 填 3.1、3.2…（完整 28 项清单见「标准套表 → DR 检查表」）',ph:'3.1\n3.2\n3.3\n3.4'},
+ {id:'issue',label:'未完成项 / 遗留问题',type:'textarea',hint:'填卡点与对策；无则填「无」',ph:'无'}
+],
+concl(c){
+  const no=parseInt(c.stage)?parseInt(c.stage):parseInt((c.stage||'').match(/DR(\d)/)?c.stage.match(/DR(\d)/)[1]:'0');
+  const tasks=DR_TASKS&&DR_TASKS[no]?DR_TASKS[no]:[];
+  const doneIds=(c.done||'').split(/[\s,，、\n]+/).map(x=>x.trim()).filter(x=>/^\d+\.\d+$/.test(x));
+  const missing=tasks.filter(t=>!doneIds.some(d=>t.indexOf(d+' ')===0||t.startsWith(d+' ')));
+  const rate=tasks.length?Math.round((tasks.length-missing.length)/tasks.length*100):0;
+  const prio=ABC_PRIO&&ABC_PRIO[c.abc]?ABC_PRIO[c.abc]:'—';
+  let html='<div style="font-size:14px;margin-bottom:6px">'+gesc(c.proj||'—')+' · '+gesc(c.stage||'—')+'（'+(c.abc||'?')+' 类 → '+prio+'）</div>';
+  html+='<div><span class="ccl-big" style="background:'+(rate===100?'#1d7a3a':(rate>=50?'#c8860d':'#a33'))+'">'+rate+'%</span>本阶段任务完成率</div>';
+  html+='<table><tr><th style="width:60px">编号</th><th>官方任务</th><th style="width:70px">状态</th></tr>'+tasks.map(t=>{
+    const id=t.split(' ')[0];const ok=!missing.includes(t);
+    return '<tr><td>'+id+'</td><td>'+gesc(t.replace(/^\d+\.\d+\s*/,''))+'</td><td style="color:'+(ok?'#1d7a3a':'#a33')+'">'+(ok?'✅ 已完成':'❌ 未完成')+'</td></tr>';
+  }).join('')+'</table>';
+  if(rate===100)html+='<p style="color:#1d7a3a;font-size:13.5px">✅ 全部任务完成，可申请 DR'+no+' 评审放行，进入下一阶段。</p>';
+  else html+='<p style="color:#a33;font-size:13.5px">⚠️ 还差 '+missing.length+' 项未完成：'+missing.map(t=>t.split(' ')[0]).join('、')+'——DR 关卡未通过不得进入下一阶段。</p>';
+  if(c.issue&&c.issue!=='无')html+='<p style="font-size:13px">遗留问题：'+gesc(c.issue)+'</p>';
+  return html;
+}};
+
+/* #4 目标设定、标准制定和任务拆分 */
+GUIDES[4]={
+case:{bg:'VSU 目标：基线 α/(α+β)=0.42，目标 0.65；驱动指标 KAI 设「EM 小组周会次数 4 次/月」；拆分为 QFD 评审、设备到货验收等 6 项任务。',
+data:{kpi:'垂直启动早期暴露率 α/(α+β)',base:'0.42',target:'0.65',unit:'比率',kai:'EM 小组运行 4 次/月；投资计划达成率 100%',tasks:'①QFD 评审 ②设备选型会签 ③到货验收 ④FAT 出厂验收 ⑤安装就位 ⑥VSU 预案演练'}},
+steps:[
+ {id:'kpi',label:'KPI 指标名称',type:'text',hint:'结果类指标（滞后指标），如垂直启动率/按时项目率/αβ比率',ph:'垂直启动早期暴露率 α/(α+β)'},
+ {id:'base',label:'基线值（现状）',type:'num',hint:'填当前实际水平——没有基线的目标无法衡量进步',ph:'0.42'},
+ {id:'target',label:'目标值',type:'num',hint:'应比基线有挑战性且可达成（建议提升 20-50%）',ph:'0.65'},
+ {id:'unit',label:'单位',type:'select',opts:['%','比率','万元','天','件','次'],hint:'指标计量单位'},
+ {id:'kai',label:'KAI 驱动指标',type:'textarea',hint:'过程类指标（领先指标）：做什么事能推动 KPI？如小组运行次数、评审完成率',ph:'EM 小组运行 4 次/月；投资计划达成率 100%'},
+ {id:'tasks',label:'任务拆分',type:'textarea',hint:'按四级计划管控拆到可执行任务（总体蓝图→月滚动→周攻坚→日清）',ph:'①QFD 评审 ②设备选型会签 ③到货验收…'}
+],
+concl(c){
+ const b=gN(c.base),t=gN(c.target);let imp=null;
+ if(b!==null&&t!==null&&b!==0)imp=Math.round((t-b)/Math.abs(b)*1000)/10;
+ return '<div><span class="ccl-big" style="background:#2557b0">'+(c.target||'—')+(c.unit==='比率'?'':' '+(c.unit||''))+'</span>目标（基线 '+(c.base||'—')+'）</div>'+
+ (imp!==null?'<p style="font-size:13.5px">需提升 <b>'+imp+'%</b>'+(imp>50?'——挑战较大，建议分阶段设定里程碑。':'（合理的挑战幅度）')+'</p>':'')+
+ '<table><tr><th style="width:150px">KAI 驱动指标</th><td>'+gesc(c.kai||'—')+'</td></tr><tr><th>任务拆分</th><td>'+gesc(c.tasks||'—').replace(/\n/g,'<br>')+'</td></tr></table>'+
+ '<p style="font-size:12.5px;color:var(--ink-3)">目标卡成立条件：有基线、有目标、有驱动、有任务、有责任人——缺任一项回到对应步骤补齐。</p>';
+}};
+
+/* #5 甘特图 */
+GUIDES[5]={
+case:{bg:'「FAT 出厂验收」任务：3/1 开始、3/5 结束、前置任务为设备选型会签（2/20 完成）——工期 5 天，正常。',
+data:{task:'FAT 出厂验收',start:'2026-03-01',end:'2026-03-05',pre:'设备选型会签（2/20 完成）',ms:'是（里程碑）'}},
+steps:[
+ {id:'task',label:'任务名称',type:'text',hint:'填项目计划中的一个具体任务',ph:'FAT 出厂验收'},
+ {id:'start',label:'开始日期',type:'date',hint:'填计划开始日期'},
+ {id:'end',label:'结束日期',type:'date',hint:'填计划完成日期'},
+ {id:'pre',label:'前置任务',type:'text',hint:'本任务开始前必须完成的任务（无依赖填「无」）',ph:'设备选型会签（2/20 完成）'},
+ {id:'ms',label:'是否里程碑',type:'select',opts:['否','是（里程碑）'],hint:'里程碑=DR 评审点或重大节点，需设置时间缓冲'}
+],
+concl(c){
+ const s=new Date(c.start),e=new Date(c.end);
+ let days=null;
+ if(!isNaN(s)&&!isNaN(e))days=Math.round((e-s)/86400000)+1;
+ let html='<table><tr><th style="width:140px">任务</th><td>'+gesc(c.task||'—')+(c.ms&&c.ms!=='否'?' ⭐ 里程碑':'')+'</td></tr>'+
+ '<tr><th>计划区间</th><td>'+(c.start||'—')+' ~ '+(c.end||'—')+'</td></tr>'+
+ '<tr><th>前置任务</th><td>'+gesc(c.pre||'—')+'</td></tr></table>';
+ if(days!==null){
+  html+='<div><span class="ccl-big" style="background:'+(days>30?'#c8860d':'#2557b0')+'">'+days+' 天</span>工期</div>';
+  if(days>30)html+='<p style="color:#c8860d;font-size:13px">⚠️ 工期超过 30 天：建议拆分为子任务并设中间检查点，识别是否为关键路径瓶颈。</p>';
+  if(days<0)html+='<p style="color:#a33;font-size:13px">⚠️ 结束日期早于开始日期，请检查日期。</p>';
+ }
+ if(c.ms&&c.ms!=='否')html+='<p style="font-size:13px">⭐ 里程碑节点：建议在计划完成日前预留 2-3 天缓冲，里程碑延期会直接推迟项目整体交付。</p>';
+ return html;
+}};
+
+/* #6 QFD */
+GUIDES[6]={
+case:{bg:'果冻爽案例：两项需求（重量稳定 权重5、封口严密 权重3）展开到三个设计特性，加权后「充填压力控制」重要度 54 分最高，成为设计优先项。',
+data:{demands:'夹心重量稳定,5\n封口严密不漏液,3',chars:'充填压力控制\n封口温度曲线\n杯体厚度设计',rel:'夹心重量稳定→充填压力控制=9\n夹心重量稳定→杯体厚度设计=3\n封口严密不漏液→封口温度曲线=9\n封口严密不漏液→充填压力控制=3'}},
+steps:[
+ {id:'demands',label:'顾客/法规需求（每行：需求,权重1-5）',type:'textarea',hint:'需求来自客户 VOC、法规（GB/食品卫生）、公司标准；权重 5=必须满足，1=期望',ph:'夹心重量稳定,5\n封口严密不漏液,3'},
+ {id:'chars',label:'设计特性（每行一个）',type:'textarea',hint:'把需求翻译成可设计、可测量的技术特性',ph:'充填压力控制\n封口温度曲线\n杯体厚度设计'},
+ {id:'rel',label:'需求→特性关系（每行：需求→特性=9/3/1）',type:'textarea',hint:'关系强度：9=强相关，3=中等，1=弱相关；每个需求至少挂一个强相关特性',ph:'夹心重量稳定→充填压力控制=9'},
+ {id:'comp',label:'竞品/现状对比（可选）',type:'text',hint:'我方与标杆在该需求上的水平差距',ph:'竞品重量 CV=1.2%，我方 2.8%'}
+],
+concl(c){
+ const ds=gParseList(c.demands).map(d=>({name:d.name,w:gN(d.extra[1])||3}));
+ const cs=(c.chars||'').split(/\n+/).map(x=>x.trim()).filter(Boolean);
+ const rs=(c.rel||'').split(/\n+/).map(l=>{
+   const m=l.match(/(.+?)[→=]/g);
+   const seg=l.split(/[→=]/).map(x=>x.trim());
+   return {d:seg[0],c:seg[1],r:gN(seg[2])||0};
+ }).filter(x=>x.d&&x.c);
+ const imp={};rs.forEach(x=>{const w=(ds.find(d=>d.name===x.d)||{w:3}).w;if(!imp[x.c])imp[x.c]=0;imp[x.c]+=w*x.r;});
+ const sorted=Object.keys(imp).sort((a,b)=>imp[b]-imp[a]);
+ let html='<p style="font-size:13.5px;margin:0 0 6px">设计特性重要度（= Σ 需求权重×关系强度）：</p>';
+ html+='<table><tr><th>排名</th><th>设计特性</th><th>重要度</th><th>设计优先级</th></tr>'+sorted.map((k,i)=>'<tr><td>'+(i+1)+'</td><td>'+gesc(k)+'</td><td><b>'+imp[k]+'</b></td><td>'+(i===0?'🔴 最优先':(imp[k]>=sorted[0]?imp[k]*0.5?'⭐ 重点':'一般':'一般'))+'</td></tr>').join('')+'</table>';
+ if(sorted.length)html+='<p style="font-size:13px">✅ 「<b>'+gesc(sorted[0])+'</b>」重要度最高（'+imp[sorted[0]]+' 分）——设计资源与 FMEA 分析应优先投入该特性。</p>';
+ const uncovered=ds.filter(d=>!rs.some(r=>r.d===d.name&&r.r>=9));
+ if(uncovered.length)html+='<p style="color:#a33;font-size:12.5px">⚠️ 需求「'+uncovered.map(d=>gesc(d.name)).join('、')+'」没有强相关（=9）设计特性承接，存在需求遗漏风险。</p>';
+ if(c.comp)html+='<p style="font-size:12.5px;color:var(--ink-3)">对比：'+gesc(c.comp)+'——差距大的需求权重应上调。</p>';
+ return html;
+}};
+
+/* #7 LCC 生命周期成本核算 */
+GUIDES[7]={
+case:{bg:'烤炉改造案例：采购 45 万＋安装 5 万，年使用成本（能耗+维护+人工+耗材）合计 12 万/年、按 10 年计，处置 1 万、残值 3 万 → LCC = 45+5+12×10+1−3 = 173 万，采购价只占 26%。',
+data:{buy:'45',install:'5',energy:'6',maint:'3',labor:'1.5',consum:'1.5',years:'10',residual:'3',disposal:'1'}},
+steps:[
+ {id:'buy',label:'设备采购成本（万元）',type:'num',hint:'设备价款＋运输＋保险',ph:'45'},
+ {id:'install',label:'安装施工成本（万元）',type:'num',hint:'基础、管线、吊装、调试费',ph:'5'},
+ {id:'energy',label:'年能耗成本（万元/年）',type:'num',hint:'电/汽/水，按额定功率×年运行小时估算',ph:'6'},
+ {id:'maint',label:'年维护成本（万元/年）',type:'num',hint:'备件＋维修人工＋保养耗材',ph:'3'},
+ {id:'labor',label:'年人工成本（万元/年）',type:'num',hint:'操作与点检分摊人工',ph:'1.5'},
+ {id:'consum',label:'年耗材成本（万元/年）',type:'num',hint:'易损件、润滑、包材损耗分摊',ph:'1.5'},
+ {id:'years',label:'使用年限（年）',type:'num',hint:'按财务折旧或技术寿命取小者',ph:'10'},
+ {id:'residual',label:'期末残值（万元）',type:'num',hint:'报废时可回收价值（从总成本中扣除）',ph:'3'},
+ {id:'disposal',label:'处置费用（万元）',type:'num',hint:'拆除、清运、环保处置',ph:'1'}
+],
+concl(c){
+ const buy=gN(c.buy)||0,inst=gN(c.install)||0,en=gN(c.energy)||0,mt=gN(c.maint)||0,lb=gN(c.labor)||0,cs=gN(c.consum)||0,y=gN(c.years)||10,rv=gN(c.residual)||0,dp=gN(c.disposal)||0;
+ const useY=en+mt+lb+cs,useT=useY*y,lcc=buy+inst+useT+dp-rv;
+ const buyPct=Math.round(buy/lcc*100),usePct=Math.round(useT/lcc*100);
+ return '<div><span class="ccl-big" style="background:#2557b0">'+lcc.toFixed(1)+' 万元</span>LCC 全生命周期总成本</div>'+
+ '<table><tr><th>成本构成</th><th>金额（万元）</th><th>占比</th></tr>'+
+ '<tr><td>采购＋安装（一次性）</td><td>'+(buy+inst).toFixed(1)+'</td><td>'+Math.round((buy+inst)/lcc*100)+'%</td></tr>'+
+ '<tr><td>使用成本（'+useY.toFixed(1)+' 万/年 × '+y+' 年）</td><td>'+useT.toFixed(1)+'</td><td>'+usePct+'%</td></tr>'+
+ '<tr><td>处置 − 残值</td><td>'+(dp-rv).toFixed(1)+'</td><td>'+Math.round((dp-rv)/lcc*100)+'%</td></tr></table>'+
+ '<p style="font-size:13.5px">'+(usePct>60?'⚠️ <b>冰山效应</b>：采购价只占 '+buyPct+'%，使用成本占 '+usePct+'%——选型时不要只比报价，重点比能耗与维护性。':'✅ 采购成本占 '+buyPct+'%、使用成本占 '+usePct+'%，成本结构均衡。')+'</p>'+
+ '<p style="font-size:12.5px;color:var(--ink-3)">年均拥有成本 = '+(lcc/y).toFixed(1)+' 万元/年；此数据用于 ABC 评级「投资回报」维度与设备选型对比。</p>';
+}};
+
+/* #8 风险评估 */
+GUIDES[8]={
+case:{bg:'「氨制冷机组泄漏」风险评估：可能性 3、严重度 5 → R=15，高风险——需厂级管控方案＋应急预案＋每月演练。',
+data:{risk:'氨制冷机组阀门泄漏',cat:'安全',L:'3',S:'5',ctrl:'现有季度巡检阀门，无在线监测',act:'加装泄漏在线报警＋双阀冗余；编制应急预案并每季度演练'}},
+steps:[
+ {id:'risk',label:'风险描述',type:'textarea',hint:'写清 风险源＋触发条件＋后果对象',ph:'氨制冷机组阀门泄漏'},
+ {id:'cat',label:'风险类别',type:'select',opts:['安全','质量','进度','环境','合规'],hint:'铁三角：安全是底线、质量是生命、进度是效益'},
+ {id:'L',label:'发生可能性 L（1-5）',type:'select',opts:['1 极少','2 较少','3 可能','4 较大','5 频繁'],hint:'基于历史数据与同类厂经验判断'},
+ {id:'S',label:'后果严重度 S（1-5）',type:'select',opts:['1 轻微','2 一般','3 较重','4 严重','5 灾难'],hint:'5=人员伤亡/重大食品安全/法规停业'},
+ {id:'ctrl',label:'现有控制措施',type:'textarea',hint:'现有防护：巡检、联锁、培训等；没有填「无」',ph:'现有季度巡检阀门，无在线监测'},
+ {id:'act',label:'改善措施',type:'textarea',hint:'按消除→替代→工程控制→管理控制→PPE 的优先级选措施',ph:'加装泄漏在线报警＋双阀冗余'}
+],
+concl(c){
+ const L=gN(c.L)||1,S=gN(c.S)||1,R=L*S;
+ const lv=R>=15?{t:'高风险',c:'#a33',a:'厂级管控：制定专项方案＋应急预案，EM 小组跟踪，每月检讨'}:(R>=8?{t:'中风险',c:'#c8860d',a:'部门级管控：纳入计划保全/点检强化，季度复盘'}:{t:'低风险',c:'#1d7a3a',a:'班组级管控：常规点检覆盖即可，年度复核'});
+ return '<div><span class="ccl-big" style="background:'+lv.c+'">R = '+R+'</span>'+lv.t+'（L='+L+' × S='+S+'）</div>'+
+ '<table><tr><th style="width:130px">风险</th><td>'+gesc(c.risk||'—')+'</td></tr><tr><th>类别</th><td>'+gesc(c.cat||'—')+'</td></tr>'+
+ '<tr><th>现有控制</th><td>'+gesc(c.ctrl||'—')+'</td></tr><tr><th>改善措施</th><td>'+gesc(c.act||'—')+'</td></tr></table>'+
+ '<p style="font-size:13.5px;color:'+lv.c+'">管控要求：'+lv.a+'。</p>'+
+ (S>=5?'<p style="color:#a33;font-size:13px">⚠️ 严重度达 5：无论可能性多低，必须有工程级措施＋应急预案（对应 FMEA S≥9 同样强制）。</p>':'');
+}};
+
+/* #9 CE 并行工程 */
+GUIDES[9]={
+case:{bg:'果冻爽项目组建跨职能团队（研发/品控/生产/EM/采购），设计与验证并行，项目周期从 11 个月压到 8 个月。',
+data:{proj:'果冻爽调理平台合并改善',team:'研发-张工（配方）；品控-李主管（标准）；生产-王班长（工艺）；EM-设备科（选型/验证）；采购-刘专员（交期）',par:'配方设计与设备选型并行；包材打样与产线布置并行',deli:'配方标准、设备技术协议、FAT 报告、工艺参数标准卡'}},
+steps:[
+ {id:'proj',label:'项目名称',type:'text',hint:'填项目全称',ph:'果冻爽调理平台合并改善'},
+ {id:'team',label:'跨职能团队（部门-姓名-职责）',type:'textarea',hint:'至少含 研发、品控、生产、EM 四方；采购/供应商按需',ph:'研发-张工（配方）；品控-李主管（标准）；生产-王班长（工艺）'},
+ {id:'par',label:'并行推进的任务',type:'textarea',hint:'哪些工作可同时做？识别传统串行中可提前启动的环节',ph:'配方设计与设备选型并行；包材打样与产线布置并行'},
+ {id:'deli',label:'各角色交付物',type:'textarea',hint:'每个角色的阶段交付物（标准/协议/报告/参数卡）',ph:'配方标准、设备技术协议、FAT 报告、工艺参数标准卡'}
+],
+concl(c){
+ const roles=(c.team||'').split(/[;；\n]/).filter(Boolean).length;
+ return '<table><tr><th style="width:150px">项目</th><td>'+gesc(c.proj||'—')+'</td></tr><tr><th>团队（'+roles+' 个角色）</th><td>'+gesc(c.team||'—').replace(/\n/g,'<br>')+'</td></tr>'+
+ '<tr><th>并行任务</th><td>'+gesc(c.par||'—').replace(/\n/g,'<br>')+'</td></tr><tr><th>交付物</th><td>'+gesc(c.deli||'—').replace(/\n/g,'<br>')+'</td></tr></table>'+
+ (roles<4?'<p style="color:#c8860d;font-size:13px">⚠️ 团队角色少于 4 个：CE 要求研发、品控、生产、EM 至少四方介入，缺角色会造成后期返工。</p>':'<p style="color:#1d7a3a;font-size:13px">✅ 跨职能团队齐备。建议固定周例会机制同步进度与风险，避免并行变混乱。</p>');
+}};
+
+/* #10 FMEA */
+GUIDES[10]={
+case:{bg:'充填封口工序：失效模式「封口不严漏液」，S=8（市场投诉级）、O=5、D=4 → RPN=160 ≥100，优先改善：加装封口温度在线监控。',
+data:{item:'充填封口工序',fail:'封口不严导致漏液',eff:'成品漏液→市场投诉、批次召回风险',S:'8',cause:'封口温度波动超出工艺窗口',O:'5',ctrl:'每 2 小时人工抽检封口强度',D:'4',act:'加装封口温度在线监控＋自动剔除；重定工艺窗口并做 CMK 验证'}},
+steps:[
+ {id:'item',label:'分析对象（工序/部件）',type:'text',hint:'填具体的工序、设备或部件名称',ph:'充填封口工序'},
+ {id:'fail',label:'失效模式（怎么坏）',type:'text',hint:'描述失效的具体方式，一个对象可列多个模式（本表填一个）',ph:'封口不严导致漏液'},
+ {id:'eff',label:'失效后果（影响谁）',type:'text',hint:'对下道工序/客户/法规的后果；食品安全类后果 S 直接给 9-10',ph:'成品漏液→市场投诉、批次召回风险'},
+ {id:'S',label:'严重度 S（1-10）',type:'select',opts:['1','2','3','4','5','6','7','8','9','10'],hint:'10=安全事故/法规违规；9=食品安全；8=市场批量投诉'},
+ {id:'cause',label:'失效起因（为什么坏）',type:'text',hint:'具体机理：参数波动？材质？磨损？设计余量不足？',ph:'封口温度波动超出工艺窗口'},
+ {id:'O',label:'频度 O（1-10）',type:'select',opts:['1','2','3','4','5','6','7','8','9','10'],hint:'10=几乎每次发生；1=极罕见。参考历史不良率'},
+ {id:'ctrl',label:'现行控制措施',type:'textarea',hint:'现有预防＋探测手段；没有填「无」',ph:'每 2 小时人工抽检封口强度'},
+ {id:'D',label:'探测度 D（1-10）',type:'select',opts:['1','2','3','4','5','6','7','8','9','10'],hint:'10=几乎无法探测；1=自动联锁探测。人眼抽检通常 5-7'},
+ {id:'act',label:'建议措施',type:'textarea',hint:'优先降低 S（设计防呆）＞降低 O（工程控制）＞降低 D（自动探测）',ph:'加装封口温度在线监控＋自动剔除'}
+],
+concl(c){
+ const S=gN(c.S)||0,O=gN(c.O)||0,D=gN(c.D)||0,RPN=S*O*D;
+ const hi=RPN>=100,sev=S>=9;
+ const color=sev||hi?'#a33':(RPN>=50?'#c8860d':'#1d7a3a');
+ return '<div><span class="ccl-big" style="background:'+color+'">RPN = '+RPN+'</span>S='+S+' × O='+O+' × D='+D+'</div>'+
+ '<table><tr><th style="width:140px">分析对象</th><td>'+gesc(c.item||'—')+'</td></tr><tr><th>失效模式</th><td>'+gesc(c.fail||'—')+'</td></tr>'+
+ '<tr><th>后果/起因</th><td>'+gesc(c.eff||'—')+'；起因：'+gesc(c.cause||'—')+'</td></tr><tr><th>现行控制</th><td>'+gesc(c.ctrl||'—')+'</td></tr></table>'+
+ (sev?'<p style="color:#a33;font-size:13.5px">🔴 S≥9（食品安全/合规级）：无论 RPN 高低，<b>必须有措施</b>，且措施需把探测度降到 D≤3（在线监测/自动剔除）。</p>':'')+
+ (hi?'<p style="color:#a33;font-size:13.5px">🔴 RPN≥100：列入优先改善清单，EM 小组跟踪至 RPN<100（复评 S/O/D）。</p>':'<p style="color:#1d7a3a;font-size:13.5px">✅ RPN&lt;100，按常规管控；措施落实后复评更新 RPN。</p>')+
+ (c.act?'<p style="font-size:13px">建议措施：'+gesc(c.act)+'</p>':'');
+}};
+
+/* #11 DOE */
+GUIDES[11]={
+case:{bg:'果冻爽夹心量稳定性 DOE：因子「充填压力 0.28/0.35MPa」「充填温度 35/45℃」全因子 2²，4 组×3 重复=12 次试验 → 确定最优窗口压力 0.32-0.35、温度 40-45℃。',
+data:{y:'夹心重量偏差 CV%',factors:'充填压力:0.28,0.35\n充填温度:35,45',dtype:'全因子析因',reps:'3',win:'最优窗口：压力 0.32-0.35MPa、温度 40-45℃，CV 由 2.8%→1.1%'}},
+steps:[
+ {id:'y',label:'质量特性 Y（要改善什么）',type:'text',hint:'可测量的输出特性，如 CV%、强度、良率',ph:'夹心重量偏差 CV%'},
+ {id:'factors',label:'因子与水平（每行：因子:水平1,水平2）',type:'textarea',hint:'从 4M 筛选出可疑因子，每因子 2-3 个水平',ph:'充填压力:0.28,0.35\n充填温度:35,45'},
+ {id:'dtype',label:'试验设计类型',type:'select',opts:['全因子析因','部分析因','正交表','单因子试验'],hint:'因子≤3 用全因子；4 个以上先部分析因筛主效应'},
+ {id:'reps',label:'重复次数',type:'num',hint:'每组合重复 2-3 次以估计试验误差',ph:'3'},
+ {id:'win',label:'结论：最优参数窗口',type:'textarea',hint:'试验后填最优组合与效果对比（目标值 vs 实测）',ph:'压力 0.32-0.35MPa、温度 40-45℃，CV 由 2.8%→1.1%'}
+],
+concl(c){
+ const fs=(c.factors||'').split(/\n+/).filter(Boolean);
+ const lvls=fs.map(f=>f.split(/[:：]/)[1]?f.split(/[:：]/)[1].split(/[,，]/).length:0);
+ const k=fs.length;let n=null;
+ if(k&&lvls.every(l=>l===2))n=(c.dtype==='全因子析因')?Math.pow(2,k):Math.pow(2,k-1);
+ const reps=gN(c.reps)||1;
+ let html='<table><tr><th style="width:150px">质量特性 Y</th><td>'+gesc(c.y||'—')+'</td></tr>'+
+ '<tr><th>因子（'+k+' 个）</th><td>'+gesc(c.factors||'—').replace(/\n/g,'<br>')+'</td></tr><tr><th>设计类型</th><td>'+gesc(c.dtype||'—')+'</td></tr></table>';
+ if(n)html+='<div><span class="ccl-big" style="background:#2557b0">'+(n*reps)+' 次</span>试验总数（'+n+' 组合 × '+reps+' 重复）</div>';
+ if(k>4)html+='<p style="color:#c8860d;font-size:13px">⚠️ 因子超过 4 个：先用部分析因/鱼骨图筛选主因子，避免试验次数爆炸。</p>';
+ html+='<p style="font-size:13px">最优窗口：'+gesc(c.win||'（试验后回填）')+'</p>'+
+ '<p style="font-size:12.5px;color:var(--ink-3)">验证顺序：小试→中试→大货试产；窗口确认后对关键参数做 CMK≥1.67 验证，再写入 SOP 预发布。</p>';
+ return html;
+}};
+
+/* #12 DFM/DFA */
+GUIDES[12]={
+case:{bg:'高粘夹心物料输送：原设计直管输送粘壁损耗 2%，对策改为大弯径保温管＋食品级快拆接头——损耗降至 0.3%，清洗时间减半。',
+data:{part:'夹心物料输送管路',issue:'高粘物料输送',detail:'直管输送粘壁损耗 2%，清洁困难',act:'改大弯径保温管＋食品级快拆接头',verdict:'通过——损耗降至 0.3%，清洗时间减半'}},
+steps:[
+ {id:'part',label:'零件/工序',type:'text',hint:'填具体的设计对象',ph:'夹心物料输送管路'},
+ {id:'issue',label:'制造性问题类型',type:'select',opts:['高粘物料输送','易碎物料破损','装配困难/耗时长','清洁死角（卫生风险）','其他'],hint:'食品行业四大典型 DFM 问题'},
+ {id:'detail',label:'问题描述（含量化损失）',type:'textarea',hint:'现状+数据：损耗率/工时/清洁时间',ph:'直管输送粘壁损耗 2%，清洁困难'},
+ {id:'act',label:'设计对策',type:'textarea',hint:'从源头解决：结构/材质/接口设计，而非靠人工补偿',ph:'改大弯径保温管＋食品级快拆接头'},
+ {id:'verdict',label:'评审结论',type:'text',hint:'通过/有条件通过（附条件）/不通过（返回设计）',ph:'通过——损耗降至 0.3%'}
+],
+concl(c){
+ return '<table><tr><th style="width:150px">对象</th><td>'+gesc(c.part||'—')+'</td></tr><tr><th>问题类型</th><td>'+gesc(c.issue||'—')+'</td></tr>'+
+ '<tr><th>描述</th><td>'+gesc(c.detail||'—')+'</td></tr><tr><th>设计对策</th><td>'+gesc(c.act||'—')+'</td></tr><tr><th>评审结论</th><td>'+gesc(c.verdict||'—')+'</td></tr></table>'+
+ '<p style="font-size:12.5px;color:var(--ink-3)">本表为 DR3 设计放行依据之一；通过的问题与对策应回传 MP 情报库，供同类设备选型复用。</p>';
+}};
+
+/* #13 ESI */
+GUIDES[13]={
+case:{bg:'自动包装机采购：合同交期 4/30，项目需要日期 5/15 → 缓冲 15 天（黄区）；技术协议明确 FAT 出厂验收＋备件清单。',
+data:{vendor:'XX包装机械有限公司',item:'自动包装机',lead:'2026-04-30',need:'2026-05-15',agree:'FAT 出厂验收标准；随机备件清单 2 年用量；SAT 到货验收条款；保修 24 个月'}},
+steps:[
+ {id:'vendor',label:'供应商名称',type:'text',hint:'填设备/关键物料供应商',ph:'XX包装机械有限公司'},
+ {id:'item',label:'设备/物料名称',type:'text',hint:'高价值或长交期项',ph:'自动包装机'},
+ {id:'lead',label:'合同交期',type:'date',hint:'供应商承诺到货日期'},
+ {id:'need',label:'项目需要日期',type:'date',hint:'按项目进度倒推的实际需要日期'},
+ {id:'agree',label:'技术协议要点',type:'textarea',hint:'必须含：FAT/SAT 验收条款、备件清单、保修期、响应时限',ph:'FAT 出厂验收标准；随机备件清单；SAT 条款'}
+],
+concl(c){
+ const l=new Date(c.lead),n=new Date(c.need);let buf=null;
+ if(!isNaN(l)&&!isNaN(n))buf=Math.round((n-l)/86400000);
+ let html='<table><tr><th style="width:140px">供应商</th><td>'+gesc(c.vendor||'—')+'</td></tr><tr><th>设备/物料</th><td>'+gesc(c.item||'—')+'</td></tr>'+
+ '<tr><th>交期 vs 需要</th><td>'+(c.lead||'—')+' vs '+(c.need||'—')+'</td></tr><tr><th>技术协议</th><td>'+gesc(c.agree||'—')+'</td></tr></table>';
+ if(buf!==null){
+  const st=buf<0?{t:'🔴 已晚于需要日期 '+Math.abs(buf)+' 天',c:'#a33'}:(buf<=15?{t:'🟡 缓冲仅 '+buf+' 天（黄区预警）',c:'#c8860d'}:{t:'🟢 缓冲 '+buf+' 天（安全）',c:'#1d7a3a'});
+  html+='<p style="font-size:14px;color:'+st.c+'"><b>'+st.t+'</b></p>'+(buf<=15?'<p style="font-size:13px">对策：设采购预警红线，每周跟踪供应商节点；必要时签延误违约条款或锁定替代供应商。</p>':'');
+ }
+ if(!/FAT|SAT/.test(c.agree||''))html+='<p style="color:#a33;font-size:13px">⚠️ 技术协议缺 FAT/SAT 验收条款——到货后质量争议无依据，务必补签。</p>';
+ return html;
+}};
+
+/* #14 QA/QM 矩阵 */
+GUIDES[14]={
+case:{bg:'「夹心重量」特性：QA 措施=在线称重全检＋每小时抽检；QM 措施=充填机月度校准＋称重传感器日点检——质量靠 QA 拦截、稳定性靠 QM 维持。',
+data:{feat:'夹心重量（单杯 18±0.5g）',qa:'在线称重全检＋剔除；每小时抽检 5 杯记录 Xbar-R 图',qm:'充填机每月校准；称重传感器每日点检；季度 CMK 复核',owner:'品控-在线检验员（QA）；设备科-点检员（QM）'}},
+steps:[
+ {id:'feat',label:'质量特性',type:'text',hint:'带规格限的可测量特性',ph:'夹心重量（单杯 18±0.5g）'},
+ {id:'qa',label:'QA 措施（检验拦截）',type:'textarea',hint:'如何发现不良：全检/抽检/控制图/出厂检验',ph:'在线称重全检＋剔除；每小时抽检 5 杯'},
+ {id:'qm',label:'QM 措施（维护维持）',type:'textarea',hint:'如何维持能力：校准/点检/CMK 复核/计划保全',ph:'充填机每月校准；传感器每日点检'},
+ {id:'owner',label:'责任岗位',type:'text',hint:'QA 责任人＋QM 责任人分别写明',ph:'品控-检验员（QA）；设备科-点检员（QM）'}
+],
+concl(c){
+ const hasQA=/检验|抽检|全检|控制图|监测/.test(c.qa||''),hasQM=/校准|点检|保全|CMK|保养/.test(c.qm||'');
+ return '<table><tr><th style="width:150px">质量特性</th><td>'+gesc(c.feat||'—')+'</td></tr><tr><th>QA（拦截）</th><td>'+gesc(c.qa||'—')+'</td></tr>'+
+ '<tr><th>QM（维持）</th><td>'+gesc(c.qm||'—')+'</td></tr><tr><th>责任岗位</th><td>'+gesc(c.owner||'—')+'</td></tr></table>'+
+ (!hasQA?'<p style="color:#a33;font-size:13px">⚠️ QA 措施未包含检验动作：质量特性必须有拦截手段。</p>':'')+
+ (!hasQM?'<p style="color:#a33;font-size:13px">⚠️ QM 措施未包含维护/校准：只靠检验不维持设备能力，不良会反弹。</p>':'')+
+ (hasQA&&hasQM?'<p style="color:#1d7a3a;font-size:13px">✅ QA＋QM 双轨齐备：检验拦截＋维护维持。QA 输出喂给 QM 排序维护重点，QM 结果决定 QA 频次松紧。</p>':'');
+}};
+
+/* #15 设计相关矩阵 */
+GUIDES[15]={
+case:{bg:'「封口严密」需求 → 特性「封口温度曲线」→ 验证项「OQ 封口强度测试」——三列对齐，保证需求不遗漏、设计可验证。',
+data:{reqs:'夹心重量稳定\n封口严密不漏液\n符合 GB 14881 卫生要求',chars:'充填压力控制\n封口温度曲线\n材料食品级合规',verify:'重量 CPK≥1.33（OQ）\n封口强度≥35N（OQ）\n材质报告＋卫生评审（IQ）'}},
+steps:[
+ {id:'reqs',label:'需求清单（每行一条）',type:'textarea',hint:'顾客/法规/标准需求，含编号更好',ph:'夹心重量稳定\n封口严密不漏液'},
+ {id:'chars',label:'设计特性（每行一条）',type:'textarea',hint:'承接需求的技术特性',ph:'充填压力控制\n封口温度曲线'},
+ {id:'verify',label:'验证项（每行一条）',type:'textarea',hint:'每个特性必须有验证方法（IQ/OQ/PQ/FAT）',ph:'重量 CPK≥1.33（OQ）\n封口强度≥35N（OQ）'}
+],
+concl(c){
+ const r=(c.reqs||'').split(/\n+/).filter(Boolean).length,ch=(c.chars||'').split(/\n+/).filter(Boolean).length,v=(c.verify||'').split(/\n+/).filter(Boolean).length;
+ let html='<div style="font-size:14px;margin-bottom:6px">需求 <b>'+r+'</b> 条 → 设计特性 <b>'+ch+'</b> 项 → 验证项 <b>'+v+'</b> 项</div>';
+ html+='<table><tr><th>需求</th><th>设计特性</th><th>验证项</th></tr>'+
+  (c.reqs||'').split(/\n+/).filter(Boolean).map((x,i)=>{
+   const cc=((c.chars||'').split(/\n+/)[i]||'—');const vv=((c.verify||'').split(/\n+/)[i]||'—');
+   return '<tr><td>'+gesc(x)+'</td><td>'+(cc==='—'?'<span style="color:#a33">未承接 ⚠️</span>':gesc(cc))+'</td><td>'+(vv==='—'?'<span style="color:#a33">未验证 ⚠️</span>':gesc(vv))+'</td></tr>';
+  }).join('')+'</table>';
+ if(r>ch)html+='<p style="color:#a33;font-size:13px">⚠️ 需求数多于特性数：有需求未被设计承接，逐行检查补齐。</p>';
+ if(ch>v)html+='<p style="color:#a33;font-size:13px">⚠️ 特性多于验证项：有设计没有验证手段，无法放行。</p>';
+ if(r&&r<=ch&&ch<=v)html+='<p style="color:#1d7a3a;font-size:13px">✅ 需求→设计→验证双向追溯完整，可作为 DR3 设计放行证据。</p>';
+ return html;
+}};
+
+/* #16 MP 维护预防系统（PAD） */
+GUIDES[16]={
+case:{bg:'MP 情报经典案例：充填阀压力标准缺失（P）→ 修订文件变更规定＋加压力报警（A）→ 标准卡受控换卡＋季度审核（D），投入 0.25 万、年收益 8.4 万，回收期 11 天。',
+data:{name:'充填阀压力标准缺失导致重量不良',p:'充填阀压力由 0.35 调至 0.28MPa 后作业标准未同步，单杯重量 CPK=0.82',a:'修订《文件变更管理规定》参数类强制换卡；加装压力上下限报警',d:'受控标准卡换卡机制＋季度文件审核；OPL 全员培训',cost:'0.25',benefit:'8.4'}},
+steps:[
+ {id:'name',label:'MP 情报名称',type:'text',hint:'一句话概括「什么问题→什么改善」',ph:'充填阀压力标准缺失导致重量不良'},
+ {id:'p',label:'P 问题定义',type:'textarea',hint:'现象＋量化损失（不良率/停机时间/金额）',ph:'压力调整后标准未同步，CPK=0.82'},
+ {id:'a',label:'A 改善描述',type:'textarea',hint:'具体做了什么改动：改标准/加装置/改流程',ph:'修订文件变更规定；加装压力上下限报警'},
+ {id:'d',label:'D 保持措施',type:'textarea',hint:'如何防止再发：标准化的载体（SOP/CIL/系统/点检表）',ph:'受控标准卡换卡机制＋季度审核＋OPL 培训'},
+ {id:'cost',label:'改善投入（万元）',type:'num',hint:'材料+人工+停机损失',ph:'0.25'},
+ {id:'benefit',label:'年改善收益（万元）',type:'num',hint:'降损+节能+效率折算成金额',ph:'8.4'}
+],
+concl(c){
+ const cost=gN(c.cost),ben=gN(c.benefit);
+ let html='<table><tr><th style="width:140px">情报名称</th><td>'+gesc(c.name||'—')+'</td></tr><tr><th>P 问题</th><td>'+gesc(c.p||'—')+'</td></tr>'+
+ '<tr><th>A 改善</th><td>'+gesc(c.a||'—')+'</td></tr><tr><th>D 保持</th><td>'+gesc(c.d||'—')+'</td></tr></table>';
+ if(cost!=null&&ben!=null&&cost>0&&ben>0){
+  const pay=Math.round(cost/ben*365);
+  html+='<div><span class="ccl-big" style="background:'+(pay<90?'#1d7a3a':(pay<365?'#c8860d':'#a33'))+'">'+pay+' 天</span>投资回收期（投入 '+cost+' 万 / 年收益 '+ben+' 万）</div>'+
+  (pay<90?'<p style="color:#1d7a3a;font-size:13px">✅ 高价值改善：回收期＜3 个月，值得横向展开到同类线。</p>':'<p style="font-size:13px">回收期 '+(pay<365?'＜1 年，有效改善。':'＞1 年，评估是否有更低成本方案。')+'</p>');
+ }
+ if(!/标准|SOP|CIL|点检|系统|审核|OPL/.test(c.d||''))html+='<p style="color:#a33;font-size:13px">⚠️ D 保持措施未指明标准化载体——没有载体的改善会退化复发。</p>';
+ html+='<p style="font-size:12.5px;color:var(--ink-3)">下一步：到「计算型工具 → MP 情报库」正式登记落库（自动生成 MP+时间戳情报ID），供新项目 DR1 调研检索复用。</p>';
+ return html;
+}};
+
+/* #17 调试验证 */
+GUIDES[17]={
+case:{bg:'果冻爽 OQ 阶段：连续 3 批×5000 杯，良率 92.4%（≥90% 标准）→ 放行进入 PQ 试生产爬坡（目标 98%）。',
+data:{level:'OQ 运行确认',item:'充填封口联线运行验证',std:'连续 3 批×5000 杯，良率≥90%，重量 CPK≥1.33',result:'3 批良率 92.4%/93.1%/91.8%，CPK=1.41',yield:'92.4'}},
+steps:[
+ {id:'level',label:'验证级别',type:'select',opts:['FAT 出厂验收','SAT 到货安装验收','IQ 安装确认','OQ 运行确认','PQ 性能确认'],hint:'五级逐级放行：FAT→SAT→IQ→OQ→PQ，不可跳级'},
+ {id:'item',label:'验证项目',type:'text',hint:'本次验证的具体内容',ph:'充填封口联线运行验证'},
+ {id:'std',label:'判定标准（放行准则）',type:'textarea',hint:'可量化：批次数、良率、CPK、参数范围',ph:'连续 3 批×5000 杯，良率≥90%，CPK≥1.33'},
+ {id:'result',label:'实测结果',type:'textarea',hint:'填实测数据，与标准逐条对应',ph:'3 批良率 92.4%/93.1%/91.8%，CPK=1.41'},
+ {id:'yield',label:'实测良率（%）',type:'num',hint:'填代表性良率数值用于自动判定',ph:'92.4'}
+],
+concl(c){
+ const y=gN(c.yield);
+ const seq=['FAT','SAT','IQ','OQ','PQ'];
+ const idx=seq.findIndex(s=>(c.level||'').indexOf(s)===0);
+ const nxt=idx>=0&&idx<4?seq[idx+1]:null;
+ let html='<table><tr><th style="width:140px">验证级别</th><td>'+gesc(c.level||'—')+'</td></tr><tr><th>项目/标准</th><td>'+gesc(c.item||'—')+'；'+gesc(c.std||'—')+'</td></tr><tr><th>实测</th><td>'+gesc(c.result||'—')+'</td></tr></table>';
+ if(y!=null){
+  const pass=y>=90;
+  html+='<div><span class="ccl-big" style="background:'+(pass?'#1d7a3a':'#a33')+'">'+y+'%</span>'+(pass?'达标（≥90%）':'未达标（<90%）')+'</div>'+
+  (pass?(y<98?'<p style="color:#1d7a3a;font-size:13px">✅ 通过本级验证，进入'+(nxt?nxt+' 或爬坡至 98% 目标':'量产移交')+'。</p>':'<p style="color:#1d7a3a;font-size:13px">✅ 良率已达 98% 量产水平，可申请 PQ 结案。</p>')
+  :'<p style="color:#a33;font-size:13px">❌ 不放行：按 PDA 缺陷分析定位原因，整改后重新验证（不得带病进入下一级）。</p>');
+ }
+ if(idx===0&&nxt)html+='<p style="font-size:12.5px;color:var(--ink-3)">FAT 在供应商工厂完成，重点验出厂性能；到货后还需 SAT 验运输安装影响。</p>';
+ return html;
+}};
+
+/* #18 5C0D 无条件0缺陷 */
+GUIDES[18]={
+case:{bg:'小馒头新品首批试产：目标 0 缺陷，实测不良率 0.8%（黑斑 12 件、重量超差 5 件）→ 差距 0.8%，逐项定「三防线」对策。',
+data:{batch:'小馒头首批试产 10000 件',rate:'0.8',src:'黑斑（烤炉温度不均）12 件；重量超差（充填气泡残留）5 件',act:'黑斑：烤炉温区均衡化＋在线色选剔除；重量：充填前脱泡＋在线称重全检'}},
+steps:[
+ {id:'batch',label:'批次/对象',type:'text',hint:'填批次号、产品与数量',ph:'小馒头首批试产 10000 件'},
+ {id:'rate',label:'实测不良率（%）',type:'num',hint:'目标恒为 0（无条件零缺陷）',ph:'0.8'},
+ {id:'src',label:'缺陷来源明细（逐项）',type:'textarea',hint:'每行：缺陷现象＋数量＋初判原因',ph:'黑斑（烤炉温度不均）12 件'},
+ {id:'act',label:'三防线对策',type:'textarea',hint:'第一防线源头消除（工艺参数）→ 第二防线过程防呆（装置）→ 第三防线检测拦截（全检/剔除）',ph:'黑斑：温区均衡化＋在线色选；重量：脱泡＋在线称重'}
+],
+concl(c){
+ const r=gN(c.rate);
+ let html='<table><tr><th style="width:140px">批次</th><td>'+gesc(c.batch||'—')+'</td></tr><tr><th>缺陷明细</th><td>'+gesc(c.src||'—').replace(/\n/g,'<br>')+'</td></tr><tr><th>对策</th><td>'+gesc(c.act||'—').replace(/\n/g,'<br>')+'</td></tr></table>';
+ if(r!=null){
+  if(r===0)html+='<div><span class="ccl-big" style="background:#1d7a3a">0 缺陷</span>达标 ✅</div>';
+  else html+='<div><span class="ccl-big" style="background:#a33">差距 '+r+'%</span>距 0 缺陷目标</div><p style="font-size:13px">按缺陷数量排序逐项消灭（先做大项）；每项对策至少落到一个防线，只有「加严检验」不算对策。</p>';
+ }
+ html+='<p style="font-size:12.5px;color:var(--ink-3)">5C0D 与良率/CMK 挂钩：连续 3 批 0 缺陷且关键参数 CMK≥1.67 才算稳态达成。</p>';
+ return html;
+}};
+
+/* #19 PDA 项目缺陷分析 */
+GUIDES[19]={
+case:{bg:'「包材印刷色差」在 DR6 才被发现：若 DR1 用 QFD 明确颜色标准、DR3 用 DFM 评审包材，可完全避免 → 登记为「QFD+DFM 可避免缺陷」。',
+data:{defect:'包材印刷色差（客户投诉）',stage:'DR6 调试及试生产',loss:'3.2',tool:'QFD',note:'DR1 未明确颜色验收标准，DFM 未评审包材打样'}},
+steps:[
+ {id:'defect',label:'缺陷描述',type:'text',hint:'项目过程中发生的问题/缺陷',ph:'包材印刷色差（客户投诉）'},
+ {id:'stage',label:'发现阶段',type:'select',opts:['DR1 早期调研','DR2 项目范围定义','DR3 详细分析','DR4 建立行动解决方案','DR5 安装','DR6 调试及试生产','DR7 反馈','量产后'],hint:'越晚发现代价越大'},
+ {id:'loss',label:'损失金额（万元）',type:'num',hint:'返工/报废/停线/投诉折算',ph:'3.2'},
+ {id:'tool',label:'本可避免所用的工具',type:'select',opts:['QFD','风险评估','FMEA','DFM/DFA','ESI','调试验证','SOP 预发布','TT&T','MP 情报','其他'],hint:'哪个工具在前置阶段部署即可拦截？'},
+ {id:'note',label:'根因备注',type:'textarea',hint:'为什么该工具当时没用/没起到作用',ph:'DR1 未明确颜色验收标准'}
+],
+concl(c){
+ const stages=['DR1 早期调研','DR2 项目范围定义','DR3 详细分析','DR4 建立行动解决方案','DR5 安装','DR6 调试及试生产','DR7 反馈','量产后'];
+ const idx=stages.indexOf(c.stage);
+ const loss=gN(c.loss);
+ let html='<table><tr><th style="width:140px">缺陷</th><td>'+gesc(c.defect||'—')+'</td></tr><tr><th>发现阶段</th><td>'+gesc(c.stage||'—')+'</td></tr>'+
+ '<tr><th>本可避免</th><td>在更早阶段部署 <b>'+gesc(c.tool||'—')+'</b></td></tr><tr><th>根因</th><td>'+gesc(c.note||'—')+'</td></tr></table>';
+ if(idx>=5)html+='<p style="color:#a33;font-size:13px">⚠️ 缺陷在 '+gesc(c.stage)+' 才发现（晚期）：损失已放大。经验教训——把「'+gesc(c.tool||'工具')+'」列入 EM 检查表的前置关卡，下个项目强制执行。</p>';
+ else html+='<p style="color:#1d7a3a;font-size:13px">✅ 缺陷在早期发现，损失可控；仍应回传 MP 情报库防止同类项目重犯。</p>';
+ if(loss!=null)html+='<p style="font-size:13px">损失 '+loss+' 万元——PDA 的价值：损失×重复概率＝不部署工具的风险成本，用于向管理层论证 EM 工具投入。</p>';
+ return html;
+}};
+
+/* #20 SOP 预发布 */
+GUIDES[20]={
+case:{bg:'充填工序参数标准卡：充填压力 0.32-0.35MPa（标准 0.34）、封口温度 138-142℃（标准 140）——量产后前 3 批按此卡执行并记录。',
+data:{proc:'充填封口工序',params:'充填压力:0.34:0.32-0.35MPa\n封口温度:140:138-142℃\n生产节拍:120:110-125杯/分',ccp:'封口温度（CCP：低于 135℃ 自动停机并隔离产品）',docno:'SOP-ZT-2026-018'}},
+steps:[
+ {id:'proc',label:'工序名称',type:'text',hint:'填工序全称',ph:'充填封口工序'},
+ {id:'params',label:'关键参数（每行：参数:标准值:允许范围）',type:'textarea',hint:'来自 DOE/验证结论；范围=控制限，标准值=中心',ph:'充填压力:0.34:0.32-0.35MPa'},
+ {id:'ccp',label:'CCP 关键控制点',type:'textarea',hint:'食品安全关键点：参数+失控动作（停机/隔离）；无则填「无」',ph:'封口温度（CCP：低于 135℃ 停机并隔离）'},
+ {id:'docno',label:'文件编号',type:'text',hint:'受控编号（发布后走受控换卡流程）',ph:'SOP-ZT-2026-018'}
+],
+concl(c){
+ const ps=gParseList(c.params);
+ let html='<p style="font-size:14px;margin:0 0 6px">'+gesc(c.proc||'—')+' · 工艺参数标准卡（'+gesc(c.docno||'编号待定')+'）</p>';
+ if(ps.length){
+  html+='<table><tr><th>关键参数</th><th>标准值</th><th>允许范围</th><th>判定</th></tr>'+ps.map(p=>{
+   const rng=(p.extra[2]||'—');
+   return '<tr><td>'+gesc(p.name)+'</td><td><b>'+gesc(p.extra[1]||'—')+'</b></td><td>'+gesc(rng)+'</td><td>'+(/-|±|~|～/.test(rng)?'✅ 范围明确':'⚠️ 无范围')+'</td></tr>';
+  }).join('')+'</table>';
+ }
+ html+='<table><tr><th style="width:140px">CCP 控制点</th><td>'+gesc(c.ccp||'—')+'</td></tr></table>';
+ if((c.ccp||'').indexOf('CCP')>=0&&!/停机|隔离|拦截/.test(c.ccp||''))html+='<p style="color:#a33;font-size:13px">⚠️ CCP 未写失控动作：CCP 必须定义超限时的自动/人工处置（停机、隔离、放行权限）。</p>';
+ html+='<p style="font-size:12.5px;color:var(--ink-3)">预发布含义：量产前 3 批按本卡试运行并记录数据，验证稳定后转正式受控 SOP——杜绝研发与生产脱节。</p>';
+ return html;
+}};
+
+/* #21 VSU 垂直启动 */
+GUIDES[21]={
+case:{bg:'果冻爽线：VSU 前（试产+调试期）暴露问题 α=27 件，VSU 期间及之后 β=13 件 → 早期暴露率 27/40=0.68 ≥0.6，达到优秀线。',
+data:{alpha:'27',beta:'13',days:'15',note:'β 中 8 件集中在充填工序——已回传 MP 并纳入检查表'}},
+steps:[
+ {id:'alpha',label:'α：VSU 前暴露问题数',type:'num',hint:'调试/试产阶段发现并解决的问题数（越多越好——问题前置消化）',ph:'27'},
+ {id:'beta',label:'β：VSU 期间及之后问题数',type:'num',hint:'正式启动后仍冒出的问题数（越少越好）',ph:'13'},
+ {id:'days',label:'VSU 启动天数',type:'num',hint:'从启动到达产（产能/良率达标）的天数',ph:'15'},
+ {id:'note',label:'β 问题分布与对策',type:'textarea',hint:'β 问题集中在哪个工序？是否已回传 MP 情报库？',ph:'β 中 8 件集中在充填工序——已回传 MP'}
+],
+concl(c){
+ const a=gN(c.alpha),b=gN(c.beta),d=gN(c.days);
+ let html='';
+ if(a!=null&&b!=null&&(a+b)>0){
+  const rate=Math.round(a/(a+b)*100)/100;
+  const lv=rate>=0.6?{t:'优',c:'#1d7a3a',a:'问题前置暴露充分，VSU 质量高'}:(rate>=0.4?{t:'中',c:'#c8860d',a:'前置暴露不足：检查表和 MP 情报移植要加严'}:{t:'差',c:'#a33',a:'问题大量后移：启动风险高，建议延长调试期'});
+  html+='<div><span class="ccl-big" style="background:'+lv.c+'">'+rate+'</span>早期暴露率 α/(α+β)（α='+a+'、β='+b+'）→ <b>'+lv.t+'</b></div>'+
+  '<p style="font-size:13.5px;color:'+lv.c+'">'+lv.a+'。</p>';
+ }
+ if(d!=null)html+='<p style="font-size:13px">VSU 启动天数：'+d+' 天（公司口径：累计试产 15 天或连续一周且≥120h 判定启动完成）'+(d>15?'——超 15 天，分析爬坡瓶颈。':'✅')+'</p>';
+ html+='<p style="font-size:12.5px;color:var(--ink-3)">'+gesc(c.note||'')+'</p><p style="font-size:12.5px;color:var(--ink-3)">提升 α 的方法：DR1-DR2 充分收集同类线 MP 情报、DR3 完整 FMEA、DR6 模拟生产/小批量爬坡。</p>';
+ return html;
+}};
+
+/* #22 SUM 启动管理 */
+GUIDES[22]={
+case:{bg:'果冻爽线启动评价：产能达成 102%、良率达成 95.7%（目标 98%）→ 产能达标、良率未达——延长爬坡 5 天，重点盯封口工序。',
+data:{capT:'5000',capA:'5100',qT:'98',qA:'93.8',note:'良率损失集中在封口不严（62%）→ 追加温度曲线优化'}},
+steps:[
+ {id:'capT',label:'产能目标（件/班）',type:'num',hint:'设计产能或合同产能',ph:'5000'},
+ {id:'capA',label:'实际产能（件/班）',type:'num',hint:'稳定班次的实测产能',ph:'5100'},
+ {id:'qT',label:'良率目标（%）',type:'num',hint:'量产良率目标（如 98%）',ph:'98'},
+ {id:'qA',label:'实际良率（%）',type:'num',hint:'实测良率',ph:'93.8'},
+ {id:'note',label:'未达标项分析与节拍平衡',type:'textarea',hint:'未达标项的损失占比＋瓶颈工序；节拍是否平衡（各工位节拍差）',ph:'良率损失集中在封口不严（62%）'}
+],
+concl(c){
+ const cT=gN(c.capT),cA=gN(c.capA),qT=gN(c.qT),qA=gN(c.qA);
+ let html='';let allPass=true;
+ if(cT&&cA!=null&&cT>0){
+  const r=Math.round(cA/cT*1000)/10;const ok=r>=100;allPass=allPass&&ok;
+  html+='<div><span class="ccl-big" style="background:'+(ok?'#1d7a3a':'#c8860d')+'">'+r+'%</span>产能达成率（目标 '+cT+' / 实际 '+cA+'）</div>';
+ }
+ if(qT!=null&&qA!=null){
+  const r=Math.round(qA/qT*1000)/10;const ok=r>=100;allPass=allPass&&ok;
+  html+='<div><span class="ccl-big" style="background:'+(ok?'#1d7a3a':'#c8860d')+'">'+r+'%</span>良率达成率（目标 '+qT+'% / 实际 '+qA+'%）</div>';
+ }
+ html+='<p style="font-size:13.5px;color:'+(allPass?'#1d7a3a':'#c8860d')+'">'+(allPass?'✅ 产能与良率双达标：SUM 达产评价通过，项目可进入 DR7 结案与移交。':'⚠️ 未完全达产：延长爬坡观察期，对未达标项做 PDA/帕累托定位主因后再评价结案。')+'</p>';
+ if(c.note)html+='<p style="font-size:13px">分析：'+gesc(c.note)+'</p>';
+ html+='<p style="font-size:12.5px;color:var(--ink-3)">节拍平衡（Line Balancing）：各工位节拍差＞10% 时需重排工位，瓶颈工位决定线体产能上限。</p>';
+ return html;
+}};
+
+/* #23 TT&T */
+GUIDES[23]={
+case:{bg:'充填机操作岗：目标技能 4 分、实际 2 分 → 差距 2 分，重点培训＋不得独立上岗；配套移交文件包 5 项齐全。',
+data:{post:'充填机操作岗',skill:'充填机操作与换产',target:'4',actual:'2',doc:'操作SOP、点检基准表、换产指导书、异常处置卡、备件清单'}},
+steps:[
+ {id:'post',label:'岗位',type:'text',hint:'填培训/移交对象岗位',ph:'充填机操作岗'},
+ {id:'skill',label:'技能项',type:'text',hint:'具体技能（可测：操作/换产/点检/异常处置）',ph:'充填机操作与换产'},
+ {id:'target',label:'目标分（1-5）',type:'select',opts:['1 了解','2 在指导下操作','3 独立操作','4 独立+处理异常','5 可培训他人'],hint:'按技能矩阵等级定义'},
+ {id:'actual',label:'实际分（1-5）',type:'select',opts:['1 了解','2 在指导下操作','3 独立操作','4 独立+处理异常','5 可培训他人'],hint:'通过实操考核评定的当前水平'},
+ {id:'doc',label:'移交文件清单',type:'textarea',hint:'SOP/点检基准/换产指导书/异常处置卡/备件清单',ph:'操作SOP、点检基准表、换产指导书…'}
+],
+concl(c){
+ const t=gN(c.target),a=gN(c.actual);
+ const gap=(t!=null&&a!=null)?t-a:null;
+ let html='<table><tr><th style="width:140px">岗位/技能</th><td>'+gesc(c.post||'—')+' · '+gesc(c.skill||'—')+'</td></tr>'+
+ '<tr><th>目标 / 实际</th><td>'+gesc(c.target||'—')+' / '+gesc(c.actual||'—')+'</td></tr><tr><th>移交文件</th><td>'+gesc(c.doc||'—')+'</td></tr></table>';
+ if(gap!=null){
+  if(gap>=2)html+='<div><span class="ccl-big" style="background:#a33">差距 '+gap+' 分</span>重点培训对象</div><p style="color:#a33;font-size:13px">差距≥2：不得独立上岗，安排带教＋实操考核，考核通过前该岗位由熟练工顶岗。</p>';
+  else if(gap===1)html+='<div><span class="ccl-big" style="background:#c8860d">差距 1 分</span>需强化</div><p style="font-size:13px">用 OPL（一点课程）针对薄弱环节培训，2 周内复评。</p>';
+  else html+='<div><span class="ccl-big" style="background:#1d7a3a">达标</span>✅</div><p style="color:#1d7a3a;font-size:13px">技能达标，可认证上岗；优秀者（5 分）可培养为岗位培训师。</p>';
+ }
+ html+='<p style="font-size:12.5px;color:var(--ink-3)">技能矩阵（目标分/实际分/差距）是 DR7 结案移交的必要条件——所有岗位差距≤1 分才允许项目关闭。</p>';
+ return html;
+}};
+
+/* #24 问题三部曲 4M/5Why/5W1H（核心教学套表） */
+GUIDES[24]={
+case:{bg:'真实案例·灌装机夹心重量不良：5W1H 界定（CPK=0.82）→ 4M 归类到「法」→ 5 层 Why 追到「文件变更分级管理缺失」这一系统根因 → 四项对策闭环。<br><b>看懂这个案例，5Why 就会用了：每一层 Why 都在问「上一层为什么会发生」，且答案都落在机制上而非责任上。</b>',
+data:{p:'灌装机#3：8月夹心产品重量 CPK=0.82（标准≥1.33），单项不良率 0.9%，日均报废 38kg',m:'法（方法/标准/流程）',
+w1:'充填阀压缩空气压力 8月由 0.35MPa 下调至 0.28MPa，作业标准卡未同步修订，现场仍按旧压力执行',
+w2:'工艺变更通知只发研发与品控，未走文件受控流程，生产现场标准卡未换发',
+w3:'《文件变更管理规定》中工艺参数类变更没有强制「受控换卡」环节，只靠邮件知会',
+w4:'2019年文件改版时删除了「参数变更需换发受控标准卡」条款，简化审批时无生产/EM 部门会签',
+w5:'文件管理部门对「参数类变更」与「描述类变更」未分级，所有变更共用同一条快速通道',
+root:'文件变更分级管理缺失（系统性根因：参数类变更无强制受控换卡与会签机制）',
+act:'①修订《文件变更管理规定》：参数类变更强制受控换卡＋生产/EM 会签；②充填压力写入标准卡并加压力上下限报警（防呆）；③OPL 全员培训；④本案回传 MP 情报库'}},
+steps:[
+ {id:'p',label:'第 1 步 · 5W1H 界定问题',type:'textarea',rows:3,hint:'What 发生什么 / When 何时 / Where 何地 / Which 对象 / How much 程度——<b>必须含量化数据</b>（数量/比率/CPK/金额/时间）',ph:'灌装机#3：8月夹心产品重量 CPK=0.82（标准≥1.33），单项不良率 0.9%',
+  check:v=>{const a=[];if(v&&!/\d/.test(v))a.push('问题描述缺少数值——无法量化的现象无法验证改善效果，请补数据（数量/比率/CPK/金额）。');return a;}},
+ {id:'m',label:'第 2 步 · 4M 归类',type:'select',opts:['人（人员/技能/配置）','机（设备/装置/工装）','料（物料/来料/包材）','法（方法/标准/流程/参数）'],hint:'先判断问题主要落在哪个 M——后续 5Why 的追问将聚焦该维度（可能多 M 交织，先抓主导）'},
+ {id:'w1',label:'第 3 步 · Why①：为什么会发生？',type:'textarea',rows:2,hint:'针对第 1 步的问题追问第一层<b>直接原因</b>——写「机制」不写「责任」',ph:'充填阀压力由 0.35MPa 调至 0.28MPa，作业标准未同步修订',
+  guide:v=>'很好。接着追问：<b>为什么「'+gSh(GS.vals.p,26)+'」会发生？</b>把 Why② 写成可直接验证的因果机制（继续对准第 2 步归类的「'+GS.vals.m+'」维度）。',
+  check:gHumanCheck},
+ {id:'w2',label:'第 4 步 · Why②：为什么会有这个原因？',type:'textarea',rows:2,hint:'顺着 Why① 继续下钻一层——每一层都要比上一层更接近管理系统',ph:'工艺变更通知未走文件受控流程，标准卡未换发',
+  guide:v=>'继续追问：<b>为什么「'+gSh(GS.vals.w1,26)+'」会发生？</b>提示：往制度/流程/标准层找（为什么没人拦住它？为什么流程允许它发生？）。',
+  check:gHumanCheck},
+ {id:'w3',label:'第 5 步 · Why③：为什么流程允许它发生？',type:'textarea',rows:2,hint:'第三层通常开始触碰管理机制：规定缺什么条款？谁该拦截没拦？',ph:'《文件变更管理规定》无参数类变更强制受控换卡环节',
+  guide:v=>'继续追问：<b>为什么「'+gSh(GS.vals.w2,26)+'」会存在？</b>这一层通常要回答：这个缺陷是什么时候、因什么决策形成的？',
+  check:gHumanCheck},
+ {id:'w4',label:'第 6 步 · Why④：这个缺陷怎么形成的？',type:'textarea',rows:2,hint:'追溯机制缺陷的来源（历史决策/改版/简化）',ph:'2019年文件改版删除了受控换卡条款，且无生产/EM 会签',
+  guide:v=>'最后一问：<b>为什么当时的决策会删掉这个环节？</b>若答案已落在「机制设计层面」（分级缺失/职责空白/系统不支持），就可以收口到第 8 步确认根因了。',
+  check:gHumanCheck},
+ {id:'w5',label:'第 7 步 · Why⑤：收口到系统层',type:'textarea',rows:2,hint:'第五层 Why 后应到达可改造的<b>系统/流程/装置</b>层面；若到此还是「某人做错了」，说明层级不够，回到 Why③ 重挖',ph:'文件变更未分级管理，参数类与描述类共用快速通道',
+  guide:v=>'✅ 若这一层已落在系统/机制层面，请到下一步正式确认根因；若仍是人员问题，回去把 Why③④ 改写。',
+  check:gHumanCheck},
+ {id:'root',label:'第 8 步 · 根本原因确认',type:'textarea',rows:2,hint:'用一句话陈述根因：<b>「什么样的机制缺失/设计缺陷导致了整条链」</b>——检验标准：根因落在系统层，且改掉它能同时消灭链上所有环节',ph:'文件变更分级管理缺失（参数类变更无强制受控换卡与会签）',
+  check:v=>{const a=gHumanCheck(v);if(v&&!/(规定|标准|流程|机制|制度|系统|设计|装置|参数|分级)/.test(v))a.push('根因未指向系统要素（规定/流程/机制/装置）——继续下钻或改写。');return a;}},
+ {id:'act',label:'第 9 步 · 对策与标准化',type:'textarea',rows:3,hint:'对策必须<b>消灭根因</b>：改什么标准/加什么防呆装置/怎么培训/如何回传 MP 情报库（四件套）',ph:'①修订规定 ②加压力报警防呆 ③OPL 培训 ④回传 MP',
+  check:v=>{const a=[];if(v&&!/(标准|规定|SOP|流程|防呆|装置|报警|联锁|培训|OPL|MP)/.test(v))a.push('对策缺「标准化载体」：改标准？加防呆？培训？回传 MP？——只靠「加强管理」的对策会退化。');return a;}}
+],
+concl(c){
+ const chain=[['问题',c.p],['Why①',c.w1],['Why②',c.w2],['Why③',c.w3],['Why④',c.w4],['Why⑤',c.w5],['根本原因',c.root]];
+ let ch=chain.filter(x=>x[1]).map(x=>'<span class="ln"><b>'+x[0]+'：</b>'+gesc(x[1])+'</span>').join('');
+ let html='<p style="font-size:13px;margin:0 0 8px;color:var(--ink-3)">因果实录（自上而下读一遍，再用「因为…所以…」反向验证一遍）：</p><div class="chain">'+ch+'</div>';
+ const sysOk=c.root&&!/(人为|疏忽|员工|失误|不小心)/.test(c.root);
+ html+='<div><span class="ccl-big" style="background:'+(sysOk?'#1d7a3a':'#a33')+'">'+(sysOk?'根因达标':'未到系统层')+'</span>'+(sysOk?'5Why 闭环质量：优':'继续下钻')+'</div>';
+ if(!sysOk&&c.root)html+='<p style="color:#a33;font-size:13px">根因仍含人为因素——按第 8 步提示改写到机制层面。</p>';
+ if(c.act)html+='<table><tr><th style="width:140px">对策与标准化</th><td>'+gesc(c.act).replace(/\n/g,'<br>')+'</td></tr></table>';
+ const depth=[c.w1,c.w2,c.w3,c.w4,c.w5].filter(Boolean).length;
+ html+='<p style="font-size:12.5px;color:var(--ink-3)">分析深度：'+depth+'/5 层'+(depth<3?'（偏浅：多数根因需 4-5 层才能到系统层，建议继续追问）':'')+'；对策落地后 30 天复评问题指标，确认根因真被消灭。</p>';
+ return html;
+}};
+
+/* #25 ECRS */
+GUIDES[25]={
+case:{bg:'案例·封箱工序优化：删（去掉人工复核——防呆装置已覆盖）→ 合（贴标与喷码两工位合并）→ 重组（物料架移至操作者右手侧）→ 简（8 个动作减为 5 个）。单件工时 46s→31s，降幅 33%。',
+data:{obj:'封箱工序（瓶装线尾段）',flow:'取箱→开箱→人工复核→装箱→贴标→喷码→码垛（7 步 / 46s）',e:'删除人工复核：防呆联锁已能拦截漏装，复核步纯冗余',c:'贴标与喷码合并为一个工位、一次定位完成',r:'物料架由左手侧移至右手侧，消除转身取料',s:'开箱动作改半自动弹开，动作 8→5 个',eff:'单件工时 46s→31s（-33%），年化节省工时 1,180h'}},
+steps:[
+ {id:'obj',label:'第 1 步 · 界定改善对象',type:'text',hint:'填工序/流程名称与位置（对象要具体到可直接观察）',ph:'封箱工序（瓶装线尾段）'},
+ {id:'flow',label:'第 2 步 · 现状流程拆解',type:'textarea',rows:2,hint:'把现状按步骤逐项列出——<b>不拆解就无法 ECRS</b>，标注每步耗时更佳',ph:'取箱→开箱→人工复核→装箱→贴标→喷码→码垛',
+  check:v=>{const a=[];if(v&&!(v.includes('→')||v.includes('->')||v.includes('；')||v.includes('\n')))a.push('流程未逐项拆解：请用「→」把每一步分开列出。');return a;}},
+ {id:'e',label:'第 3 步 · E 删除（Eliminate）',type:'textarea',rows:2,hint:'哪些步骤/动作可以整个去掉？判断标准：去掉后由谁拦截错误？若无影响则纯冗余',ph:'删除人工复核：防呆联锁已覆盖，复核步纯冗余'},
+ {id:'c',label:'第 4 步 · C 合并（Combine）',type:'textarea',rows:2,hint:'哪些步骤可以合并同时/同地完成？（工位合并、表单合并、内外作业合并）',ph:'贴标与喷码合并为一个工位一次定位'},
+ {id:'r',label:'第 5 步 · R 重组（Rearrange）',type:'textarea',rows:2,hint:'顺序/布局能否重排？把取放路径缩最短、瓶颈工序前移',ph:'物料架移至右手侧，消除转身取料'},
+ {id:'s',label:'第 6 步 · S 简化（Simplify）',type:'textarea',rows:2,hint:'剩余每步还有没有更简单的方法？（动作数、工具、省力化）',ph:'开箱改半自动弹开，动作 8→5 个'},
+ {id:'eff',label:'第 7 步 · 改善效果量化',type:'textarea',rows:2,hint:'工时/步数/距离/人数的 before→after，<b>必须量化</b>',ph:'单件工时 46s→31s（-33%）',
+  check:v=>{const a=[];if(v&&!/\d/.test(v))a.push('效果缺数值——ECRS 改善必须能量化对比（工时/步数/距离）。');return a;}}
+],
+concl(c){
+ const acts=[['E 删除',c.e],['C 合并',c.c],['R 重组',c.r],['S 简化',c.s]].filter(x=>x[1]);
+ let html='<table><tr><th style="width:150px">改善对象</th><td>'+gesc(c.obj||'—')+'</td></tr>'+
+  '<tr><th>现状流程</th><td>'+gesc(c.flow||'—').replace(/→/g,' → ').replace(/\n/g,'<br>')+'</td></tr></table>'+
+  '<p style="font-size:13px;margin:8px 0">ECRS 应用：'+(acts.length?acts.map(x=>'<span class="ln"><b>'+x[0]+'</b>：'+gesc(x[1])+'</span>').join(''):'—')+'</p>';
+ const cnt=acts.length;
+ html+='<div><span class="ccl-big" style="background:'+(cnt>=3?'#1d7a3a':(cnt?'#b07b1e':'#a33'))+'">'+cnt+'/4 原则</span>'+(cnt>=3?'优化充分':'再逐项过一遍四原则')+'</div>';
+ if(c.eff)html+='<table><tr><th style="width:150px">改善效果</th><td>'+gesc(c.eff)+'</td></tr></table>';
+ if(!cnt)html+='<p style="color:#a33;font-size:13px">⚠️ 尚未应用任何原则——按 E→C→R→S 顺序逐项过一遍现状流程。</p>';
+ return html;
+}};
+
+/* #26 标杆对比 */
+GUIDES[26]={
+case:{bg:'案例·充填工序对标：本公司 OEE 71% vs 集团标杆（杭州厂）86%，拆解三要素后定位差距主要在性能开动率（速度损失）；定 6 个月目标 78%，借鉴其「分段提速＋模具快换」两项做法。',
+data:{obj:'充填工序 OEE',self:'OEE 71%（可用率 88% × 性能 82% × 质量 98%）',bench:'杭州厂同型线：OEE 86%（可用率 91% × 性能 95% × 质量 99.5%）',gap:'性能开动率差 13pt（速度设定保守＋换模慢）',act:'①导入分段提速试验 ②SMED 快换（换模 25min→8min）',goal:'6 个月内 OEE 71%→78%（性能 82%→89%）'}},
+steps:[
+ {id:'obj',label:'第 1 步 · 对标指标',type:'text',hint:'选单一可比指标（OEE、不良率、换模时间、能耗/吨…）',ph:'充填工序 OEE'},
+ {id:'self',label:'第 2 步 · 我方现状',type:'textarea',rows:2,hint:'填当前水平，<b>有条件时给出构成分解</b>（如 OEE 三要素）',ph:'OEE 71%（可用率 88% × 性能 82% × 质量 98%）',
+  check:v=>{const a=[];if(v&&!/\d/.test(v))a.push('缺数值：对标必须以数据为基准。');return a;}},
+ {id:'bench',label:'第 3 步 · 标杆对象与其水平',type:'textarea',rows:2,hint:'标杆可以是集团兄弟厂 / 行业标杆 / 自己最好历史水平（内部标杆）——注明数据来源',ph:'杭州厂同型线：OEE 86%（可用率 91% × 性能 95% × 质量 99.5%）'},
+ {id:'gap',label:'第 4 步 · 差距拆解',type:'textarea',rows:2,hink:'',hint:'差距是多少？主要由哪个构成项贡献？（差距不拆解就找不到抓手）',ph:'性能开动率差 13pt（速度设定保守＋换模慢）',
+  guide:v=>'✅ 差距已定位。下一步把差距转化为可执行的借鉴动作——标杆具体做对了什么？我们能搬哪几条？'},
+ {id:'act',label:'第 5 步 · 借鉴动作',type:'textarea',rows:2,hint:'标杆做对了什么？我们具体搬哪几条？（写动作不写口号）',ph:'①分段提速试验 ②SMED 快换 25min→8min',
+  check:v=>{const a=[];if(v&&!/\d/.test(v)&&!/①|②|③/.test(v))a.push('动作不具体：请列成可执行条目（含目标值）。');return a;}},
+ {id:'goal',label:'第 6 步 · 量化目标与期限',type:'text',hint:'目标值＋达成期限（差距大时分阶段设里程碑）',ph:'6 个月内 OEE 71%→78%'}
+],
+concl(c){
+ const g1=gN((c.self||'').match(/\d+(\.\d+)?/)?c.self.match(/\d+(\.\d+)?/)[0]:null);
+ const g2=gN((c.bench||'').match(/\d+(\.\d+)?/)?c.bench.match(/\d+(\.\d+)?/)[0]:null);
+ let html='<table>'+
+  '<tr><th style="width:150px">对标指标</th><td>'+gesc(c.obj||'—')+'</td></tr>'+
+  '<tr><th>我方现状</th><td>'+gesc(c.self||'—')+'</td></tr>'+
+  '<tr><th>标杆水平</th><td>'+gesc(c.bench||'—')+'</td></tr>'+
+  '<tr><th>差距拆解</th><td>'+gesc(c.gap||'—')+'</td></tr></table>';
+ if(g1!==null&&g2!==null)html+='<p style="font-size:13px">量化差距：<b>'+(g2-g1>0?'+':'')+(g2-g1).toFixed(1)+'</b>（'+g1+' → '+g2+'）</p>';
+ html+='<p style="font-size:13px;margin:8px 0">借鉴动作：'+(c.act?gesc(c.act).replace(/\n/g,'<br>'):'—')+'</p>';
+ if(c.goal)html+='<div><span class="ccl-big">目标：'+gesc(c.goal)+'</span>建立月度跟踪点检</div>';
+ return html;
+}};
+
+/* #27 帕累托图/柏拉图 */
+GUIDES[27]={
+case:{bg:'案例·灌装线停机损失：8 月停机 42 次/26.5h，帕累托分析——充填阀堵塞 15 次/11.2h（42%）＋换模 10 次/6.8h（26%）＋输送带跑偏 8 次/3.9h，前三项累计 82% 时长 → 主攻充填阀堵塞（CIP 频率不足根因）。',
+data:{obj:'灌装线 8 月停机损失',items:'充填阀堵塞,11.2\n换模调整,6.8\n输送带跑偏,3.9\n小停机待料,2.1\n其他,2.5',main:'充填阀堵塞 11.2h＋换模 6.8h＝累计 68% 时长',act:'充填阀堵塞：CIP 频率 1 次/周→1 次/2 天，目标月停机 -60%',expect:'月停机时长 26.5h→15h 以内'}},
+steps:[
+ {id:'obj',label:'第 1 步 · 分析对象与期间',type:'text',hint:'填损失类型＋统计期间（停机/不良/客诉/报废…）',ph:'灌装线 8 月停机损失'},
+ {id:'items',label:'第 2 步 · 损失项目清单（按金额/时长排序）',type:'textarea',rows:5,hint:'每行一项，格式：<b>项目名,数值</b>（逗号分隔，按从大到小排序填入）',ph:'充填阀堵塞,11.2\n换模调整,6.8\n输送带跑偏,3.9',
+  check:v=>{const a=gParseList(v);const r=[];if(a.length===0&&v)r.push('格式：每行「项目,数值」。');if(a.length>1){for(let i=1;i<a.length;i++)if(a[i].val>a[i-1].val){r.push('未按从大到小排序：第'+(i+1)+'行「'+a[i].name+'」('+a[i].val+') 大于上一行——帕累托必须降序。');break;}}return r;},
+  guide:v=>{const a=gParseList(v);if(!a.length)return null;const tot=a.reduce((s,x)=>s+x.val,0);const top2=a.slice(0,2).reduce((s,x)=>s+x.val,0);return '共 '+a.length+' 项、合计 '+(Math.round(tot*10)/10)+'。前 2 项占 <b>'+Math.round(top2/tot*100)+'%</b>'+(top2/tot>=0.6?'（≥60%，符合二八原则，主攻它们）':'（尚未集中，看看排序是否正确或项目颗粒度是否太粗）。');}},
+ {id:'main',label:'第 3 步 · 主要损失确认（Vital Few）',type:'textarea',rows:2,hint:'累计占比约 80% 内的头部项目是哪些？合计占比多少？',ph:'充填阀堵塞＋换模＝累计 68% 时长'},
+ {id:'act',label:'第 4 步 · 主攻改善动作',type:'textarea',rows:2,hint:'对主要损失立项改善（动作＋目标幅度）；长尾项目先标准化维持',ph:'CIP 频率 1 次/周→1 次/2 天，目标 -60%'},
+ {id:'expect',label:'第 5 步 · 预期效果',type:'text',hint:'改善后目标水平',ph:'月停机 26.5h→15h 以内'}
+],
+concl(c){
+ const a=gParseList(c.items);const tot=a.reduce((s,x)=>s+x.val,0);
+ let html='<table><tr><th style="width:150px">分析对象</th><td>'+gesc(c.obj||'—')+'</td></tr></table>';
+ if(a.length){
+  let cum=0,rows='';
+  a.forEach((x,i)=>{cum+=x.val;rows+='<tr><td>'+(i+1)+'</td><td>'+gesc(x.name)+'</td><td style="text-align:right">'+x.val+'</td><td style="text-align:right">'+(tot?Math.round(x.val/tot*100):0)+'%</td><td style="text-align:right">'+(tot?Math.round(cum/tot*100):0)+'%</td>'+(cum/tot<=0.8?'<td>★ 主攻</td>':'<td>维持</td>')+'</tr>';});
+  html+='<table style="margin-top:8px"><tr><th>#</th><th>损失项目</th><th>数值</th><th>占比</th><th>累计</th><th>策略</th></tr>'+rows+'</table>';
+  const vital=a.filter((x,i)=>{const cc=a.slice(0,i+1).reduce((s,y)=>s+y.val,0);return cc/tot<=0.8;});
+  html+='<div><span class="ccl-big">主攻 '+vital.length+' 项 / 共 '+a.length+' 项</span>'+(vital.length&&vital.length<=Math.ceil(a.length*0.3)?'符合二八原则':'头部集中度不足，改善优先级需再评估')+'</div>';
+ }
+ if(c.main)html+='<p style="font-size:13px">主要损失：'+gesc(c.main)+'</p>';
+ if(c.act)html+='<table><tr><th style="width:150px">改善动作</th><td>'+gesc(c.act)+'</td></tr><tr><th>预期效果</th><td>'+gesc(c.expect||'—')+'</td></tr></table>';
+ return html;
+}};
+
+/* #28 Poka Yoke 防愚措施 */
+GUIDES[28]={
+case:{bg:'案例·包材错用防呆：同一产线两种规格彩盒曾发生错用（月均 2 次）。防呆方案——接触式：扫码枪校验 SKU 与工单匹配，错盒直接停线（源头拦截），替代原「人工核对」；检出无需依赖注意力，错误不可能流入下一工序。',
+data:{err:'彩盒规格错用（A 款装入 B 款产品），月均 2 次、单次返工成本 800 元',type:'接触式（检测 SKU 与工单匹配）',where:'源头拦截：开盒工位扫码校验，不匹配即停线',mech:'光电＋扫码联锁：错误发生时设备物理停机，人无法继续',ver:'错误率 2 次/月→0；免人工核对，每班省 15min'}},
+steps:[
+ {id:'err',label:'第 1 步 · 目标差错是什么',type:'textarea',rows:2,hint:'曾经发生/可能发生的具体差错（错装/漏装/反向/错参数…），<b>含频次与后果</b>',ph:'彩盒规格错用，月均 2 次、单次返工 800 元',
+  check:v=>{const a=[];if(v&&!/\d/.test(v))a.push('缺频次/损失数据：防呆优先级要靠损失量化排序。');return a;}},
+ {id:'type',label:'第 2 步 · 防呆类型',type:'select',opts:['接触式（检测物性/编码：传感器、扫码、定位销）','定值式（数量/参数校验：计数、称重、扭矩）','动作步序式（顺序/互锁：漏步骤即停）'],hint:'接触式查「是不是这个」、定值式查「够不够/对不对」、步序式查「顺序对不对」'},
+ {id:'where',label:'第 3 步 · 拦截位置',type:'select',opts:['源头拦截（错误发生点即制止）','下游检出（流入下工序前剔除）'],hint:'<b>源头拦截优于下游检出</b>——错误不产生成本；无法源头时才退而求其次'},
+ {id:'mech',label:'第 4 步 · 防呆机制',type:'textarea',rows:2,hint:'用什么物理/逻辑机制保证？判断标准：<b>即使人想错也做不到</b>（联锁/定位/自动校验），不是「提醒人注意」',ph:'扫码校验 SKU，不匹配即联锁停线',
+  check:v=>{const a=[];if(v&&!/(联锁|停机|停线|传感器|扫码|定位|计数|称重|报警|校验|互锁|防呆)/.test(v))a.push('机制未落在装置/系统上——「加强培训/提醒注意」不是防呆，错误仍可能再发生。');return a;}},
+ {id:'ver',label:'第 5 步 · 验证方式与效果',type:'text',hint:'如何证明防呆有效？（试验故意错件是否被拦截＋上线后错误率跟踪）',ph:'故意错件测试 100% 拦截；错误率 2 次/月→0'}
+],
+concl(c){
+ const src=c.where&&c.where.indexOf('源头')===0;
+ let html='<table>'+
+  '<tr><th style="width:150px">目标差错</th><td>'+gesc(c.err||'—')+'</td></tr>'+
+  '<tr><th>防呆类型</th><td>'+gesc(c.type||'—')+'</td></tr>'+
+  '<tr><th>拦截位置</th><td>'+gesc(c.where||'—')+'</td></tr>'+
+  '<tr><th>防呆机制</th><td>'+gesc(c.mech||'—')+'</td></tr></table>';
+ const ok=c.mech&&/(联锁|停机|停线|传感器|扫码|定位|计数|称重|互锁|校验)/.test(c.mech);
+ html+='<div><span class="ccl-big" style="background:'+(ok?(src?'#1d7a3a':'#b07b1e'):'#a33')+'">'+(ok?(src?'源头防呆 · 优':'下游检出 · 可用'):'未达标')+'</span>'+(ok?(src?'错误在发生点被消灭':'建议评估能否前移到源头拦截'):'机制未落在装置层，重新设计')+'</div>';
+ if(c.ver)html+='<p style="font-size:13px">验证：'+gesc(c.ver)+'；上线后跟踪 3 个月错误率，并回传 MP 情报库。</p>';
+ return html;
+}};
+
+/* #29 OEE 设备综合效率 */
+GUIDES[29]={
+case:{bg:'案例·灌装机 8 月：日历时间 720h，计划停机 40h，故障停机 55h，换模调整 30h；理论节拍 0.2s/件，实际产量 990 万件；不良 10 万件。OEE = 可用率 87.5% × 性能 92.4% × 质量 99.0% ≈ 80.1%（良好区间）。',
+data:{line:'灌装机 #3（2026-08）',cal:'720',plan:'40',fault:'55',setup:'30',cycle:'0.2',out:'990',bad:'10'}},
+steps:[
+ {id:'line',label:'第 1 步 · 设备与统计期间',type:'text',hint:'设备名＋月份（单台单线统计才有意义）',ph:'灌装机 #3（2026-08）'},
+ {id:'cal',label:'第 2 步 · 日历时间（h）',type:'num',hint:'统计期间总时间（月=约 720h）',ph:'720'},
+ {id:'plan',label:'第 3 步 · 计划停机（h）',type:'num',hint:'计划保养、无订单、休息等计划内停机',ph:'40',
+  guide:v=>'✅ 接着填计划外的损失：先填故障停机，再填换模调整——两者构成「可用率」的分母扣减项。'},
+ {id:'fault',label:'第 4 步 · 故障停机（h）',type:'num',hint:'突发故障停机时间（EM/PM 改善重点）',ph:'30'},
+ {id:'setup',label:'第 5 步 · 换模/调整（h）',type:'num',hint:'换模、调整、开机准备时间（SMED 改善重点）',ph:'25'},
+ {id:'cycle',label:'第 6 步 · 理论节拍（s/件）',type:'num',hint:'设计理论周期时间（不是实际最快）',ph:'0.5'},
+ {id:'out',label:'第 7 步 · 实际产量（万件）',type:'num',hint:'统计期间总产量',ph:'190'},
+ {id:'bad',label:'第 8 步 · 不良数量（万件）',type:'num',hint:'不良品数量（含返工判定为不合格部分）',ph:'1.1'}
+],
+concl(c){
+ const cal=gN(c.cal),pl=gN(c.plan),fa=gN(c.fault),su=gN(c.setup),cy=gN(c.cycle),out=gN(c.out),bad=gN(c.bad);
+ if(cal===null||out===null||cy===null)return '<p style="color:var(--ink-3);font-size:13px">请至少填写日历时间、理论节拍与产量。</p>';
+ const load=cal-(pl||0);const run=load-(fa||0)-(su||0);
+ const a=load>0?run/load:0;
+ const theo=(out*10000)*cy/3600;
+ const p=run>0?theo/run:0;
+ const q=out>0?(out-(bad||0))/out:1;
+ const oee=a*p*q;
+ let html='<table style="margin-top:8px"><tr><th>项目</th><th>数值</th><th>计算</th></tr>'+
+  '<tr><td>负荷时间</td><td>'+(Math.round(load*10)/10)+' h</td><td>日历 − 计划停机</td></tr>'+
+  '<tr><td>开动时间</td><td>'+(Math.round(run*10)/10)+' h</td><td>负荷 − 故障 − 换模</td></tr>'+
+  '<tr><td>时间开动率 A</td><td><b>'+(a*100).toFixed(1)+'%</b></td><td>开动 ÷ 负荷</td></tr>'+
+  '<tr><td>性能开动率 P</td><td><b>'+(p*100).toFixed(1)+'%</b></td><td>理论工时 ÷ 开动</td></tr>'+
+  '<tr><td>合格品率 Q</td><td><b>'+(q*100).toFixed(1)+'%</b></td><td>(产量−不良) ÷ 产量</td></tr></table>';
+ const lv=oee>=0.85?'世界级（≥85%）':(oee>=0.75?'良好（75–85%）':(oee>=0.60?'典型水平（60–75%）':'偏低（＜60%）'));
+ const col=oee>=0.75?'#1d7a3a':(oee>=0.6?'#b07b1e':'#a33');
+ html+='<div><span class="ccl-big" style="background:'+col+'">OEE = '+(oee*100).toFixed(1)+'%</span>'+lv+'</div>';
+ const min=Math.min(a,p,q);
+ const weak=min===a?'时间开动率（故障/换模损失大→EM/PM、SMED）':(min===p?'性能开动率（速度损失→节拍优化、小停机）':'合格品率（质量损失→工艺条件、MP 情报）');
+ html+='<p style="font-size:13px">三要素中最短板：<b>'+weak+'</b>——改善资源优先投向短板项，OEE 提升最快。</p>';
+ return html;
+}};
+
+/* #30 损失概念（十六大损失） */
+GUIDES[30]={
+case:{bg:'案例·灌装线损失盘点：按十六大损失分类归集后，故障损失 3.2%、换模损失 2.1%、速度损失 6.8%、小停机 1.5%、开始/结束损失 0.9%、不良返工 1.1%——速度损失为最大单项，纳入 FI 焦点改善。',
+data:{line:'灌装线（2026-08）',fault:'3.2',setup:'2.1',speed:'6.8',minor:'1.5',se:'0.9',defect:'1.1',other:'管理/人员损失约 2.0（未细分，后续补）',focus:'速度损失 6.8% → FI 焦点改善课题'}},
+steps:[
+ {id:'line',label:'第 1 步 · 产线与期间',type:'text',hint:'产线名＋统计月份',ph:'灌装线（2026-08）'},
+ {id:'fault',label:'第 2 步 · 故障损失（%）',type:'num',hint:'突发故障停机占负荷时间比例',ph:'3.2'},
+ {id:'setup',label:'第 3 步 · 换模/调整损失（%）',type:'num',hint:'换模、调整、准备损失',ph:'2.1'},
+ {id:'speed',label:'第 4 步 · 速度损失（%）',type:'num',hint:'实际节拍低于设计节拍的损失（常被忽视的最大隐性损失）',ph:'6.8'},
+ {id:'minor',label:'第 5 步 · 小停机/空转（%）',type:'num',hint:'短暂停机与空转（卡料、传感器复位…）',ph:'1.5'},
+ {id:'se',label:'第 6 步 · 开始/结束损失（%）',type:'num',hint:'开机升速、收尾降速损失',ph:'0.9'},
+ {id:'defect',label:'第 7 步 · 质量损失（%）',type:'num',hint:'不良/返工/降级损失占比',ph:'1.1'},
+ {id:'other',label:'第 8 步 · 其他损失记录',type:'textarea',rows:2,hint:'管理损失、人员损失、能源损失等未量化部分如实注明（不量化=看不见=改不了）',ph:'管理/人员损失约 2.0%（未细分，后续补）'},
+ {id:'focus',label:'第 9 步 · 改善焦点判定',type:'text',hint:'最大 1-2 项损失是什么？交给谁改善（FI 课题/PM 对策/QM）',ph:'速度损失 6.8% → FI 焦点改善'}
+],
+concl(c){
+ const items=[['故障',c.fault],['换模调整',c.setup],['速度',c.speed],['小停机',c.minor],['开始结束',c.se],['质量',c.defect]].map(x=>[x[0],gN(x[1])||0]);
+ const tot=items.reduce((s,x)=>s+x[1],0);
+ items.sort((a,b)=>b[1]-a[1]);
+ let html='<table><tr><th style="width:150px">产线/期间</th><td>'+gesc(c.line||'—')+'</td></tr></table>';
+ if(tot>0){
+  let rows='';items.forEach((x,i)=>{rows+='<tr><td>'+(i+1)+'</td><td>'+x[0]+'损失</td><td style="text-align:right">'+x[1]+'%</td><td style="text-align:right">'+(Math.round(x[1]/tot*100))+'%</td>'+(i===0?'<td>★ 最大</td>':'<td></td>')+'</tr>';});
+  html+='<table style="margin-top:8px"><tr><th>#</th><th>损失类型</th><th>占比</th><th>结构占比</th><th></th></tr>'+rows+'</table>'+
+   '<div><span class="ccl-big">六大量化损失合计 '+tot.toFixed(1)+'%</span>最大项：'+items[0][0]+'损失 '+items[0][1]+'%</div>';
+  if(tot>18)html+='<p style="color:#a33;font-size:13px">⚠️ 量化损失合计＞18%：对标 OEE 世界级水平（损失合计≤15%），改善空间显著。</p>';
+ }
+ if(c.other)html+='<p style="font-size:13px">其他损失：'+gesc(c.other)+'</p>';
+ if(c.focus)html+='<table><tr><th style="width:150px">改善焦点</th><td>'+gesc(c.focus)+'</td></tr></table>';
+ return html;
+}};
+
+/* #31 标准化（OPL/CIL/SOP） */
+GUIDES[31]={
+case:{bg:'案例·充填压力异常处置标准化：改文件规定（源标准）→ SOP 作业标准卡（怎么操作）→ OPL 一点课程（3 分钟教会「压力表读数三色区」）→ CIL 点检表（班前 1min 查压力表指针在绿区）。四层载体各司其职，知识不再依赖老师傅。',
+data:{know:'充填压力异常的判定与处置（压力表三色区）',src:'《充填作业标准》v3.2 §4.1',opl:'一点课程：压力表三色区判定——绿区 0.30-0.35MPa 正常 / 黄区偏离 5% 内微调 / 红区立即停机叫修',cil:'班前点检：压力表指针在绿区、气源三联件无水（1min/班）',sop:'标准作业卡：压力设定、微调、停机叫修三步流程',train:'全员 OPL 培训＋上岗实操验证（覆盖率 100%）'}},
+steps:[
+ {id:'know',label:'第 1 步 · 要标准化的知识/技能',type:'text',hint:'一句话说清「什么知识」（判定类/操作类/点检类）',ph:'充填压力异常的判定与处置'},
+ {id:'src',label:'第 2 步 · 源标准（制度/规定）',type:'text',hint:'知识的管理母体是哪个文件、哪一条？（没有源标准的先补文件）',ph:'《充填作业标准》v3.2 §4.1'},
+ {id:'opl',label:'第 3 步 · OPL 一点课程',type:'textarea',rows:2,hint:'一个知识点、3 分钟、一页图——只讲「一个点」，让新人也会',ph:'压力表三色区判定：绿区正常/黄区微调/红区停机叫修'},
+ {id:'cil',label:'第 4 步 · CIL 点检项目',type:'textarea',rows:2,hint:'纳入日常清洁·点检·润滑的项目与频次（写清部位＋判定基准＋频次）',ph:'班前：压力表指针在绿区、三联件无水（1min/班）',
+  check:v=>{const a=[];if(v&&!/(班|日|周|月|次\/)/.test(v))a.push('点检项缺频次：CIL 必须写明「多久查一次」。');return a;}},
+ {id:'sop',label:'第 5 步 · SOP 标准作业',type:'textarea',rows:2,hint:'操作步骤写成「谁、何时、做什么、判定标准」——可照做的程度',ph:'压力设定→微调→停机叫修三步流程'},
+ {id:'train',label:'第 6 步 · 培训与落地验证',type:'text',hint:'培训方式＋覆盖率＋验证方式（实操抽查）',ph:'全员 OPL＋实操验证，覆盖率 100%'}
+],
+concl(c){
+ const has=[['源标准',c.src],['OPL',c.opl],['CIL',c.cil],['SOP',c.sop],['培训验证',c.train]].filter(x=>x[1]);
+ let html='<table><tr><th style="width:150px">标准化对象</th><td>'+gesc(c.know||'—')+'</td></tr>'+
+  has.map(x=>'<tr><th>'+x[0]+'</th><td>'+gesc(x[1]).replace(/\n/g,'<br>')+'</td></tr>').join('')+'</table>';
+ const n=has.length;
+ html+='<div><span class="ccl-big" style="background:'+(n>=4?'#1d7a3a':(n>=2?'#b07b1e':'#a33'))+'">'+n+'/5 载体</span>'+(n>=4?'标准化链路完整':'补齐缺失载体：知识缺载体就会随人员流失')+'</div>';
+ return html;
+}};
+
+/* #32 5S 现场管理 */
+GUIDES[32]={
+case:{bg:'案例·灌装区域 5S：整理（清出 37 件闲置物）→ 整顿（工具影子板＋胶箱定位线）→ 清扫（污染源封箱机漏油根治）→ 清洁（班前 10min 5S 点检表）→ 素养（月度区域评比）。寻找时间 3min→15s，漏油污染源归零。',
+data:{area:'灌装区域',s1:'红牌作战清出闲置物 37 件（含淘汰备件、私人物品）',s2:'工具影子板 1 块、胶箱定位划线 26 处、物料先进先出标识',s3:'清扫中发现封箱机漏油——根治污染源而非每天擦',s4:'班前 10min 5S 点检表＋区域责任网格图',s5:'月度区域评比＋改善提案积分',eff:'寻找时间 3min→15s；漏油污染源归零；点检发现隐患 12 项'}},
+steps:[
+ {id:'area',label:'第 1 步 · 目标区域',type:'text',hint:'划定具体区域（一条线/一个间/一个库）',ph:'灌装区域'},
+ {id:'s1',label:'第 2 步 · 整理（Seiri）',type:'textarea',rows:2,hint:'区分要与不要：清出多少不要物？（红牌作战数量化）',ph:'红牌作战清出闲置物 37 件',
+  guide:v=>v?'✅ 整理完成度看数量：清出件数是整理的硬指标。下一步整顿——留下来的每件物品都要有「固定位置＋标识」。':'先做整理！不清理就整顿＝给废物也安家。'},
+ {id:'s2',label:'第 3 步 · 整顿（Seiton）',type:'textarea',rows:2,hint:'定置定位＋标识（影子板/划线/色标），目标是「30 秒内取到」',ph:'影子板 1 块、定位划线 26 处'},
+ {id:'s3',label:'第 4 步 · 清扫（Seiso）',type:'textarea',rows:2,hint:'清扫＝点检：清扫中发现的污染源/微缺陷要根治，不是天天擦',ph:'发现封箱机漏油——根治污染源而非每天擦',
+  check:v=>{const a=[];if(v&&/(每天擦|定期擦|加强清扫)/.test(v)&&!/根治|源头/.test(v))a.push('只擦不治＝损失常态化：清扫的真正目的是发现并根治污染源。');return a;}},
+ {id:'s4',label:'第 5 步 · 清洁（Seiketsu）',type:'textarea',rows:2,hint:'把前 3S 制度化：点检表＋责任网格＋频次',ph:'班前 10min 点检表＋区域责任网格图'},
+ {id:'s5',label:'第 6 步 · 素养（Shitsuke）',type:'textarea',rows:2,hint:'维持机制：评比/提案积分/管理者巡查',ph:'月度区域评比＋改善提案积分'},
+ {id:'eff',label:'第 7 步 · 效果量化',type:'text',hint:'寻找时间/隐患发现数/不要物清出量等硬指标',ph:'寻找时间 3min→15s，隐患发现 12 项'}
+],
+concl(c){
+ const arr=[['整理',c.s1],['整顿',c.s2],['清扫',c.s3],['清洁',c.s4],['素养',c.s5]];
+ const done=arr.filter(x=>x[1]).length;
+ let html='<table><tr><th style="width:150px">目标区域</th><td>'+gesc(c.area||'—')+'</td></tr>'+
+  arr.map(x=>'<tr><th>'+x[0]+'</th><td>'+gesc(x[1]||'—').replace(/\n/g,'<br>')+'</td></tr>').join('')+'</table>';
+ html+='<div><span class="ccl-big" style="background:'+(done===5?'#1d7a3a':(done>=3?'#b07b1e':'#a33'))+'">'+done+'/5 S</span>'+(done===5?'5S 链路完整，转入维持（清洁制度化）':'按顺序补齐——顺序颠倒会返工')+'</div>';
+ if(c.eff)html+='<table><tr><th style="width:150px">效果量化</th><td>'+gesc(c.eff)+'</td></tr></table>';
+ return html;
+}};
+
+/* #33 DMS 日常管理系统 */
+GUIDES[33]={
+case:{bg:'案例·灌装车间日清会机制：厂级周会（周四 14:00，KPI 达成与资源协调）→ 车间日清会（每日 8:30，15min，昨日 KPI/KAI 异常三问）→ 班组班前会（8:00，5min，任务布置＋安全提醒）。异常按「红黄绿」亮灯管理，红色 24h 内必须响应。',
+data:{lvl:'厂级周会 → 车间日清会 → 班组班前会（三级）',kpi:'OEE、不良率、停机时长、能耗/吨、客诉件数（红黄绿亮灯）',kai:'当日微改善：小停机处理、5S 隐患闭环（当日事当日毕）',mtg:'日清会 15min：①昨日指标亮灯 ②红色项三问（发生了什么/为什么/谁几点前关闭）③今日风险预告',board:'车间可视化看板：KPI 趋势＋异常处置进度＋横展事项'}},
+steps:[
+ {id:'lvl',label:'第 1 步 · 会议层级架构',type:'textarea',rows:2,hint:'几级会议？各层级频次与时长（厂级周会/车间日清会/班组班前会）',ph:'厂级周会 → 车间日清会 → 班组班前会'},
+ {id:'kpi',label:'第 2 步 · 跟踪的 KPI 指标',type:'textarea',rows:2,hint:'每层会议盯哪些指标（上游盯结果、下游盯过程）',ph:'OEE、不良率、停机时长、能耗/吨',
+  check:v=>{const a=[];if(v&&!/\d/.test(v))a.push('KPI 未含目标值/阈值——红黄绿判定需要基准线。');return a;}},
+ {id:'kai',label:'第 3 步 · KAI 日常改善机制',type:'textarea',rows:2,hint:'当日微改善怎么闭环（当日事当日毕的标准是什么）',ph:'小停机处理、5S 隐患 24h 闭环'},
+ {id:'mtg',label:'第 4 步 · 日清会议程',type:'textarea',rows:2,hint:'固定议程模板（指标亮灯→红色项三问→风险预告），<b>控制在 15min 内</b>',ph:'①亮灯 ②红色项三问 ③风险预告'},
+ {id:'board',label:'第 5 步 · 可视化看板',type:'text',hint:'KPI 趋势＋异常处置进度＋横展事项上墙',ph:'车间可视化看板（KPI 趋势/处置进度/横展）'}
+],
+concl(c){
+ const has=[['会议层级',c.lvl],['KPI 跟踪',c.kpi],['KAI 改善',c.kai],['日清议程',c.mtg],['可视化看板',c.board]].filter(x=>x[1]);
+ let html='<table>'+has.map(x=>'<tr><th style="width:150px">'+x[0]+'</th><td>'+gesc(x[1]).replace(/\n/g,'<br>')+'</td></tr>').join('')+'</table>';
+ const n=has.length;
+ html+='<div><span class="ccl-big" style="background:'+(n>=4?'#1d7a3a':(n>=2?'#b07b1e':'#a33'))+'">'+n+'/5 要素</span>'+(n>=4?'DMS 骨架成立，靠「红色 24h 响应」纪律维持运转':'补齐要素：日清会的价值=异常当天被看见')+'</div>';
+ return html;
+}};
+
+/* #34 目标管理（层层分解与跟踪） */
+GUIDES[34]={
+case:{bg:'案例·「OEE 71%→78%」目标分解：公司级（年度 OEE 78%）→ 车间级（灌装线 Q3 75%）→ 班组级（换模 25min→8min、小停机 -50%）→ 岗位级（班前点检 100% 执行、CIP 每 2 天）。周跟踪看板 + 月度复盘纠偏。',
+data:{goal:'灌装线 OEE 71%→78%（2026 年度）',l1:'车间级：Q3 达 75%（分解故障停机 -30%、换模 -60%）',l2:'班组级：换模 25min→8min、小停机次数 -50%',l3:'岗位级：班前点检执行率 100%、CIP 频次 1 次/2 天',track:'周跟踪：OEE 三要素趋势上墙；偏差＞2pt 触发周会分析',rev:'月度复盘：未达项走 4M/5Why 分析，对策纳入下月计划'}},
+steps:[
+ {id:'goal',label:'第 1 步 · 公司级/产线级目标',type:'text',hint:'SMART：指标＋现状→目标＋期限',ph:'灌装线 OEE 71%→78%（2026 年度）',
+  check:v=>{const a=[];if(v&&!/\d/.test(v))a.push('目标缺数值——不可量化则不可跟踪。');return a;}},
+ {id:'l1',label:'第 2 步 · 车间级分解',type:'textarea',rows:2,hint:'目标拆到车间/线，含关键抓手项',ph:'Q3 达 75%（故障 -30%、换模 -60%）'},
+ {id:'l2',label:'第 3 步 · 班组级分解',type:'textarea',rows:2,hint:'拆到班组可控的具体课题',ph:'换模 25min→8min、小停机 -50%'},
+ {id:'l3',label:'第 4 步 · 岗位级分解',type:'textarea',rows:2,hint:'拆到个人可执行的动作（点检/操作/频次）',ph:'班前点检 100%、CIP 1 次/2 天',
+  guide:v=>v?'✅ 分解到位的检验：每个岗位的动作都能向上支撑班组课题——问一句「你这个动作支撑上面哪条？」答不上来就是假分解。':'分解到底层才有执行力：岗位级必须是「动作」不是「指标」。'},
+ {id:'track',label:'第 5 步 · 跟踪机制',type:'textarea',rows:2,hint:'频次＋载体＋偏差触发规则（偏差多少触发什么动作）',ph:'周跟踪看板，偏差＞2pt 触发周会分析'},
+ {id:'rev',label:'第 6 步 · 复盘纠偏',type:'textarea',rows:2,hint:'未达项怎么处理（4M/5Why 分析→对策→下月计划）',ph:'月度复盘：未达项走 5Why，对策纳入下月计划'}
+],
+concl(c){
+ const has=[['总目标',c.goal],['车间级',c.l1],['班组级',c.l2],['岗位级',c.l3],['跟踪',c.track],['复盘',c.rev]].filter(x=>x[1]);
+ let html='<table>'+has.map(x=>'<tr><th style="width:150px">'+x[0]+'</th><td>'+gesc(x[1]).replace(/\n/g,'<br>')+'</td></tr>').join('')+'</table>';
+ const n=has.length;
+ html+='<div><span class="ccl-big" style="background:'+(n>=5?'#1d7a3a':(n>=3?'#b07b1e':'#a33'))+'">'+n+'/6 要素</span>'+(n>=5?'分解-跟踪-复盘闭环成立':'目标管理=分解＋跟踪＋复盘，缺一环就变成口号')+'</div>';
+ return html;
+}};
+
+/* #35 ABC 项目分级（官方口径，复用 computeABC 引擎） */
+GUIDES[35]={
+case:{bg:'案例·EEM「果冻爽调理平台合并改善」：投资 21.15 万、回报 2 年、OEE 90%，其余维度无风险——按官方加权公式算得 <b>68 分 = A 类</b>（与公司表格真实记录一致）。<br>EPM 示例·集团首产新品：改造成本 101 万、集团首次、年产值 501 万、单吨毛利率 26% → 20 分 = A 类。',
+data:{ptype:'EEM（新设备）',m:'',lec:'',comp:'',def:'',oee:'90',cost:'21.15',roi:'2',pcost:'101',mat:'5',gmv:'501',gm:'26'}},
+steps:[
+ {id:'ptype',label:'第 1 步 · 项目类型',type:'select',opts:['EEM（新设备）','EPM（新产品）'],hint:'EEM 七维加权满分 100；EPM 四维相加满分 20——公式不同，先选类型'},
+ {id:'m',label:'EEM ① 环境安全 M 值',type:'num',hint:'M＞60→5；25＜M≤60→3；M≤25→1；无风险可留空（按 1 分计）',ph:'留空'},
+ {id:'lec',label:'EEM ② 工作安全 LEC D 值',type:'num',hint:'D＞320→5；70＜D≤320→3；D≤70→1',ph:'留空'},
+ {id:'comp',label:'EEM ③ 有效客诉（件/年）',type:'num',hint:'≥2 件→5；0-2 件→3；未发生→1（填 0 也有效）',ph:'0'},
+ {id:'def',label:'EEM ④ 不良率（%）',type:'num',hint:'≥0.2%→5；0.05-0.2%→3；＜0.05%→1',ph:'0.03'},
+ {id:'oee',label:'EEM ⑤ OEE（%）',type:'num',hint:'≤75%→5；75-90%→3；＞90%→1',ph:'90'},
+ {id:'cost',label:'EEM ⑥ 投资成本（万元）',type:'num',hint:'≥20 万→5；8-20 万→3（官方公式口径）；＜8 万→1——<b>权重 0.40，影响最大</b>',ph:'21.15'},
+ {id:'roi',label:'EEM ⑦ 投资回报（回收期年数）',type:'num',hint:'＜1 年→5；1-2 年→3；＞2 年→1——权重 0.30',ph:'2'},
+ {id:'pcost',label:'EPM ① 改造成本（万元）',type:'num',hint:'＞100 万→5；20-100 万→3；＜20 万→1',ph:'101'},
+ {id:'mat',label:'EPM ② 产品类别',type:'select',opts:['5','3','1'],hint:'5=集团首次生产；3=本厂首次（兄弟厂已量产）；1=本厂已量产/复制',ph:'5'},
+ {id:'gmv',label:'EPM ③ 预期年产值（万元）',type:'num',hint:'＞500 万→5；200-500 万→3；＜200 万→1',ph:'501'},
+ {id:'gm',label:'EPM ④ 单吨毛利率（%）',type:'num',hint:'＞25%→5；12-25%→3；＜12%→1',ph:'26'}
+],
+concl(c){
+ const isEpm=c.ptype&&c.ptype.indexOf('EPM')===0;
+ const vals={};
+ ABC_RULES[isEpm?'EPM':'EEM'].dims.forEach(d=>{vals[d.id]=c[d.id]||'';});
+ const r=computeABC(isEpm?'EPM':'EEM',vals);
+ if(!r)return '<p style="color:var(--ink-3);font-size:13px">请至少填写一个维度（未填维度按最低档 1 分计）。</p>';
+ let rows='';r.dims.forEach(d=>{rows+='<tr><td>'+d.label+'</td><td style="text-align:right">'+(d.filled?d.raw:'未填*')+'</td><td style="text-align:right">'+d.score+(d.filled?'':'*')+'</td><td style="text-align:right">'+(Math.round(d.contrib*100)/100)+'</td></tr>';});
+ const ctrl={A:'强制执行 EM ＋ 项目追踪：DR 逐关评审、月度报告、厂级责任人',B:'遵循 EM：按部就班走 DR 流程，报告规模可适度灵活',C:'遵循 EM：管控与报告由本地决定，重点保住 DR 关卡纪律'};
+ let html='<p style="font-size:13px;margin:0 0 6px">'+(isEpm?'EPM 公式：E = 改造成本＋产品类别＋产值＋单吨毛利率（满分 20）':'EEM 公式：E =（环安×0.05＋工安×0.05＋客诉×0.05＋不良×0.05＋OEE×0.10＋成本×0.40＋回报×0.30）×20（满分 100）')+'</p>'+
+  '<table><tr><th>维度</th><th>实际值</th><th>得分</th><th>贡献</th></tr>'+rows+'</table>'+
+  '<div><span class="ccl-big" style="background:'+(r.cls==='A'?'#a33':(r.cls==='B'?'#b07b1e':'#1d7a3a'))+'">'+r.cls+' 类 · '+r.score+' / '+r.full+' 分</span>'+ABC_PRIO[r.cls]+'优先级</div>'+
+  '<p style="font-size:13px"><b>管控要求：</b>'+ctrl[r.cls]+'</p>'+
+  '<p style="font-size:12.5px;color:var(--ink-3)">* 未填维度按最低档 1 分保守计（与公司表格「计算错误」不同，本表永给出结果）。公式已用公司 48 条真实记录验算吻合。</p>';
+ return html;
+}};
+
+/* #36 MP 情报管理（公司口径） */
+GUIDES[36]={
+case:{bg:'案例·「充填压力标准缺失」MP 情报（公司表格式）：类型=新增情报，类别=设备，部门=三厂，设备=灌装机#3，投入 25 元（标准卡印刷），收益 12,600 元/年（消除 0.9% 报废）。P 段写量化缺陷，A 段写机制改善，D 段写标准化载体并回传。',
+data:{name:'充填压力标准缺失致夹心重量不良',type:'新增情报',cat:'设备',dept:'三厂',line:'果冻线',equip:'灌装机 #3',cost:'25',ben:'12600',p:'充填阀压力 8 月由 0.35MPa 调至 0.28MPa 后，作业标准卡未同步换发，夹心产品重量 CPK 0.82（标准≥1.33），日均报废 38kg',a:'修订《文件变更管理规定》：参数类变更强制受控换卡＋生产/EM 会签；充填压力写入标准卡并加压力上下限报警',d:'标准卡受控换发＋压力报警防呆装置＋OPL 全员培训；本案已回传 MP 情报库（情报ID MP2609091030）'}},
+steps:[
+ {id:'name',label:'第 1 步 · 情报名称',type:'text',hint:'一句话说清「什么设备/环节的什么缺陷/改善」',ph:'充填压力标准缺失致夹心重量不良'},
+ {id:'type',label:'第 2 步 · 情报类型',type:'select',opts:['新增情报','提案转换'],hint:'提案转换=由改善提案转来的情报；新增=日常发现直接登记',ph:''},
+ {id:'cat',label:'第 3 步 · 提案类别',type:'select',opts:['设备','能源','安全','品质','成本','效率','环境','教育','物料','工程','管理','其他'],hint:'公司表 12 类'},
+ {id:'dept',label:'第 4 步 · 部门/厂别',type:'select',opts:['一厂','二厂','三厂','四厂','五厂','六厂','七厂','八厂','九厂'],hint:'湖北各厂'},
+ {id:'line',label:'第 5 步 · 线别',type:'text',hint:'产线名称',ph:'果冻线'},
+ {id:'equip',label:'第 6 步 · 设备名称',type:'text',hint:'设备名＋编号（MP 情报必须挂设备）',ph:'灌装机 #3'},
+ {id:'cost',label:'第 7 步 · 改善投入费用（元）',type:'text',hint:'填数字或文字描述（公司表此列为文本）',ph:'25'},
+ {id:'ben',label:'第 8 步 · 改善收益（元/年）',type:'num',hint:'年化收益金额',ph:'12600'},
+ {id:'p',label:'第 9 步 · 异常/缺陷描述（P）',type:'textarea',rows:3,hint:'<b>对象＋现象＋量化数据</b>（不良率/频次/损失金额）——这是情报的核心价值',ph:'压力变更未换发标准卡，CPK 0.82，日均报废 38kg',
+  check:v=>{const a=[];if(v&&!/\d/.test(v))a.push('P 段缺量化数据：无数据的情报无法评估收益、无法被检索复用。');if(v&&v.length<15)a.push('P 段偏简短：建议写全「对象＋现象＋数据」。');return a;}},
+ {id:'a',label:'第 10 步 · 改善措施（A）',type:'textarea',rows:2,hint:'机制层改善（改标准/加防呆/改流程），不是「加强管理」',ph:'修订文件变更规定＋压力写入标准卡＋报警',
+  check:v=>{const a=[];if(v&&!/(标准|规定|SOP|流程|防呆|装置|报警|联锁|参数|换发|培训|OPL)/.test(v))a.push('A 段缺标准化载体：改善落在装置/标准上才不会退化。');return a;}},
+ {id:'d',label:'第 11 步 · 改善后说明/保持措施（D）',type:'textarea',rows:2,hint:'怎么保持不反弹：受控文件/防呆/OPL/点检＋是否已回传 MP 库',ph:'标准卡受控换发＋OPL＋已回传情报库',
+  check:v=>{const a=[];if(v&&!/(受控|标准|点检|OPL|培训|防呆|回传|MP)/.test(v))a.push('D 段未写明保持载体——没有载体的改善三个月就回退。');return a;}}
+],
+concl(c){
+ const ben=gN(c.ben),cost=gN(c.cost);
+ let html='<table>'+
+  '<tr><th style="width:150px">情报名称</th><td>'+gesc(c.name||'—')+'</td></tr>'+
+  '<tr><th>类型 / 类别</th><td>'+gesc(c.type||'—')+' / '+gesc(c.cat||'—')+'</td></tr>'+
+  '<tr><th>部门 / 线别</th><td>'+gesc(c.dept||'—')+' / '+gesc(c.line||'—')+'</td></tr>'+
+  '<tr><th>设备</th><td>'+gesc(c.equip||'—')+'</td></tr></table>'+
+  '<p style="font-size:13px;margin:8px 0"><b>P：</b>'+gesc(c.p||'—')+'<br><b>A：</b>'+gesc(c.a||'—')+'<br><b>D：</b>'+gesc(c.d||'—')+'</p>';
+ const q=[c.p&&/\d/.test(c.p),c.a&&/(标准|规定|防呆|装置|报警|流程|培训|OPL)/.test(c.a),c.d&&/(受控|点检|OPL|培训|防呆|回传|MP)/.test(c.d)].filter(Boolean).length;
+ html+='<div><span class="ccl-big" style="background:'+(q===3?'#1d7a3a':(q>=1?'#b07b1e':'#a33'))+'">PAD 质量 '+q+'/3</span>'+(q===3?'情报达标，可入库供 DR1-DR2 调用':'按提示补强 P/A/D')+'</div>';
+ if(ben!==null&&ben>0){
+  html+='<p style="font-size:13px">改善收益 <b>'+ben+' 元/年</b>'+(cost!==null?'，投入 '+cost+' 元':'')+(cost?'，投入产出比 <b>1 : '+Math.round(ben/Math.max(cost,1))+'</b>':'')+'。</p>';
+  html+='<p style="font-size:12.5px;color:var(--ink-3)">正式登记请到「计算型工具 → MP 情报库」：情报ID 自动生成（MP+时间戳），落 Supabase 云库供全厂检索。</p>';
+ }
+ return html;
+}};
+
+/* #37 LCC 全生命周期成本统计 */
+GUIDES[37]={
+case:{bg:'案例·调理平台合并改善 LCC：设计 2.4 + 制造 15.2 + 安装 1.8 + 调试 0.9 + 维修 0.6 + 耗材 0.2 = 21.1 万（残值/处置为 0）；年效益 12.6 万 → 回收期 1.67 年（可行区间 1-2 年）。注意官方公式中「设备残值」为<b>加项</b>。',
+data:{pname:'果冻爽调理平台合并改善',design:'2.4',make:'15.2',install:'1.8',commis:'0.9',repair:'0.6',consum:'0.2',energy:'0',labor:'0',residual:'0',disposal:'0',ben:'12.6',bdetail:'消除 0.9% 重量报废：38kg/日×365 天×6.5 元/kg ≈ 9.0 万＋提速增益 3.6 万'}},
+steps:[
+ {id:'pname',label:'第 1 步 · 项目名称',type:'text',hint:'与 EM 项目台账一致（结案 DR6-DR7 阶段核算）',ph:'果冻爽调理平台合并改善'},
+ {id:'design',label:'第 2 步 · 设计成本（万元）',type:'num',hint:'方案设计、图纸、试制验证费用',ph:'2.4'},
+ {id:'make',label:'第 3 步 · 制造成本（万元）',type:'num',hint:'设备购置/制造、材料加工',ph:'15.2'},
+ {id:'install',label:'第 4 步 · 安装成本（万元）',type:'num',hint:'基础施工、吊装、管线接驳',ph:'1.8'},
+ {id:'commis',label:'第 5 步 · 调试成本（万元）',type:'num',hint:'调试、试产消耗（VSU 阶段）',ph:'0.9'},
+ {id:'repair',label:'第 6 步 · 维修成本（万元）',type:'num',hint:'寿命期内预计维修分摊',ph:'0.6'},
+ {id:'consum',label:'第 7 步 · 耗材成本（万元）',type:'num',hint:'备件、易损件分摊',ph:'0.2'},
+ {id:'energy',label:'第 8 步 · 能源成本（万元）',type:'num',hint:'水电气分摊',ph:'0'},
+ {id:'labor',label:'第 9 步 · 人工成本（万元）',type:'num',hint:'操作/维护人工分摊',ph:'0'},
+ {id:'residual',label:'第 10 步 · 设备残值（万元）',type:'num',hint:'寿命期末设备残余价值——<b>官方公式中为加项</b>',ph:'0'},
+ {id:'disposal',label:'第 11 步 · 处置费用（万元）',type:'num',hint:'报废拆除处置费用',ph:'0'},
+ {id:'ben',label:'第 12 步 · 效益合计（万元/年）',type:'num',hint:'年化改善收益',ph:'12.6',
+  guide:v=>v?'✅ 效益已填，结论区将自动测算投资回收期＝LCC 合计 ÷ 效益。':''},
+ {id:'bdetail',label:'第 13 步 · 效益计算明细',type:'textarea',rows:2,hint:'效益怎么算出来的（公式＋数据来源）——公司表必填项',ph:'38kg/日×365 天×6.5 元/kg≈9.0 万＋提速 3.6 万',
+  check:v=>{const a=[];if(v&&!/[×xX*]|\/|\d/.test(v))a.push('明细缺计算过程：写清「数据×单价」的算式。');return a;}}
+],
+concl(c){
+ const ids=['design','make','install','commis','repair','consum','energy','labor','residual','disposal'];
+ const labels={'design':'设计','make':'制造','install':'安装','commis':'调试','repair':'维修','consum':'耗材','energy':'能源','labor':'人工','residual':'残值','disposal':'处置'};
+ const vals=ids.map(k=>({k:labels[k],v:gN(c[k])||0}));
+ const tot=vals.reduce((s,x)=>s+x.v,0);
+ vals.sort((a,b)=>b.v-a.v);
+ let rows='';vals.forEach(x=>{rows+='<tr><td>'+x.k+'</td><td style="text-align:right">'+x.v+'</td><td style="text-align:right">'+(tot?Math.round(x.v/tot*100):0)+'%</td></tr>';});
+ const ben=gN(c.ben);
+ let html='<p style="font-size:13px;margin:0 0 6px">官方公式：LCC = 设计＋制造＋安装＋调试＋维修＋耗材＋能源＋人工＋<b>＋设备残值</b>＋处置费用</p>'+
+  '<table><tr><th>成本项</th><th>万元</th><th>占比</th></tr>'+rows+'<tr><th>合计</th><th style="text-align:right">'+(Math.round(tot*100)/100)+'</th><th></th></tr></table>';
+ if(ben&&ben>0){
+  const pay=tot/ben;
+  const lv=pay<1?['优选投资','#1d7a3a']:(pay<=2?['可行投资','#b07b1e']:['需重新评估','#a33']);
+  html+='<div><span class="ccl-big" style="background:'+lv[1]+'">'+lv[0]+' · 回收期 '+pay.toFixed(2)+' 年</span>（判定：＜1 年优选 / 1-2 年可行 / ＞2 年重新评估）</div>'+
+   '<p style="font-size:13px">年效益 '+ben+' 万，投入产出比 1 : '+(Math.round(ben/Math.max(tot,0.01)*10)/10)+'。</p>';
+ }else{
+  html+='<p style="font-size:13px;color:var(--ink-3)">填入年效益后自动测算投资回收期与评级。</p>';
+ }
+ if(c.bdetail)html+='<table><tr><th style="width:150px">效益明细</th><td>'+gesc(c.bdetail)+'</td></tr></table>';
+ if(vals[0]&&vals[0].v>0)html+='<p style="font-size:12.5px;color:var(--ink-3)">最大成本项：'+vals[0].k+'（'+vals[0].v+' 万，'+(tot?Math.round(vals[0].v/tot*100):0)+'%）——优化 LCC 优先从它下手。正式登记请到「计算型工具 → LCC 成本统计」。</p>';
+ return html;
+}};
+
+
 </script>
 </body>
 </html>
