@@ -271,6 +271,110 @@
   .crs-form td{padding:4px 8px;border:1px solid #e2eee7;color:var(--ink-2);line-height:1.7;vertical-align:top}
   .crs-form td:first-child{width:34px;text-align:center;color:var(--ink-3);background:#fafdfb}
   .crs-note{font-size:11.5px;color:var(--ink-3);margin-top:3px;line-height:1.7}
+  /* ===== 🔍 设计审查系统（rv*） ===== */
+  .rvtop{display:flex;gap:14px;align-items:flex-end;flex-wrap:wrap}
+  .rvtop .fld{flex:1.3;min-width:240px;margin:0}
+  .rvtop .fld label{font-size:12px;font-weight:700;color:var(--ink-2);display:block;margin-bottom:5px}
+  .rvtop .fld select,.rvsel{font-family:inherit;font-size:13px;padding:7px 10px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);min-width:110px}
+  .rvtop .fld select:focus,.rvsel:focus{outline:none;border-color:#a8c0e8;box-shadow:0 0 0 3px rgba(31,58,110,.08)}
+  .rvsel{padding:6px 8px;font-size:12.5px}
+  #rv_prjinfo{flex:2.2;min-width:260px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-size:13px;color:var(--ink-2);padding-bottom:2px}
+  .rvmods{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0 4px}
+  .rvmods button{font-family:inherit;font-size:13px;font-weight:700;color:var(--ink-2);background:#fff;border:1.5px solid var(--line);border-radius:11px;padding:8px 18px;cursor:pointer;transition:all .15s}
+  .rvmods button:hover{border-color:#a8c0e8;color:var(--header)}
+  .rvmods button.on{background:var(--header);border-color:var(--header);color:#fff;box-shadow:0 4px 12px rgba(31,58,110,.25)}
+  .rvwarn{background:var(--warn-soft);border:1px solid #f2ddae;color:#8a5c00;border-radius:10px;padding:9px 14px;font-size:12.5px;margin:10px 0}
+  .rvstages{display:grid;grid-template-columns:repeat(7,1fr);gap:9px;margin:12px 0 14px}
+  .rvstages.rv6{grid-template-columns:repeat(6,1fr)}
+  .rvstages.rv7{grid-template-columns:repeat(7,1fr)}
+  @media(max-width:1100px){.rvstages,.rvstages.rv6,.rvstages.rv7{grid-template-columns:repeat(4,1fr)}}
+  @media(max-width:760px){.rvstages,.rvstages.rv6,.rvstages.rv7{grid-template-columns:repeat(2,1fr)}}
+  .rvstage{position:relative;background:#fff;border:1.5px solid var(--line);border-radius:11px;padding:9px 10px 10px;cursor:pointer;transition:all .15s}
+  .rvstage:hover{border-color:#a8c0e8;box-shadow:var(--shadow)}
+  .rvstage.on{border-color:var(--header);background:#f4f7fd;box-shadow:0 4px 12px rgba(31,58,110,.14)}
+  .rvstage.cur::after{content:"当前阶段";position:absolute;top:-8px;right:8px;font-size:10px;font-weight:800;color:#fff;background:var(--header);border-radius:20px;padding:1px 8px}
+  .rvstage.done{border-color:var(--ok)}
+  .rvst-no{font-size:14px;font-weight:800;color:var(--header)}
+  .rvstage.done .rvst-no{color:var(--ok)}
+  .rvst-nm{font-size:11.5px;font-weight:600;color:var(--ink-2);margin:2px 0 4px;line-height:1.4}
+  .rvst-meta{font-size:11px;color:var(--ink-3)}
+  .rvst-meta b{color:var(--ink);font-size:12px}
+  .rvst-bar{height:5px;background:var(--line);border-radius:20px;margin-top:6px;overflow:hidden}
+  .rvst-bar i{display:block;height:100%;background:var(--header);border-radius:20px;transition:width .3s}
+  .rvst-ng{margin-top:6px;font-size:10.5px;font-weight:800;color:var(--danger);background:var(--danger-soft);border-radius:6px;padding:2px 6px;display:inline-block}
+  .rvmeta{display:grid;grid-template-columns:repeat(3,1fr);gap:10px 14px;padding:12px 14px;background:#f8fafd;border:1px solid var(--line);border-radius:11px;margin-top:4px}
+  @media(max-width:900px){.rvmeta{grid-template-columns:1fr}}
+  .rvmeta .fld{margin:0}
+  .rvmeta .fld.wide{grid-column:1/-1}
+  .rvmeta label{font-size:11.5px;font-weight:700;color:var(--ink-2);display:block;margin-bottom:4px}
+  .rvmeta input,.rvmeta select{width:100%;font-family:inherit;font-size:13px;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+  .rvmeta input:focus,.rvmeta select:focus{outline:none;border-color:#a8c0e8}
+  details.rvgrp{border:1px solid var(--line);border-radius:11px;margin:9px 0;background:#fff;overflow:hidden}
+  details.rvgrp summary{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 14px;cursor:pointer;user-select:none;background:#f8fafd;font-size:13px;list-style:none}
+  details.rvgrp summary::-webkit-details-marker{display:none}
+  details.rvgrp summary::before{content:"▸";color:var(--ink-3);font-size:11px;transition:transform .15s}
+  details.rvgrp[open] summary::before{transform:rotate(90deg)}
+  details.rvgrp summary b{color:var(--header);font-size:12.5px}
+  .rvgrp-meta{font-size:11.5px;color:var(--ink-3);font-weight:400;white-space:nowrap}
+  .rvq{padding:10px 14px;border-top:1px solid var(--line);transition:background .12s}
+  .rvq:hover{background:#fafbfd}
+  .rvq.ans-ok{box-shadow:inset 3px 0 0 var(--ok)}
+  .rvq.ans-partial{box-shadow:inset 3px 0 0 var(--warn)}
+  .rvq.ans-ng{box-shadow:inset 3px 0 0 var(--danger);background:#fffafa}
+  .rvq.ans-na{box-shadow:inset 3px 0 0 var(--ink-3)}
+  .rvq-hd{display:flex;align-items:flex-start;gap:7px;flex-wrap:wrap}
+  .rvq-no{flex:none;min-width:30px;font-size:11.5px;font-weight:800;color:var(--ink-3);text-align:right}
+  .rvq-pil{flex:none;font-size:10.5px;font-weight:800;color:#7c5cbf;background:#f1ecfb;border-radius:5px;padding:1px 6px;margin-top:1px}
+  .rvq-gr{flex:none;font-size:10.5px;font-weight:800;color:#b47a00;background:var(--warn-soft);border-radius:5px;padding:1px 6px;margin-top:1px;letter-spacing:.5px}
+  .rvq-ee{flex:none;font-size:10.5px;font-weight:800;color:#1f6feb;background:#e8f1fe;border-radius:5px;padding:1px 6px;margin-top:1px}
+  .rvq-t{flex:1;min-width:300px;font-size:13px;color:var(--ink);line-height:1.65}
+  .rvq-ops{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:8px 0 0 37px}
+  .rvab{font-family:inherit;font-size:12px;font-weight:700;border:1.5px solid var(--line);background:#fff;color:var(--ink-3);border-radius:8px;padding:4px 11px;cursor:pointer;transition:all .12s}
+  .rvab:hover{border-color:#a8c0e8;color:var(--ink-2)}
+  .rvab[data-a="ok"][data-on="1"]{background:var(--ok);border-color:var(--ok);color:#fff}
+  .rvab[data-a="partial"][data-on="1"]{background:var(--warn);border-color:var(--warn);color:#fff}
+  .rvab[data-a="ng"][data-on="1"]{background:var(--danger);border-color:var(--danger);color:#fff}
+  .rvab[data-a="na"][data-on="1"]{background:var(--ink-3);border-color:var(--ink-3);color:#fff}
+  .rvq-note{flex:1;min-width:170px;font-family:inherit;font-size:12px;padding:5px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink-2)}
+  .rvq-note:focus{outline:none;border-color:#a8c0e8}
+  .rvfit{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--ink-2);cursor:pointer;white-space:nowrap}
+  .rvfit input{cursor:pointer}
+  .rvcnts{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-2);margin:2px 0 8px}
+  .rvcnts b{color:var(--header)}
+  .rvdot{display:inline-flex;align-items:center;font-size:11.5px;font-weight:700;border-radius:20px;padding:2px 9px;background:#f2f5fa;color:var(--ink-2)}
+  .rvdot.d-ok{background:var(--ok-soft);color:var(--ok)}
+  .rvdot.d-partial{background:var(--warn-soft);color:var(--warn)}
+  .rvdot.d-ng{background:var(--danger-soft);color:var(--danger)}
+  .rvdot.d-na{background:#eef1f7;color:var(--ink-3)}
+  .rvdot.d-todo{background:#f2f5fa;color:var(--ink-3)}
+  .rveqc-tip{background:#f0f7ff;border:1px solid #d4e4f7;color:#2a5d9f;border-radius:10px;padding:9px 14px;font-size:12px;line-height:1.8;margin:10px 0}
+  .rvrisk-wrap{display:grid;grid-template-columns:minmax(340px,5fr) 7fr;gap:18px;margin-top:12px}
+  @media(max-width:1100px){.rvrisk-wrap{grid-template-columns:1fr}}
+  .rvrisk-left{min-width:0}
+  .rvrisk-right{min-width:0}
+  .rvsub{font-size:13px;font-weight:800;color:var(--header);margin:0 0 8px;padding-left:9px;border-left:3px solid var(--header)}
+  .rvmx{border-collapse:collapse;font-size:12.5px;width:100%;max-width:430px}
+  .rvmx th{font-size:11px;font-weight:700;color:var(--ink-3);padding:3px 5px;text-align:center}
+  .rvmx td{width:44px;height:40px;text-align:center;vertical-align:middle;border:2px solid #fff;border-radius:6px;font-size:14px}
+  .rvdimbars{display:flex;flex-direction:column;gap:6px;max-width:430px}
+  .rvdimbar{display:flex;align-items:center;gap:8px}
+  .rvdimbar .k{flex:none;width:18px;font-size:12px;font-weight:800;color:var(--header)}
+  .rvdimbar .b{flex:1;height:16px;background:var(--line);border-radius:20px;overflow:hidden}
+  .rvdimbar .b i{display:block;height:100%;background:linear-gradient(90deg,#3a5fae,#2557b0);border-radius:20px;transition:width .3s}
+  .rvdimbar .v{flex:none;width:22px;text-align:right;font-size:12px;font-weight:800;color:var(--ink)}
+  .rvlegend{font-size:11.5px;color:var(--ink-2);line-height:2;margin-top:10px}
+  .rvdims{display:flex;gap:6px;flex-wrap:wrap}
+  .rvdim{font-family:inherit;font-size:12px;font-weight:800;color:var(--ink-2);background:#fff;border:1.5px solid var(--line);border-radius:8px;padding:4px 12px;cursor:pointer;transition:all .12s}
+  .rvdim:hover{border-color:#a8c0e8}
+  .rvdim.on{background:var(--header);border-color:var(--header);color:#fff}
+  .rvaudit-top{display:flex;gap:18px;align-items:stretch;flex-wrap:wrap;margin:10px 0 14px}
+  .rvtotal{flex:none;background:linear-gradient(135deg,#22407c,#1f3a6e);color:#fff;border-radius:14px;padding:14px 26px;text-align:center;min-width:150px}
+  .rvtotal .t{font-size:34px;font-weight:800;line-height:1.15}
+  .rvtotal .l{font-size:11.5px;opacity:.85;margin-top:2px}
+  .rvaudit-top .rvstages{flex:1;margin:0;grid-template-columns:repeat(7,1fr);min-width:520px}
+  .rvin{font-family:inherit;font-size:13px;width:76px;padding:5px 8px;border:1px solid var(--line);border-radius:7px;color:var(--ink)}
+  .rvin:focus{outline:none;border-color:#a8c0e8}
+  tr.rvstep td{background:#f4f7fd;font-weight:800;font-size:12.5px;color:var(--header);padding:8px 10px}
   /* ===== 案例查看窗口（固定尺寸弹窗 + 内部向下滚动，避免长页面） ===== */
   .cmask{position:fixed;inset:0;background:rgba(19,28,46,.55);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;z-index:120;padding:24px}
   .cmask.on{display:flex}
@@ -535,6 +639,7 @@
   <button data-tab="sheets">📋 标准套表</button>
   <button data-tab="usage">🧭 工具使用</button>
   <button data-tab="calc">🧮 计算型工具</button>
+  <button data-tab="review">🔍 设计审查</button>
 </nav>
 
 <div class="wrap">
@@ -984,6 +1089,33 @@
   </div>
 </section>
 
+<!-- ============ Tab 6: 🔍 设计审查系统 ============ -->
+<section class="tab" id="tab-review">
+  <div class="card">
+    <h3><span class="bar"></span>🔍 基于检查表的设计审查系统 <span class="hint">DR1-DR7 检查清单 694 题 · EQC 专家问题 180 题 · PQCDSM 风险评估 · EM 审核 51 项（源自 EM 支柱标准表单）</span></h3>
+    <div class="rvtop">
+      <div class="fld"><label>当前评审项目</label><select id="rv_prj" onchange="rvSelPrj()"><option value="">（请选择 EM 项目）</option></select></div>
+      <div id="rv_prjinfo"><span style="color:var(--ink-3);font-size:13px">选择项目后：检查表将按项目类型（EEM/EPM）与设备等级（A/B/C）自动过滤适用问题，作答自动保存到云端。</span></div>
+    </div>
+    <div class="stats" style="margin-top:14px">
+      <div class="stat"><div class="ico">📋</div><div><b id="rv_s1">694</b><span>DR 检查题（7 关）</span></div></div>
+      <div class="stat"><div class="ico">✍️</div><div><b id="rv_s2">0</b><span>已作答 DR 题</span></div></div>
+      <div class="stat"><div class="ico">⚠️</div><div><b id="rv_s3">0</b><span>登记风险数</span></div></div>
+      <div class="stat"><div class="ico">🎯</div><div><b id="rv_s4">—</b><span>EM 审核得分 / 100</span></div></div>
+    </div>
+    <div class="rvmods" id="rv_mods">
+      <button data-mod="dr" class="on" onclick="rvMod('dr')">📋 ① DR 检查清单</button>
+      <button data-mod="eqc" onclick="rvMod('eqc')">💬 ② EQC 专家问题</button>
+      <button data-mod="risk" onclick="rvMod('risk')">⚠️ ③ 风险登记评估</button>
+      <button data-mod="audit" onclick="rvMod('audit')">🎯 ④ EM 审核评分</button>
+    </div>
+    <div id="rv_dr"></div>
+    <div id="rv_eqc" style="display:none"></div>
+    <div id="rv_risk" style="display:none"></div>
+    <div id="rv_audit" style="display:none"></div>
+  </div>
+</section>
+
 <!-- ============ 「引导式套表」已合并至「🧭 工具使用」页签（第 ② 部分） ============ -->
 
 <footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥<br><span style="color:var(--ink-3)">当前版本 v3.0 · 提示：若页面仍显示旧版，请强制刷新（Mac: ⌘+Shift+R / Windows: Ctrl+F5）</span></footer>
@@ -1007,8 +1139,8 @@
 /* ================= Supabase 连接配置 ================= */
 const SB_URL='https://lgohtkyiltxypvhydlbu.supabase.co';
 const SB_KEY='sb_publishable_KjUwI-HYgDIWgAnObNUdKQ_hcYTH6Bg'; // publishable key（公开，非管理密钥）
-const TABLES=['em_projects','em_dr_records','em_tool_usage','em_fmea','em_vsu','em_skills','em_mp_info','em_lcc','em_dsr_records','em_design_feedback','em_mp_intel'];
-const TABLE_NAMES={'em_projects':'项目台账','em_dr_records':'DR关卡','em_tool_usage':'使用台账','em_fmea':'FMEA','em_vsu':'VSU','em_skills':'技能矩阵','em_mp_info':'MP情报','em_lcc':'LCC成本','em_dsr_records':'设计审查记录','em_design_feedback':'设计反馈库','em_mp_intel':'MP情报录入'};
+const TABLES=['em_projects','em_dr_records','em_tool_usage','em_fmea','em_vsu','em_skills','em_mp_info','em_lcc','em_dsr_records','em_design_feedback','em_mp_intel','em_review_sessions','em_review_risks'];
+const TABLE_NAMES={'em_projects':'项目台账','em_dr_records':'DR关卡','em_tool_usage':'使用台账','em_fmea':'FMEA','em_vsu':'VSU','em_skills':'技能矩阵','em_mp_info':'MP情报','em_lcc':'LCC成本','em_dsr_records':'设计审查记录','em_design_feedback':'设计反馈库','em_mp_intel':'MP情报录入','em_review_sessions':'审查会话','em_review_risks':'风险登记'};
 const tableOK={};
 
 async function api(path,method='GET',body=null,prefer=null){
@@ -1166,6 +1298,7 @@ document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",
   if(b.dataset.tab==="projects")loadProjects();
   if(b.dataset.tab==="usage")loadUsage();
   if(b.dataset.tab==="calc")loadCalc();
+  if(b.dataset.tab==="review"&&typeof rvInit==='function')rvInit();
 }));
 document.querySelectorAll(".subtabs button").forEach(b=>b.addEventListener("click",()=>{
   document.querySelectorAll(".subtabs button").forEach(x=>x.classList.remove("on"));b.classList.add("on");
@@ -5590,6 +5723,671 @@ async function migrateLocal(){
     }
   }catch(e){/* 迁移失败静默保留本地，下次进入重试 */}
 }
+
+</script>
+<script>
+/* ===== 设计审查数据（源自 5 份标准表单，勿手工改动）=====
+   ① EM_小组路径-DR清单-汇总.xlsx  DR1-DR7
+   ② 专家问题检查清单-湖北EM11.xlsx  EQC 共 180 题
+   ③ EM项目风险评估表范本.xlsx  PQCDSM + L×S 矩阵
+   ④ 22-EM审核表 湖北总厂.xlsx  51 项权重合计 100 分
+   ⑤ 项目风险注册表.xlsx  风险跟踪字段 */
+const DRQS={"1":[["生产力/能力",[["产品或设备的资料信息是否有收到？","EM",3,"ABC"],["是否从同一产品的其他工厂收集所有经验？","EM",2,"AB"],["是否根据机器容量，机械速度和OEE，为所有产品设定了目标？","FI",3,"AB"],["是否考虑了所有部分的能力影响？","FI",3,"AB"],["是否确定了人力要求的目标？","FI",3,"A"],["团队中有设备操作员吗？","FI",3,"ABC"]]],["质量",[["机器可以根据规定的原料/附加材料按规格（包装规格）生产指定的产品吗？","QM",3,"AB"],["团队中有质量部门或QM支柱的成员吗？","QM",3,"AB"]]],["可靠性与维修",[["团队中有维修部门或PM支柱的成员吗？","PM",3,"AB"]]],["自主维护",[["在AM问题上有否征求过操作员？","AM",3,"AB"]]],["安全健康环境",[["SHE支柱是否涉及项目团队？","SHE",3,"ABC"],["是否考虑过人员健康的问题？","SHE",3,"AB"],["是否考虑过卫生问题？","SHE",3,"AB"],["对环境的影响中涉及利用资源，使用和排放的有害物质，废物处理等，是否已经从环境管理体系评估？","SHE",3,"ABC"],["新设备是否需要修改现有系统以减少排放/排放？","SHE",3,"AB"]]],["布局和流动",[["制定布局图是否考虑设备，材料流程，工人操作和公用设施？","SHE",1,"AB"],["在现场的演练已经进行，并从演练中生成的动作列表？","SHE",1,"AB"],["生产车间的门入口可以让足够大的机器进来","SHE",1,"AB"],["生产厅门入口大到重型起重机进入","SHE",1,"AB"],["团队是否考虑到机器所需的区域？","SHE",1,"AB"],["团队是否考虑了进料和出货存储所需的面积？","SHE",3,"AB"],["团队是否考虑了辅助设备和工具所需的区域？","SHE",1,"AB"],["团队是否考虑到物料搬运所需的区域？","SHE",3,"AB"],["团队是否考虑到走廊所需的面积？","SHE",3,"AB"],["团队是否考虑到地面和屋顶梁之间的最小高度。","SHE",1,"AB"],["团队是否考虑了每列之间的最小空间？","SHE",1,"AB"],["团队考虑了 地板和/或屋顶上的最大重量？","SHE",1,"AB"],["是否需要地基计算（根据设备的静态和动态负载）","SHE",1,"AB"],["机器操作或维护需要起重机吗？ 团队是否考虑到所需的区域？","SHE",1,"AB"],["设备是否需要普通或者冷却水？","SHE",1,"AB"],["设备是否需要压缩空气或空调？","SHE",1,"AB"],["整机是否需要一个很好的流平地板。","SHE",1,"AB"],["我们需要在地板和沟槽/凹坑上进行环氧涂装吗？","SHE",1,"AB"],["团队是否考虑机器供给和排出空气？","SHE",1,"AB"],["团队有没有考虑在屋顶上安装设备？","SHE",1,"AB"],["新设备是否需要修改现有的废物处理系统？","SHE",1,"A"]]],["规划",[["使用类似的过去项目设定目标","SHE",3,"AB"],["甘特图是否已经完成？","SHE",3,"AB"],["目前是否已确定的项目团队？","SHE",3,"AB"],["项目负责人是否已确定？","SHE",3,"AB"],["是否已通知项目负责人和团队所有目标？","SHE",3,"ABC"],["是否有一个团队委员会？","SHE",3,"AB"],["团队是否考虑过工具和辅助设备？","SHE",1,"AB"],["计划是否考虑过培训时间？","SHE",3,"AB"],["在预算中考虑了培训费用？","SHE",3,"AB"],["是否有任何需要全球IM支持的IT或编程相关的问题？","SHE",3,"AB"],["EM团队成员是否接受过EM团队路径培训？","SHE",3,"AB"],["产品的商业部分是否被考虑过？","SHE",2,"AB"],["是否考虑了额外的材料和消耗品？","SHE",3,"AB"],["是否确定了新产品的市场？","SHE",2,"AB"],["工厂交付预测是否基于新产品更新？","SHE",2,"AB"],["是否需要对新测试方法进行调查？","SHE",3,"AB"],["是否对流程的影响进行了调查（过程参数，速度，浪费等）？","SHE",3,"AB"],["是否需要对新设备进行调查？","SHE",1,"AB"],["制定时间表时是否考虑了公共假期？","SHE",3,"AB"],["生产预测是否完成？","SHE",3,"AB"],["是否有现有的质量代码，尺寸代码和/或差异代码？","SHE",2,"AB"],["可以从以前的类似项目中获取经验吗？","SHE",3,"ABC"],["是否上传/下载了项目跟踪表上的团队目标表（A类设备是强制性要求）","SHE",3,"AB"],["已确认设备状态，是新的吗？ 对于本地定制化的清扫有不同的过程，对于新的要求2个月以上。","SHE",3,"ABC"],["有想过设备本地定制化的清扫吗？","SHE",3,"ABC"]]],["成本",[["是否决定设备是资本化还是费用化？","SHE",1,"ABC"],["有没有考虑不购买设备的备选方案？","SHE",1,"ABC"],["有考虑其他投资选择并且成本（使用回报净现值：NPV）进行了比较？","SHE",3,"AB"],["投资或费用是否包括在投资或费用预算中？","SHE",3,"ABC"],["您是否在费用预算中涵盖备件成本？","SHE",1,"AB"],["拥有建筑物，设备，辅助设备压缩机，空调，物料搬运设备，安装，安装材料，供应商测试/测试材料（包括入场费和费用）以及启动，备件，运费， 包装，运输，关税和税收估计？","SHE",3,"AB"],["对于能源需求设备（> 30兆瓦时/年）：基于生命周期成本（LCC），与传统设备相比，是否具有更多的节能设备？","SHE",1,"A"],["进行生命周期成本分析，比较替代解决方案？","Cost",1,"A"],["财务经理和成本支柱是否参与完成表格？","Cost",3,"AB"],["已经考虑了所有投资的次级成本影响？","EM",1,"A"],["竞争设备制造商是否被考虑并报价？","EM",1,"A"],["有考虑设备安装人员和建筑施工人员竞标，并收到报价吗？","EM",1,"A"],["有想过新产品的市场吗？","SC",2,"AB"],["有想到新产品的客户吗？","SC",2,"AB"]]],["会议准备",[["你回答了上面的所有问题吗？","EM",3,"AB"],["清单是否您是否收集并记录了此步骤中的所有问题？关闭所有点？","EM",3,"AB"],["您是否收集并记录了此步骤中的所有问题？","EM",3,"AB"],["在此步骤之后，您是否进行了项目风险评估？","EM",3,"A"],["你填写了EM目标管理表吗？","EM",3,"A"],["你在这一步中总结/总结工作和结论吗？","EM",3,"A"],["有没有为DR 1计划会议的日期？","EM",3,"AB"]]],["会议决定",[["有正式的DR 1会议吗？","EM",3,"AB"],["记录DR 1会议的与会者？（位置和名称）","EM",3,"AB"],["决定 - 工厂通过/不通过？","EM",3,"AB"]]]],"2":[["生产力/能力",[["您是否检查了减少非增值活动的所有可能性？","FI",3,"B"],["有降低工人动作损失的解决方案吗？","FI",3,"A"],["所有的生产力和产能是否明确地定义和编写，包括机器速度，循环时间，设置时间，总体产能和人力需求？","AM",1,"A"],["评估机器能力目标是否考虑了预测产量？","FI",3,"B"],["是否已识别在机器上常规执行的所有操作？","AM",1,"B"],["平均订单大小是否已知？","FI",2,"C"],["在制定目标时，是否咨询了生产管理、FI支柱和质量管理？","FI",3,"A"],["是否使用先前机器、产品的数据来设定目标？","FI",3,"B"],["是否制定了设备设定标准草案？","FI",1,"C"]]],["质量",[["“按照质量来确定关键机器零件（QA矩阵）？”","QM",3,"A"],["您是否从QM矩阵（您的工厂，其他工厂和中央职能部门）收集了所有可用的适用数据，","QM",3,"A"],["您是否确定了控制产品参数的过程参数（例如温度设置，机械设计等）","QM",3,"A"],["客户的具体要求是否已经明确并与质量特性挂钩？","QM",2,"A"],["通过以前的机器的经验去考虑减少问题和提高质量表现？","QM",3,"B"],["在最关键的参数上是否已经根据“5C0D”定义评分？","QM",3,"A"],["考虑“5C0D”是否使能有所改进，尽可能性去提高分数？","QM",3,"A"],["质量规格是否明确定义？","QM",3,"A"],["是否定义了如何在调试时验证产品质量。这是否在项目预算和时间规划中考虑？","QM",3,"A"],["新设备中的预期技术浪费水平是否定义？","QM",1,"A"],["是否调查了对上游或下游流程产生的影响？","QM",1,"A"],["是否可以随时控制机器在指定的值内？(斜坡上下等)","QM",1,"A"],["质量目标是否明确定义，包括质量目标，Cpk？","QM",2,"A"],["设定目标时，是否咨询了质量经理和质量管理支柱？","QM",3,"B"],["在类似的机器上有没有完成质量问题的清单？（使用数据和过去的经验）","QM",3,"A"],["这个清单是否在新设备的设计中得到了解决？","QM",3,"A"],["原物料是否到货","QM",2,"B"],["原物料到货数量是否满足生产需求","QM",2,"B"],["原物料到货数量是否满足检测需求","QM",2,"B"],["原物料是否检测完成","QM",2,"B"],["原物料检测结果是否合格","QM",2,"B"],["原物料供应商是否提供外检报告","QM",2,"B"],["原物料供应商提供的外检报告内容是否符合要求","QM",2,"B"],["原物料供应商是否提供生产许可","QM",2,"B"],["原物料供应商是否提供营业执照","QM",2,"B"],["原物料供应商是否提供印刷许可","QM",2,"B"],["原物料供应商是否提供食品接触材料符合性声明","QM",2,"B"],["原物料供应商是否提供原材料调查表","QM",2,"B"],["试车申请单是否提供","QM",2,"B"],["试车申请单核决单位是否满足核决权限要求","QM",2,"B"],["试车内联是否提供","QM",2,"B"],["试车内联是否签核完成","QM",2,"B"],["试车工艺和配方是否下发","QM",3,"B"],["试车时间是否确认","QM",2,"B"],["试车数量是否确认","QM",2,"B"],["试车品包装形式是否确认","QM",3,"B"],["试车品的喷码格式是否确认","QM",3,"B"],["原料混料及使用方式的确认","QM",3,"B"],["设备目标的最小调配量的确定","QM",3,"B"],["调配入水量的确定","QM",2,"B"],["生产设备是否可以满足试车","QM",3,"B"],["现场检测仪器是否可以满足产品理化指标检测需求","QM",2,"B"],["试车现场原料数量确认","QM",3,"B"]]],["可靠性与维修",[["可靠性的规范是否明确定义和编写？（故障率）","PM",1,"A"],["有类似机器的可靠性问题清单已经完成？（使用数据和过去的经验）","PM",1,"A"],["这个清单是否在新设备的设计中得到了解决？","PM",1,"A"],["MTBF目标是否已设定？","PM",1,"A"],["设定目标时，是否咨询了PM支柱？","PM",1,"B"],["启动后的几个月，考虑检查并重新拧紧所有电气连接点所需的时间和钱？","PM",1,"B"]]],["维护",[["所有主要备件是否容易接近，易于维护和更换（电机，齿轮箱，电气面板，轴，滚子，轴承）？","PM",1,"B"],["所有检查和润滑点是否容易看到和容易接近？","AM",1,"B"],["难以接近的区域需要自动化/集中化润滑系统吗？","AM",1,"B"],["电气和其他设备外壳是否配有可视化管理的玻璃窗？","AM",1,"B"],["有关操作和维护手册的要求已经通过以前的标准示例提供给供应商？","PM",1,"B"],["所要求的备件是否已订购并与机器一起交货？","PM",1,"A"],["您是否收集了有关统计部件有效期、部件维护和清洗的可用数据？（技术说明书）","PM",1,"A"],["你是否考虑用金属管代替塑料管，因为“静电问题”？","PM",1,"B"],["维护规范是否明确定义和编写？","PM",1,"A"]]],["自主维护",[["透明罩便于机械传动（皮带，轴）检查？","AM",1,"B"],["透明罩便于柜体检查？","AM",1,"B"],["透明电机盖便于检查？","AM",1,"B"],["面板上有可见的仪表便于检查？","AM",1,"B"],["关键螺栓已锁定并定期检查？","AM",1,"B"],["齿轮箱的油位指示器有最小和最大点吗？","AM",1,"B"],["空气润滑器在最小值和最大值点可见油位指示器？","AM",1,"B"],["容易识别不同类型的润滑点和润滑剂？","AM",1,"B"],["皮带张力容易检查吗？","AM",1,"B"],["有足够的覆盖物防止液体飞溅？","AM",1,"B"],["封闭的柔性电缆槽能防止灰尘吗？","AM",1,"B"],["在工作地点附近是否有存放工具的地方？","AM",1,"B"],["送风和排风系统能有效避免粉尘污染？。","AM",1,"B"],["清洁、润滑和检查（CLI）程序草案是否已定义？","AM",3,"B"]]],["安全",[["机器的部件是否有人移动或站立设计和建造，以防止人员滑倒、绊倒在这些部件上？","SHE",1,"B"],["设备是否有适当的照明设备？如果缺乏正常强度的环境照明，设备可能会引起危险。需要经常检查的内部部件，调整和维护区域必须提供适当的照明吗？","SHE",1,"B"],["设备是怎样设计和建造的吗？是否考虑到技术进步和减少噪音的手段，尤其是在源头上，将空气噪音的排放所造成的风险降低到最低水平。","SHE",1,"B"],["安全相关部分的控制系统安全可靠吗？","SHE",1,"A"],["紧急停车的设计原则实现了吗？","SHE",1,"A"],["设备是否装有隔离所有能源的手段？这种隔离器必须能够被锁定（锁定系统），并且在切断能量后，必须将正常的任何剩余能量耗散或储存在机器的电路中，而不会暴露于人身上。","SHE",1,"B"],["设备的启动是出于自愿提供的控制，以及在不影响暴露人员的情况下重新启动或改变操作条件吗？","SHE",1,"B"],["电源在中断重新建立过程中，中断或波动的任何方式的电源供应不会导致危险的情况？","SHE",1,"B"],["平台、楼梯和梯子方便、安全和符合人体工程学吗？","SHE",1,"B"],["设计和建造的设备、部件和配件，使它们在预期的操作条件下足够稳定，以防倾覆、坠落或意外移动的危险。如果设备本身的形状或预期安装不足以提供足够的稳定性，则必须将适当的锚定方法纳入说明书中。","SHE",1,"A"],["在设计、建造和布置的设备上移动部件以避免危险，或在危险持续存在时，用保护装置或保护装置固定，以防止可能导致事故的所有接触风险？","SHE",1,"B"],["保护装置的坚固的结构，不增加任何额外的风险，不容易暴露点？","SHE",1,"B"],["是否将操作者的不适，降低到符合人体工程学原理的最低限度吗？","SHE",1,"B"],["在安装或改装的某些部分时可能的风险源被消除了（防错）？","SHE",1,"A"],["工作地点是以简单的方式组织起来的，操作位置的可视性，使操作人员能够完全安全地为操作机器及其工具？","SHE",1,"B"],["指定紧急停止速率（在x秒内完全停止）？","SHE",1,"A"],["设备的规格和购买协议是否包含了安全要求？","SHE",1,"A"],["避免使用限制性有害物质吗？","SHE",3,"B"],["是否有必要对新产品的特殊废物处理进行调查？","SHE",3,"A"],["设备和程序是否符合国内的法律法规要求规定？","SHE",1,"A"],["气体泄漏检测和监测设备的考虑？","SHE",1,"B"]]],["环境",[["是否选择了最节能的解决方案？","SHE",1,"B"],["压缩空气的使用是否尽可能地减少？","SHE",1,"B"],["设备中含有的限制性有害物质是否被避免了？","SHE",1,"B"],["设备中使用的新化学物质（如溶剂、润滑剂）是否已被评估和批准？","SHE",3,"B"],["是否需要特别清洁或过滤废气？","SHE",3,"B"],["是否需要对产品/废物进行特殊的废物处理？","SHE",3,"B"],["检查排放物的清洁或过滤设备是否符合规定的要求。","SHE",1,"B"],["是否尽可能减少介质消耗（润滑剂、溶剂）？","SHE",1,"B"],["设备是否集成能耗监测系统中？","SHE",1,"B"],["设备是否集成通风控制系统中？","SHE",1,"B"],["会使用需要批准和处理的新化学物质吗？","SHE",3,"B"]]],["教育与培训",[["是否定义了技能矩阵？","E&T",3,"A"],["培训计划草案确定了吗？","E&T",3,"B"],["技能矩阵是定义的（操作员和维护）吗？","E&T",3,"B"]]],["柔性设置",[["设定程序（时间和程序）是否明确？","FI",1,"B"],["所有的活动都被划分为简单的操作吗？","FI",1,"B"],["操作人员的关键活动与设备的某一部分有关吗？","FI",1,"B"],["新设备简化了活动吗？","FI",1,"B"],["活动的时间减少了吗？","FI",1,"B"],["机器运转时，下一个装置能完成吗？","FI",1,"B"],["机器柔性的规格是否清楚地定义并发给供应商？","FI",1,"B"]]],["布局和流动",[["冷却水系统有足够的容量吗？","EM",1,"B"],["压缩空气有足够的流动性吗？","EM",1,"B"],["冷空气有足够的流动性吗？","EM",1,"B"],["设备的颜色是要求指定的（油漆颜色，未上漆的不锈钢板）？","EM",1,"B"],["所有的机器都设计成坐在底板上吗？","EM",1,"B"],["检查已安装区域的现有平面图以避免不同网络的问题？（卫生、水疏散……）","EM",1,"A"],["最后的布局图完成了吗？","EM",1,"A"],["运输和安装所需的设备尺寸和重量阐述了吗","EM",1,"B"],["所有连接和辅助设备都指定了吗？","EM",1,"B"],["水流量和水管长度和长度是否指定？","EM",1,"B"],["所排放的废气是否有规定？","EM",1,"B"],["有足够的冷冻水吗？","EM",1,"B"],["压缩空气流量和管道直径和长度是否指定？","EM",1,"B"],["是否有必要的基础尺寸说明？","EM",1,"B"],["指定的坑和电线/管道沟（位置，尺寸）是否完成？","EM",1,"B"],["有没有考虑使用单板和化学锚？","EM",1,"B"],["隔音和隔热是否有规定？","EM",1,"B"],["走道的空间足以满足人和物料的流动吗？","EM",3,"B"],["物料储存和物料移动空间是否足够？","EM",3,"B"],["设备的设计是否满足机器周围的区域没有额外的工作材料、工具和辅助设备吗？","EM",1,"B"],["每个电气元件的电压、相位、频率和电流是否是指定的？","EM",1,"B"],["天然气的流量、压力和管径是否有规定？","EM",1,"B"],["地板的平整度和强度有规定吗？","EM",1,"B"],["基础计算完成了吗？","EM",1,"B"],["地板漆/环氧树脂有规定吗？","EM",1,"B"],["排水管的直径和长度是否有规定？","EM",1,"B"],["有产品条码位置定义基于顾客需求？","EM",3,"B"]]],["易操作",[["检查和评估是否易于到达操作台控制？","AM",1,"B"],["检查和评估安装和调整是否方便。","AM",1,"B"],["检查、改变和调整部分缓解磨损的评价（刀，带）。","AM",1,"B"],["是否有通过视觉管理检查和评估操作系统。","AM",1,"B"],["检查和评估-检查或操作工具是否可简单的识别和使用","AM",1,"B"],["检查和评估-影响质量的风险点是否有人员的防错措施","AM",3,"B"],["检查和评估-影响机器的风险点是否有人员的防错措施","AM",1,"B"],["检查和评估-是否有方便检查读数的工具","AM",1,"B"],["检查和评估-设备是否便于清洗","AM",3,"B"],["检查和评估-故障或故障报警系统？","PM",1,"B"],["检查和评估-润滑是否容易","AM",1,"B"],["检查和评估-故障排除和发现故障部件的时间？","PM",1,"B"],["检查和评估-更换失效零件的时间？","PM",1,"B"],["检查和评估关键部件的检查是否容易（油位，关键磨损部件，）","AM",1,"B"],["检查和评估-质量控制点的检查是否容易","AM",3,"B"]]],["成本和规划",[["使用生命周期、成本、安全性、生产力、可靠性、可维修性、质量、能力、灵活性等类别进行供应商评价和供应商选择？（LCC分析工具）","EM",1,"A"],["所有活动都有详细计划，并与所有供应商和团队成员达成一致吗？","EM",1,"A"],["确定了DR3、DR4、DR5、DR6和DR7的日期。","EM",3,"A"],["所有交付（机器、建筑物、安装、公用设施）。辅助设备等）得到供应商和团队成员的充分理解。一切都会及时提供（惩罚？）","EM",1,"A"],["采购安排满意吗？（保险，交货时间，包装，运输，价格，付款条件，保修，选择分制造商）","Cost",1,"A"],["供应商设施的测试范围是否清楚？","Cost",1,"B"],["供应商的安装范围是否清楚？","EM",1,"B"],["供应商的备件范围是否清楚（只有有价值的备件）？","EM",1,"B"],["供应商已被告知的要求，根据WCM和LP手册、当地语言的文档等。","EM",1,"B"],["供应范围是否清楚地覆盖并与供应商沟通？：\n-建立标准，计划维修计划，安全风险评估，清洁、润滑和检查（CLI）标准，技能矩阵","EM",3,"A"],["时间线更新了吗？","EM",1,"A"],["需要确定关键技能吗？","E&T",1,"A"],["有针对关键技能的目标定义吗？","E&T",1,"A"],["是否所有的团队成员都更新了技能矩阵，确定差距和采取行动来弥补它？","EM",1,"A"],["目标是否切合实际且容易跟进？","EM",1,"B"],["试车品项是否准备上市","QM",2,"A"],["试车品项上市时间确认","QM",3,"A"],["试车品送检项目是否有增加","QM",2,"A"],["试车品项添加剂合规性确定","QM",2,"A"],["外检报告是否提供","QM",2,"A"],["外检报告检测项目是否齐全","QM",2,"A"],["外检报告检测结果是否合格","QM",2,"A"]]],["会议准备",[["你回答了上面所有的问题吗？","EM",3,"A"],["检查单上的所有点都结束了吗？","EM",3,"A"],["你收集并记录了这一步中的所有问题吗？","EM",3,"A"],["这一步之后你做过项目风险评估吗？","EM",3,"A"],["你填写EEM目标管理表了吗？","EM",3,"A"],["你在这一步，做一个总结和学习的工作和结论？","EM",3,"A"],["DR2会议有计划吗？","EM",3,"A"]]],["会议决定",[["你有正式的DR2会议吗？","EM",3,"A"],["请记录DR2会议的与会者？（位置和名字）","EM",3,"A"],["决定-发送投资建议，采购订单，项目完全定义？","EM",3,"A"],["决策项目交货的目标\n（项目将按此目标进行测量-不可更改）","EM",3,"A"],["DR3会议日期\n（该项目将按此日期进行测量-不改变）","EM",3,"A"],["DR4会议日期\n（该项目将按此日期进行测量-不改变）","EM",3,"A"],["DR5会议日期\n（该项目将按此日期进行测量-不改变）","EM",3,"A"],["DR6会议日期\n（该项目将按此日期进行测量-不改变）","EM",3,"A"],["DR7会议日期\n（该项目将按此日期进行测量-不改变）","EM",3,"A"]]]],"3":[["生产力/能力",[["主要操作面板容易阅读和设计，以确保安全，快速，无差错的操作？","FI",1,"AB"],["能显示机器停止的原因吗？","FI",1,"AB"],["供应商有无更新的ECRS？","FI",1,"A"],["操作次数减少了吗？","FI",1,"B"],["操作简化了吗？","FI",3,"B"],["有没有减少人工操作的机会？","FI",3,"A"],["装卸活动是否简化了？","FI",3,"B"],["是否考虑过快速断开和锁定装置？","FI",1,"AB"],["是否有凹痕，颜色和参考，使调整更容易？","FI",3,"A"],["所有的调整是否快速简便？","FI",3,"B"],["所有的任务是否可以用把手代替工具。","FI",1,"A"],["在可能的情况下，有没有使用紧固孔？","FI",1,"A"],["每个操作的频率被识别了吗？（每班人数）","AM",3,"A"],["执行每个操作的动作是否被检查和评估以改进？","AM",3,"A"],["对产品流程和工人位置的最佳布局进行了调查吗？","FI",3,"AB"],["有减少损失的解决办法吗？","FI",3,"AB"],["考虑了低成本自动化的所有选择吗？","FI",1,"A"],["有没有关于减少对设备进行调整的损失的调查？","FI",3,"AB"],["有没有减少材料损失的解决方案？","FI",3,"A"],["是否考虑过减少机器周期的可能性？（ECRS）","FI",1,"A"],["是否考虑过设备生产力方面的经验？","FI",3,"A"],["有操作员活动的流程图吗？","FI",3,"AB"],["所有的“安装设备”都有快速接头吗？","FI",1,"AB"],["螺栓的数量是否减少到最低限度？","FI",1,"AB"],["快速锁紧装置代替螺丝？","FI",1,"AB"],["最终确定的标准是什么？","FI",3,"AB"],["管道内部焊接情况是否良好？","FI",3,"AB"],["无菌管道接口连接是否对称？","FI",3,"AB"],["无菌管道安装高度设计是否合理？","FI",3,"AB"],["在焊接时是否有焊渣掉落设备的风险？","FI",3,"AB"],["无菌管道锁紧备件是否容易松动;","FI",3,"AB"],["无菌均质机故障是否可直接监控;","FI",3,"AB"],["纸车是否安装推车轨道？","FI",3,"AB"],["注塑磨具材质是否容易磨损;","FI",3,"AB"],["水顶料时间设置是否合理,避免料液浪费？","FI",3,"AB"],["混料器是否有料液泡沫多,抽不干净的情况？","FI",3,"AB"],["调配桶安全护栏高度设置是否合理？","FI",3,"AB"],["除水设备输送链是否防护到位？","FI",3,"AB"],["投料口线槽是否合理？","FI",3,"AB"]]],["质量",[["所有的质量改进（DR1和DR2）都包括在设计中吗？","QM",1,"AB"],["有防错系统被引入到防止人为错误？","QM",3,"AB"],["是否有文件记录废料？","QM",3,"A"],["重要的质量参数是否有系统监控？","QM",3,"A"],["这个设备/过程对下游业务有负面影响吗？","QM",3,"A"],["是否有磁性过滤器可减少异物风险？","QM",3,"A"],["是否有可能根据过程FMEA来改进评分？","QM",3,"A"],["储存实验的内容及要求是否明确","QM",3,"AB"],["储存实验的反馈机制的制定","QM",3,"AB"],["储存实验的结果判定是否有明确依据","QM",3,"AB"],["储存实验反馈的及时性","QM",3,"AB"],["储存实验异常情况的处理机制","QM",3,"AB"]]],["可靠性与维修",[["维护计划草案是否已定义？","PM",1,"AB"],["是否确定了所有潜在的失效模式/影响？（FMEA）","PM",3,"A"],["MP情报数据和OPL数据库能够有效支持项目？","PM",3,"AB"]]],["维护",[["所有元件（螺栓，连接器，传感器，气缸，马达）分组，以提供最少数量和类型的备件减少？","PM",1,"AB"],["管道和电线在电缆盘内进行保护且容易检查？","PM",1,"AB"],["设备连接是否便于装配？","PM",1,"A"],["电缆和电线容易识别和快速替代？","PM",1,"A"],["额外的电线用于未来的维修或应用？","PM",1,"A"],["是否可快速断开电动机？","PM",1,"AB"],["空气调节器集中在一点操作/维护中？","PM",1,"A"],["空气调节器是否张贴功能标签","PM",1,"A"],["所有的面板门、检查和维修点可快速打开？","PM",1,"AB"],["接线盒可快速打开？","PM",1,"A"],["带开启关闭指示器的手动阀","PM",1,"AB"],["带正常工作范围的仪表。","PM",1,"AB"],["所有组件是否用图表进行标记","PM",1,"AB"],["气流运动的指标？","PM",1,"AB"],["具有状态指示器的开关？","PM",1,"AB"],["具有状态和正确对准指示器的关电池开关？","PM",1,"A"],["所有刻度盘和仪表盘都在一个面板上吗？","PM",1,"A"],["所有按正常/安全读数定位的刻度盘都指向上吗？","PM",1,"A"],["带有压力差表的空气过滤器？","PM",1,"AB"],["电线、管子、托盘等从地板上抬起来了吗？","PM",1,"AB"],["你承认用金属管代替塑料管由于“静态”问题？","PM",1,"AB"],["安装盖（防护罩）可以防止灰尘从平台上落下吗？","PM",1,"AB"],["滚筒固定容易对齐吗？","PM",1,"AB"],["电机是否容易调整？","PM",1,"AB"],["电缆是否有足够的长度？","PM",1,"AB"],["维护空间是否满足用于设备的维修和拆卸？","PM",1,"A"]]],["自主维护",[["有控制仪表、显示正常工作范围和实际情况的图形屏幕吗？","AM",1,"AB"],["在操作员面板上显示机器的可视图形布局，使流程和流程易于理解吗？","AM",1,"AB"],["按钮和开关是否以便于理解功能的方式排列和标记？","AM",1,"AB"]]],["安全健康环境",[["风险评估是否与供应商一起评审？","SHE",1,"A"],["在达到足够的安全性并有个人防护设备和/或培训、警告标志、指示已被实施以使用户能够遵循之后，是否要消除风险？","SHE",1,"B"],["机器是否按照规定验收标准交付？","SHE",1,"ABC"],["是否有关于如何安全地安装、操作、调整、维护、清洁、修理或运输设备的说明？","SHE",1,"AB"],["机器的可触及部件是否设计成圆角和光滑的表面以防止受伤？","SHE",1,"AB"],["有强大的特种警卫和保护装置，不产生任何额外的风险，不易旁通或使非经营性的，位于危险区足够的距离，使最小阻塞对生产过程的角度，使必要的工作是安装和/或更换工具进行也为维护被限制只能访问到该地区的工作要做，如果没有保护或保护不得不被拆除的设备？","SHE",1,"A"],["手段（例如，关键操作开关，接入码）提供必要时，以防止未经授权使用的操作员控制站？","SHE",1,"AB"],["调整、润滑和维护点是否位于危险区之外？","SHE",1,"AB"],["摇摆控制台是否限于安全区？","SHE",1,"AB"],["机器停止运转几天时，是否提供安全电气切断阀？冷水。","SHE",1,"AB"],["所有凹槽都是用金属板覆盖的吗？","SHE",1,"AB"],["电缆是否与其他软管/管道分开？","SHE",1,"AB"],["安全阀是否包括在高压元件中？","SHE",1,"AB"],["根据ISO（或美国市场的ANSI）和当地语言的所有指示是否有安全标志？","SHE",3,"AB"],["是否考虑过职业健康问题（温度、噪音、空气质量）？","SHE",3,"AB"],["是否考虑过防火问题？","SHE",1,"AB"],["小组是否考虑了必要的安全防护设备？","SHE",1,"AB"],["是否已经定义了所有潜在的安全改进措施？","SHE",3,"AB"],["有以前的项目安全经验吗？","SHE",3,"AB"],["气体泄漏检测和监测设备的考虑？","SHE",1,"AB"],["风险评估是否与供应商一起评审？","SHE",1,"AB"],["背压阀位置是否合适，是否有安全风险;","SHE",1,"AB"],["产品管升温时温度高有烫伤风险","SHE",1,"AB"],["考虑到环境区域的风险并采取可能的纠正措施？","SHE",3,"AB"],["当设备闲置时，能量消耗功能是否自动关闭？","SHE",1,"AB"],["耗能功能控制吗？","SHE",1,"AB"],["压缩空气压力是否尽可能低？","SHE",1,"AB"],["对冷水的需求是否尽可能减少？","SHE",1,"AB"],["你调查过冷水温度是否更高（以降低能耗）","SHE",3,"AB"],["空气的排放量和水的排放量是否被考虑和减少？","SHE",1,"ABC"],["材料的浪费是否尽可能地减少了？","SHE",3,"AB"],["对环境影响是否进行了基本设计的评估？","SHE",1,"AB"],["如果需要环境许可证，申请许可证是否已经提交？","SHE",3,"AB"]]],["教育与培训",[["有可以提高设备性能相关的人、OPL、方法和材料，课件等","E&T",3,"AB"],["有可以提高技能的带教老师吗？","E&T",3,"AB"],["计划培训材料的工作？","E&T",3,"AB"]]],["布局和流动",[["机械设备的图纸设计是否最优？","EM",1,"AB"],["关键部件的设计计算是否以专业的方式完成？","EM",1,"A"],["这些手册易于阅读，有很多图片可以快速操作、维护和解决问题吗？","EM",1,"AB"],["SOP（标准操作程序）和分步显示的图片是否已检查过？","EM",3,"AB"],["图纸是数字化的吗？AutoCAD者优先。","EM",1,"AB"],["PLC程序是否在符号文件中用简单的文本描述显示IO、DB块等细节？","EM",1,"AB"]]],["成本和规划",[["这个工作范围和图纸是否已经提交给安装承包商更新范围和报价？","EM",1,"AB"],["有详细的计划（DR2）被更新和必要的行动已同意确保达到交货？","EM",1,"AB"],["所有的备件都经过彻底检查了吗？","EM",1,"AB"],["是否考虑了基础材料的储存？","EM",3,"AB"],["是否考虑储存其他材料？","EM",3,"AB"],["是否考虑了成品库存？","EM",3,"AB"],["已确认设备状况、是否是新的？","EM",3,"ABC"],["有没有考虑过设备通关？","SC",3,"ABC"],["检查机器是否需要安装在线振动装置？","EM",1,"AB"],["检查机器是否需要安装链条张力监控装置？","EM",1,"AB"],["检查机器是否需要安装温度监控装置？","EM",1,"AB"],["检查CPU的能力满足机器升级？","EM",1,"ABC"],["检查PLC版本是否可以升级CPU？","EM",1,"ABC"],["你回答了上面所有的问题吗？","EM",3,"AB"],["检查单上的所有点都结束了吗？","EM",3,"AB"],["你收集并记录了这一步中的所有问题吗？","EM",3,"AB"],["这一步之后你做过项目风险评估吗？","EM",3,"A"],["你填写EEM目标管理表了吗？","EM",3,"A"],["你在这一步，做一个总结和学习的工作和结论？","EM",3,"A"],["DR3会议有计划吗？","EM",3,"AB"],["你有正式的DR3会议吗？","EM",3,"AB"],["请记录DR3会议的与会者？（位置和名字）","EM",3,"AB"],["决定-开始生产和培训？","EM",3,"AB"]]]],"4":[["生产力/能力",[["是否有跟踪OEE和工艺废料损失的系统？（材料损失）","FI",3,"AB"]]],["质量",[["CQAs (所有关键质量参数)是否尽可能在供应商处测试？","QM",3,"AB"],["SC(食品生产许可)证是否包含新品产品类别","QM",3,"AB"],["SC(食品生产许可)证是否在有效期","QM",3,"AB"],["SC(食品生产许可)证工厂是否正确","QM",3,"AB"],["最小包装版面是否提供","QM",3,"AB"],["礼盒版面标准样稿件是否提供","QM",3,"AB"],["外箱版面标准样稿件是否提供","QM",3,"AB"],["包材版面标准稿件是否确认正确","QM",3,"AB"],["BOM(物料清单)表是否下发","QM",3,"AB"],["保质期测试评估报告是否提供","QM",3,"AB"],["保质期测试评估报告数据是否完整","QM",3,"AB"],["保质期测试评估报告结论是否可接受","QM",3,"AB"],["与工厂留样情况是否存在差异","QM",3,"AB"],["是否有相关部门有特殊需求","QM",3,"AB"],["是否需要工厂配合进行测试并提供产品防护稳定性报告","QM",3,"AB"],["是否提供产品防护稳定性报告","QM",3,"AB"],["是否提供包装规格表/包材用料卡","QM",3,"AB"],["包装规格表/包材用料卡是否有主管签字确认","QM",3,"AB"],["包装规格表/包材用料卡是否包含所有包装形式","QM",3,"AB"],["包装规格表/包材用料卡是否包含周装箱的包装形式及要求","QM",3,"AB"],["包材用料卡是否包含所有包装形式的喷码格式要求","QM",3,"AB"]]],["可靠性与维修",[["传感器保护免受外部损坏吗？","PM",1,"AB"],["传感器和报警器是否安装好了，是否可以直观确认有无报警？","PM",1,"A"],["接近开关安装是否便于检查更换？","PM",1,"AB"],["散热装置（风扇，空调，露天空间）是否有效，以防止过热？","PM",1,"AB"],["电柜上的密封门和过滤器/风扇是否有效？","PM",1,"AB"],["管道、接线和传感器的连接点是否有加固/保护以防外部损坏？","PM",1,"A"],["液压系统是否正常？","PM",1,"AB"],["是否有跟踪预防性维护时间系统？","PM",3,"AB"]]],["维护",[["金属框架、支架、支撑、围栏、电缆桥架、线槽镀锌室外安装吗？","PM",1,"AB"],["电缆是否与其他软管/管道分开？","PM",1,"AB"],["最终设备维修计划是否定义？","PM",1,"AB"],["在工厂维修计划中包含完整的维修计划吗？","PM",1,"AB"],["所需备件清单是否已更新？","PM",3,"A"],["你更新校准程序了吗？","PM",1,"AB"],["是否更新了设备树？","PM",1,"ABC"],["管道和接线的连接点是为了防止外部损坏而加强吗？","PM",1,"AB"]]],["安全健康环境",[["是否规定了安全程序并记录在案？","SHE",3,"AB"],["是否按ISO 14001所规定的程序执行？","SHE",3,"AB"]]],["自主维护",[["空气过滤器易于检查和更换？","AM",1,"AB"],["是否存在难以清洁的地区？有无改善措施？","AM",1,"AB"],["控制仪器是否放置在操作者看得见的地方？","AM",1,"AB"],["所有的控制仪器是否放置在适当的高度？","AM",1,"A"],["所有控制仪表目前的指示是否在正常工作范围？","AM",1,"AB"],["所有管道都有标示流向吗？","AM",1,"AB"],["按钮和开关的排列方式和标签是否容易理解？","AM",1,"AB"],["操作面板上显示机器的可视图形布局，使流程易于理解？","AM",1,"A"],["所有的润滑点是否都清楚地标示，可见，并且容易接近？","AM",1,"AB"],["空气调节器是否张贴其功能？","AM",1,"AB"],["仪表上是否有正常范围的标记，以便于人员观察。","AM",1,"AB"],["所有部件是否密封，以免水和油滴漏。","AM",1,"AB"],["电线安装牢固不会脱落？","AM",1,"AB"],["最终的清洗、润滑和检查程序是否被定义？","AM",1,"AB"],["是否有一个完整的自主维护计划（清洁、润滑和检查计划）？","AM",1,"AB"]]],["安装准备",[["是否有详细的安装计划和指定的职责？","E&T",3,"ABC"],["所有负责的人是否都被告知他们的职责和商定的时间计划？","EM",3,"ABC"],["所有的布局、电气和管道图纸都有吗？","EM",1,"AB"],["安装说明书/标准是否可用？","EM",1,"AB"],["所需的工具和技能是否可用？","EM",1,"AB"],["计划是否考虑消除运输和提升损害的风险？","EM",1,"AB"],["根据规范准备好基础吗？","EM",1,"A"],["所有安装前的工作是否准备妥善，如布线，布管工作是否完成等。","EM",1,"AB"],["是否有详细的物料清单和设备清单？","EM",1,"AB"],["是否需要备件和润滑油？","EM",1,"AB"],["设备安装使用是否会对原有设备造成影响？","EM",1,"AB"],["设备的安装和储存空间足够吗？","EM",1,"AB"],["是否有备用的的材料、工具、设备和辅助设备？","EM",3,"ABC"],["设备是否按使用顺序进行？","EM",1,"AB"],["对安装的安全计划进行了评审，包括（提升、锁定标签、卫生等）。","EM",1,"AB"],["设备的匹配性，是否可以满足批量连续生产的要求","EM",1,"AB"]]],["成本和规划",[["完整的设备测试是否在供应商确保的时间内完成？","EM",1,"AB"],["有详细的计划（DR 2）被更新和必要的行动已同意确保达到交货？","EM",1,"AB"],["它被认为是最具成本效益的时间安装机器（使用OT与生产停工）？","EM",1,"ABC"],["机器是否符合所有规格，包括材料、部件、尺寸、油漆？","EM",1,"AB"],["所有技术文件是否已交付（图纸和手册）","EM",1,"AB"],["是否有计划建立本地CLI标准（AM）、预防性维护标准（PM）和重点改善标准（FI）？","EM",1,"AB"],["是否有培训计划，培训人员，维修人员，质量检查，包括培训材料和培训员？（所有培训，包括安全方面）","EM",3,"AB"],["操作人员培训效果评估？操作能力是否达到？","EM",3,"ABC"],["它是如何定义培训效率的？","EM",1,"AB"],["与客户讨论产品需求？（订货、包装等）","EM",3,"AB"],["无法全面了解新增设备PLC程序","E&T",3,"A"]]],["会议准备",[["你回答了上面所有的问题吗？","EM",3,"ABC"],["检查单上的所有点都结束了吗？","EM",3,"ABC"],["你收集并记录了这一步中的所有问题吗？","EM",3,"ABC"],["这一步之后你做过项目风险评估吗？","EM",3,"AB"],["你填写EEM目标管理表了吗？","EM",3,"AB"],["你在这一步，有做总结关于工作中学到了什么和总结了什么结论？","EM",3,"AB"],["DR4会议有计划吗？","EM",3,"A"]]],["会议决定",[["你有正式的DR4会议吗？","EM",3,"A"],["请记录DR4会议的与会者？（位置和名字）","EM",3,"A"],["决定装运设备/材料？","EM",3,"AB"]]]],"5":[["生产力/能力",[["安装调试人员是否因施工图纸问题导致进度滞后","FI",3,"AB"],["管道/设备焊接口内经是否存在焊渣残留","FI",3,"AB"],["设备投料平台有无设定护栏及支撑","FI",3,"AB"],["生产用水管道设计是否合理充分","FI",3,"AB"],["调配桶与平台之间是否间隙太大，存在安全风险。","FI",3,"AB"],["蒸汽管道/高温管道有无安全管道防护措施","FI",3,"AB"],["设备安装是否制定和实施计划，按计划执行","EM",3,"AB"],["设备安装有无使用其它材料/尺寸差异的材料代替","EM",3,"AB"],["所需安装的材料是否全部到货无变形破损现象","EM",3,"AB"]]],["质量",[["该区域清洁无灰尘，金属屑，额外的工具和材料？","AM",1,"AB"],["ISO系统中的工作程序和表格是否已更新？","QM",3,"AB"],["是否有一个系统来跟踪质量绩效和缺陷的浪费？","QM",3,"A"],["设备参数是否按照研发下发工艺要求进行设定是否达到标准","QM",3,"AB"],["设备所使用的相关物料试车是否全部合格","QM",3,"AB"],["到货的原物检验是否合格","QM",3,"AB"],["到货物料标签版面信息是否清晰正常","QM",3,"AB"],["新品成品标准是否提供项目是否完整","QM",3,"AB"],["新品工艺流程图是否提供","QM",3,"AB"],["工艺流程图管控项目及参数是否完整","QM",3,"AB"],["新品QC工程图是否提供","QM",3,"AB"],["生产线清洗消毒规范是否提供","QM",3,"AB"],["设备试生产微生物抽样是否合格达到标准","QM",3,"ABC"],["新品生产作业标准书是否提供","QM",3,"AB"],["新品检验作业标准书是否提供","QM",3,"ABC"],["新品生产记录表单是否提供","QM",3,"AB"],["新品日期打印规范是否提供","QM",3,"ABC"]]],["维护",[["安装所剩下的备件和机器是否一起交货","PM",1,"AB"],["设备操作手册/备件手册等相关材料是否齐全","PM",1,"AB"],["设备保养计划清单是否提供明确","PM",1,"AB"],["电缆与电线容易识别能否快速查找","PM",1,"AB"],["所有电缆、电线接头终端是否紧固不脱落","PM",1,"AB"],["所有链条运转和齿轮等旋转方向是否明确","AM",1,"AB"]]],["安全",[["检查所有的护栏安全绳是否有损坏现象","SHE",1,"AB"],["有安装起吊项目是否设定安全区域","SHE",1,"AB"],["车间照明照度是否适合人员操作和维护","SHE",1,"AB"],["人员进厂施工是否检查工人的精神状态及安全监护","SHE",1,"ABC"],["现场防护罩牢固是否可靠","SHE",1,"AB"],["所有的备用电线是否有固定及防止短路现象","SHE",1,"AB"],["施工区域及危险区有无安全标志、标签、警告标识等","SHE",1,"AB"],["施工人员进厂作业是否有相应的安全知识培训","SHE",1,"AB"]]],["成本和规划",[["机器是否符合所有规格，包括材料、部件、尺寸、油漆","EM",1,"AB"],["设备操作技能培训是否按计划进行培训","E&T",3,"ABC"],["试运行的材料测试是否正常","EM",3,"ABC"],["确定客户的产品要求？（订单、托盘、包裹等）","SC",2,"AB"],["有没有为DR1计划会议的日期？","EM",3,"AB"]]],["会议准备",[["你回答了上面所有的问题吗？","EM",3,"AB"],["检查单上的所有点都结束了吗？","EM",3,"AB"],["你收集并记录了这一步中的所有问题吗？","EM",3,"AB"],["这一步之后你做过项目风险评估吗？","EM",3,"A"],["你填写EEM目标管理表了吗？","EM",3,"A"],["你在这一步，有做总结关于工作中学到了什么和总结了什么结论？","EM",3,"A"]]],["会议决定",[["你有正式的DR5会议吗？","EM",3,"AB"],["请记录DR6会议的与会者？（位置和名字）","EM",3,"AB"],["决定-开始调试？","EM",3,"AB"]]]],"6":[["生产力/能力",[["所有的EE目标的组成（设置，速度损失等）都已经测试过，以确保达到EE目标。","FI",3,"AB"],["是否对工艺废料的所有部件进行了测试，以确保工艺废品达到目标？","FI",3,"AB"],["是否已经对生产率的所有组成部分进行了测试，以确保达到生产率目标？","FI",3,"A"],["每个速度簇（产品）的技术速度是否得到验证？","FI",3,"A"],["如果在生产过程中出现问题，是否已决定活动以防止再次发生？","FI",3,"AB"],["参数设置是否在测试过程中试过并记录下来？","EM",3,"AB"],["杀菌流量与无菌均质机流量不匹配，造成生产压力波动大","FI",3,"AB"],["混料器桶盖需要设定的水量全部入完后才能打卡人孔盖开始投料；（实际操作中入到一定的水量可进行投料，节约调配总时间）。","FI",3,"AB"],["混料机电机功率不符合产品需求/更换电机频率","FI",3,"AB"],["调配桶电机搅拌效果不佳/更换电机轴承和搅拌叶","FI",3,"AB"],["清洗时搅拌电机是否存在泄漏","FI",3,"AB"],["清洗时管道与目标是否存在清洗盲点","FI",3,"AB"],["人员准备数量是否足以应对生产","FI",3,"AB"],["人员能力是否可以满足生产要求","FI",3,"AB"],["基本规格（费用、工艺、质量等）是否清楚？","FI",3,"AB"],["是否存在评估和测试不充分而导致的盲点？","FI",3,"AB"],["材料测试方式的评估是否贯穿整个工艺流程？","FI",3,"AB"]]],["质量",[["都可适用的数据从QM矩阵被检查，所有程序来跟随它","QM",3,"AB"],["在最关键的参数上检查了“五个零缺陷的条件”吗？","QM",3,"AB"],["根据工艺FMEA与供应商一起检查是否有改进？","QM",3,"A"],["产品质量得到检验了吗？","QM",3,"A"],["ISO系统中的工作程序和表格是否已更新？","QM",3,"ABC"],["在生产过程中，重要的质量参数如何跟踪/确认？","QM",3,"A"],["包装材料是否按照测试计划在灌装机中进行验证？","QM",2,"A"],["根据测试计划有包属性得到满足（泄漏、工程机械、成型、等）吗？","QM",2,"A"],["工艺标准是否清晰？","QM",3,"ABC"],["制造合格产品所需要的条件是否清晰定义和量化？","QM",3,"AB"],["此类条件是否易于实施？","QM",3,"AB"]]],["可靠性与维修",[["在调试过程中发现的所有机器故障都已检查到根本原因并消除了吗？","PM",3,"AB"],["有没有足够的维护操作空间？","PM",3,"AB"],["有没有难以检查的部件？","PM",3,"AB"],["配件是否合理紧固且防漏？","PM",3,"AB"],["面板和门打开的朝向是否合理？","PM",3,"AB"],["故障排除系统操作是否合理？","PM",3,"AB"],["润滑系统是否满足要求？","PM",3,"AB"]]],["维护",[["是否按计划完成维修培训并进行有效性测试？","PM",3,"AB"],["更新设备树？","PM",3,"ABC"],["更新TBM系统？","PM",3,"ABC"],["更新CBM系统？","PM",3,"ABC"],["检查点和检查时间间隔是否已定义？","AM",3,"ABC"],["润滑点和润滑时间间隔是否已定义？","AM",3,"ABC"],["清洁点和清洁时间间隔是否已定义？","AM",3,"ABC"],["操作工提出的建议和请求是否合理评估？","AM",3,"ABC"]]],["安全健康环境",[["所有与FMEA安全相关的操作都已经完成了吗？","SHE",3,"A"],["是否制定了一项行动计划来消除新发现的风险？","SHE",3,"ABC"],["安全培训是否已按照计划交付给操作人员和维修人员？","SHE",3,"ABC"],["有没有不带保护的旋转件和导轨？","SHE",3,"ABC"],["有没有挂钩或突出部分？","SHE",3,"ABC"],["零件和操作工可能接触的犄角相关的安全条件是否都进行了检查？","SHE",3,"ABC"],["事故分析是否针对类似机器进行了举一反三？","SHE",3,"ABC"],["ISO14001中是否需要额外的例程/文档？","SHE",3,"AB"],["是否考虑过卫生方面的风险并采取了可能的纠正措施？","SHE",3,"AB"],["考虑到环境区域的风险并采取可能的纠正措施？","SHE",3,"AB"]]],["教育与培训",[["根据技能矩阵评估所需技能水平吗？","E&T",3,"AB"],["新建产线人员技能矩阵是否建立？","E&T",3,"ABC"],["新建产线的质量、安全、操作标准课件是否移交或者建立？","E&T",3,"ABC"],["是否建立培训计划？新的质量、安全、操作标准","E&T",3,"ABC"],["是否所有对员工依据培训计划进行培训？新的质量、安全、操作标准","E&T",3,"ABC"],["是否所有对员工培训效果进行追踪确认？新的质量、安全、操作标准","E&T",3,"ABC"]]],["会议准备",[["你回答了上面所有的问题吗？","EM",3,"AB"],["检查单上的所有点都结束了吗？","EM",3,"AB"],["你收集并记录了这一步中的所有问题吗？","EM",3,"AB"],["这一步之后你做过项目风险评估吗？","EM",3,"A"],["你填写EEM目标管理表了吗？","EM",3,"A"],["你在这一步，有做总结关于工作中学到了什么和总结了什么结论？","EM",3,"A"],["DR6会议有计划吗","EM",3,"AB"]]],["会议决定",[["你有正式的DR6会议吗？","EM",3,"AB"],["请记录DR6会议的与会者？（位置和名字）","EM",3,"AB"],["根据工厂计划进行生产决策？","EM",3,"AB"]]]],"7":[["生产力/能力",[["设备/工艺能移交给FI支柱吗？","FI",3,"AB"]]],["质量",[["设备/工艺和产品质量标准能否移交给品保及产线？","QM",3,"AB"],["如果目标未达到，是否已采取行动，以充分完成目标？","QM",3,"AB"],["QA/QM矩阵是否建立完善？","QM",3,"A"]]],["可靠性与维修",[["设备自主维保标准是否交给计划维护支柱？","PM",3,"AB"],["设备的质量维护和计划维护是否已转交给产线？","PM",1,"AB"],["连续性生产效率是否达到设定目标？","PM",3,"AB"]]],["安全",[["是否对所有新建设备进行风险识别？","SHE",3,"A"],["是否对所有设备高、中级风险进行改善？对未改善的风险是否有防范措施？","SHE",3,"AB"],["是否建立安全地图？","SHE",3,"ABC"],["是否将安全地图移交给产线？","SHE",3,"AB"]]],["柔性设置",[["新建产线或设备是否具备生产预期产品？","EM",3,"AB"]]],["自主维护",[["CILT标准是否移交给自主/维护支柱吗？","AM",3,"AB"]]],["成本和规划",[["你算出实际的/最优的LCC值","Cost",3,"A"],["主计划是否已更新？","EM",3,"AB"],["你有没有发现任何旧设备的投资？","EM",1,"AB"],["你有没有在新设备上注明库存数量并将其添加到库存清单中？","EM",1,"ABC"],["设备/过程交给WCM督导委员会（所有支柱）/生产？","EM",3,"AB"],["初始操作成本是否在目标值内？","Cost",3,"A"],["OTIF目标在启动了吗","EM",3,"AB"],["所有的学习被收集和记录了吗？","EM",3,"AB"],["是否已采取措施防止由该项目/团队引入的问题再次发生？","EM",3,"AB"],["您是否已根据新增或报废设备更新库存清单，并与财务部（固定资产控制器）沟通？","EM",1,"ABC"]]],["教育与培训",[["新建产线人员技能矩阵是否建立？","E&T",3,"ABC"],["新建产线的质量、安全、操作标准课件是否移交或者建立？","E&T",3,"ABC"],["是否建立培训计划？新的质量、安全、操作标准","E&T",3,"ABC"],["是否所有对员工依据培训计划进行培训？新的质量、安全、操作标准","E&T",3,"ABC"],["是否所有对员工培训效果进行追踪确认？新的质量、安全、操作标准","E&T",3,"ABC"],["新产品与客户沟通了吗？","QM",2,"AB"],["更新设备树？","PM",3,"ABC"],["更新TBM系统？","PM",3,"ABC"],["更新CBM系统？","PM",3,"ABC"],["项目的成功后有计算投资回收后吗？","EM",3,"ABC"]]],["会议准备",[["你回答了上面所有的问题吗？","EM",3,"AB"],["检查单上的所有点都结束了吗？","EM",3,"AB"],["你收集并记录了这一步中的所有问题吗？","EM",3,"AB"],["这一步之后你做过项目风险评估吗？","EM",3,"A"],["你填写EEM目标管理表了吗？","EM",3,"A"],["你在这一步，有做总结关于工作中学到了什么和总结了什么结论？","EM",3,"A"],["DR7会议有计划吗","EM",3,"AB"]]],["会议决定",[["你有正式的DR7会议吗？","EM",3,"AB"],["请记录DR7会议的与会者？（位置和名字）","EM",3,"AB"],["决定-关闭团队？","EM",3,"AB"]]]]};
+const EQCS=[[1,"EQC1","DR1早期调研","安全SH","团队已确定哪些适用法律法规和工厂标准？（例如：机械指令、零接触概念、高处作业、受限空间等）"],[2,"EQC1","DR1早期调研","安全SH","工厂 SH如何参与项目团队，期望是什么（例如安全标准等）？"],[3,"EQC1","DR2项目范围","安全SH","如何确保在生产启动时提供正确的使用说明书（包括供应商的说明）？"],[4,"EQC1","DR1早期调研","质量QM","从客户角度考虑，最重要的质量要求是什么？"],[5,"EQC1","DR1早期调研","质量QM","如何纳入过去（内部或外部）的质量问题教训（MP情报）？"],[6,"EQC1","DR2项目范围","质量QM","质量部门或 QM 支柱成员如何参与团队，期望他们做什么？"],[7,"EQC1","DR2项目范围","质量QM","拟议变更影响哪些质量流程（QM矩阵变更）？"],[8,"EQC1","DR2项目范围","可靠性PM","解释项目如何配备人员以确保可靠性能力？"],[9,"EQC1","DR1早期调研","可靠性PM","类似机器有哪些可靠性问题（利用数据和过往经验 - 标杆对比）？"],[10,"EQC1","DR1早期调研","可维护性AM","初步维护要求是什么（AM/PM 计划、易于维护、维护技能）？"],[11,"EQC1","DR2项目范围","可维护性AM","初步计划维护成本是多少？"],[12,"EQC1","DR1早期调研","成本FI","该项目的主要成本改进目标是什么，目标损失是什么？"],[13,"EQC1","DR2项目范围","成本FI","总项目成本如何估算？"],[14,"EQC1","DR1早期调研","成本FI","如何将以往项目的经验教训纳入成本考量？"],[15,"EQC1","DR2项目范围","可操作性E&T","项目团队如何配备操作、维护能力（团队中有经验的操作员）？"],[16,"EQC1","DR1早期调研","可操作性E&T","在需求设定中如何考虑了操作人员的知识？"],[17,"EQC1","DR1早期调研","食品安全QM","项目将如何涉及食品包装安全与交互，是否咨询食品安全顾问（品保部），期望他们做什么（例如 进行食品安全风险分析等）？"],[18,"EQC1","DR1早期调研","食品安全QM","如何识别并确保在安装现场满足与接触材料和良好生产规范（GMP）相关的法律要求？"],[19,"EQC1","DR1早期调研","食品安全QM","适用哪些卫生设计要求与标准（例如 GMP等），并向供应商提出了哪些要求？"],[20,"EQC1","DR1早期调研","环境ENV","该项目将改善哪些类型的废弃物（或废弃物处理）？"],[21,"EQC1","DR1早期调研","环境ENV","如何考虑改善直接/间接能源使用，如电力、压缩空气、天然气等？"],[22,"EQC2","DR3详细分析","安全SH","EM 团队如何识别 CE 标志要求与当地安全要求之间的差异？（例如零接触概念）"],[23,"EQC2","DR3详细分析","安全SH","安装需要哪些当地许可证或执照？"],[24,"EQC2","DR3详细分析","安全SH","EM 团队如何识别合格的承包商，并确保安装风险得到良好管理？（ 承包商评估）"],[25,"EQC2","DR3详细分析","安全SH","设备位置如何从风险角度影响区域（例如疏散路线、走道、交通路线、物料进出流、公用设施隔离、照明等）？"],[26,"EQC2","DR3详细分析","安全SH","项目对当地消防证书和消防系统有何影响？"],[27,"EQC2","DR3详细分析","质量QM","质量矩阵（QM矩阵）中有哪些新的或变更的质量参数，它们如何转化为工艺参数（质量条件）？"],[28,"EQC2","DR3详细分析","质量QM","您是否预估了预期过程能力（Ppk），预期的质量结果是什么？"],[29,"EQC2","DR3详细分析","质量QM","哪些是不可检测的缺陷，如何确保这些缺陷被控制（例如哪些屏障等）？"],[30,"EQC2","DR3详细分析","质量QM","针对所选工艺类型，与工艺规格和废弃物相关的主要风险/弱点是什么？"],[31,"EQC2","DR3详细分析","可靠性PM","如何将可靠性要求转化为技术参数（例如通过 CDM（关联设计矩阵）、TS&A（目标设定与分配）等）？"],[32,"EQC2","DR3详细分析","可靠性PM","计划了哪些识别可靠性风险的活动（例如 FMEA 等）？"],[33,"EQC2","DR3详细分析","可靠性PM","描述虚拟和物理可靠性测试的计划（例如加速寿命测试、硬件和软件等）"],[34,"EQC2","DR3详细分析","可靠性PM","计划了哪些活动以确保新方案与现有设备的集成？"],[35,"EQC2","DR3详细分析","可靠性PM","基于供应商知识，已采取或将要采取哪些可靠性措施？"],[36,"EQC2","DR3详细分析","可维护性AM","向供应商提出了哪些维护要求，如何在设计、预测试和安装等过程中跟进？"],[37,"EQC2","DR3详细分析","可维护性AM","设备的维护策略是什么，如何与维护系统设置（A/B/C 分类、CBM/TBM 等）保持一致？"],[38,"EQC2","DR3详细分析","可维护性AM","在无法避免维护的情况下，每个维护点的一般 AM 步骤 4 要求是什么（易于维护、润滑、清洁、检查等）？"],[39,"EQC2","DR3详细分析","可维护性AM","如何确保提供完整的维护计划并作为培训的一部分（例如 OPL / POKA防呆）？"],[40,"EQC2","DR3详细分析","成本FI","商业案例的关键驱动因素如何计算？"],[41,"EQC2","DR3详细分析","成本FI","考虑了哪些成本敏感性场景？"],[42,"EQC2","DR3详细分析","可操作性E&T","收集了哪些与可操作性相关的先前类似项目/设备的改进（kaizens）和反馈（例如通过 MP 系统等）？"],[43,"EQC2","DR3详细分析","可操作性E&T","您减少机器与人交互和操作员饱和度优化的方法是什么（例如 ECRS、防错、自动化方案、无接触方法等）？"],[44,"EQC2","DR3详细分析","可操作性E&T","在仍需要操作员接触和接口点的情况下，如何确保这些点确实必要、经过评估并有效使用？"],[45,"EQC2","DR3详细分析","食品安全QM","在基本设计中，关于卫生设计要求和适用设计标准（例如GMP）的要点是什么？"],[46,"EQC2","DR3详细分析","食品安全QM","您是否已定义并与供应商就要求达成一致，以及如何确保这些要求得到满足（例如在合同中）？"],[47,"EQC2","DR3详细分析","环境ENV","如何将环境法律要求纳入设计实施？"],[48,"EQC2","DR3详细分析","环境ENV","如何在要求中确保废弃物或排放物按照当地工厂处置程序处理？"],[49,"EQC3","DR4行动解决","安全SH","如何确保安全进入所有检查和维修点？"],[50,"EQC3","DR4行动解决","安全SH","如何确保所有设备电源在维护和清洁时能够轻松隔离（例如电力和压缩空气的 LOTO）？"],[51,"EQC3","DR4行动解决","安全SH","如何在设计中最小化或减轻与噪音和人机工程学相关的风险？"],[52,"EQC3","DR4行动解决","安全SH","操作中会涉及哪些危险物质，需要哪些个人防护装备？"],[53,"EQC3","DR4行动解决","安全SH","项目对当地消防证书和消防系统有何影响？"],[54,"EQC3","DR4行动解决","安全SH","如何为安装团队提供承包商 OHS 职业健康安全要求和安全入场培训？"],[55,"EQC3","DR4行动解决","质量QM","需要监测哪些质量条件，如何调整工艺和操作窗口（例如“5 条件到零缺陷5C0D”的结果等）？"],[56,"EQC3","DR4行动解决","质量QM","解释如何确保拟议方案中所有缺陷都可检测？"],[57,"EQC3","DR4行动解决","质量QM","采取了哪些措施确保生产过程中工艺参数受控（低波动）（例如监控过程能力的 SPC 等）？"],[58,"EQC3","DR4行动解决","质量QM","如何确保正确报告给工厂生产系统（例如停止和缺陷代码）？"],[59,"EQC3","DR4行动解决","质量QM","设备如何设计以消除任何不必要的浪费（例如在设置时）？"],[60,"EQC3","DR4行动解决","可靠性PM","您将在本机器中重复使用哪些经过验证的现有解决方案（内部或外部），您是否了解其在可靠性方面的优缺点？"],[61,"EQC3","DR4行动解决","可靠性PM","在功能和软件测试中如何考虑了可靠性方面？"],[62,"EQC3","DR4行动解决","可靠性PM","如何确保正确的图纸交付给供应商？"],[63,"EQC3","DR4行动解决","可靠性PM","在已进行的测试和仿真中观察到哪些与可靠性相关的问题，计划采取哪些措施来确保？"],[64,"EQC3","DR4行动解决","可靠性PM","关于功能接口（机械和电气）缺少哪些知识，将采取什么措施来弥补？"],[65,"EQC3","DR4行动解决","可维护性AM","根据 FMEA 结果，识别了哪些关键维护任务？"],[66,"EQC3","DR4行动解决","可维护性AM","概念中潜在的污垢来源和难以接近的区域有哪些，如何预防/最小化？"],[67,"EQC3","DR4行动解决","可维护性AM","将以何种方式测试维护要求？"],[68,"EQC3","DR4行动解决","可维护性AM","为避免使用特殊工具进行维护，采取了什么措施？"],[69,"EQC3","DR4行动解决","可维护性AM","如何在设计中实现所有维护和检查点的轻松访问，例如无需打开盖板或拆卸面板？"],[70,"EQC3","DR4行动解决","可维护性AM","如何确保所有维护和检查点都包含在维护手册中？"],[71,"EQC3","DR4行动解决","可维护性AM","如何考虑部件的易于识别（例如标记、参考标识等）？"],[72,"EQC3","DR4行动解决","成本FI","考虑到敏感性分析和关键利益相关者的意见，商业案例有哪些更新？"],[73,"EQC3","DR4行动解决","成本FI","从成本角度，已签署的 VSU 协议(网络系统虚拟化技术)中需要监控的主要点是什么？"],[74,"EQC3","DR4行动解决","可操作性E&T","您调查了哪些以减少操作员动作损失（人机分离图调查）？"],[75,"EQC3","DR4行动解决","可操作性E&T","如何确保所有检查点都被收集、易于读取或尽可能自动化？"],[76,"EQC3","DR4行动解决","可操作性E&T","如果操作员需要额外的工具/设备或消耗品来操作机器，它们将存放在哪里（包括 5S）？"],[77,"EQC3","DR4行动解决","可操作性E&T","如果新设备需要设置，如何确保操作员参与尽可能少？"],[78,"EQC3","DR4行动解决","食品安全QM","如何确保符合所有与食品接触材料和良好生产规范（GMP）相关的适用法律要求？"],[79,"EQC3","DR4行动解决","食品安全QM","是否根据设备布局、系统和材料选择进行了危害和风险分析，结果如何？"],[80,"EQC3","DR4行动解决","食品安全QM","将采取哪些措施确保安装现场满足良好生产规范要求？"],[81,"EQC3","DR4行动解决","环境ENV","如何确保改善直接/间接能源使用，如电力、压缩空气、天然气、液化石油气、柴油等？"],[82,"EQC3","DR4行动解决","环境ENV","如何确认避免使用化学品或有害物质（例如供应商的确认等）？"],[83,"EQC3","DR4行动解决","环境ENV","如果在操作或维护中使用水，请描述如何确保改善水足迹（用水量和/或水质）？"],[84,"EQC4","DR5安装验证","安全SH","如何将安装团队和安装区域与运营活动分开，并向所有当地员工传达？"],[85,"EQC4","DR5安装验证","安全SH","如何定义和商定 OHS 角色与职责？如何确保安装期间保持安全工作规范（例如通过审核/检查）？"],[86,"EQC4","DR5安装验证","质量QM","如何确保质量体系按设定要求运行？"],[87,"EQC4","DR5安装验证","质量QM","有哪些系统来跟进废弃物和质量绩效（Ppk、规格符合性），如何确保工艺质量条件受控？"],[88,"EQC4","DR5安装验证","质量QM","工艺参数或顺序有哪些变化，采取了哪些措施确保正确设置（例如更新配方和 主数据等）？"],[89,"EQC4","DR5安装验证","质量QM","如何确保将质量能力从项目转移到维护或操作人员？"],[90,"EQC4","DR5安装验证","可靠性PM","在此阶段之前如何验证可靠性要求，如果有未完成项，如何处理？"],[91,"EQC4","DR5安装验证","可靠性PM","描述如何确保软件接口通信无需现场调整即可正常工作？"],[92,"EQC4","DR5安装验证","可靠性PM","采取了哪些措施确保正确的电气接口连接（例如图纸和安装能力等）？"],[93,"EQC4","DR5安装验证","可靠性PM","在工厂验收测试间发现了哪些与可靠性相关的问题，如何在安装完成前解决？"],[94,"EQC4","DR5安装验证","可维护性AM","根据维护技能评估，需要采取哪些行动？"],[95,"EQC4","DR5安装验证","可维护性AM","关闭项目中提出的维护要求差距（资源、工具等的可用性）的计划是什么？"],[96,"EQC4","DR5安装验证","可维护性AM","如何审查维护手册并确保用户可用？"],[97,"EQC4","DR5安装验证","可维护性AM","如何确保要求的备件和特殊工具随机器一起交付？"],[98,"EQC4","DR5安装验证","可维护性AM","如何确保安装接口（公用设施）与维护友好性相关（例如连接件/接头放置在能够检测可能泄漏的位置等）？"],[99,"EQC4","DR5安装验证","成本FI","项目中有哪些部分需要从成本角度特别关注？"],[100,"EQC4","DR5安装验证","可操作性E&T","如何确保所有操作员都接受操作培训？"],[101,"EQC4","DR5安装验证","可操作性E&T","为顺利启动采取了哪些与可操作性相关的措施（SOP/工作指令、基于标杆的行动）？"],[102,"EQC4","DR5安装验证","可操作性E&T","您采取了哪些措施确保操作员所有关键接触点和工作任务的知识转移？"],[103,"EQC4","DR5安装验证","食品安全QM","作为危害和风险分析以及良好生产规范要求审查的结果，更新了哪些操作规程？"],[104,"EQC4","DR5安装验证","食品安全QM","在设备检查期间将验证哪些要求（例如工厂检查清单、审核等）？"],[105,"EQC4","DR5安装验证","环境ENV","如何验证直接/间接能源使用（如电力、压缩空气、天然气、液化石油气、柴油等）？"],[106,"EQC4","DR5安装验证","环境ENV","验证废弃物处理或排放的计划是什么？"],[107,"EQC4","DR5安装验证","环境ENV","描述将如何验证水足迹（用水量和/或水质）？"],[108,"EQC5","DR6调试试产","安全SH","如何记录任何已识别的安全改进（例如安装后完成零接触评估）？"],[109,"EQC5","DR6调试试产","安全SH","如何确保所有符合性文件（风险评估、技术文件、符合性声明）已完成并妥善保存？"],[110,"EQC5","DR6调试试产","安全SH","如何确保新员工或临时员工接受充分培训以操作设备？"],[111,"EQC5","DR6调试试产","质量QM","如何将关键质量条件受控（例如传感器校准等）转移至转换工厂(Qm到AM)？"],[112,"EQC5","DR6调试试产","质量QM","您能以何种方式确认已实现设定的质量目标？"],[113,"EQC5","DR6调试试产","质量QM","如何将内部或外部的质量教训纳入工厂的新/下一个项目？"],[114,"EQC5","DR6调试试产","可靠性PM","描述在试运行期间发现的所有机器和软件故障，以及如何调查根本原因并消除？"],[115,"EQC5","DR6调试试产","可靠性PM","有哪些系统用于跟进可靠性，谁负责报告问题？"],[116,"EQC5","DR6调试试产","可靠性PM","基于项目发现，您将对即将推出或其他设备实施哪些改进，如何确保这些改进被记录？"],[117,"EQC5","DR6调试试产","可维护性AM","在验证/确认期间识别的与可维护性相关的差距是什么，将采取哪些措施？"],[118,"EQC5","DR6调试试产","可维护性AM","为确保 PM 和 AM 活动的妥善交接做了哪些工作？"],[119,"EQC5","DR6调试试产","可维护性AM","如何确保随机器交付的备件正确处理和可用（新备件录入系统，旧备件出库）？"],[120,"EQC5","DR6调试试产","可维护性AM","更新的机器文档如何集成到 PM记录中？"],[121,"EQC5","DR6调试试产","可维护性AM","如何确保工厂的可维护性反馈，并为后续机器提出哪些变更？"],[122,"EQC5","DR6调试试产","成本FI","项目支出与初始项目成本估算相比如何？"],[123,"EQC5","DR6调试试产","成本FI","项目结束后如何跟进商业案例和生命周期成本？"],[124,"EQC5","DR6调试试产","可操作性E&T","SOP/手册/工作指令如何集成到 ISO 和质量管理体系例程中？"],[125,"EQC5","DR6调试试产","可操作性E&T","我们如何收集操作员建议/经验，如何反馈？"],[126,"EQC5","DR6调试试产","可操作性E&T","您有哪些系统来跟进可操作性，采取了哪些措施防止操作员知识退化？"],[127,"EQC5","DR6调试试产","可操作性E&T","您会对下一台机器提出哪些可操作性变更，如何确保这些变更被记录（MP 情报、PDA 等）？"],[128,"EQC5","DR6调试试产","食品安全QM","如何确保将食品安全文件交接给安装现场的 负责人（任何剩余风险需在常规生产中控制）？"],[129,"EQC5","DR6调试试产","食品安全QM","如何确保设计合规文件（例如与包装材料接触的部件等）交接给工厂？"],[130,"EQC5","DR6调试试产","食品安全QM","哪些与食品安全相关的反馈需要返回给内部或供应商，由谁负责？"],[131,"EQC5","DR6调试试产","环境ENV","如何跟进直接/间接能源使用（如电力、压缩空气、天然气、液化石油气、柴油等）？"],[132,"EQC5","DR6调试试产","环境ENV","项目结束后如何以可持续方式处理化学品或有害物质？"],[133,"EQC5","DR6调试试产","环境ENV","描述已实施的明确环境改进，由谁负责确保？"],[134,"EQC6","DR7交付反馈","安全SH","试车/试生产期间所有安全防护装置（光栅、安全门联锁、急停等）是否经过验证并正常运行？"],[135,"EQC6","DR7交付反馈","安全SH","试生产过程中发现的安全隐患是否已全部记录、评估并关闭？"],[136,"EQC6","DR7交付反馈","安全SH","零接触概念（Zero Access）是否在试生产条件下经过验证？"],[137,"EQC6","DR7交付反馈","安全SH","操作人员是否已取得必要的上岗资格证（如特种设备操作证、受限空间作业证等）？"],[138,"EQC6","DR7交付反馈","安全SH","安全符合性文件（风险评估、技术文件、符合性声明）是否已完成并准备移交？"],[139,"EQC6","DR7交付反馈","安全SH","试车区域的安全隔离与警示标识是否到位？"],[140,"EQC6","DR7交付反馈","质量QM","试生产阶段的质量目标（如合格率、废品率、Ppk等）是否达成？"],[141,"EQC6","DR7交付反馈","质量QM","试生产过程中所有质量缺陷是否已分类、记录并完成根本原因分析？"],[142,"EQC6","DR7交付反馈","质量QM","关键质量条件（CPP/CQA）的监控系统（如SPC、传感器校准）是否在试生产期间稳定运行？"],[143,"EQC6","DR7交付反馈","质量QM","试生产期间的工艺参数波动是否在控制范围内？工艺操作窗口是否经过充分验证？"],[144,"EQC6","DR7交付反馈","质量QM","成品/半成品的检测方法和检测设备是否经过验证并满足要求？"],[145,"EQC6","DR7交付反馈","质量QM","试生产发现的质量问题是否已全部关闭或制定明确的整改计划？"],[146,"EQC6","DR7交付反馈","质量QM","质量控制计划（Control Plan）是否根据试生产结果完成更新？"],[147,"EQC6","DR7交付反馈","可靠性PM","试车/试生产期间所有设备故障是否已记录、完成根本原因分析并消除？"],[148,"EQC6","DR7交付反馈","可靠性PM","设备的可靠性指标（如MTBF、故障率等）是否达到设计要求？"],[149,"EQC6","DR7交付反馈","可靠性PM","软件系统在试生产期间是否稳定运行？是否发现并修复了软件缺陷？"],[150,"EQC6","DR7交付反馈","可靠性PM","设备与上下游系统的接口（机械、电气、软件）在试生产条件下是否正常工作？"],[151,"EQC6","DR7交付反馈","可靠性PM","试生产期间暴露的可靠性风险是否已评估并制定改进措施？"],[152,"EQC6","DR7交付反馈","可靠性PM","备用件/易损件在试生产期间的使用情况是否记录？备件清单是否需要更新？"],[153,"EQC6","DR7交付反馈","可维护性AM","试生产期间执行的维护任务是否与设计阶段定义的维护计划一致？"],[154,"EQC6","DR7交付反馈","可维护性AM","试生产期间发现的维护便利性问题（如难接近的维护点、需要特殊工具等）是否已记录？"],[155,"EQC6","DR7交付反馈","可维护性AM","CIL维护指导书是否根据试生产的实际维护经验完成更新？"],[156,"EQC6","DR7交付反馈","可维护性AM","试生产期间使用的备件和特殊工具是否充足？备件管理系统是否已更新？"],[157,"EQC6","DR7交付反馈","可维护性AM","PM（预防性维护）和AM（自主维护）活动的交接是否清晰明确？"],[158,"EQC6","DR7交付反馈","可维护性AM","试生产期间设备清洁、润滑、检查等日常维护任务的执行情况是否记录并纳入维护体系？"],[159,"EQC6","DR7交付反馈","成本FI","试生产期间的实际废品/损耗是否达到项目设定的成本改进目标？"],[160,"EQC6","DR7交付反馈","成本FI","试生产期间的实际能耗（电、压缩空气、水等）是否与设计预期一致？"],[161,"EQC6","DR7交付反馈","成本FI","试生产期间的实际维护成本是否与初步计划维护成本一致？"],[162,"EQC6","DR7交付反馈","成本FI","项目总支出与初始成本估算的偏差是否在可接受范围内？偏差原因是否已分析？"],[163,"EQC6","DR7交付反馈","成本FI","效益核算和生命周期成本的后续跟踪责任是否已明确？"],[164,"EQC6","DR7交付反馈","可操作性E&T","所有操作人员是否已完成操作培训并通过考核？"],[165,"EQC6","DR7交付反馈","可操作性E&T","SOP/工作指令是否根据试生产的实际操作经验完成更新？"],[166,"EQC6","DR7交付反馈","可操作性E&T","试生产期间操作人员的操作负荷（饱和度）是否可接受？是否存在过度的人机交互？"],[167,"EQC6","DR7交付反馈","可操作性E&T","操作员在试生产期间提出的改进建议是否已收集、评估并反馈？"],[168,"EQC6","DR7交付反馈","可操作性E&T","所有关键操作检查点是否易于读取或已实现自动化？"],[170,"EQC6","DR7交付反馈","食品安全QM","试生产期间是否验证了所有与食品接触材料的合规性？"],[171,"EQC6","DR7交付反馈","食品安全QM","试生产期间是否验证了GMP（良好生产规范）要求在安装现场的落实情况？"],[172,"EQC6","DR7交付反馈","食品安全QM","试生产期间是否完成了危害与风险分析的最终验证？分析结果是否更新？"],[173,"EQC6","DR7交付反馈","食品安全QM","食品安全文件（接触材料清单、合规声明、GMP检查记录等）是否完整并准备移交？"],[174,"EQC6","DR7交付反馈","食品安全QM","操作规程（SOP）是否根据试生产的食品安全验证结果完成更新？"],[175,"EQC6","DR7交付反馈","食品安全QM","与食品安全相关的改进反馈是否已记录并准备返回给内部或供应商？"],[176,"EQC6","DR7交付反馈","环境ENV","试生产期间的实际能源使用（电、压缩空气、天然气等）是否达到改善目标？"],[177,"EQC6","DR7交付反馈","环境ENV","试生产期间的废弃物/排放物处理是否按照工厂处置程序执行？"],[178,"EQC6","DR7交付反馈","环境ENV","试生产期间的水足迹（用水量和水质）是否达到改善目标？"],[179,"EQC6","DR7交付反馈","环境ENV","试生产期间使用的化学品或有害物质是否已妥善管理并规划了可持续处置方案？"],[180,"EQC6","DR7交付反馈","环境ENV","试生产期间确认的环境改善成果是否已记录并明确后续责任归属？"],[181,"EQC6","DR7交付反馈","环境ENV","环境法律要求的合规性是否在试生产条件下经过验证？"]];
+const EQMAP=[["EQC1 (概念阶段)","DR1","早期调研","项目还未正式启动，主要进行外部法规识别、历史问题收集、可行性初判。EQC1的问题（如适用哪些法规、过去质量问题教训）恰好在这个阶段提出。"],["","DR2","项目范围","明确项目要做什么、不做什么，确定核心质量目标、成本目标和团队配置。EQC1中关于团队组建、主要成本改进目标的问题在这一步敲定。"],["EQC2 (基础设计阶段)","DR3","详细分析","将需求转化为系统架构和基础设计方案，进行风险分析（如FMEA）、能力预估（Ppk）。EQC2的问题（可靠性参数转化、FMEA计划）正好对应此阶段的“详细分析”工作。"],["EQC3 (详细设计阶段)","DR4","行动解决","敲定详细图纸、技术规格，制定具体的实施和维护策略。EQC3的问题（安全进入设计、缺陷可检测性、FMEA关键维护任务）正好对应“建立行动”和锁定“解决方案”的过程。"],["EQC4 (采购与施工阶段)","DR5","安装验证","设备采购、制造、FAT（工厂验收测试）以及现场的安装施工。EQC4的问题（安装区域隔离、承包商OHS要求、FAT问题处理）完全覆盖“安装”阶段的核心风险。"],["EQC5 (安装与调试阶段)","DR6","调试试产","现场的SAT（现场验收测试）、联动调试、试运行。EQC5的问题（试运行故障记录、质量目标确认）完美对应“调试及试生产”。"],["项目收尾与闭环","DR7","交付反馈","项目完成后，将经验教训、可维护性/可操作性改进建议、安全和食安等交接回工厂知识体系。EQC5末尾的问题（对下一台机器的改进建议、MP情报记录）正好对应“反馈”阶段。"]];
+const AUDIT=[["第 1 步︰早期调研",1,"项目组织架构已经确定",1.0],["第 1 步︰早期调研",2,"目的预算成本已确定，效益已评估",1.0],["第 1 步︰早期调研",3,"项目财务分析被确认(合算投资回报率)",1.0],["第 1 步︰早期调研",4,"初期的技术目标和要求已经决定",2.0],["第 1 步︰早期调研",5,"依据工厂现状进行风险评估",2.0],["第 1 步︰早期调研",6,"制定详细的小组甘特图计划",1.0],["第 2 步︰项目范围定义",7,"制定详细的项目目标和业绩目标：评估垂直启动指标和项目初步成本",2.0],["第 2 步︰项目范围定义",8,"对新品的生产过程工艺进行变更点评估",2.0],["第 2 步︰项目范围定义",9,"已定义了详细的项目进度表",2.0],["第 2 步︰项目范围定义",10,"垂直启动协议已在合同签署",2.0],["第 2 步︰项目范围定义",11,"供应商合同已签订并明确了技术要求",3.0],["第 2 步︰项目范围定义",12,"已根据技术要求和目标商定验收标准及技术参数",3.0],["第 2 步︰项目范围定义",13,"已创建一个初步的培训计划和技能矩阵",2.0],["第 3 步︰详细分析",14,"设备风险评估和目标差距分析：\n1、FAMA、4M分析潜在问题\n2、MP分析\n3、停机、效率、成本分析",4.0],["第 3 步︰详细分析",15,"制定改善计划：\n1、问题改善清单\n2、输出改善解决方法\n3、输出关键的排期\n4、输出人员技能课程",4.0],["第 3 步︰详细分析",16,"设备厂家详细信息：\n1、按照合同清单供货\n2、技术方案审核\n3、输出技术澄清，解决方案报告\n4、确定择优选择结果",3.0],["第 3 步︰详细分析",17,"确认原辅料、备件等供应情况：_x000b_①输出备件、原料、辅料供应商资质_x000b_②确定供货周期，制定安全库存",3.0],["第 3 步︰详细分析",18,"人员培训：\n1、TT&T培训计划制定\n2、培训资源确定、培训讲师确定、培训形式确定、培训项目确定、培训人确定。",3.0],["第4步:运营解决方案",19,"跟踪供应商改善：\n1、输出跟踪结果（电话、视频、邮件）\n2、跟踪结果的整改\n3、工厂内的改善跟踪",3.0],["第4步:运营解决方案",20,"制定改善计划：\n1、问题改善清单\n2、输出改善解决方法\n3、输出关键的排期\n4、输出人员技能课程",4.0],["第4步:运营解决方案",21,"设备厂家详细信息：\n1、按照合同清单供货\n2、技术方案审核\n3、输出技术澄清，解决方案报告\n4、确定择优选择结果",3.0],["第4步:运营解决方案",22,"确认辅料、备件等供应情况：\n1、输出备件、辅料、原料供应商资质\n2、确定供货周期，制定安全库存",3.0],["第4步:运营解决方案",23,"人员培训：\n1、TT&T培训计划制定\n2、培训资源确定、培训讲师确定、培训形式确定、培训项目确定、培训人确定。",3.0],["第 5 步︰ 安装/测试",24,"安装前，制定安装方案和安装计划",1.0],["第 5 步︰ 安装/测试",25,"安装前召开项目会议",1.0],["第 5 步︰ 安装/测试",26,"根据计划进行安装",1.0],["第 5 步︰ 安装/测试",27,"技能矩阵更新",1.0],["第 5 步︰ 安装/测试",28,"安装后，测试过程对小单元进行测试，整体测试",2.0],["第 5 步︰ 安装/测试",29,"对培训后的员工进行理论知识测评",1.0],["第 5 步︰ 安装/测试",30,"项目对EM系统的更新进行总结",2.0],["第 5 步︰ 安装/测试",31,"项目方案过程使用EM系统",1.0],["第 5 步︰ 安装/测试",32,"PM支柱已经输出维护、保养策略",1.0],["第 5 步︰ 安装/测试",33,"AM支柱已经输出CIL标准",1.0],["第 5 步︰ 安装/测试",34,"QM支柱输出质量标准",1.0],["第 5 步︰ 安装/测试",35,"SH支柱输出安全防护标准",1.0],["第 6 步 调试",36,"根据计划进行调试",2.0],["第 6 步 调试",37,"调试期间进行人员责任分工",1.0],["第 6 步 调试",38,"调试完毕",2.0],["第 6 步 调试",39,"完成质量、 性能和垂直启动结果报告",2.0],["第 6 步 调试",40,"技能矩阵更新",1.0],["第 6 步 调试",41,"TT&T都按计划结束",2.0],["第 6 步 调试",42,"调试计划做成方案下发到各个部门",1.0],["第 6 步 调试",43,"项目对EM系统的更新进行总结",2.0],["第 6 步 调试",44,"项目方案过程使用EM系统",2.0],["第 6 步 调试",45,"试车报告完成",1.0],["第 7 步︰ 试运行",46,"项目交接完成",2.0],["第 7 步︰ 试运行",47,"通过质量和性能报告证实目标已经实现",3.0],["第 7 步︰ 试运行",48,"项目结束后，培训工作全部完成。",2.0],["第 7 步︰ 试运行",49,"项目过程采用并行工程",2.0],["第 7 步︰ 试运行",50,"对项目跟踪6个月运行结果",2.0],["第 7 步︰ 试运行",51,"已将所有的 MP & PDA （项目缺陷分析）、检查清单、验收申请单留存保存",2.0]];
+const RDIMS=[["P (生产/生产力)","项目活动是否会导致设备停机时间增加？是否会影响生产计划执行？是否降低OEE？是否引入新的生产瓶颈？",["新设备调试延迟，导致生产线停产。","实施维护流程变更时沟通不畅，导致计划外停机增加。","备件管理系统切换出错，关键备件无法及时获取，延长MTTR。","设备改造期间，产能暂时下降。"]],["Q (质量)","项目活动是否会影响设备精度、稳定性？是否可能导致产品缺陷增加？是否影响过程控制能力？",["状态监测系统安装/校准不当，未能及时预警设备劣化，导致批量质量问题。","预防性维护计划执行不到位（因项目资源分散），设备精度下降，产品尺寸超差。","新设备操作培训不足，员工误操作导致产品报废率上升。"]],["C (成本)","项目活动是否会导致预算超支？是否增加运营成本（能耗、维修费、人工）？是否造成浪费（物料、返工）",["设备改造项目成本估算不足，严重超预算。","新采购的设备能效低于预期，导致长期运行成本增加。","状态监测系统投资回报率低，未能有效减少重大故障维修费用。","因项目导致的计划外停机造成大量生产浪费。"]],["D (交付)","项目活动是否会影响订单按时交付？是否延长生产周期？是否影响供应链（如因设备问题无法按时供料）？",["关键设备升级项目延期，导致后续订单生产延误。","备件管理系统实施初期混乱，紧急采购周期延长，影响设备修复和订单交付。","因设备管理项目占用资源，影响日常维护响应速度，导致小问题扩大影响交付。"]],["S (安全/环境)","项目活动是否引入新的安全隐患？是否可能导致安全事故？是否影响环保合规性（泄漏、排放、废弃物）？是否恶化工作环境？",["新设备安装未充分考虑安全防护措施，存在机械伤害风险。","设备改造涉及危险能源（电、气、液压），上锁挂牌程序执行不到位，导致安全事故。","更换设备润滑油时处理不当，造成土壤或水源污染。","设备噪音或粉尘控制措施在项目中未落实，影响员工健康。"]],["M (士气/参与)","项目活动是否影响员工工作满意度？是否导致员工抗拒变革？是否增加员工工作负担或压力？是否影响团队协作？",["新维护流程过于复杂或未被充分解释，导致操作/维护人员抵触情绪高。","项目任务繁重，占用员工大量休息时间或增加额外负担，导致疲劳和不满。","跨部门协作不畅（如生产与维护因项目产生摩擦），影响团队士气。","项目成果未得到认可，挫伤参与积极性。"]]];
+const RRULE=[["1~4","低风险","常规监控，无需额外措施","绿色"],["5~10","中风险","需制定控制计划，6个月内解决","黄色"],["11~25","高风险","立即采取行动，项目暂停直至风险受控","红色"]];
+/* ==================== 🔍 设计审查系统（块C：数据 + 四模块） ====================
+   ① DR 检查清单：DR1-DR7 共 694 题（分类/支柱/设备等级 A·B·C/EEM·EPM）
+   ② EQC 专家问题：EQC1-EQC6 共 180 题（8 大专家领域）
+   ③ 风险登记评估：PQCDSM 六维 + L×S 5×5 矩阵（低 1-4 / 中 5-10 / 高 11-25）
+   ④ EM 审核评分：22-EM审核表 51 项权重合计 100 分
+   存储：Supabase（em_review_sessions / em_review_risks）+ localStorage 降级
+   ⚠️ 本块在块A/块B之后执行；引用块A 的 $/esc/api/toast/today/PROJECTS/tableOK/DR_META 均安全。 */
+
+/* ---------- 常量 ---------- */
+const RV_STAGES=[1,2,3,4,5,6,7];
+const RV_PHASES=[['EQC1','概念阶段','对应 DR1 早期调研 / DR2 项目范围'],['EQC2','基础设计','对应 DR3 详细分析'],['EQC3','详细设计','对应 DR4 行动解决'],['EQC4','采购与施工','对应 DR5 安装验证'],['EQC5','安装与调试','对应 DR6 调试试产'],['EQC6','试生产·交付','对应 DR7 交付反馈（湖北总厂补充）']];
+const RV_ANS=[['ok','✓ 符合'],['partial','△ 部分符合'],['ng','✗ 不符合'],['na','— 不适用']];
+const RV_ANS_TXT={ok:'符合',partial:'部分符合',ng:'不符合',na:'不适用'};
+const RV_EQC_ST=['进行中','已完成'];
+const RV_RK_ST=['未开始','进行中','计划中','采购中','已完成'];
+const RV_LSK='em_review_v1';
+const RV_LSK_RK='em_review_risks_v1';
+
+/* ---------- 状态 ---------- */
+let RV={prj:0,mod:'dr',dr:1,eqc:'EQC1',all:{},risks:[],f:{q:'',cat:'',pil:'',only:'',fit:1},timer:null,inited:false,editRisk:0,rkDim:{}};
+
+/* ---------- 存储（云端优先 + localStorage 镜像） ---------- */
+function rvLSGet(k){try{return JSON.parse(localStorage.getItem(k)||'{}')}catch(e){return{}}}
+function rvLSSet(k,o){try{localStorage.setItem(k,JSON.stringify(o))}catch(e){}}
+function rvSes(stage){
+  if(!RV.all[stage])RV.all[stage]={a:{},m:{},s:{}};
+  const s=RV.all[stage];
+  if(!s.a||typeof s.a!=='object')s.a={};
+  if(!s.m||typeof s.m!=='object')s.m={};
+  if(!s.s||typeof s.s!=='object')s.s={};
+  return s;
+}
+async function rvLoadAll(){
+  RV.all={};
+  if(!RV.prj)return;
+  if(tableOK.em_review_sessions){
+    try{
+      const rows=await api('em_review_sessions?project_id=eq.'+RV.prj);
+      (rows||[]).forEach(r=>{RV.all[r.stage]=(r.payload&&typeof r.payload==='object')?r.payload:{a:{},m:{}};});
+    }catch(e){}
+  }
+  const ls=rvLSGet(RV_LSK),pk='p'+RV.prj;
+  if(ls[pk])Object.keys(ls[pk]).forEach(k=>{if(!RV.all[k])RV.all[k]=ls[pk][k];});
+}
+async function rvLoadRisks(){
+  RV.risks=[];
+  if(!RV.prj)return;
+  if(tableOK.em_review_risks){
+    try{RV.risks=await api('em_review_risks?project_id=eq.'+RV.prj+'&order=id.asc')||[];}
+    catch(e){}
+  }
+  const ls=rvLSGet(RV_LSK_RK),pk='p'+RV.prj;
+  if(ls[pk]){
+    const ids=RV.risks.map(r=>+r.id);
+    ls[pk].forEach(r=>{if(ids.indexOf(+r.id)<0)RV.risks.push(r);});
+  }
+}
+function rvTouch(){
+  clearTimeout(RV.timer);
+  RV.timer=setTimeout(rvFlush,900);
+}
+async function rvFlush(){
+  const stage=rvCurStage();if(!stage||!RV.prj)return;
+  const ses=RV.all[stage];if(!ses)return;
+  const ls=rvLSGet(RV_LSK),pk='p'+RV.prj;
+  ls[pk]=ls[pk]||{};ls[pk][stage]=ses;rvLSSet(RV_LSK,ls);
+  const el=$('#rv_saved');if(el)el.textContent='保存中…';
+  if(tableOK.em_review_sessions){
+    try{
+      await api('em_review_sessions?on_conflict=project_id,stage','POST',
+        {project_id:RV.prj,stage:stage,payload:ses,updated_at:new Date().toISOString()},
+        'return=representation,resolution=merge-duplicates');
+      if(el)el.textContent='✓ 已自动保存 '+rvClock();
+    }catch(e){if(el)el.textContent='⚠️ 云端失败已存本地：'+e.message;}
+  }else if(el)el.textContent='已存本地（云端表未创建）';
+}
+function rvClock(){const d=new Date();return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');}
+function rvCurStage(){
+  if(RV.mod==='dr')return 'DR'+RV.dr;
+  if(RV.mod==='eqc')return RV.eqc;
+  if(RV.mod==='audit')return 'AUDIT';
+  return null;
+}
+
+/* ---------- 初始化 ---------- */
+async function rvInit(){
+  if(!RV.inited)RV.inited=true;
+  if(!PROJECTS.length&&tableOK.em_projects){try{await loadProjects();}catch(e){}}
+  rvFillPrj();
+  rvPrjInfo();
+  rvStats();
+  rvMod(RV.mod,true);
+}
+function rvFillPrj(){
+  const sel=$('#rv_prj');if(!sel)return;
+  const v=String(RV.prj||'');
+  sel.innerHTML='<option value="">（请选择 EM 项目）</option>'+PROJECTS.map(p=>'<option value="'+p.id+'">'+esc(p.code?p.code+' · ':'')+esc(p.name)+'</option>').join('');
+  sel.value=v;
+}
+async function rvSelPrj(){
+  RV.prj=+($('#rv_prj').value||0)||0;
+  RV.editRisk=0;
+  rvPrjInfo();
+  await rvLoadAll();
+  await rvLoadRisks();
+  rvStats();
+  if(RV.mod==='dr')rvDr();
+  else if(RV.mod==='eqc')rvEqc();
+  else if(RV.mod==='risk')rvRiskRender();
+  else if(RV.mod==='audit')rvAudit();
+}
+function rvPrjInfo(){
+  const el=$('#rv_prjinfo');if(!el)return;
+  const p=RV.prj?PROJECTS.find(x=>x.id===RV.prj):null;
+  if(!p){el.innerHTML='<span style="color:var(--ink-3);font-size:13px">选择项目后：检查表将按项目类型（EEM/EPM）与设备等级（A/B/C）自动过滤适用问题，作答自动保存到云端。</span>';return;}
+  el.innerHTML=
+    '<span class="badge '+(p.ptype==='EPM'?'b-amber':'b-blue')+'">'+esc(p.ptype)+'</span> '+
+    (p.abc_class?'<span class="badge b-green" title="项目台账 ABC 分级">'+p.abc_class+' 类设备</span> ':'<span class="badge b-gray" title="未分级时默认显示全部等级问题">未分级</span> ')+
+    '<span class="badge b-blue">'+esc(DR_META[p.dr_stage||1]||'')+'（当前阶段）</span> '+
+    '<span style="font-size:12.5px;color:var(--ink-3)">负责人：'+esc(p.leader||'—')+'</span> '+
+    '<button class="btn ghost sm" onclick="gotoProjTab()">打开项目台账</button>';
+}
+function rvStats(){
+  const s3=$('#rv_s3');if(s3)s3.textContent=RV.risks.length;
+  const s4=$('#rv_s4');
+  if(s4){const ses=RV.all['AUDIT'];const t=ses&&ses.s?Object.keys(ses.s).reduce((x,k)=>x+(+ses.s[k]||0),0):0;s4.textContent=t?Math.round(t*10)/10:'—';}
+  const s1=$('#rv_s1');const s2=$('#rv_s2');
+  if(s1||s2){
+    let tot=0,done=0;
+    RV_STAGES.forEach(n=>{
+      tot+=rvDrCount(n);
+      const ans=(RV.all['DR'+n]&&RV.all['DR'+n].a)||{};
+      Object.keys(ans).forEach(k=>{if(ans[k]&&ans[k].a)done++;});
+    });
+    if(s1)s1.textContent=tot;
+    if(s2)s2.textContent=done;
+  }
+}
+function rvMod(mod,silent){
+  RV.mod=mod;
+  document.querySelectorAll('#rv_mods button').forEach(b=>b.classList.toggle('on',b.dataset.mod===mod));
+  ['dr','eqc','risk','audit'].forEach(m=>{const el=$('#rv_'+m);if(el)el.style.display=m===mod?'':'none';});
+  if(mod==='dr')rvDr();
+  else if(mod==='eqc')rvEqc();
+  else if(mod==='risk')rvRiskRender();
+  else if(mod==='audit')rvAudit();
+}
+
+/* ---------- ① DR 检查清单 ---------- */
+function rvStageName(n){return (typeof DR_META!=='undefined'&&DR_META[n])||'';}
+function rvDrCount(n){return DRQS[n].reduce((s,g)=>s+g[1].length,0);}
+function rvDr(){
+  const host=$('#rv_dr');if(!host)return;
+  const p=RV.prj?PROJECTS.find(x=>x.id===RV.prj):null;
+  const cards=RV_STAGES.map(n=>{
+    const cnt=rvDrCount(n);
+    const ses=RV.all['DR'+n];const ans=(ses&&ses.a)||{};
+    const done=Object.keys(ans).filter(k=>ans[k]&&ans[k].a).length;
+    const ng=Object.keys(ans).filter(k=>ans[k]&&ans[k].a==='ng').length;
+    const cur=p&&p.dr_stage===n;
+    return '<div class="rvstage'+(RV.dr===n?' on':'')+(cur?' cur':'')+'" onclick="rvDrSel('+n+')" title="共 '+cnt+' 个检查问题">'+
+      '<div class="rvst-no">DR'+n+'</div><div class="rvst-nm">'+rvStageName(n)+'</div>'+
+      '<div class="rvst-meta">'+cnt+' 题 · 已答 <b>'+done+'</b></div>'+
+      '<div class="rvst-bar"><i style="width:'+(cnt?Math.round(done/cnt*100):0)+'%"></i></div>'+
+      (ng?'<div class="rvst-ng">✗ 不符合 '+ng+'</div>':'')+'</div>';
+  }).join('');
+  const ses=rvSes('DR'+RV.dr);
+  const m=ses.m;
+  const pillars=['EM','FI','QM','PM','AM','SHE','Cost','SC','E&T'];
+  const cats=[''].concat(DRQS[RV.dr].map(g=>g[0]));
+  host.innerHTML=
+    '<div class="card"><h3><span class="bar"></span>DR'+RV.dr+' '+rvStageName(RV.dr)+' · 设计评审检查清单 <span class="hint">'+rvDrCount(RV.dr)+' 个问题 · 源自《EM_小组路径-DR清单-汇总》</span></h3>'+
+    (RV.prj?'':'<div class="rvwarn">⚠️ 请先在上方选择 EM 项目，选择后才能作答与保存（未选项目时为只读浏览）。</div>')+
+    '<div class="rvstages">'+cards+'</div>'+
+    '<div class="rvmeta">'+
+      '<div class="fld"><label>评审会议日期</label><input type="date" id="rv_m_date" value="'+esc(m.date||'')+'" onchange="rvMeta(\'date\',this.value)"></div>'+
+      '<div class="fld"><label>评审人</label><input id="rv_m_rev" placeholder="姓名，多人逗号分隔" value="'+esc(m.reviewers||'')+'" onchange="rvMeta(\'reviewers\',this.value)"></div>'+
+      '<div class="fld"><label>会议结论</label><select id="rv_m_dec" onchange="rvMeta(\'decision\',this.value)"><option value="">—</option><option value="pass"'+(m.decision==='pass'?' selected':'')+'>通过</option><option value="conditional_pass"'+(m.decision==='conditional_pass'?' selected':'')+'>有条件通过</option><option value="fail"'+(m.decision==='fail'?' selected':'')+'>不通过</option></select></div>'+
+      '<div class="fld wide"><label>会议决议 / 备忘</label><input id="rv_m_note" placeholder="决议事项、遗留问题、行动与责任…" value="'+esc(m.notes||'')+'" onchange="rvMeta(\'notes\',this.value)"></div>'+
+    '</div>'+
+    '<div class="toolbar" style="margin:10px 0;padding:10px 14px">'+
+      '<div class="search"><span class="mag">🔍</span><input id="rv_q" type="text" placeholder="搜索问题关键词…" value="'+esc(RV.f.q)+'" oninput="rvFilt(\'q\',this.value)"></div>'+
+      '<select class="rvsel" onchange="rvFilt(\'cat\',this.value)"><option value="">全部分类</option>'+cats.map(c=>'<option'+(RV.f.cat===c?' selected':'')+'>'+esc(c)+'</option>').join('')+'</select>'+
+      '<select class="rvsel" onchange="rvFilt(\'pil\',this.value)"><option value="">全部支柱</option>'+pillars.map(x=>'<option'+(RV.f.pil===x?' selected':'')+'>'+x+'</option>').join('')+'</select>'+
+      '<select class="rvsel" onchange="rvFilt(\'only\',this.value)">'+
+        '<option value="">全部问题</option><option value="todo"'+(RV.f.only==='todo'?' selected':'')+'>只看未答</option><option value="ng"'+(RV.f.only==='ng'?' selected':'')+'>只看不符合</option><option value="done"'+(RV.f.only==='done'?' selected':'')+'>只看已答</option></select>'+
+      '<label class="rvfit"><input type="checkbox" '+(RV.f.fit?'checked':'')+' onchange="rvFilt(\'fit\',this.checked?1:0)"> 只看适用本项目（等级/类型）</label>'+
+      '<button class="btn ghost sm" onclick="rvExpand(1)">展开全部</button>'+
+      '<button class="btn ghost sm" onclick="rvExpand(0)">折叠全部</button>'+
+      '<button class="btn ghost sm" onclick="rvExportDr()">⬇ 导出本关 CSV</button>'+
+      '<span id="rv_saved" style="font-size:12px;color:var(--ink-3);margin-left:auto"></span>'+
+    '</div>'+
+    '<div class="rvcnts" id="rv_cnts"></div>'+
+    '<div id="rv_list"></div>'+
+    '</div>';
+  rvList();
+}
+function rvDrSel(n){RV.dr=n;rvDr();}
+function rvMeta(k,v){const ses=rvSes('DR'+RV.dr);ses.m[k]=v||'';rvTouch();}
+function rvFilt(k,v){
+  RV.f[k]=(k==='q')?String(v||''):v;
+  if(k==='fit')RV.f.fit=v?1:0;
+  if(k==='q')clearTimeout(RV._qt),RV._qt=setTimeout(rvList,220);
+  else rvList();
+}
+function rvExpand(open){document.querySelectorAll('#rv_list details.rvgrp').forEach(d=>d.open=!!open);}
+function rvFitOk(it){
+  if(!RV.f.fit)return true;
+  const p=RV.prj?PROJECTS.find(x=>x.id===RV.prj):null;
+  if(!p)return true;
+  if(p.abc_class&&it.g.indexOf(p.abc_class)<0)return false;
+  if(p.ptype==='EEM'&&(it.ee&1)===0)return false;
+  if(p.ptype==='EPM'&&(it.ee&2)===0)return false;
+  return true;
+}
+function rvList(){
+  const host=$('#rv_list');if(!host)return;
+  const ses=rvSes('DR'+RV.dr);
+  const items=[];
+  let idx=0;
+  DRQS[RV.dr].forEach(gr=>gr[1].forEach(q=>{items.push({i:idx++,cat:gr[0],q:q[0],p:q[1],ee:q[2],g:q[3]});}));
+  RV.items=items;
+  const f=RV.f;
+  const vis=items.filter(it=>{
+    if(!rvFitOk(it))return false;
+    if(f.cat&&it.cat!==f.cat)return false;
+    if(f.pil&&it.p!==f.pil)return false;
+    if(f.q&&it.q.toLowerCase().indexOf(f.q.toLowerCase())<0)return false;
+    const av=(ses.a[it.i]||{}).a||'';
+    if(f.only==='todo'&&av)return false;
+    if(f.only==='ng'&&av!=='ng')return false;
+    if(f.only==='done'&&!av)return false;
+    return true;
+  });
+  const groups={};const order=[];
+  vis.forEach(it=>{if(!groups[it.cat]){groups[it.cat]=[];order.push(it.cat);}groups[it.cat].push(it);});
+  const forceOpen=!!(f.q||f.cat||f.pil||f.only);
+  host.innerHTML=order.length?order.map(cat=>{
+    const list=groups[cat];
+    return '<details class="rvgrp"'+(forceOpen?' open':'')+'><summary data-cat="'+esc(cat)+'"><b>'+esc(cat)+'</b><span class="rvgrp-meta" id="rvg_'+rvIdOf(cat)+'">'+list.length+' 题'+rvGrpBadge(list,ses)+'</span></summary>'+
+      list.map(it=>rvRow(it,ses)).join('')+'</details>';
+  }).join(''):'<div class="nodata2" style="display:block">没有符合筛选条件的检查问题。</div>';
+  rvCnts();
+}
+function rvIdOf(s){let h=0;for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;return h.toString(36);}
+function rvGrpBadge(list,ses){
+  const done=list.filter(it=>(ses.a[it.i]||{}).a).length;
+  const ng=list.filter(it=>((ses.a[it.i]||{}).a)==='ng').length;
+  return ' · 已答 '+done+(ng?' · <b style="color:#d64550">✗ '+ng+'</b>':'');
+}
+function rvRow(it,ses){
+  const an=ses.a[it.i]||{};const av=an.a||'';
+  const ro=RV.prj?'':' disabled';
+  return '<div class="rvq'+(av?' ans-'+av:'')+'" id="rvq_'+it.i+'">'+
+    '<div class="rvq-hd"><span class="rvq-no">'+(it.i+1)+'</span>'+
+    '<span class="rvq-pil" title="责任支柱">'+esc(it.p)+'</span>'+
+    '<span class="rvq-gr" title="适用设备等级（A=关键 B=重要 C=一般）">'+it.g+'</span>'+
+    '<span class="rvq-ee" title="'+((it.ee&1)?'EEM 设备早期管理 ':'')+((it.ee&2)?'EPM 产品早期管理':'')+'">'+((it.ee&1)&&(it.ee&2)?'EEM·EPM':(it.ee&1)?'EEM':'EPM')+'</span>'+
+    '<span class="rvq-t">'+esc(it.q)+'</span></div>'+
+    '<div class="rvq-ops">'+
+      RV_ANS.map(a=>'<button class="rvab" data-a="'+a[0]+'"'+(av===a[0]?' data-on="1"':'')+(ro?'':' onclick="rvAns('+it.i+',\''+a[0]+'\')"')+'>'+a[1]+'</button>').join('')+
+      '<input class="rvq-note" placeholder="备注 / 证据 / 说明" value="'+esc(an.n||'')+'"'+(ro?' disabled':' onchange="rvNote('+it.i+',this.value)"')+'>'+
+      (av==='ng'&&RV.prj?'<button class="btn ghost sm" onclick="rvToRisk('+it.i+')">⚠ 登记风险</button>':'')+
+    '</div></div>';
+}
+function rvAns(i,a){
+  const ses=rvSes('DR'+RV.dr);
+  const cur=ses.a[i]||{};
+  const nv=cur.a===a?'':a;
+  ses.a[i]={a:nv,n:cur.n||''};
+  rvRowRefresh(i,ses);rvCnts();rvTouch();
+}
+function rvNote(i,v){
+  const ses=rvSes('DR'+RV.dr);
+  const cur=ses.a[i]||{};
+  ses.a[i]={a:cur.a||'',n:v||''};
+  rvTouch();
+}
+function rvRowRefresh(i,ses){
+  const el=document.getElementById('rvq_'+i);if(!el)return;
+  const it=RV.items[i];if(!it)return;
+  const tmp=document.createElement('div');tmp.innerHTML=rvRow(it,ses);
+  el.replaceWith(tmp.firstChild);
+  // 更新分组徽章与阶段卡
+  const gi='rvg_'+rvIdOf(it.cat);const gb=document.getElementById(gi);
+  if(gb){const list=RV.items.filter(x=>x.cat===it.cat);gb.innerHTML=list.length+' 题'+rvGrpBadge(list,ses);}
+  const card=document.querySelectorAll('#rv_dr .rvstage')[RV.dr-1];
+  if(card){
+    const ans=ses.a;const cnt=rvDrCount(RV.dr);
+    const done=Object.keys(ans).filter(k=>ans[k]&&ans[k].a).length;
+    const ng=Object.keys(ans).filter(k=>ans[k]&&ans[k].a==='ng').length;
+    const meta=card.querySelector('.rvst-meta');if(meta)meta.innerHTML=cnt+' 题 · 已答 <b>'+done+'</b>';
+    const bar=card.querySelector('.rvst-bar i');if(bar)bar.style.width=(cnt?Math.round(done/cnt*100):0)+'%';
+    let ngEl=card.querySelector('.rvst-ng');
+    if(ng&&!ngEl){const d=document.createElement('div');d.className='rvst-ng';d.textContent='✗ 不符合 '+ng;card.appendChild(d);}
+    else if(!ng&&ngEl)ngEl.remove();
+    else if(ng&&ngEl)ngEl.textContent='✗ 不符合 '+ng;
+  }
+}
+function rvCnts(){
+  const el=$('#rv_cnts');if(!el)return;
+  const ses=rvSes('DR'+RV.dr);
+  const a=ses.a;
+  const c={ok:0,partial:0,ng:0,na:0};
+  Object.keys(a).forEach(k=>{const v=(a[k]||{}).a;if(c[v]!==undefined)c[v]++;});
+  const done=c.ok+c.partial+c.ng+c.na;
+  const cnt=rvDrCount(RV.dr);
+  el.innerHTML='<b>'+done+' / '+cnt+'</b> 已作答　'+
+    '<span class="rvdot d-ok">✓ 符合 '+c.ok+'</span>'+
+    '<span class="rvdot d-partial">△ 部分 '+c.partial+'</span>'+
+    '<span class="rvdot d-ng">✗ 不符合 '+c.ng+'</span>'+
+    '<span class="rvdot d-na">— 不适用 '+c.na+'</span>'+
+    '<span class="rvdot d-todo">未答 '+(cnt-done)+'</span>'+
+    (c.ng?'<span style="color:#d64550;font-weight:700">　▶ 有 '+c.ng+' 项不符合，建议逐项「登记风险」并跟踪闭环</span>':'');
+}
+function rvExportDr(){
+  const ses=rvSes('DR'+RV.dr);
+  const items=RV.items||[];
+  const p=RV.prj?PROJECTS.find(x=>x.id===RV.prj):null;
+  const q=c=>'"'+String(c==null?'':c).replace(/"/g,'""').replace(/[\r\n]+/g,' ')+'"';
+  const head=['序号','分类','检查问题','支柱','适用等级','EEM/EPM','结论','备注'];
+  const rows=items.map(it=>{
+    const an=ses.a[it.i]||{};
+    return [it.i+1,it.cat,it.q,it.p,it.g,((it.ee&1)&&(it.ee&2)?'EEM·EPM':(it.ee&1)?'EEM':'EPM'),RV_ANS_TXT[an.a||'']||'未答',an.n||''];
+  });
+  const csv=[head.map(q).join(',')].concat(rows.map(r=>r.map(q).join(','))).join('\r\n');
+  const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='DR'+RV.dr+'_检查清单_'+(p?String(p.name).replace(/[\\/:*?"<>|]/g,'_'):'项目')+'_'+today()+'.csv';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(a.href),3000);
+  toast('已导出 DR'+RV.dr+' 检查清单 '+rows.length+' 条 ✓','ok');
+}
+
+/* ---------- ② EQC 专家问题 ---------- */
+function rvEqc(){
+  const host=$('#rv_eqc');if(!host)return;
+  const cards=RV_PHASES.map(ph=>{
+    const list=EQCS.filter(e=>e[1]===ph[0]);
+    const ses=RV.all[ph[0]];const ans=(ses&&ses.a)||{};
+    const done=Object.keys(ans).filter(k=>ans[k]&&ans[k].c).length;
+    const act=Object.keys(ans).filter(k=>ans[k]&&ans[k].act).length;
+    return '<div class="rvstage'+(RV.eqc===ph[0]?' on':'')+'" onclick="rvEqcSel(\''+ph[0]+'\')">'+
+      '<div class="rvst-no">'+ph[0]+'</div><div class="rvst-nm">'+ph[1]+'</div>'+
+      '<div class="rvst-meta">'+list.length+' 题 · 已评 <b>'+done+'</b></div>'+
+      '<div class="rvst-bar"><i style="width:'+(list.length?Math.round(done/list.length*100):0)+'%"></i></div>'+
+      (act?'<div class="rvst-ng">⚑ 需行动 '+act+'</div>':'')+'</div>';
+  }).join('');
+  const ses=rvSes(RV.eqc);
+  const list=EQCS.filter(e=>e[1]===RV.eqc);
+  const areas=[];const groups={};
+  list.forEach(e=>{const ar=e[3];if(!groups[ar]){groups[ar]=[];areas.push(ar);}groups[ar].push(e);});
+  const meta=RV_PHASES.filter(x=>x[0]===RV.eqc)[0];
+  host.innerHTML=
+    '<div class="card"><h3><span class="bar"></span>'+RV.eqc+' '+meta[1]+' · 专家问题清单（EQC）<span class="hint">'+meta[2]+' · 源自《专家问题检查清单-湖北EM11》</span></h3>'+
+    (RV.prj?'':'<div class="rvwarn">⚠️ 请先在上方选择 EM 项目，选择后才能填写与保存。</div>')+
+    '<div class="rvstages rv6">'+cards+'</div>'+
+    '<div class="rveqc-tip">💡 EQC 问题用于激发讨论（非简单是/否）——整个项目团队在每个阶段早期将其作为讨论指南，逐项评论并标记「需要行动」。专家领域：安全SH / 质量QM / 可靠性PM / 可维护性AM / 成本FI / 可操作性E&T / 食品安全QM / 环境ENV。</div>'+
+    areas.map(ar=>{
+      const g=groups[ar];
+      return '<details class="rvgrp" open><summary><b>'+esc(ar)+'</b><span class="rvgrp-meta">'+g.length+' 题</span></summary>'+
+        g.map(e=>rvEqcRow(e,ses)).join('')+'</details>';
+    }).join('')+
+    '</div>';
+  rvEqcCnts();
+}
+function rvEqcSel(ph){RV.eqc=ph;rvEqc();}
+function rvEqcRow(e,ses){
+  const an=ses.a[e[0]]||{};
+  const ro=RV.prj?'':' disabled';
+  return '<div class="rvq" id="rve_'+e[0]+'">'+
+    '<div class="rvq-hd"><span class="rvq-no">'+e[0]+'</span>'+
+    '<span class="rvq-pil" title="对应 DR 环节">'+esc(e[2])+'</span>'+
+    '<span class="rvq-t">'+esc(e[4])+'</span></div>'+
+    '<div class="rvq-ops">'+
+    '<input class="rvq-note" style="flex:2" placeholder="评论 / 团队讨论结论" value="'+esc(an.c||'')+'"'+(ro?' disabled':' onchange="rvEqcFld('+e[0]+',\'c\',this.value)"')+'>'+
+    '<label class="rvfit"><input type="checkbox"'+(an.act?' checked':'')+(ro?' disabled':' onchange="rvEqcFld('+e[0]+',\'act\',this.checked?1:0)"')+'>⚑ 需要行动</label>'+
+    '<input class="rvq-note" style="flex:1;min-width:90px" placeholder="负责人" value="'+esc(an.ow||'')+'"'+(ro?' disabled':' onchange="rvEqcFld('+e[0]+',\'ow\',this.value)"')+'>'+
+    '<select class="rvsel"'+(ro?' disabled':' onchange="rvEqcFld('+e[0]+',\'st\',this.value)"')+'>'+RV_EQC_ST.map(s=>'<option'+(an.st===s?' selected':'')+'>'+s+'</option>').join('')+'</select>'+
+    '</div></div>';
+}
+function rvEqcFld(n,k,v){
+  const ses=rvSes(RV.eqc);
+  const cur=ses.a[n]||{};
+  cur[k]=(k==='act')?(v?1:0):(v||'');
+  ses.a[n]=cur;
+  rvTouch();
+  if(k==='act'&&v){const card=document.querySelectorAll('#rv_eqc .rvstage')[RV_PHASES.map(x=>x[0]).indexOf(RV.eqc)];
+    if(card){let ngEl=card.querySelector('.rvst-ng');
+      const ses2=ses;const list=EQCS.filter(e=>e[1]===RV.eqc);
+      const act=Object.keys(ses2.a).filter(x=>ses2.a[x]&&ses2.a[x].act).length;
+      if(!ngEl){const d=document.createElement('div');d.className='rvst-ng';d.textContent='⚑ 需行动 '+act;card.appendChild(d);}else ngEl.textContent='⚑ 需行动 '+act;}}
+}
+function rvEqcCnts(){
+  const ses=rvSes(RV.eqc);
+  const list=EQCS.filter(e=>e[1]===RV.eqc);
+  const a=ses.a;
+  let done=0,act=0,fin=0;
+  Object.keys(a).forEach(k=>{const v=a[k]||{};if(v.c)done++;if(v.act)act++;if(v.st==='已完成')fin++;});
+  const el=$('#rv_eqc_cnts');
+  if(el)el.innerHTML='<b>'+done+' / '+list.length+'</b> 已评论　<span class="rvdot d-ng">⚑ 需行动 '+act+'</span><span class="rvdot d-ok">已完成 '+fin+'</span>';
+}
+
+/* ---------- ③ 风险登记评估 ---------- */
+function rvLvOf(v){return v<=4?['低','b-green','#0e8a5f']:v<=10?['中','b-amber','#b47a00']:['高','b-red','#d64550'];}
+function rvRiskRender(){
+  const host=$('#rv_risk');if(!host)return;
+  const dims=RDIMS;
+  host.innerHTML=
+    '<div class="card"><h3><span class="bar"></span>风险登记与评估（PQCDSM）<span class="hint">风险值 R = L可能性 × S严重性（1-5）· 源自《EM项目风险评估表范本》</span></h3>'+
+    (RV.prj?'':'<div class="rvwarn">⚠️ 请先选择 EM 项目——风险登记与项目绑定。</div>')+
+    '<div class="rvrisk-wrap">'+
+      '<div class="rvrisk-left">'+
+        '<div class="rvsub">风险矩阵（当前项目 '+(RV.risks.length||0)+' 条）</div>'+
+        rvMatrix()+
+        '<div class="rvsub" style="margin-top:14px">PQCDSM 维度分布</div>'+
+        rvDimBars()+
+        '<div class="rvlegend">'+RRULE.map(r=>{const lv=rvLvOf(r[1].indexOf('低')>=0?2:r[1].indexOf('中')>=0?8:15);return '<span class="rvdot" style="color:'+lv[2]+'">■ '+r[1]+'（'+r[0]+'）'+r[2]+'</span>';}).join('<br>')+'</div>'+
+      '</div>'+
+      '<div class="rvrisk-right">'+
+        '<div class="rvsub">'+(RV.editRisk?'✏️ 编辑风险 #'+RV.editRisk:'➕ 新增风险')+(RV.rkDim&&RV.rkDim.src?' <span class="badge b-amber">来自检查清单：'+esc(RV.rkDim.src)+'</span>':'')+'</div>'+
+        '<div class="fgrid">'+
+          '<div class="fld wide"><label>影响维度（PQCDSM 多选）</label><div class="rvdims" id="rk_dims">'+dims.map(d=>{const k=d[0].split(' ')[0];const on=RV.rkDim&&RV.rkDim.dim&&RV.rkDim.dim.indexOf(k)>=0;return '<button type="button" class="rvdim'+(on?' on':'')+'" onclick="rvDimToggle(\''+k+'\')" title="'+esc(d[1])+'">'+k+'</button>';}).join('')+'</div>'+
+          '<div class="livecalc" id="rk_dimhint">'+(RV.rkDim&&RV.rkDim.dim?rvDimHint(RV.rkDim.dim):'点击维度字母查看该维度应关注什么（来自风险评估表范本）')+'</div></div>'+
+          '<div class="fld"><label>关键活动/任务</label><input id="rk_act" value="'+esc((RV.rkDim&&RV.rkDim.act)||'')+'"></div>'+
+          '<div class="fld wide"><label>潜在风险描述 <i>*</i></label><input id="rk_desc" placeholder="如：设备包装速度不匹配旺季产能需求" value="'+esc((RV.rkDim&&RV.rkDim.desc)||'')+'"></div>'+
+          '<div class="fld"><label>风险可能原因</label><input id="rk_cause" value="'+esc((RV.rkDim&&RV.rkDim.cause)||'')+'"></div>'+
+          '<div class="fld"><label>潜在后果</label><input id="rk_cons" value="'+esc((RV.rkDim&&RV.rkDim.cons)||'')+'"></div>'+
+          '<div class="fld"><label>可能性 L（1-5）</label><select id="rk_l">'+[1,2,3,4,5].map(x=>'<option value="'+x+'"'+((RV.rkDim&&+RV.rkDim.l)===x?' selected':'')+'>'+x+'</option>').join('')+'</select></div>'+
+          '<div class="fld"><label>严重性 S（1-5）</label><select id="rk_s">'+[1,2,3,4,5].map(x=>'<option value="'+x+'"'+((RV.rkDim&&+RV.rkDim.s)===x?' selected':'')+'>'+x+'</option>').join('')+'</select></div>'+
+          '<div class="fld"><label>风险值与等级（自动）</label><div class="livecalc" id="rk_calc">—</div></div>'+
+          '<div class="fld"><label>现有控制措施</label><input id="rk_ctrl" value="'+esc((RV.rkDim&&RV.rkDim.ctrl)||'')+'"></div>'+
+          '<div class="fld"><label>控制充分性</label><select id="rk_ade">'+['Y','N','部分'].map(x=>'<option'+((RV.rkDim&&RV.rkDim.ade)===x?' selected':'')+'>'+x+'</option>').join('')+'</select></div>'+
+          '<div class="fld wide"><label>建议的额外应对措施</label><input id="rk_plan" placeholder="① … ② …" value="'+esc((RV.rkDim&&RV.rkDim.plan)||'')+'"></div>'+
+          '<div class="fld"><label>责任人</label><input id="rk_owner" value="'+esc((RV.rkDim&&RV.rkDim.owner)||'')+'"></div>'+
+          '<div class="fld"><label>目标完成日期</label><input id="rk_due" type="date" value="'+esc((RV.rkDim&&RV.rkDim.due)||'')+'"></div>'+
+          '<div class="fld"><label>当前状态</label><select id="rk_status">'+RV_RK_ST.map(s=>'<option'+((RV.rkDim&&RV.rkDim.status)===s?' selected':'')+'>'+s+'</option>').join('')+'</select></div>'+
+        '</div>'+
+        '<div class="fbtns">'+
+          '<button class="btn primary" onclick="rvRiskSave()">'+(RV.editRisk?'保存修改':'登记风险')+'</button>'+
+          (RV.editRisk?'<button class="btn ghost" onclick="rvRiskReset()">取消编辑</button>':'')+
+          '<button class="btn ghost" onclick="rvExportRisk()">⬇ 导出 CSV</button>'+
+        '</div>'+
+      '</div>'+
+    '</div>'+
+    '<div class="rvsub" style="margin-top:18px">风险台账</div>'+
+    rvRiskTable()+
+    '</div>';
+  rvCalc();
+}
+function rvDimHint(ks){
+  const hs=RDIMS.filter(d=>ks.indexOf(d[0].split(' ')[0])>=0).map(d=>'<b>'+d[0]+'</b>：'+d[1]);
+  return hs.length?hs.join('<br>'):'点击维度字母查看该维度应关注什么';
+}
+function rvDimToggle(k){
+  RV.rkDim=RV.rkDim||{};
+  let ds=RV.rkDim.dim||'';
+  ds=ds.split(',').filter(Boolean);
+  const i=ds.indexOf(k);
+  if(i>=0)ds.splice(i,1);else ds.push(k);
+  RV.rkDim.dim=ds.join(',');
+  document.querySelectorAll('#rk_dims .rvdim').forEach(b=>b.classList.toggle('on',ds.indexOf(b.textContent)>=0));
+  const h=$('#rk_dimhint');if(h)h.innerHTML=rvDimHint(ds.join(','));
+}
+function rvCalc(){
+  const l=+($('#rk_l')||{}).value||1,s=+($('#rk_s')||{}).value||1;
+  const v=l*s;const lv=rvLvOf(v);
+  const el=$('#rk_calc');
+  if(el)el.innerHTML='<b style="font-size:15px;color:'+lv[2]+'">'+v+' · '+lv[0]+'风险</b><span style="font-size:12px;color:var(--ink-3)">（L='+l+' × S='+s+'）</span>';
+}
+function rvMatrix(){
+  const cnt={};
+  RV.risks.forEach(r=>{const k=(+r.likelihood||1)+'x'+(+r.severity||1);cnt[k]=(cnt[k]||0)+1;});
+  let h='<table class="rvmx"><tr><th>S＼L</th>'+[1,2,3,4,5].map(l=>'<th>L='+l+'</th>').join('')+'<th style="width:90px">说明</th></tr>';
+  for(let s=5;s>=1;s--){
+    h+='<tr><th>S='+s+'</th>';
+    for(let l=1;l<=5;l++){
+      const v=l*s;const lv=rvLvOf(v);const c=cnt[l+'x'+s]||0;
+      h+='<td style="background:'+lv[2]+(c?'':'22')+';color:'+(c?'#fff':'rgba(0,0,0,.35)')+';font-weight:700" title="风险值 '+v+' · '+lv[0]+'风险">'+(c||v)+'</td>';
+    }
+    h+='<td style="text-align:left;font-size:11px;color:var(--ink-3);font-weight:400">'+(s===5?'S=5 灾难性':s===4?'S=4 重大':s===3?'S=3 中等':s===2?'S=2 轻微':'S=1 可忽略')+'</td></tr>';
+  }
+  h+='</table><div style="font-size:11.5px;color:var(--ink-3);margin-top:4px">■ 格内数字 = 该位置风险条数（空白格显示该格风险值）；绿=低（1-4）黄=中（5-10）红=高（11-25）</div>';
+  return h;
+}
+function rvDimBars(){
+  const ks=['P','Q','C','D','S','M'];
+  const cnt={};let mx=1;
+  RV.risks.forEach(r=>String(r.dimension||'').split(',').filter(Boolean).forEach(k=>{cnt[k]=(cnt[k]||0)+1;if(cnt[k]>mx)mx=cnt[k];}));
+  return '<div class="rvdimbars">'+ks.map(k=>{
+    const d=RDIMS.filter(x=>x[0].indexOf(k+' ')===0)[0]||[];
+    const c=cnt[k]||0;
+    return '<div class="rvdimbar" title="'+esc(d[1]||'')+'"><span class="k">'+k+'</span>'+
+      '<div class="b"><i style="width:'+(c?Math.round(c/mx*100):0)+'%"></i></div>'+
+      '<span class="v">'+c+'</span></div>';
+  }).join('')+'</div>';
+}
+function rvRiskTable(){
+  if(!RV.risks.length)return '<div class="nodata2" style="display:block">暂无登记风险——可在检查清单中对「不符合」项点「⚠ 登记风险」，或在上方直接新增。</div>';
+  const rows=RV.risks.slice().sort((a,b)=>(+b.risk_value||0)-(+a.risk_value||0));
+  return '<div style="overflow:auto"><table class="t"><thead><tr><th>#</th><th>维度</th><th>风险描述</th><th>活动</th><th>L</th><th>S</th><th>风险值</th><th>等级</th><th>责任人</th><th>截止</th><th>状态</th><th>措施</th><th style="width:150px">操作</th></tr></thead><tbody>'+
+    rows.map(r=>{
+      const lv=rvLvOf(+r.risk_value||1);
+      return '<tr><td>'+r.id+'</td><td>'+esc(r.dimension||'')+'</td><td style="max-width:260px"><b>'+esc(r.risk_desc||'')+'</b>'+(r.source?'<div style="font-size:11px;color:var(--ink-3)">来源：'+esc(r.source)+'</div>':'')+'</td>'+
+      '<td style="font-size:12px">'+esc(r.activity||'')+'</td><td>'+r.likelihood+'</td><td>'+r.severity+'</td>'+
+      '<td><b>'+r.risk_value+'</b></td><td><span class="badge '+lv[1]+'">'+lv[0]+'</span></td>'+
+      '<td>'+esc(r.owner||'—')+'</td><td style="font-size:12px">'+esc(r.due_date||'—')+'</td>'+
+      '<td><span class="badge '+(r.status==='已完成'?'b-green':'b-gray')+'" style="font-size:11px">'+esc(r.status||'未开始')+'</span></td>'+
+      '<td style="font-size:11.5px;max-width:200px">'+esc(r.action_plan||'')+'</td>'+
+      '<td style="white-space:nowrap"><button class="btn sm ghost" onclick="rvRiskEdit('+r.id+')">编辑</button> '+
+      '<button class="btn sm '+(r.status==='已完成'?'ghost':'primary')+'" onclick="rvRiskDone('+r.id+')">'+(r.status==='已完成'?'重开':'完成')+'</button> '+
+      '<button class="btn sm danger" onclick="rvRiskDel('+r.id+')">删</button></td></tr>';
+    }).join('')+'</tbody></table></div>';
+}
+function rvToRisk(i){
+  const it=RV.items[i];if(!it)return;
+  RV.rkDim={dim:'',act:it.cat,desc:it.q,cause:'',cons:'',l:3,s:3,ctrl:'',ade:'',plan:'',owner:'',due:'',status:'未开始',src:'DR'+RV.dr+' 检查#'+(i+1)};
+  RV.editRisk=0;
+  RV.mod='risk';
+  document.querySelectorAll('#rv_mods button').forEach(b=>b.classList.toggle('on',b.dataset.mod==='risk'));
+  ['dr','eqc','risk','audit'].forEach(m=>{const el=$('#rv_'+m);if(el)el.style.display=m==='risk'?'':'none';});
+  rvRiskRender();
+  toast('已带入 DR'+RV.dr+' 第 '+(i+1)+' 题（不符合）→ 请补全 L/S 与责任人后登记','ok');
+  const el=$('#rv_risk');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+async function rvRiskSave(){
+  if(!RV.prj){toast('请先选择 EM 项目','err');return;}
+  const desc=($('#rk_desc').value||'').trim();
+  if(!desc){toast('请填写潜在风险描述','err');return;}
+  const l=+$('#rk_l').value,s=+$('#rk_s').value,v=l*s,lv=rvLvOf(v);
+  const body={project_id:RV.prj,dimension:RV.rkDim.dim||'',activity:($('#rk_act').value||'').trim()||null,
+    risk_desc:desc,cause:($('#rk_cause').value||'').trim()||null,consequence:($('#rk_cons').value||'').trim()||null,
+    likelihood:l,severity:s,risk_value:v,risk_level:lv[0],
+    control:($('#rk_ctrl').value||'').trim()||null,adequacy:$('#rk_ade').value||null,
+    action_plan:($('#rk_plan').value||'').trim()||null,owner:($('#rk_owner').value||'').trim()||null,
+    due_date:$('#rk_due').value||null,status:$('#rk_status').value||'未开始',
+    source:(RV.rkDim&&RV.rkDim.src)||null,updated_at:new Date().toISOString()};
+  if(RV.editRisk){
+    if(tableOK.em_review_risks){
+      try{await api('em_review_risks?id=eq.'+RV.editRisk,'PATCH',body);}
+      catch(e){toast('保存失败：'+e.message,'err');return;}
+    }
+    const r=RV.risks.filter(x=>+x.id===RV.editRisk)[0];
+    if(r)Object.assign(r,body);
+    toast('风险 #'+RV.editRisk+' 已更新 ✓','ok');
+  }else{
+    body.id=Date.now();
+    if(tableOK.em_review_risks){
+      try{
+        const rows=await api('em_review_risks','POST',body);
+        if(rows&&rows[0]&&rows[0].id)body.id=rows[0].id;
+      }catch(e){toast('云端保存失败：'+e.message+'（已存本地）','err');}
+    }
+    RV.risks.push(body);
+    toast('风险已登记（'+lv[0]+'风险 · R='+v+'）✓','ok');
+  }
+  rvRiskLocalMirror();
+  RV.editRisk=0;RV.rkDim={dim:''};
+  rvRiskRender();rvStats();
+}
+function rvRiskLocalMirror(){
+  if(!RV.prj)return;
+  const ls=rvLSGet(RV_LSK_RK);ls['p'+RV.prj]=RV.risks;rvLSSet(RV_LSK_RK,ls);
+}
+function rvRiskEdit(id){
+  const r=RV.risks.filter(x=>+x.id===+id)[0];if(!r)return;
+  RV.editRisk=+id;
+  RV.rkDim={dim:r.dimension||'',act:r.activity||'',desc:r.risk_desc||'',cause:r.cause||'',cons:r.consequence||'',
+    l:+r.likelihood||3,s:+r.severity||3,ctrl:r.control||'',ade:r.adequacy||'',plan:r.action_plan||'',
+    owner:r.owner||'',due:r.due_date||'',status:r.status||'未开始',src:(r.source||'')};
+  rvRiskRender();
+  window.scrollTo({top:($('#rv_risk')||document.body).offsetTop-10,behavior:'smooth'});
+}
+async function rvRiskDone(id){
+  const r=RV.risks.filter(x=>+x.id===+id)[0];if(!r)return;
+  const st=r.status==='已完成'?'进行中':'已完成';
+  r.status=st;
+  if(tableOK.em_review_risks){try{await api('em_review_risks?id=eq.'+id,'PATCH',{status:st,updated_at:new Date().toISOString()});}catch(e){}}
+  rvRiskLocalMirror();rvRiskRender();
+}
+async function rvRiskDel(id){
+  if(!confirm('确认删除该风险记录？'))return;
+  RV.risks=RV.risks.filter(x=>+x.id!==+id);
+  if(tableOK.em_review_risks){try{await api('em_review_risks?id=eq.'+id,'DELETE');}catch(e){}}
+  rvRiskLocalMirror();rvRiskRender();rvStats();
+  toast('风险已删除','ok');
+}
+function rvRiskReset(){RV.editRisk=0;RV.rkDim={dim:''};rvRiskRender();}
+function rvExportRisk(){
+  if(!RV.risks.length){toast('暂无可导出的风险','err');return;}
+  const q=c=>'"'+String(c==null?'':c).replace(/"/g,'""').replace(/[\r\n]+/g,' ')+'"';
+  const head=['#','维度','关键活动','风险描述','原因','后果','L','S','风险值','等级','现有控制','充分性','建议措施','责任人','完成日期','状态','来源'];
+  const csv=[head.map(q).join(',')].concat(RV.risks.map(r=>[r.id,r.dimension,r.activity,r.risk_desc,r.cause,r.consequence,r.likelihood,r.severity,r.risk_value,r.risk_level,r.control,r.adequacy,r.action_plan,r.owner,r.due_date,r.status,r.source].map(q).join(','))).join('\r\n');
+  const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='风险登记表_'+today()+'.csv';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(a.href),3000);
+  toast('已导出 '+RV.risks.length+' 条风险 ✓','ok');
+}
+
+/* ---------- ④ EM 审核评分 ---------- */
+function rvAudit(){
+  const host=$('#rv_audit');if(!host)return;
+  const ses=rvSes('AUDIT');
+  const steps=[];
+  AUDIT.forEach(a=>{if(steps.indexOf(a[0])<0)steps.push(a[0]);});
+  const sum={};const got={};
+  steps.forEach(st=>{
+    sum[st]=0;got[st]=0;
+    AUDIT.forEach(a=>{if(a[0]===st){sum[st]+=(+a[3]||0);got[st]+=(+ses.s[a[1]]||0);}});
+  });
+  const total=Object.keys(got).reduce((x,k)=>x+got[k],0);
+  const cards=steps.map((st,i)=>{
+    const w=sum[st],g=got[st];
+    return '<div class="rvstage'+(g>=w&&w>0?' done':'')+'">'+
+      '<div class="rvst-no" style="font-size:13px">第'+(i+1)+'步</div><div class="rvst-nm">'+esc(st.replace(/^第\s*\d+\s*步[︰:︖]?\s*/,''))+'</div>'+
+      '<div class="rvst-meta"><b style="color:var(--header)">'+(Math.round(g*10)/10)+'</b> / '+w+' 分</div>'+
+      '<div class="rvst-bar"><i style="width:'+(w?Math.round(g/w*100):0)+'%;background:'+(g/w>=0.9?'#0e8a5f':g/w>=0.7?'#b47a00':'#d64550')+'"></i></div></div>';
+  }).join('');
+  let cur='';const rows=[];
+  AUDIT.forEach(a=>{
+    if(a[0]!==cur){cur=a[0];const i=steps.indexOf(cur);rows.push('<tr class="rvstep"><td colspan="6">第'+(i+1)+'步 · '+esc(cur)+'　<span class="rvgrp-meta">本步 '+got[cur]+' / '+sum[cur]+' 分</span></td></tr>');}
+    const v=ses.s[a[1]];
+    rows.push('<tr><td>'+a[1]+'</td><td style="min-width:280px">'+esc(a[2]).replace(/\n/g,'<br>')+'</td><td><b>'+a[3]+'</b></td>'+
+      '<td><input class="rvin" type="number" min="0" max="'+a[3]+'" step="0.5" value="'+(v===undefined?'':v)+'" placeholder="0"'+(RV.prj?'':' disabled')+' onchange="rvAuditSet('+a[1]+',this.value,'+a[3]+')"></td>'+
+      '<td>'+(v===undefined?'<span style="color:var(--ink-3)">未评</span>':'<b>'+v+'</b> / '+a[3]+'</b>')+'</td>'+
+      '<td><div class="rvst-bar" style="width:70px"><i style="width:'+(a[3]?Math.round((+v||0)/a[3]*100):0)+'%"></i></div></td></tr>');
+  });
+  host.innerHTML=
+    '<div class="card"><h3><span class="bar"></span>EM 小组审核评分表 <span class="hint">51 项 · 满分 100 · 源自《22-EM审核表 湖北总厂》：现场讲解、抽查相关资料，不符合项依据相关权重扣分</span></h3>'+
+    (RV.prj?'':'<div class="rvwarn">⚠️ 请先选择 EM 项目，选择后才能评分与保存。</div>')+
+    '<div class="rvaudit-top">'+
+      '<div class="rvtotal"><div class="t">'+(Math.round(total*10)/10)+'</div><div class="l">当前总分 / 100</div></div>'+
+      '<div class="rvstages rv7">'+cards+'</div>'+
+    '</div>'+
+    '<table class="t"><thead><tr><th>编号</th><th>检查内容</th><th>满分</th><th>实际得分</th><th>得分率</th><th>进度</th></tr></thead><tbody>'+rows.join('')+'</tbody></table>'+
+    '<div style="font-size:12px;color:var(--ink-3);margin-top:8px">评分自动保存'+(tableOK.em_review_sessions?'到云端':'到本地（云端表未创建）')+'；得分率 = 实际得分 ÷ 该项满分。</div>'+
+    '</div>';
+  rvStats();
+}
+function rvAuditSet(no,v,w){
+  const ses=rvSes('AUDIT');
+  let x=parseFloat(v);
+  if(isNaN(x)||x<0)x=0;
+  if(x>w)x=w;
+  if(x===0&&(!v||v==='')){delete ses.s[no];}else ses.s[no]=Math.round(x*10)/10;
+  rvTouch();
+  rvAudit();
+}
+
 
 </script>
 </body>
