@@ -309,13 +309,28 @@
   .rvmeta label{font-size:11.5px;font-weight:700;color:var(--ink-2);display:block;margin-bottom:4px}
   .rvmeta input,.rvmeta select{width:100%;font-family:inherit;font-size:13px;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
   .rvmeta input:focus,.rvmeta select:focus{outline:none;border-color:#a8c0e8}
-  details.rvgrp{border:1px solid var(--line);border-radius:11px;margin:9px 0;background:#fff;overflow:hidden}
-  details.rvgrp summary{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 14px;cursor:pointer;user-select:none;background:#f8fafd;font-size:13px;list-style:none}
+  details.rvgrp{border:1px solid var(--line);border-radius:10px;margin:8px 0;background:#fff;overflow:hidden;transition:border-color .15s}
+  details.rvgrp:hover{border-color:#c6d5ea}
+  details.rvgrp[open]{border-color:#b9cbe6}
+  details.rvgrp summary{display:flex;align-items:center;gap:9px;padding:8px 13px;cursor:pointer;user-select:none;background:#f7f9fd;font-size:13px;list-style:none;border-left:3px solid transparent;transition:background .15s}
+  details.rvgrp summary:hover{background:#eef3fb}
+  details.rvgrp[open] summary{background:#eaf1fb;border-left-color:var(--header);border-bottom:1px solid var(--line)}
   details.rvgrp summary::-webkit-details-marker{display:none}
-  details.rvgrp summary::before{content:"▸";color:var(--ink-3);font-size:11px;transition:transform .15s}
+  details.rvgrp summary::before{content:"";flex:none;width:0;height:0;border-left:5px solid var(--ink-3);border-top:4px solid transparent;border-bottom:4px solid transparent;transition:transform .15s}
   details.rvgrp[open] summary::before{transform:rotate(90deg)}
-  details.rvgrp summary b{color:var(--header);font-size:12.5px}
-  .rvgrp-meta{font-size:11.5px;color:var(--ink-3);font-weight:400;white-space:nowrap}
+  details.rvgrp summary b{color:var(--header);font-size:12.5px;font-weight:800}
+  .rvgrp-meta{font-size:11.5px;color:var(--ink-3);font-weight:400;white-space:nowrap;margin-left:auto}
+  .rvg-ix{flex:none;font-size:10.5px;font-weight:800;color:#5b7bb5;background:#e8eefb;border-radius:5px;padding:1px 6px;letter-spacing:.4px;font-variant-numeric:tabular-nums}
+  .rvg-nm{flex:1;min-width:0;font-size:13px;font-weight:700;color:var(--header);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .rvg-pg{flex:none;width:88px;height:6px;background:#e3e8ef;border-radius:20px;overflow:hidden}
+  .rvg-pg i{display:block;height:100%;width:0;background:var(--header);border-radius:20px;transition:width .3s}
+  .rvg-pg i.full{background:var(--ok)}
+  .rvg-pg i.warn{background:var(--warn)}
+  .rvg-ct{flex:none;min-width:48px;text-align:right;font-size:11.5px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+  .rvg-ct b{color:var(--ink);font-weight:800;font-size:12px}
+  .rvg-ng{flex:none;font-size:10.5px;font-weight:800;color:var(--danger);background:var(--danger-soft);border-radius:20px;padding:1px 8px}
+  .rvg-ok{flex:none;font-size:10.5px;font-weight:800;color:var(--ok);background:var(--ok-soft);border-radius:20px;padding:1px 8px}
+  @media(max-width:820px){.rvg-pg{display:none}}
   .rvq{padding:10px 14px;border-top:1px solid var(--line);transition:background .12s}
   .rvq:hover{background:#fafbfd}
   .rvq.ans-ok{box-shadow:inset 3px 0 0 var(--ok)}
@@ -6008,18 +6023,26 @@ function rvList(){
   const groups={};const order=[];
   vis.forEach(it=>{if(!groups[it.cat]){groups[it.cat]=[];order.push(it.cat);}groups[it.cat].push(it);});
   const forceOpen=!!(f.q||f.cat||f.pil||f.only);
+  const gIx={};DRQS[RV.dr].forEach((gr,i)=>{gIx[gr[0]]=i+1;});
+  RV.groups=groups;RV.gorder=order;RV.gix=gIx;
   host.innerHTML=order.length?order.map(cat=>{
     const list=groups[cat];
-    return '<details class="rvgrp"'+(forceOpen?' open':'')+'><summary data-cat="'+esc(cat)+'"><b>'+esc(cat)+'</b><span class="rvgrp-meta" id="rvg_'+rvIdOf(cat)+'">'+list.length+' 题'+rvGrpBadge(list,ses)+'</span></summary>'+
+    return '<details class="rvgrp"'+(forceOpen?' open':'')+'><summary data-cat="'+esc(cat)+'" id="rvg_'+rvIdOf(cat)+'">'+rvGrpHead(cat,list,ses,gIx[cat])+'</summary>'+
       list.map(it=>rvRow(it,ses)).join('')+'</details>';
   }).join(''):'<div class="nodata2" style="display:block">没有符合筛选条件的检查问题。</div>';
   rvCnts();
 }
 function rvIdOf(s){let h=0;for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;return h.toString(36);}
-function rvGrpBadge(list,ses){
+function rvGrpHead(cat,list,ses,ix){
   const done=list.filter(it=>(ses.a[it.i]||{}).a).length;
   const ng=list.filter(it=>((ses.a[it.i]||{}).a)==='ng').length;
-  return ' · 已答 '+done+(ng?' · <b style="color:#d64550">✗ '+ng+'</b>':'');
+  const pct=list.length?Math.round(done/list.length*100):0;
+  const full=list.length>0&&done===list.length;
+  return '<span class="rvg-ix">'+(ix?('0'+ix).slice(-2):'--')+'</span>'+
+    '<span class="rvg-nm" title="'+esc(cat)+'">'+esc(cat)+'</span>'+
+    '<span class="rvg-pg"><i class="'+(ng?'warn':(full?'full':''))+'" style="width:'+pct+'%"></i></span>'+
+    '<span class="rvg-ct"><b>'+done+'</b>/'+list.length+'</span>'+
+    (ng?'<span class="rvg-ng">✗ '+ng+'</span>':(full?'<span class="rvg-ok">✓ 完成</span>':''));
 }
 function rvRow(it,ses){
   const an=ses.a[it.i]||{};const av=an.a||'';
@@ -6055,8 +6078,9 @@ function rvRowRefresh(i,ses){
   const tmp=document.createElement('div');tmp.innerHTML=rvRow(it,ses);
   el.replaceWith(tmp.firstChild);
   // 更新分组徽章与阶段卡
-  const gi='rvg_'+rvIdOf(it.cat);const gb=document.getElementById(gi);
-  if(gb){const list=RV.items.filter(x=>x.cat===it.cat);gb.innerHTML=list.length+' 题'+rvGrpBadge(list,ses);}
+  const gb=document.getElementById('rvg_'+rvIdOf(it.cat));
+  if(gb){const list=(RV.groups&&RV.groups[it.cat])||RV.items.filter(x=>x.cat===it.cat);
+    gb.innerHTML=rvGrpHead(it.cat,list,ses,(RV.gix||{})[it.cat]);}
   const card=document.querySelectorAll('#rv_dr .rvstage')[RV.dr-1];
   if(card){
     const ans=ses.a;const cnt=rvDrCount(RV.dr);
