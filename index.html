@@ -807,13 +807,13 @@
 /* ================= Supabase 连接配置 ================= */
 const SB_URL='https://lgohtkyiltxypvhydlbu.supabase.co';
 const SB_KEY='sb_publishable_KjUwI-HYgDIWgAnObNUdKQ_hcYTH6Bg'; // publishable key（公开，非管理密钥）
-const TABLES=['em_projects','em_dr_records','em_tool_usage','em_fmea','em_vsu','em_skills','em_mp_info','em_lcc'];
-const TABLE_NAMES={'em_projects':'项目台账','em_dr_records':'DR关卡','em_tool_usage':'使用台账','em_fmea':'FMEA','em_vsu':'VSU','em_skills':'技能矩阵','em_mp_info':'MP情报','em_lcc':'LCC成本'};
+const TABLES=['em_projects','em_dr_records','em_tool_usage','em_fmea','em_vsu','em_skills','em_mp_info','em_lcc','em_dsr_records','em_design_feedback'];
+const TABLE_NAMES={'em_projects':'项目台账','em_dr_records':'DR关卡','em_tool_usage':'使用台账','em_fmea':'FMEA','em_vsu':'VSU','em_skills':'技能矩阵','em_mp_info':'MP情报','em_lcc':'LCC成本','em_dsr_records':'设计审查记录','em_design_feedback':'设计反馈库'};
 const tableOK={};
 
-async function api(path,method='GET',body=null){
+async function api(path,method='GET',body=null,prefer=null){
   const headers={'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json'};
-  if(method!=='GET') headers['Prefer']='return=representation';
+  if(method!=='GET') headers['Prefer']=prefer||'return=representation';
   const res=await fetch(SB_URL+'/rest/v1/'+path,{method,headers,body:body?JSON.stringify(body):undefined});
   if(!res.ok){let msg='HTTP '+res.status;try{const j=await res.json();msg=j.message||msg;}catch(e){}throw new Error(msg);}
   const t=await res.text();return t?JSON.parse(t):null;
@@ -1897,6 +1897,8 @@ async function delSkill(id){
 let rtThrottle=null,_rtFallback=false;
 function activeDataTab(){const b=document.querySelector(".tabs button.on");return b?b.dataset.tab:null;}
 function refreshActiveView(){
+  const s=document.body.getAttribute('data-sys');
+  if(s==='1'||s==='2'||s==='3'){SYS_META[+s].load();return;}  // 系统一/二/三视图：整视图刷新
   const t=activeDataTab();
   if(t==="projects")loadProjects();
   else if(t==="usage")loadUsage();
@@ -1931,7 +1933,7 @@ function setupRealtime(){
 }
 
 /* ---------- 启动 ---------- */
-checkTables().then(()=>{loadProjects();setupRealtime();});
+checkTables().then(()=>{loadProjects();migrateLocal();setupRealtime();});
 </script>
 
 <script>
@@ -3182,6 +3184,7 @@ async function loadSys1(){
 function gotoProjTab(){showSystem(4);setTimeout(function(){var b=document.querySelector('.tabs button[data-tab="projects"]');if(b)b.click();},60);}
 
 /* ================= 系统二：基于检查表的设计审查系统 ================= */
+let DSR_ROWS=[]; // 设计审查记录缓存（云端 em_dsr_records 优先，本地兜底时按 localStorage 收集）
 function dsrGet(pid,dr){try{return JSON.parse(localStorage.getItem('dsr_'+pid+'_'+dr)||'null');}catch(e){return null;}}
 function dsrSet(pid,dr,obj){localStorage.setItem('dsr_'+pid+'_'+dr,JSON.stringify(obj));}
 function dsrLocked(p,dr){
@@ -3196,9 +3199,16 @@ async function loadSys2(){
   let projects=[];
   if(tableOK.em_projects&&PROJECTS.length)projects=PROJECTS.slice();
   else if(tableOK.em_projects){try{projects=await api("em_projects?select=*&order=created_at.desc");}catch(e){}}
+  // 设计审查记录：云端优先，表未创建时回退 localStorage 收集
+  let dsrRows=[];
+  if(tableOK.em_dsr_records){try{dsrRows=await api("em_dsr_records?select=*&order=ts.desc")||[];}catch(e){dsrRows=[];}}
+  if(!tableOK.em_dsr_records){
+    projects.forEach(p=>{[1,2,3,4,5,6,7].forEach(n=>{const r=dsrGet(p.id,n);if(r)dsrRows.push({project_id:p.id,dr_no:n,experts:r.experts,tasks:r.tasks,issues:r.issues,actions:r.actions,verdict:r.verdict,ts:r.ts});});});
+    dsrRows.sort((a,b)=>(b.ts||0)-(a.ts||0));
+  }
+  DSR_ROWS=dsrRows;
   // 统计已审查关卡
-  let reviewed=0,failed=0;
-  projects.forEach(p=>{[1,2,3,4,5,6,7].forEach(n=>{const r=dsrGet(p.id,n);if(r)reviewed++;if(r&&r.verdict==="fail")failed++;});});
+  const reviewed=dsrRows.length,failed=dsrRows.filter(r=>r.verdict==="fail").length;
   const optP='<option value="">（选择项目）</option>'+projects.map(p=>'<option value="'+p.id+'">'+esc(p.name)+'</option>').join("");
   const optD=[1,2,3,4,5,6,7].map(n=>'<option value="'+n+'">DR'+n+' '+DR_META[n]+'</option>').join("");
   hero.innerHTML=
@@ -3206,7 +3216,7 @@ async function loadSys2(){
    '<h3><span class="bar"></span>基于检查表的设计审查系统 <span class="hint">每关卡配检查表 · 专家 + 任务控制 + 逐步三要素审查</span></h3>'+
    '<div style="font-size:13px;color:var(--ink-2);line-height:1.9;margin-top:4px">'+
    '设计审查系统在 <b>每个 DR 关卡</b> 配备一套<b>检查表</b>，从三个控制维度把关：<b>专家</b>（跨职能专家评审，覆盖研发/品控/生产/EM）、<b>任务控制</b>（确认该关卡交付物与标准任务完成情况）、<b>逐步</b>（按七步逐关推进，形成可追溯的评审台账）。'+
-   '审查记录存本地浏览器；正式 DR 评审放行请到「系统四 → 项目台账 → DR关卡」登记。</div>'+
+   '审查记录保存至云端（em_dsr_records 表），团队共享可追溯；正式 DR 评审放行请到「系统四 → 项目台账 → DR关卡」登记。</div>'+
    '<div class="mpstat" style="margin-top:14px">'+
    '<div class="ms"><b>'+reviewed+'</b><span>已审查关卡</span></div>'+
    '<div class="ms"><b>'+failed+'</b><span>发现问题关</span></div>'+
@@ -3220,8 +3230,7 @@ async function loadSys2(){
    '<div class="sys-card"><h3><span class="bar"></span>审查记录汇总 <span class="hint">所有已审查关卡</span></h3><div id="ds2_recs">暂无记录</div></div>';
   // 渲染记录汇总
   const recBox=hero.querySelector('#ds2_recs');
-  let allRecs=[];
-  projects.forEach(p=>{[1,2,3,4,5,6,7].forEach(n=>{const r=dsrGet(p.id,n);if(r)allRecs.push({p:p,dr:n,r:r});});});
+  let allRecs=dsrRows.map(r=>({p:projects.find(x=>String(x.id)===String(r.project_id)),dr:+r.dr_no,r:r})).filter(x=>x.p);
   if(allRecs.length){
     allRecs.sort((a,b)=>b.r.ts-a.r.ts);
     recBox.innerHTML=allRecs.map(x=>{
@@ -3240,7 +3249,7 @@ function ds2Load(){
   const body=$('#ds2_body');if(!pid||!dr){body.innerHTML='<p style="font-size:13px;color:var(--ink-3);margin-top:14px">请选择项目与关卡，开始设计审查。</p>';return;}
   const p=PROJECTS.find(x=>x.id===+pid)||(tableOK.em_projects?PROJECTS.find(x=>x.id===pid):null);
   const tasks=DR_TASKS[+dr]||[];
-  const saved=dsrGet(pid,dr)||{};
+  const saved=(DSR_ROWS.find(r=>String(r.project_id)===String(pid)&&String(r.dr_no)===String(dr)))||dsrGet(pid,dr)||{};
   const chip=T=>'<span style="display:inline-block;font-size:11.5px;color:var(--ink-2);background:#f0f4fa;border-radius:5px;padding:2px 8px;margin:2px 4px 0 0">'+T+'</span>';
   body.innerHTML=
    '<div class="drstep"><div class="ico">👥</div><div class="bd"><b>① 专家评审</b>（跨职能：研发/品控/生产/EM）<br>填参与评审的专家与评审结论。</div></div>'+
@@ -3270,14 +3279,21 @@ function ds2Auto(){
   else if(issue&&act){advice='<div class="gateverdict ok">✅ 问题已填措施，闭环后可放行；审查通过后请到「项目台账 → DR关卡」登记正式放行。</div>';}
   box.innerHTML=advice||'';
 }
-function ds2Save(){
+async function ds2Save(){
   const pid=$('#ds2_prj').value,dr=$('#ds2_dr').value;
   if(!pid||!dr){toast('请先选择项目与关卡','err');return;}
   const verdict=$('#d2_verdict').value;
   if(!verdict){toast('请选择审查结论（通过 / 有条件 / 不通过）','err');return;}
   const obj={experts:($('#d2_exp').value||'').trim(),tasks:($('#d2_tasks').value||'').trim(),issues:($('#d2_issue').value||'').trim(),actions:($('#d2_act').value||'').trim(),verdict,ts:Date.now()};
-  dsrSet(pid,dr,obj);
-  toast('设计审查记录已保存（DR'+dr+'）✓','ok');
+  if(tableOK.em_dsr_records){
+    try{
+      await api("em_dsr_records?on_conflict=project_id,dr_no","POST",{project_id:+pid,dr_no:+dr,experts:obj.experts,tasks:obj.tasks,issues:obj.issues,actions:obj.actions,verdict:obj.verdict,ts:obj.ts},"return=representation,resolution=merge-duplicates");
+      toast('设计审查记录已保存至云端（DR'+dr+'）✓','ok');
+    }catch(e){toast('云端保存失败：'+e.message+' — 已转存本地','err');dsrSet(pid,dr,obj);}
+  }else{
+    dsrSet(pid,dr,obj);
+    toast('设计审查记录已保存本地（DR'+dr+'）✓ —— em_dsr_records 表未创建，暂不能云端共享','ok');
+  }
   loadSys2();
 }
 
@@ -3294,8 +3310,14 @@ async function loadSys3(){
   let mpList=[];
   if(tableOK.em_mp_info){try{mpList=await api("em_mp_info?select=*&order=created_at.desc");PROJECTS; }catch(e){}}
   else mpList=mpRow;
-  const stds=fbGet('fb_std');
-  const specs=fbGet('fb_spec');
+  // 标准载体 / 产品规格：云端优先，表未创建时回退 localStorage
+  let stds=[],specs=[];
+  if(tableOK.em_design_feedback){
+    try{
+      const all=await api("em_design_feedback?select=*&order=ts.desc")||[];
+      stds=all.filter(r=>r.kind==="std");specs=all.filter(r=>r.kind==="spec");
+    }catch(e){stds=fbGet('fb_std');specs=fbGet('fb_spec');}
+  }else{stds=fbGet('fb_std');specs=fbGet('fb_spec');}
   const mpStd=Math.round(MP_STD_CAT.length)+1;
   const fmtBenefit=x=>x?((+x)>=10000?((+x/10000).toFixed(1)+' 万'):x+' 元'):'—';
   hero.innerHTML=
@@ -3324,32 +3346,86 @@ async function loadSys3(){
    '<div class="fld wide"><label>关联设备/项目</label><input id="fb_stdref" placeholder="如：灌装机#3 / 果冻爽项目"></div>'+
    '<div class="fld wide"><label>要点</label><textarea id="fb_stdnote" rows="2" placeholder="标准要点 / 适用范围"></textarea></div>'+
    '<div class="fbtns"><button class="btn primary" onclick="fbSaveStd()">保存标准</button></div></div>'+
-   '<div id="fb_stdlist" style="margin-top:8px;font-size:12.5px;color:var(--ink-2)">'+(stds.length?stds.map((s,i)=>'<div class="feedbackitem"><b>'+esc(s.type)+'</b> · '+esc(s.name)+(s.ref?'<br>关联：'+esc(s.ref):'')+(s.note?'<br>'+esc(s.note):'')+'<div style="margin-top:4px"><button class="btn sm danger" onclick="fbDelStd('+i+')">删除</button></div></div>').join(""):'暂无标准载体')+'</div></div>'+
+   '<div id="fb_stdlist" style="margin-top:8px;font-size:12.5px;color:var(--ink-2)">'+(stds.length?stds.map((s,i)=>{const del=(s.id!==undefined&&s.id!==null)?s.id:('L'+i);return '<div class="feedbackitem"><b>'+esc(s.type)+'</b> · '+esc(s.name)+(s.ref?'<br>关联：'+esc(s.ref):'')+(s.note?'<br>'+esc(s.note):'')+'<div style="margin-top:4px"><button class="btn sm danger" onclick="fbDelStd(\''+del+'\')">删除</button></div></div>';}).join(""):'暂无标准载体')+'</div></div>'+
    '<div class="sys-card" style="margin-bottom:0"><h3><span class="bar"></span>③ 产品规格 <span class="hint">新产品/新工艺的规格定义</span></h3>'+
    '<div class="fgrid">'+
    '<div class="fld"><label>规格名称</label><input id="fb_spname" placeholder="如：无菌灌装机·夹心重量规格"></div>'+
    '<div class="fld"><label>产品</label><input id="fb_spprod" placeholder="如：果冻爽 200g"></div>'+
    '<div class="fld wide"><label>规格参数</label><textarea id="fb_spnote" rows="2" placeholder="关键规格 / 公差 / 检验标准"></textarea></div>'+
    '<div class="fbtns"><button class="btn primary" onclick="fbSaveSpec()">保存规格</button></div></div>'+
-   '<div id="fb_speclist" style="margin-top:8px;font-size:12.5px;color:var(--ink-2)">'+(specs.length?specs.map((s,i)=>'<div class="feedbackitem"><b>'+esc(s.name)+'</b> · '+esc(s.prod||'—')+(s.note?'<br>'+esc(s.note):'')+'<div style="margin-top:4px"><button class="btn sm danger" onclick="fbDelSpec('+i+')">删除</button></div></div>').join(""):'暂无产品规格')+'</div></div>'+
+   '<div id="fb_speclist" style="margin-top:8px;font-size:12.5px;color:var(--ink-2)">'+(specs.length?specs.map((s,i)=>{const del=(s.id!==undefined&&s.id!==null)?s.id:('L'+i);return '<div class="feedbackitem"><b>'+esc(s.name)+'</b> · '+esc(s.prod||'—')+(s.note?'<br>'+esc(s.note):'')+'<div style="margin-top:4px"><button class="btn sm danger" onclick="fbDelSpec(\''+del+'\')">删除</button></div></div>';}).join(""):'暂无产品规格')+'</div></div>'+
    '</div>'+
    '<div class="sys-card"><h3><span class="bar"></span>④ 设计反馈闭环 <span class="hint">项目缺陷 → 回传 MP，同类设备可复用</span></h3>'+
    '<div style="font-size:13px;color:var(--ink-2);line-height:1.9;margin-bottom:10px">'+
    '把「系统二设计审查」与「系统四 PDA 缺陷分析」发现的问题，回传为 MP 情报——DR7 结案时（7.2 MP 信息上传）即可沉淀为可复用经验。</div>'+
    '<div id="fb_loop" style="font-size:13px;color:var(--ink-2)">'+(mpList.length?'当前 MP 情报库已有 <b>'+mpList.length+'</b> 条可复用经验，新设备 DR1-DR2 立项时应优先检索复用。<br><span style="color:var(--ink-3)">提示：到「系统四 → 计算型工具 → DR 关卡/项目台账」完成正式评审与缺陷回传。</span>':'当前情报库较空，建议在项目推进中持续回传改善经验。')+'</div></div>';
 }
-function fbSaveStd(){
+async function fbSaveStd(){
   const name=$('#fb_stdname').value.trim();if(!name){toast('请填写载体名称','err');return;}
-  const a=fbGet('fb_std');a.push({type:$('#fb_stdtype').value,name,ref:$('#fb_stdref').value.trim(),note:$('#fb_stdnote').value.trim(),ts:Date.now()});fbSet('fb_std',a);
-  toast('标准载体已保存 ✓','ok');loadSys3();
+  const rec={type:$('#fb_stdtype').value,name,ref:$('#fb_stdref').value.trim(),note:$('#fb_stdnote').value.trim(),ts:Date.now()};
+  if(tableOK.em_design_feedback){
+    try{await api("em_design_feedback","POST",Object.assign({kind:'std'},rec));toast('标准载体已保存至云端 ✓','ok');}
+    catch(e){toast('云端保存失败：'+e.message+' — 已转存本地','err');const a=fbGet('fb_std');a.push(rec);fbSet('fb_std',a);}
+  }else{
+    const a=fbGet('fb_std');a.push(rec);fbSet('fb_std',a);
+    toast('标准载体已保存本地 ✓ —— em_design_feedback 表未创建，暂不能云端共享','ok');
+  }
+  loadSys3();
 }
-function fbDelStd(i){const a=fbGet('fb_std');a.splice(i,1);fbSet('fb_std',a);loadSys3();}
-function fbSaveSpec(){
+async function fbDelStd(x){
+  if(typeof x==='string'&&x.charAt(0)==='L'){const a=fbGet('fb_std');a.splice(+x.slice(1),1);fbSet('fb_std',a);loadSys3();return;}
+  if(!confirm('确认删除该标准载体？'))return;
+  try{await api("em_design_feedback?id=eq."+x,"DELETE");toast('标准载体已删除 ✓','ok');}catch(e){toast('删除失败：'+e.message,'err');}
+  loadSys3();
+}
+async function fbSaveSpec(){
   const name=$('#fb_spname').value.trim();if(!name){toast('请填写规格名称','err');return;}
-  const a=fbGet('fb_spec');a.push({name,prod:$('#fb_spprod').value.trim(),note:$('#fb_spnote').value.trim(),ts:Date.now()});fbSet('fb_spec',a);
-  toast('产品规格已保存 ✓','ok');loadSys3();
+  const rec={name,prod:$('#fb_spprod').value.trim(),note:$('#fb_spnote').value.trim(),ts:Date.now()};
+  if(tableOK.em_design_feedback){
+    try{await api("em_design_feedback","POST",Object.assign({kind:'spec'},rec));toast('产品规格已保存至云端 ✓','ok');}
+    catch(e){toast('云端保存失败：'+e.message+' — 已转存本地','err');const a=fbGet('fb_spec');a.push(rec);fbSet('fb_spec',a);}
+  }else{
+    const a=fbGet('fb_spec');a.push(rec);fbSet('fb_spec',a);
+    toast('产品规格已保存本地 ✓ —— em_design_feedback 表未创建，暂不能云端共享','ok');
+  }
+  loadSys3();
 }
-function fbDelSpec(i){const a=fbGet('fb_spec');a.splice(i,1);fbSet('fb_spec',a);loadSys3();}
+async function fbDelSpec(x){
+  if(typeof x==='string'&&x.charAt(0)==='L'){const a=fbGet('fb_spec');a.splice(+x.slice(1),1);fbSet('fb_spec',a);loadSys3();return;}
+  if(!confirm('确认删除该产品规格？'))return;
+  try{await api("em_design_feedback?id=eq."+x,"DELETE");toast('产品规格已删除 ✓','ok');}catch(e){toast('删除失败：'+e.message,'err');}
+  loadSys3();
+}
+
+/* ---------- 旧数据一次性迁移上云（localStorage → Supabase，失败下次重试） ---------- */
+async function migrateLocal(){
+  try{
+    // ① 设计审查记录 dsr_<pid>_<dr> → em_dsr_records
+    if(tableOK.em_dsr_records&&!localStorage.getItem('em_dsr_migrated')){
+      let rows=[];
+      for(let i=0;i<localStorage.length;i++){
+        const k=localStorage.key(i);
+        const m=k&&k.match(/^dsr_(\d+)_(\d)$/);
+        if(!m)continue;
+        let r;try{r=JSON.parse(localStorage.getItem(k));}catch(e){continue;}
+        if(r&&r.verdict)rows.push({project_id:+m[1],dr_no:+m[2],experts:r.experts||null,tasks:r.tasks||null,issues:r.issues||null,actions:r.actions||null,verdict:r.verdict,ts:r.ts||null});
+      }
+      if(rows.length){
+        // 过滤云端不存在的项目，防外键失败
+        try{const prj=await api("em_projects?select=id")||[];const ids=prj.map(x=>+x.id);rows=rows.filter(r=>ids.indexOf(r.project_id)>=0);}catch(e){}
+        if(rows.length)await api("em_dsr_records?on_conflict=project_id,dr_no","POST",rows,"return=representation,resolution=merge-duplicates");
+      }
+      localStorage.setItem('em_dsr_migrated','1');
+    }
+    // ② 标准载体 / 产品规格 → em_design_feedback
+    if(tableOK.em_design_feedback&&!localStorage.getItem('em_fb_migrated')){
+      const rows=fbGet('fb_std').map(r=>({kind:'std',type:r.type||null,name:r.name,ref:r.ref||null,note:r.note||null,ts:r.ts||null}))
+        .concat(fbGet('fb_spec').map(r=>({kind:'spec',name:r.name,prod:r.prod||null,note:r.note||null,ts:r.ts||null})));
+      if(rows.length)await api("em_design_feedback","POST",rows);
+      localStorage.setItem('em_fb_migrated','1');
+    }
+  }catch(e){/* 迁移失败静默保留本地，下次进入重试 */}
+}
 
 </script>
 </body>
