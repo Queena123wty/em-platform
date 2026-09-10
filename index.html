@@ -198,7 +198,32 @@
   .chain{font-size:13px;line-height:2.0}
   .chain .ln{display:block;padding-left:14px;border-left:2px solid #c9d6ec;margin-left:8px;margin-bottom:6px}
   .chain .ln b{color:#2557b0}
-  @media print{.tabs,.g-top .g-desc,footer,.gbtns,.ggd{display:none!important}.gcase{display:block!important}}
+  /* ===== 工具使用：① 案例展示 ② 引导式标准套表 ③ 使用记录 ===== */
+  .sec-no{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:7px;background:#2557b0;color:#fff;font-size:12.5px;font-weight:800;margin-right:7px;vertical-align:middle}
+  .sec-lead{font-size:13px;color:var(--ink-2);line-height:1.8;background:#f7f9fd;border:1px dashed #d8e0f0;border-radius:10px;padding:10px 14px;margin:0 0 14px}
+  .sec-lead b{color:var(--header)}
+  .ucbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:2px 0 14px}
+  .ucbar input[type=text]{flex:1;min-width:190px;border:1px solid var(--line);border-radius:9px;padding:9px 12px;font-size:13px;font-family:inherit;color:var(--ink-1);background:#fff;box-sizing:border-box}
+  .ucbar select{border:1px solid var(--line);border-radius:9px;padding:9px 12px;font-size:13px;font-family:inherit;color:var(--ink-1);background:#fff;max-width:280px}
+  .uccount{font-size:12.5px;color:var(--ink-3);white-space:nowrap}
+  .uccount b{color:var(--header)}
+  .ucgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px}
+  .uccard{border:1px solid var(--line);border-radius:12px;background:#fff;padding:13px 15px;transition:.18s;display:flex;flex-direction:column;gap:6px}
+  .uccard:hover{border-color:#bcd0ee;box-shadow:0 6px 18px rgba(30,64,140,.08)}
+  .uccard.open{border-color:#2557b0;box-shadow:0 0 0 1px #2557b0 inset}
+  .uccard .uchd{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .uccard .uno{flex:none;font-size:11.5px;font-weight:800;color:#2557b0;background:#e8eefb;border-radius:7px;padding:2px 8px}
+  .uccard .unm{font-size:13.5px;font-weight:800;color:var(--ink-1)}
+  .uccard .uph{margin-left:auto;font-size:11px;font-weight:600;color:var(--ink-3);background:#f2f5fa;border-radius:20px;padding:2px 9px;white-space:nowrap}
+  .uccard .uen{font-size:11.5px;color:var(--ink-3);font-style:italic}
+  .uccard .ubr{font-size:12.5px;color:var(--ink-2);line-height:1.7}
+  .uccard .ubg{font-size:12.5px;color:#8a6116;background:#fffaf0;border:1px solid #f0d9a8;border-radius:9px;padding:8px 11px;line-height:1.75}
+  .uccard .ubg b{color:#7a530f}
+  .uccard .udet{margin:2px 0 0 18px;font-size:12.5px;color:var(--ink-2);line-height:1.85}
+  .uccard .ubtns{display:flex;gap:8px;margin-top:auto;padding-top:8px}
+  .uccard .ubtns .btn{flex:1;justify-content:center;text-align:center}
+  .uccard.hi{border-color:#e8a33d;box-shadow:0 0 0 2px #f7dfb6}
+  @media print{.tabs,.g-top .g-desc,footer,.gbtns,.ggd,.ucbar,.ubtns{display:none!important}.gcase,.uccard .ubg{display:block!important}}
   .sheet-pane{display:none}.sheet-pane.on{display:block}
   .guide{border:1px solid #d8e0f0;border-radius:10px;background:#f7f9fd;padding:10px 14px;margin-bottom:14px;font-size:13px;color:var(--ink-2)}
   .guide summary{cursor:pointer;font-weight:700;color:var(--header);font-size:13.5px}
@@ -427,8 +452,7 @@
   <button data-tab="tools" class="on">🧭 工具导航</button>
   <button data-tab="projects">📁 EM项目台账</button>
   <button data-tab="sheets">📋 标准套表</button>
-  <button data-tab="guide">🧭 引导式套表</button>
-  <button data-tab="usage">📝 工具使用台账</button>
+  <button data-tab="usage">🧭 工具使用</button>
   <button data-tab="calc">🧮 计算型工具</button>
 </nav>
 
@@ -501,28 +525,52 @@
   </div>
 </section>
 
-<!-- ============ Tab 3: 工具使用台账 ============ -->
+<!-- ============ Tab 3: 工具使用（① 案例展示 ② 引导式标准套表 ③ 使用记录） ============ -->
 <section class="tab" id="tab-usage">
-  <div class="card">
-    <h3><span class="bar"></span>登记工具使用记录 <span class="hint">谁、在哪个项目、何时、用了哪个工具</span></h3>
-    <div class="fgrid">
-      <div class="fld wide"><label>使用工具 <i>*</i></label><select id="us_tool"></select></div>
-      <div class="fld wide"><label>关联项目</label><select id="us_project"><option value="">（不关联项目）</option></select></div>
-      <div class="fld"><label>使用人 <i>*</i></label><input id="us_user" placeholder="姓名"></div>
-      <div class="fld"><label>使用日期</label><input id="us_date" type="date"></div>
-      <div class="fld wide"><label>使用说明 / 产出</label><textarea id="us_notes" placeholder="如：完成灌装工段 FMEA 初稿，识别 3 项 RPN≥100 风险"></textarea></div>
-      <div class="fbtns"><button class="btn primary" onclick="saveUsage()">登记使用</button></div>
+  <div class="g-top">
+    <div class="g-desc"><b style="color:var(--header)">🧭 工具使用 · 三步走</b>：<b>① 看案例</b> → <b>② 用引导式标准套表做一遍</b> → <b>③ 使用记录自动生成</b>。填完套表即自动登记，<b>无需手动单独填记录</b>。<span style="background:#eef2f7;border:1px solid #d7e0ea;color:var(--header);font-size:11.5px;font-weight:600;padding:1px 9px;border-radius:20px;margin-left:8px;vertical-align:middle">v3.0</span></div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <input id="g_user" placeholder="记录人（自动登记用）" onchange="gSetUser(this.value)" style="border:1px solid var(--line);border-radius:9px;padding:9px 12px;font-size:13px;font-family:inherit;width:158px;color:var(--ink-1);background:#fff">
+      <select id="g_tool" onchange="gSelect(this.value)"></select>
     </div>
   </div>
-  <div class="card">
-    <h3><span class="bar"></span>工具使用热度 <span class="hint">按登记次数统计 Top 10</span></h3>
-    <div id="u_bars" style="font-size:13px;color:var(--ink-3)">暂无记录</div>
+
+  <!-- ① 案例展示 -->
+  <div class="card" id="uc_card">
+    <h3><span class="bar"></span><span class="sec-no">1</span>案例展示 <span class="hint">37 个工具的实战案例——先看别人怎么做，再照着套表做一遍</span></h3>
+    <div class="sec-lead">每张卡片是一个工具的<b>真实项目案例</b>：点「📖 查看案例」展开背景与关键数据；点「🧭 用此套表」直接跳到第 ② 步，用该工具的引导式标准套表做一遍。</div>
+    <div class="ucbar">
+      <input id="uc_q" type="text" placeholder="搜索工具名称 / 缩写 / 案例关键词，如 FMEA、QFD、垂直启动…" oninput="ucRender()">
+      <select id="uc_phase" onchange="ucRender()"></select>
+      <span class="uccount">共 <b id="uc_cnt">37</b> 个工具案例</span>
+    </div>
+    <div id="uc_grid" class="ucgrid"></div>
   </div>
+
+  <!-- ② 引导式使用标准套表 -->
+  <div class="card" style="padding-bottom:6px">
+    <h3><span class="bar"></span><span class="sec-no">2</span>引导式使用标准套表 <span class="hint">打开即是示例：灰色斜体为案例数据，逐项替换为你的实际数据（替换后自动变黑），填完自动生成结论</span></h3>
+    <div class="sec-lead">按提示逐步填写，每步都有 <b>💡 填写指引</b> 与 <b>⚠️ 校验提醒</b>；填完自动生成结论，并<b>自动登记使用记录</b>（关联项目与实际数据）。</div>
+  </div>
+  <div id="g_wrap"></div>
+
+  <!-- ③ 使用记录 -->
   <div class="card">
-    <h3><span class="bar"></span>使用记录（最近 100 条）</h3>
+    <h3><span class="bar"></span><span class="sec-no">3</span>使用记录 <span class="hint">由第 ② 步引导式套表自动登记——谁、何时、用哪个工具、在哪个项目、得出什么结论</span></h3>
+    <div class="ucbar">
+      <select id="us_f_tool" onchange="renderUsage()"></select>
+      <input id="us_f_kw" type="text" placeholder="搜索使用人 / 项目 / 说明…" oninput="renderUsage()">
+      <span class="uccount">共 <b id="us_cnt">0</b> 条</span>
+      <button class="btn ghost" onclick="loadUsage()">🔄 刷新</button>
+      <button class="btn ghost" onclick="exportUsage()">⬇ 导出 CSV</button>
+    </div>
     <div class="tblwrap"><table class="tbl"><thead><tr>
-      <th>日期</th><th>工具</th><th>关联项目</th><th>使用人</th><th>说明</th><th>操作</th>
+      <th>日期</th><th>工具</th><th>关联项目</th><th>使用人</th><th>说明 / 产出</th><th>操作</th>
     </tr></thead><tbody id="us_tbody"></tbody></table></div>
+  </div>
+  <div class="card" style="margin-bottom:0">
+    <h3><span class="bar"></span>工具使用热度 <span class="hint">按自动登记次数统计 Top 10</span></h3>
+    <div id="u_bars" style="font-size:13px;color:var(--ink-3)">暂无记录</div>
   </div>
 </section>
 
@@ -855,19 +903,9 @@
   </div>
 </section>
 
-<!-- ============ Tab 7: 引导式套表（37 工具） ============ -->
-<section class="tab" id="tab-guide">
-  <div class="g-top">
-    <div class="g-desc"><b style="color:var(--header)">🧭 引导式电子套表</b>：打开即是示例——表单里<b>灰色斜体为案例示例数据</b>，逐项替换为你的实际数据（替换后自动变黑）；填完自动生成结论，并<b>自动登记使用记录</b>（关联项目与实际数据）。<span style="background:#eef2f7;border:1px solid #d7e0ea;color:var(--header);font-size:11.5px;font-weight:600;padding:1px 9px;border-radius:20px;margin-left:8px;vertical-align:middle">v2.2</span></div>
-    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-      <input id="g_user" placeholder="记录人（自动登记用）" onchange="gSetUser(this.value)" style="border:1px solid var(--line);border-radius:9px;padding:9px 12px;font-size:13px;font-family:inherit;width:158px;color:var(--ink-1);background:#fff">
-      <select id="g_tool" onchange="gSelect(this.value)"></select>
-    </div>
-  </div>
-  <div id="g_wrap"></div>
-</section>
+<!-- ============ 「引导式套表」已合并至「🧭 工具使用」页签（第 ② 部分） ============ -->
 
-<footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥<br><span style="color:var(--ink-3)">当前版本 v2.2 · 提示：若页面仍显示旧版，请强制刷新（Mac: ⌘+Shift+R / Windows: Ctrl+F5）</span></footer>
+<footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥<br><span style="color:var(--ink-3)">当前版本 v3.0 · 提示：若页面仍显示旧版，请强制刷新（Mac: ⌘+Shift+R / Windows: Ctrl+F5）</span></footer>
 </div>
 
 <!-- 工具详情弹窗 -->
@@ -1063,19 +1101,15 @@ function openItem(n){
    '<div class="m-field"><div class="lb">方法要点</div><ul>'+t.detail.map(x=>'<li>'+x+'</li>').join("")+'</ul></div>'+
    (t.fields?'<div class="m-field"><div class="lb">关联与提示</div><div class="m-chips">'+t.fields.map(f=>'<span class="chip">'+f+'</span>').join("")+'</div></div>':'')+
    '<div class="m-actions">'+
-   '<button class="btn primary" onclick="gotoGuide('+t.n+')">🧭 打开引导式套表</button>'+
-   '<button class="btn ghost" onclick="gotoUsage('+t.n+')">📝 登记使用记录</button>'+
+   '<button class="btn primary" onclick="gotoGuide('+t.n+')">🧭 用引导式套表做一次</button>'+
+   '<button class="btn ghost" onclick="gotoCase('+t.n+')">📖 查看案例</button>'+
    (t.calc?'<button class="btn ghost" onclick="gotoCalc(\''+t.calc+'\')">🧮 打开在线填报</button>':'')+
    (t.sheet?'<button class="btn ghost" onclick="gotoSheet(\''+t.sheet+'\')">📋 打开标准套表</button>':'')+
    '</div></div>';
   $("#mask").classList.add("on");
 }
 function closeM(e){if(e&&e.target!==e.currentTarget)return;$("#mask").classList.remove("on");}
-function gotoUsage(toolNo){
-  closeM();document.querySelector('.tabs button[data-tab="usage"]').click();
-  const t=TOOLS.find(x=>x.n===toolNo);if(t)$("#us_tool").value=t.n;
-  $("#us_user").focus();
-}
+function gotoUsage(toolNo){gotoGuide(toolNo);}
 function gotoCalc(pane){
   closeM();document.querySelector('.tabs button[data-tab="calc"]').click();
   document.querySelector('.subtabs button[data-pane="'+pane+'"]').click();
@@ -1096,9 +1130,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeM();closeDr();
   ["sk_target","sk_actual"].forEach(id=>{
     $("#"+id).innerHTML=seq5.map(v=>'<option value="'+v+'" '+(v===3?"selected":"")+'>'+v+'</option>').join("");
   });
-  $("#us_tool").innerHTML='<option value="">— 请选择工具 —</option>'+PHASES.map(ph=>
-    '<optgroup label="'+ph.p+'">'+TOOLS.filter(t=>t.phase===ph.p).map(t=>'<option value="'+t.n+'">#'+t.n+' '+t.name+'</option>').join("")+'</optgroup>').join("");
-  ["us_date","vs_date","sk_date","fm_due"].forEach(id=>$("#"+id).value=today());
+  $("#us_tool")&&($("#us_tool").innerHTML='<option value="">— 请选择工具 —</option>'+PHASES.map(ph=>
+    '<optgroup label="'+ph.p+'">'+TOOLS.filter(t=>t.phase===ph.p).map(t=>'<option value="'+t.n+'">#'+t.n+' '+t.name+'</option>').join("")+'</optgroup>').join(""));
+  ["vs_date","sk_date","fm_due"].forEach(id=>$("#"+id).value=today());
   ["pj_start","pj_target"].forEach(id=>$("#"+id).value=today());
 })();
 
@@ -1422,7 +1456,7 @@ async function loadProjects(){
 }
 function refreshProjectSelects(){
   const opts='<option value="">（不关联项目）</option>'+PROJECTS.map(p=>'<option value="'+p.id+'">'+esc(p.name)+'</option>').join("");
-  ["us_project","fm_project","vs_project","mp_project"].forEach(id=>{const v=$("#"+id).value;$("#"+id).innerHTML=opts;if(v)$("#"+id).value=v;});
+  ["fm_project","vs_project","mp_project"].forEach(id=>{const el=$("#"+id);if(!el)return;const v=el.value;el.innerHTML=opts;if(v)el.value=v;});
   const sel=$('#lcc_prj');if(sel){const v=sel.value;sel.innerHTML='<option value="">（手动输入项目名）</option>'+PROJECTS.map(p=>'<option value="'+p.id+'">'+esc(p.name)+'</option>').join("");if(v)sel.value=v;}
   refreshAcPrj();
 }
@@ -1801,46 +1835,108 @@ async function saveDr(pid){
   }catch(e){toast("保存失败："+(e.message.includes("Could not find")?"数据表未创建，请先执行建表 SQL":e.message),"err");}
 }
 
-/* ================= 工具使用台账 ================= */
+/* ================= 工具使用：① 案例展示 / ② 引导式标准套表 / ③ 使用记录 ================= */
+let US_ROWS=[];        // 全量使用记录缓存（供筛选 / 导出）
+let UC_OPEN={};        // 案例卡片展开状态
+let UC_HI=null;        // 从工具弹窗跳入时高亮的卡片
+
+/* ---- ① 案例展示：37 个工具的案例卡片墙 ---- */
+function ucInit(){
+  const ph=$('#uc_phase');
+  if(ph&&!ph.options.length)ph.innerHTML='<option value="">全部阶段</option>'+PHASES.map(p=>'<option>'+gesc(p.p)+'</option>').join('');
+  const ft=$('#us_f_tool');
+  if(ft&&ft.options.length<=1)ft.innerHTML='<option value="">全部工具</option>'+TOOLS.map(t=>'<option value="'+t.n+'">#'+t.n+' '+gesc(t.name)+'</option>').join('');
+  ucRender();
+}
+function ucBg(t){const g=GUIDES[t.n];return (g&&g.case&&g.case.bg)?g.case.bg:'';}
+function ucRender(){
+  const grid=$('#uc_grid');if(!grid)return;
+  const qEl=$('#uc_q'),phEl=$('#uc_phase');
+  const q=qEl?qEl.value.trim().toLowerCase():'';
+  const ph=phEl?phEl.value:'';
+  const list=TOOLS.filter(t=>{
+    if(ph&&t.phase!==ph)return false;
+    if(!q)return true;
+    return (t.name+' '+t.en+' '+t.brief+' '+t.phase+' '+ucBg(t)).toLowerCase().indexOf(q)>-1;
+  });
+  const cEl=$('#uc_cnt');if(cEl)cEl.textContent=list.length;
+  if(!list.length){grid.innerHTML='<div style="grid-column:1/-1;text-align:center;color:var(--ink-3);padding:34px 0;font-size:13.5px">未找到匹配的工具案例，请更换关键词。</div>';return;}
+  grid.innerHTML=list.map(t=>{
+    const bg=ucBg(t),open=!!UC_OPEN[t.n],plain=bg.replace(/<[^>]*>/g,'');
+    return '<div class="uccard'+(open?' open':'')+(UC_HI===t.n?' hi':'')+'" id="ucc_'+t.n+'">'+
+      '<div class="uchd"><span class="uno">#'+t.n+'</span><span class="unm">'+gesc(t.name)+'</span><span class="uph">'+gesc(t.phase)+'</span></div>'+
+      '<div class="uen">'+gesc(t.en)+'</div>'+
+      '<div class="ubr">'+gesc(t.brief)+'</div>'+
+      (bg?'<div class="ubg">'+(open?bg:gesc(gSh(plain,88)))+'</div>':'')+
+      (open&&t.detail?'<ul class="udet">'+t.detail.map(x=>'<li>'+gesc(x)+'</li>').join('')+'</ul>':'')+
+      '<div class="ubtns">'+
+        '<button class="btn ghost sm" onclick="ucToggle('+t.n+')">'+(open?'▲ 收起案例':'📖 查看案例')+'</button>'+
+        '<button class="btn primary sm" onclick="ucUse('+t.n+')">🧭 用此套表</button>'+
+      '</div></div>';
+  }).join('');
+}
+function ucToggle(n){UC_OPEN[n]=!UC_OPEN[n];ucRender();}
+function ucUse(n){UC_HI=null;gSelect(n);scrollToGuide();}
+function scrollToGuide(){setTimeout(()=>{const w=$('#g_wrap');if(w)w.scrollIntoView({behavior:'smooth',block:'start'});},80);}
+function gotoCase(n){
+  const b=document.querySelector('.tabs button[data-tab="usage"]');
+  if(b)b.click();
+  if(!gInited){gInited=true;gInit();}
+  UC_OPEN[n]=true;UC_HI=n;ucRender();
+  setTimeout(()=>{const c=$('#ucc_'+n);if(c)c.scrollIntoView({behavior:'smooth',block:'center'});},140);
+}
+
+/* ---- ③ 使用记录：由第 ② 步引导式套表自动登记，支持筛选 / 导出 / 删除 ---- */
 async function loadUsage(){
   if(!tableOK.em_tool_usage){renderUsage([]);return;}
-  try{const rows=await api("em_tool_usage?select=*&order=created_at.desc&limit=100");renderUsage(rows);}
+  try{renderUsage(await api("em_tool_usage?select=*&order=created_at.desc&limit=300"));}
   catch(e){toast("加载使用记录失败："+e.message,"err");renderUsage([]);}
 }
+function usFiltered(){
+  const PS=(typeof PROJECTS!=='undefined'&&PROJECTS)?PROJECTS:[];
+  const pmap={};PS.forEach(p=>pmap[p.id]=p.name);
+  const ft=$('#us_f_tool'),fk=$('#us_f_kw');
+  const fTool=ft?ft.value:'',fKw=fk?fk.value.trim().toLowerCase():'';
+  let list=US_ROWS.slice();
+  if(fTool)list=list.filter(r=>String(r.tool_no)===fTool);
+  if(fKw)list=list.filter(r=>((r.user_name||'')+' '+(r.notes||'')+' '+(r.tool_name||'')+' '+(pmap[r.project_id]||'')).toLowerCase().indexOf(fKw)>-1);
+  return {list,pmap};
+}
 function renderUsage(rows){
-  const tb=$("#us_tbody");
-  const pmap={};PROJECTS.forEach(p=>pmap[p.id]=p.name);
-  if(!tableOK.em_tool_usage){tb.innerHTML='<tr><td colspan="6" class="empty">⚠️ em_tool_usage 表未创建：请先在 Supabase Dashboard 执行《EM数据库建表脚本.sql》</td></tr>';}
-  else if(!rows.length){tb.innerHTML='<tr><td colspan="6" class="empty">暂无使用记录。可在「工具导航」中点开任一工具，一键登记使用</td></tr>';}
-  else tb.innerHTML=rows.map(r=>'<tr>'+
+  if(rows)US_ROWS=rows;
+  const tb=$("#us_tbody");if(!tb)return;
+  const {list,pmap}=usFiltered();
+  const cEl=$('#us_cnt');if(cEl)cEl.textContent=list.length;
+  if(!tableOK.em_tool_usage){tb.innerHTML='<tr><td colspan="6" class="empty">⚠️ em_tool_usage 表未创建：请先执行《EM数据库建表脚本.sql》</td></tr>';}
+  else if(!US_ROWS.length){tb.innerHTML='<tr><td colspan="6" class="empty">暂无使用记录。到上方 ② 用引导式标准套表完整做一遍，填完会自动登记到这里</td></tr>';}
+  else if(!list.length){tb.innerHTML='<tr><td colspan="6" class="empty">没有符合筛选条件的使用记录</td></tr>';}
+  else tb.innerHTML=list.map(r=>'<tr>'+
     '<td>'+esc(r.usage_date||"")+'</td>'+
     '<td><b>#'+r.tool_no+'</b> '+esc(r.tool_name)+'</td>'+
     '<td>'+(r.project_id&&pmap[r.project_id]?esc(pmap[r.project_id]):"—")+'</td>'+
     '<td>'+esc(r.user_name||"—")+'</td>'+
-    '<td style="max-width:280px;font-size:12.5px;color:var(--ink-2)">'+esc(r.notes||"—")+'</td>'+
+    '<td style="max-width:300px;font-size:12.5px;color:var(--ink-2)">'+esc(r.notes||"—")+'</td>'+
     '<td><button class="btn sm danger" onclick="delUsage('+r.id+')">删除</button></td></tr>').join("");
-  // 热度条形图（带数据标签）
-  const cnt={};rows.forEach(r=>cnt[r.tool_name]=(cnt[r.tool_name]||0)+1);
+  /* 热度条形图（带数据标签）——基于全部记录统计 */
+  const cnt={};US_ROWS.forEach(r=>cnt[r.tool_name]=(cnt[r.tool_name]||0)+1);
   const top=Object.entries(cnt).sort((a,b)=>b[1]-a[1]).slice(0,10);
   const max=top.length?top[0][1]:1;
-  $("#u_bars").innerHTML=top.length?top.map(([nm,c])=>
+  const ub=$("#u_bars");
+  if(ub)ub.innerHTML=top.length?top.map(([nm,c])=>
     '<div class="ubar"><span class="nm" title="'+esc(nm)+'">'+esc(nm)+'</span><div class="rail"><div class="fill" style="width:'+(c/max*100)+'%"></div></div><span class="val">'+c+' 次</span></div>').join("")
     :'暂无记录';
 }
-async function saveUsage(){
-  const tv=$("#us_tool").value;
-  if(!tv){toast("请选择工具","err");return;}
-  const user=$("#us_user").value.trim();
-  if(!user){toast("请填写使用人","err");return;}
-  const t=TOOLS.find(x=>x.n===+tv);
-  const body={tool_no:t.n,tool_name:t.name,phase:t.phase,
-    project_id:$("#us_project").value||null,user_name:user,
-    usage_date:$("#us_date").value||today(),notes:$("#us_notes").value.trim()||null};
-  try{
-    await api("em_tool_usage","POST",body);
-    toast("使用记录已登记 ✓","ok");
-    $("#us_notes").value="";loadUsage();
-  }catch(e){toast("保存失败："+(e.message.includes("Could not find")?"数据表未创建，请先执行建表 SQL":e.message),"err");}
+function exportUsage(){
+  const {list,pmap}=usFiltered();
+  if(!list.length){toast('暂无可导出的使用记录','err');return;}
+  const q=c=>'"'+String(c==null?'':c).replace(/"/g,'""').replace(/[\r\n]+/g,' ')+'"';
+  const head=['日期','工具编号','工具名称','阶段','关联项目','使用人','说明/产出'];
+  const csv=[head.map(q).join(',')].concat(list.map(r=>[r.usage_date,r.tool_no,r.tool_name,r.phase,pmap[r.project_id]||'',r.user_name,r.notes].map(q).join(','))).join('\r\n');
+  const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='工具使用记录_'+today()+'.csv';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(a.href),3000);
+  toast('已导出 '+list.length+' 条使用记录 ✓','ok');
 }
 async function delUsage(id){
   if(!confirm("确认删除这条使用记录？"))return;
@@ -2068,6 +2164,7 @@ function gInit(){
   html+='</optgroup>';sel.innerHTML=html;sel.value=GS.tool;
   const gu=document.getElementById('g_user');
   if(gu&&!gu.value)gu.value=localStorage.getItem('em_guser')||'';
+  ucInit();                       /* ① 案例卡片墙 + ③ 记录筛选下拉 */
   gPrefill();renderGuide();
 }
 /* 预填示例数据（灰色）：打开套表默认就是案例，提示替换为实际数据 */
@@ -2082,7 +2179,7 @@ function gPrefill(){
     if(v)GS.vals[st.id]=v;
   });
 }
-function gSelect(n){GS.tool=+n;gPrefill();const sel=document.getElementById('g_tool');if(sel)sel.value=n;renderGuide();window.scrollTo({top:0,behavior:'smooth'});}
+function gSelect(n){GS.tool=+n;gPrefill();const sel=document.getElementById('g_tool');if(sel)sel.value=n;renderGuide();scrollToGuide();}
 function renderGuide(){
   const spec=GUIDES[GS.tool],t=TOOLS.find(x=>x.n===GS.tool);
   const wrap=document.getElementById('g_wrap');
@@ -2220,10 +2317,14 @@ function gAutoSchedule(){
   }else GS.wasDone=false;
 }
 function gotoGuide(n){
-  closeM();document.querySelector('.tabs button[data-tab="guide"]').click();
+  closeM();
+  const b=document.querySelector('.tabs button[data-tab="usage"]');
+  if(b)b.click();
+  if(!gInited){gInited=true;gInit();}
   gSelect(n);
 }
-document.querySelector('.tabs button[data-tab="guide"]').addEventListener("click",()=>{
+/* 「工具使用」页签首次打开时初始化引导式套表引擎 */
+document.querySelector('.tabs button[data-tab="usage"]').addEventListener("click",()=>{
   if(!gInited){gInited=true;gInit();}
 });
 
