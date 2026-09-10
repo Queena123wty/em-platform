@@ -621,7 +621,7 @@
 
 <nav class="systabs" id="systabs">
   <button data-sys="1"><span class="st-no" style="background:#2563eb">一</span><span class="st-info"><span class="st-name">项目审查与阶段控制</span><span class="st-sub">DR1-DR7 关卡 · 门禁放行</span></span></button>
-  <button data-sys="2"><span class="st-no" style="background:#7c3aed">二</span><span class="st-info"><span class="st-name">基于检查表的设计审查系统</span><span class="st-sub">专家 · 任务控制 · 逐步</span></span></button>
+  <button data-sys="2"><span class="st-no" style="background:#7c3aed">二</span><span class="st-info"><span class="st-name">基于检查表的设计审查系统</span><span class="st-sub">694 题清单 · 风险矩阵 · 审核评分</span></span></button>
   <button data-sys="3"><span class="st-no" style="background:#0f6e56">三</span><span class="st-info"><span class="st-name">MP 和设计反馈</span><span class="st-sub">MP情报库 · 标准 · 产品规格</span></span></button>
   <button data-sys="4" class="on"><span class="st-no" style="background:#d97706">四</span><span class="st-info"><span class="st-name">方法和工具</span><span class="st-sub">QFD · DOE · FMEA · TT&amp;T</span></span></button>
 </nav>
@@ -1118,7 +1118,7 @@
 
 <!-- ============ 「引导式套表」已合并至「🧭 工具使用」页签（第 ② 部分） ============ -->
 
-<footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥<br><span style="color:var(--ink-3)">当前版本 v3.0 · 提示：若页面仍显示旧版，请强制刷新（Mac: ⌘+Shift+R / Windows: Ctrl+F5）</span></footer>
+<footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥<br><span style="color:var(--ink-3)">当前版本 v3.06（新增 🔍 设计审查 · 694 题检查清单）· 提示：若页面仍显示旧版，请强制刷新（Mac: ⌘+Shift+R / Windows: Ctrl+F5）</span></footer>
 </div>
 
 <!-- 工具详情弹窗 -->
@@ -5228,13 +5228,14 @@ function dsrLocked(p,dr){
   return false;
 }
 async function loadSys2(){
+  /* v3.06：本模块已升级为「🔍 设计审查」完整版（694 题检查清单 + 180 专家问题 + 风险矩阵 + 审核评分）。
+     此处作为体系入口：完整版入口卡 + 旧版三要素登记表（收在折叠区，写入 em_dsr_records 表）。 */
   const root=document.getElementById('sysview-2');
   root.innerHTML='<div class="sys-hero"></div>';
   const hero=root.querySelector('.sys-hero');
   let projects=[];
   if(tableOK.em_projects&&PROJECTS.length)projects=PROJECTS.slice();
   else if(tableOK.em_projects){try{projects=await api("em_projects?select=*&order=created_at.desc");}catch(e){}}
-  // 设计审查记录：云端优先，表未创建时回退 localStorage 收集
   let dsrRows=[];
   if(tableOK.em_dsr_records){try{dsrRows=await api("em_dsr_records?select=*&order=ts.desc")||[];}catch(e){dsrRows=[];}}
   if(!tableOK.em_dsr_records){
@@ -5242,28 +5243,46 @@ async function loadSys2(){
     dsrRows.sort((a,b)=>(b.ts||0)-(a.ts||0));
   }
   DSR_ROWS=dsrRows;
-  // 统计已审查关卡
   const reviewed=dsrRows.length,failed=dsrRows.filter(r=>r.verdict==="fail").length;
   const optP='<option value="">（选择项目）</option>'+projects.map(p=>'<option value="'+p.id+'">'+esc(p.name)+'</option>').join("");
   const optD=[1,2,3,4,5,6,7].map(n=>'<option value="'+n+'">DR'+n+' '+DR_META[n]+'</option>').join("");
   hero.innerHTML=
    '<div class="sys-card">'+
-   '<h3><span class="bar"></span>基于检查表的设计审查系统 <span class="hint">每关卡配检查表 · 专家 + 任务控制 + 逐步三要素审查</span></h3>'+
-   '<div style="font-size:13px;color:var(--ink-2);line-height:1.9;margin-top:4px">'+
-   '设计审查系统在 <b>每个 DR 关卡</b> 配备一套<b>检查表</b>，从三个控制维度把关：<b>专家</b>（跨职能专家评审，覆盖研发/品控/生产/EM）、<b>任务控制</b>（确认该关卡交付物与标准任务完成情况）、<b>逐步</b>（按七步逐关推进，形成可追溯的评审台账）。'+
-   '审查记录保存至云端（em_dsr_records 表），团队共享可追溯；正式 DR 评审放行请到「系统四 → 项目台账 → DR关卡」登记。</div>'+
+   '<h3><span class="bar"></span>🔍 基于检查表的设计审查系统 <span class="hint">源自 EM 支柱标准表单（5 份）· 完整版已就绪</span></h3>'+
+   '<div style="font-size:13px;color:var(--ink-2);line-height:2;margin-top:4px">'+
+   '本模块已按 <b>5 份 EM 支柱标准表单</b> 整合为完整版，含四个部分：<br>'+
+   '① <b>DR 检查清单</b> —— DR1-DR7 七关卡共 <b>694 题</b>，四态作答（符合 / 部分符合 / 不符合 / 不适用），支持分类筛选与关键字搜索<br>'+
+   '② <b>EQC 专家问题</b> —— <b>180 条</b> 跨职能专家检查问题（含湖北补充 47 题）<br>'+
+   '③ <b>风险登记评估</b> —— PQCDSM 六维登记，R = L×S，5×5 矩阵热力图，低 1-4 绿 / 中 5-10 黄 / 高 11-25 红<br>'+
+   '④ <b>EM 审核评分</b> —— <b>51 项</b> 审核条款，权重合计 100 分，自动算分与分级'+
+   '</div>'+
    '<div class="mpstat" style="margin-top:14px">'+
-   '<div class="ms"><b>'+reviewed+'</b><span>已审查关卡</span></div>'+
-   '<div class="ms"><b>'+failed+'</b><span>发现问题关</span></div>'+
+   '<div class="ms"><b>694</b><span>检查题库（7 关）</span></div>'+
+   '<div class="ms"><b>180</b><span>专家问题</span></div>'+
+   '<div class="ms"><b>51</b><span>审核条款 / 100 分</span></div>'+
    '<div class="ms"><b>'+projects.length+'</b><span>在管项目</span></div>'+
+   '</div>'+
+   '<div class="fbtns" style="margin-top:18px">'+
+   '<button class="btn primary" style="font-size:14.5px;padding:12px 24px" onclick="rvGoFull()">▶ 打开完整版设计审查系统</button>'+
+   '<button class="btn" onclick="gotoProjTab()">📁 先建 EM 项目</button>'+
+   '</div>'+
+   '<div style="font-size:12.5px;color:var(--ink-3);margin-top:12px;line-height:1.9">'+
+   '· 作答 <b>自动保存到云端</b>（em_review_sessions / em_review_risks 表），团队共享可追溯，断网自动降级本机缓存<br>'+
+   '· DR 题答「<b style="color:#d64550">不符合</b>」可一键登记为风险，形成「检查 → 风险 → 措施 → 闭环」链路<br>'+
+   '· 检查表按项目类型（EEM / EPM）与设备等级（A / B / C）自动过滤适用问题'+
    '</div></div>'+
-   '<div class="sys-card"><h3><span class="bar"></span>设计审查表单 <span class="hint">选择项目与关卡 → 三要素审查 → 自动判定</span></h3>'+
-   '<div class="fgrid">'+
+   '<details class="sys-card" style="padding:16px 22px">'+
+   '<summary style="cursor:pointer;font-size:13.5px;font-weight:800;color:var(--header);outline:none">旧版登记表（三要素审查 · 写入 em_dsr_records 表）— 点击展开 ▾</summary>'+
+   '<div style="font-size:12.5px;color:var(--ink-3);margin:10px 0 0">旧版按「专家 + 任务控制 + 逐步」三要素逐关登记，可继续使用；新建审查建议直接使用上方完整版。</div>'+
+   '<div class="fgrid" style="margin-top:12px">'+
    '<div class="fld"><label>关联项目 <i>*</i></label><select id="ds2_prj" onchange="ds2Load()">'+optP+'</select></div>'+
    '<div class="fld"><label>审查关卡 <i>*</i></label><select id="ds2_dr" onchange="ds2Load()">'+optD+'</select></div>'+
-   '</div><div id="ds2_body"></div></div>'+
-   '<div class="sys-card"><h3><span class="bar"></span>审查记录汇总 <span class="hint">所有已审查关卡</span></h3><div id="ds2_recs">暂无记录</div></div>';
-  // 渲染记录汇总
+   '</div><div id="ds2_body"></div>'+
+   '<div style="margin-top:18px;border-top:1px solid var(--line);padding-top:14px">'+
+   '<div style="font-size:13.5px;font-weight:800;color:var(--header)">审查记录汇总 <span style="font-size:12px;color:var(--ink-3);font-weight:400">旧版共 '+reviewed+' 条，发现问题 '+failed+' 关</span></div>'+
+   '<div id="ds2_recs">暂无记录</div></div>'+
+   '</details>';
+  // 渲染旧版记录汇总
   const recBox=hero.querySelector('#ds2_recs');
   let allRecs=dsrRows.map(r=>({p:projects.find(x=>String(x.id)===String(r.project_id)),dr:+r.dr_no,r:r})).filter(x=>x.p);
   if(allRecs.length){
@@ -5278,6 +5297,16 @@ async function loadSys2(){
        '<div style="font-size:11.5px;color:var(--ink-3);margin-top:4px">'+new Date(x.r.ts).toLocaleString('zh-CN')+'</div></div>';
     }).join("");
   }
+}
+/* v3.06：从「系统模式」跳转到「🔍 设计审查」主页签（必须先 showSystem(4) 退出系统模式，
+   否则 body[data-sys=1|2|3] 的 CSS 会继续隐藏 nav.tabs 与 .wrap，点了页签也看不到内容） */
+function rvGoFull(){
+  if(typeof showSystem==='function')showSystem(4);
+  setTimeout(function(){
+    var b=document.querySelector('.tabs button[data-tab="review"]');
+    if(b)b.click();
+    if(typeof toast==='function')toast('已打开完整版设计审查系统 ✓','ok');
+  },80);
 }
 function ds2Load(){
   const pid=$('#ds2_prj').value,dr=$('#ds2_dr').value;
@@ -5852,7 +5881,11 @@ async function rvSelPrj(){
 function rvPrjInfo(){
   const el=$('#rv_prjinfo');if(!el)return;
   const p=RV.prj?PROJECTS.find(x=>x.id===RV.prj):null;
-  if(!p){el.innerHTML='<span style="color:var(--ink-3);font-size:13px">选择项目后：检查表将按项目类型（EEM/EPM）与设备等级（A/B/C）自动过滤适用问题，作答自动保存到云端。</span>';return;}
+  if(!p){
+    el.innerHTML=PROJECTS.length===0
+      ? '<span class="badge b-amber">台账暂无项目</span> <span style="color:var(--ink-3);font-size:13px">当前显示 <b>全部 694 题</b>（不做 EEM/EPM 与 ABC 等级过滤）。如需按项目过滤并云端存档，请先</span> <button class="btn" style="padding:4px 12px;font-size:12.5px" onclick="gotoProjTab()">📁 去新建 EM 项目</button>'
+      : '<span style="color:var(--ink-3);font-size:13px">选择项目后：检查表将按项目类型（EEM/EPM）与设备等级（A/B/C）自动过滤适用问题，作答自动保存到云端。</span>';
+    return;}
   el.innerHTML=
     '<span class="badge '+(p.ptype==='EPM'?'b-amber':'b-blue')+'">'+esc(p.ptype)+'</span> '+
     (p.abc_class?'<span class="badge b-green" title="项目台账 ABC 分级">'+p.abc_class+' 类设备</span> ':'<span class="badge b-gray" title="未分级时默认显示全部等级问题">未分级</span> ')+
