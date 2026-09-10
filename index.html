@@ -994,6 +994,7 @@ function showSystem(n){
   if(n>=1&&n<=3){
     const sv=document.getElementById('sysview-'+n);
     sv.classList.add('on');
+    if(n===3&&typeof mpSnapForm==='function')mpSnapForm(); /* 切走前保存 MP 录入表草稿，切回来可续填 */
     sv.innerHTML='<div class="sys-hero"></div>'; /* 清空，避免二次渲染重影 */
     SYS_META[n].load();
   }
@@ -1984,7 +1985,11 @@ let rtThrottle=null,_rtFallback=false;
 function activeDataTab(){const b=document.querySelector(".tabs button.on");return b?b.dataset.tab:null;}
 function refreshActiveView(){
   const s=document.body.getAttribute('data-sys');
-  if(s==='1'||s==='2'||s==='3'){SYS_META[+s].load();return;}  // 系统一/二/三视图：整视图刷新
+  if(s==='1'||s==='2'||s==='3'){
+    /* 系统三：用户正在填写 MP 录入表 / 设置查询筛选时，跳过本次自动刷新，
+       防止整视图重渲染把未保存内容清掉、页面来回跳动 */
+    if(s==='3'&&typeof mpSys3Busy==='function'&&mpSys3Busy())return;
+    SYS_META[+s].load();return;}  // 系统一/二/三视图：整视图刷新
   const t=activeDataTab();
   if(t==="projects")loadProjects();
   else if(t==="usage")loadUsage();
@@ -3390,8 +3395,11 @@ function fbSet(k,a){localStorage.setItem(k,JSON.stringify(a));}
 function fbGenId(prefix){return prefix+Date.now().toString(36).toUpperCase();}
 async function loadSys3(){
   const root=document.getElementById('sysview-3');
-  root.innerHTML='<div class="sys-hero"></div>';
-  const hero=root.querySelector('.sys-hero');
+  if(typeof mpSnapForm==='function')mpSnapForm();   /* 重渲染前快照未保存草稿 */
+  const sy=window.scrollY;
+  /* 离屏构建：不再先把视图清成空白（那会让页面高度瞬间塌缩→滚动来回跳），
+     等数据到齐后一次性替换 DOM */
+  const hero=document.createElement('div');hero.className='sys-hero';
   const mpRow=!tableOK.em_mp_info?await fbGet('fb_mp'):[];// 兜底
   let mpList=[];
   if(tableOK.em_mp_info){try{mpList=await api("em_mp_info?select=*&order=created_at.desc");PROJECTS; }catch(e){}}
@@ -3455,7 +3463,10 @@ async function loadSys3(){
    '<div style="font-size:13px;color:var(--ink-2);line-height:1.9;margin-bottom:10px">'+
    '把「系统二设计审查」与「系统四 PDA 缺陷分析」发现的问题，回传为 MP 情报——DR7 结案时（7.2 MP 信息上传）即可沉淀为可复用经验。</div>'+
    '<div id="fb_loop" style="font-size:13px;color:var(--ink-2)">'+(mpList.length?'当前 MP 情报库已有 <b>'+mpList.length+'</b> 条可复用经验，新设备 DR1-DR2 立项时应优先检索复用。<br><span style="color:var(--ink-3)">提示：到「系统四 → 计算型工具 → DR 关卡/项目台账」完成正式评审与缺陷回传。</span>':'当前情报库较空，建议在项目推进中持续回传改善经验。')+'</div></div>';
-  mpRefreshNos();mpCatSync();mpQueryRender();
+  root.innerHTML='';root.appendChild(hero);          /* 一次性替换，无闪烁跳动 */
+  if(!mpFormRestore())mpRefreshNos();                /* 有草稿则回填（含原情报ID），否则生成新 ID */
+  mpCatSync();mpQueryRender();
+  window.scrollTo(0,sy);                             /* 保持滚动位置 */
 }
 async function fbSaveStd(){
   const name=$('#fb_stdname').value.trim();if(!name){toast('请填写载体名称','err');return;}
@@ -3504,8 +3515,50 @@ const MP_VENDORS=['创灵','上海创灵','靖江宝联','博世','如皋通达'
 const MP_MACHINES=['BOSCH称量熬煮系统','香精奶粉添加系统','捏合机','成型系统','五层冷风隧道','金属检测机','低速包装机','高速包装机','高速枕式包装机','立式包装机','自动折叠机','立式散装包装机','自动贴标机','立式区自动供料系统','自动给袋机','连续式封口机','重量检测机','多规格检重机','寿力空压机','日立空压机','冰水机','电动堆高车','冷却水塔','热缩膜机'];
 const MP_MODELS=['BKK0750','NHG-600','BPK0160DB','ISD-6008-PB','FW340','FW3201','JH-Z2000','TT2001A','LB-01-NNT','RL720','TBJ-2000Y','24000*530','MR6-300','FRKS1100-WQ','DACS-FS-050-SB/PB-1','美旺定制','55KW','RCU40WHZ-A','RCU100WHZ-A','RCU120WHZ-A','S-12','LBC80RT','LBC125RT','LBC150RT','M31R'];
 function mpOpt(arr,sel){return arr.map(v=>'<option'+(v===sel?' selected':'')+'>'+esc(v)+'</option>').join('');}
-/* 情报ID = "MP"+YYMMDDHHMMSS（Excel 公式 ="MP"&TEXT(NOW(),"yymmddhhmmss") 网页版） */
-function mpGenInfoId(){const d=new Date(),p=n=>String(n).padStart(2,'0');return 'MP'+String(d.getFullYear()).slice(2)+p(d.getMonth()+1)+p(d.getDate())+p(d.getHours())+p(d.getMinutes())+p(d.getSeconds());}
+/* 情报ID = "MP"+YYMMDDHHMMSS+毫秒（Excel 公式 ="MP"&TEXT(NOW(),"yymmddhhmmss") 网页版；
+   追加毫秒避免同一秒内连续保存/多人同时录入生成重复 ID，导致 upsert 相互覆盖） */
+function mpGenInfoId(){const d=new Date(),p=n=>String(n).padStart(2,'0');return 'MP'+String(d.getFullYear()).slice(2)+p(d.getMonth()+1)+p(d.getDate())+p(d.getHours())+p(d.getMinutes())+p(d.getSeconds())+String(d.getMilliseconds()).padStart(3,'0');}
+/* ================= 录入草稿保护（自动刷新 / 视图切换 / 重渲染不丢正在填写的内容） ================= */
+const MP_FORM_FIELDS=['mpi_name','mpi_propdate','mpi_proposer','mpi_improver','mpi_model','mpi_cost','mpi_benefit','mpi_remark','mpi_defect','mpi_fix_before','mpi_fix_after','mpi_after_note','mpi_dept_opinion','mpi_recv_opinion','mpi_dept','mpi_line','mpi_area','mpi_pillar','mpi_vendor','mpi_machine','mpi_grade'];
+/* 快照：表单存在且用户实际填写过内容时记录（下拉默认值不算"填写中"） */
+function mpSnapForm(){
+  if(!document.getElementById('mpi_name'))return;      /* 表单不在页面上：保留旧快照（跨系统切换续填） */
+  const vals={};
+  MP_FORM_FIELDS.forEach(id=>{const el=document.getElementById(id);if(el)vals[id]=el.value;});
+  /* dirty 只看用户可输入/可清空的字段：文本框 + 描述区 + 无默认值的下拉（设备/等级）+ 已选类别 */
+  const DIRTY=['mpi_name','mpi_proposer','mpi_improver','mpi_model','mpi_cost','mpi_benefit','mpi_remark','mpi_defect','mpi_fix_before','mpi_fix_after','mpi_after_note','mpi_dept_opinion','mpi_recv_opinion','mpi_machine','mpi_grade'];
+  const chips=[...document.querySelectorAll('.catchip.on')].map(c=>c.dataset.v);
+  const dirty=DIRTY.some(id=>{const el=document.getElementById(id);return el&&el.value;})||chips.length>0;
+  if(!dirty)return;                                    /* 空表单不产生快照 */
+  vals._chips=chips;
+  const info=document.getElementById('mpi_infoid'),pn=document.getElementById('mpi_propno'),uq=document.getElementById('mpi_uniq');
+  if(info)vals._info=info.dataset.v||info.textContent;
+  if(pn)vals._prop=pn.textContent;
+  if(uq)vals._uniq=uq.textContent;
+  window.MP_FORM_SNAP=vals;
+  try{localStorage.setItem('em_mp_draft',JSON.stringify(vals));}catch(e){} /* F5 刷新也不丢草稿 */
+}
+/* 回填：草稿存在时写回新渲染的表单（含原情报ID，保证保存时 ID 与填写时一致），返回是否回填 */
+function mpFormRestore(){
+  let s=window.MP_FORM_SNAP;
+  if(!s){try{s=JSON.parse(localStorage.getItem('em_mp_draft'));}catch(e){s=null;}}
+  if(!s)return false;
+  window.MP_FORM_SNAP=s;
+  MP_FORM_FIELDS.forEach(id=>{const el=document.getElementById(id);if(el&&s[id]!==undefined)el.value=s[id];});
+  document.querySelectorAll('.catchip').forEach(c=>c.classList.toggle('on',(s._chips||[]).indexOf(c.dataset.v)>=0));
+  if(s._info){const el=document.getElementById('mpi_infoid');if(el){el.textContent=s._info;el.dataset.v=s._info;}}
+  if(s._prop){const el=document.getElementById('mpi_propno');if(el)el.textContent=s._prop;}
+  if(s._uniq){const el=document.getElementById('mpi_uniq');if(el)el.textContent=s._uniq;}
+  return true;
+}
+/* 清除草稿（保存成功 / 手动清空后调用，使下次渲染得到空表单+新ID） */
+function mpFormReset(){window.MP_FORM_SNAP=null;try{localStorage.removeItem('em_mp_draft');}catch(e){}}
+/* 自动刷新守卫：正在录入（有草稿）或查询表设置了筛选时，跳过整视图自动重渲染 */
+function mpSys3Busy(){
+  if(window.MP_FORM_SNAP)return true;
+  const f=id=>{const el=document.getElementById(id);return !!(el&&el.value);};
+  return f('mpqi_line')||f('mpqi_cat')||f('mpqi_pillar')||f('mpqi_kw');
+}
 /* 提案编号 / 构建唯一值：按线别累计计数（Excel COUNTIFS 语义） */
 function mpRefreshNos(){
   if(!$('#mpi_infoid'))return;
@@ -3603,23 +3656,33 @@ async function mpIntelSave(){
     try{
       await api("em_mp_intel?on_conflict=info_id","POST",rec,"return=representation,resolution=merge-duplicates");
       toast('✅ 情报 '+infoId+' 已保存并分发至 ①汇总表 ②查询表 ③详情一览表','ok');
+      mpFormReset(); /* 已保存：清除草稿，重渲染后为空表单+新ID（云端失败则不清，保留续填） */
     }catch(e){
       toast('云端保存失败：'+e.message+' — 已转存本地','err');
       const a=fbGet('fb_mp_intel');a.unshift(rec);fbSet('fb_mp_intel',a);
+      mpFormReset();
     }
   }else{
     const a=fbGet('fb_mp_intel');a.unshift(rec);fbSet('fb_mp_intel',a);
+    mpFormReset();
     toast('已保存本地 ✓ —— em_mp_intel 表未创建，暂不能云端共享','ok');
   }
-  await loadSys3(); // 重新渲染：三视图即时更新，表单自动清空并生成新 ID，可继续填写下一条
+  /* 先清空 DOM 表单并清除草稿，再重渲染——否则重渲染前的快照会把旧内容回填回去 */
+  mpClearFormDom();mpFormReset();
+  await loadSys3(); // 重新渲染：三视图即时更新，表单为空+新 ID，可继续填写下一条
+}
+/* 清空录入表 DOM 控件值（不含情报ID/编号，那两个由 mpRefreshNos 重生成） */
+function mpClearFormDom(){
+  ['mpi_name','mpi_proposer','mpi_improver','mpi_model','mpi_cost','mpi_benefit','mpi_remark','mpi_defect','mpi_fix_before','mpi_fix_after','mpi_after_note','mpi_dept_opinion','mpi_recv_opinion'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  const g=document.getElementById('mpi_grade');if(g)g.value='';
+  const m=document.getElementById('mpi_machine');if(m)m.value='';
+  document.querySelectorAll('.catchip.on').forEach(c=>c.classList.remove('on'));
 }
 /* 🔄 一键清空继续填写（= Excel 清空MP情报内容宏） */
 function mpIntelClear(){
-  ['mpi_name','mpi_proposer','mpi_improver','mpi_model','mpi_cost','mpi_benefit','mpi_remark','mpi_defect','mpi_fix_before','mpi_fix_after','mpi_after_note','mpi_dept_opinion','mpi_recv_opinion'].forEach(id=>{const el=$('#'+id);if(el)el.value='';});
-  const g=$('#mpi_grade');if(g)g.value='';
-  const m=$('#mpi_machine');if(m)m.value='';
-  document.querySelectorAll('.catchip.on').forEach(c=>c.classList.remove('on'));
-  mpCatSync();mpRefreshNos();
+  if(!document.getElementById('mpi_name'))return;
+  mpClearFormDom();
+  mpFormReset();mpCatSync();mpRefreshNos();
   toast('已清空，可继续填写下一条情报 ✓','ok');
 }
 async function mpIntelDel(infoId){
