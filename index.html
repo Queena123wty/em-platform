@@ -208,7 +208,7 @@
   .uccount{font-size:12.5px;color:var(--ink-3);white-space:nowrap}
   .uccount b{color:var(--header)}
   .ucgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px}
-  .uccard{border:1px solid var(--line);border-radius:12px;background:#fff;padding:13px 15px;transition:.18s;display:flex;flex-direction:column;gap:6px}
+  .uccard{border:1px solid var(--line);border-radius:12px;background:#fff;padding:13px 15px;transition:.18s;display:flex;flex-direction:column;gap:6px;cursor:pointer}
   .uccard:hover{border-color:#bcd0ee;box-shadow:0 6px 18px rgba(30,64,140,.08)}
   .uccard.open{border-color:#2557b0;box-shadow:0 0 0 1px #2557b0 inset}
   .uccard .uchd{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
@@ -249,7 +249,37 @@
   .upath-d{font-size:12.5px;color:var(--ink-2);line-height:1.9}
   .upath-d b{color:#2557b0}
   .upath-d .why{color:#a35a00;font-weight:700}
-  @media print{.tabs,.g-top .g-desc,footer,.gbtns,.ggd,.ucbar,.ubtns{display:none!important}.gcase,.uccard .ubg{display:block!important}.uftab,.upath{break-inside:avoid}}
+  /* ===== 案例查看窗口（固定尺寸弹窗 + 内部向下滚动，避免长页面） ===== */
+  .cmask{position:fixed;inset:0;background:rgba(19,28,46,.55);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;z-index:120;padding:24px}
+  .cmask.on{display:flex}
+  .cmodal{background:#fff;border-radius:16px;width:min(1000px,100%);max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 70px rgba(15,25,45,.42);animation:pop .22s ease}
+  .cm-hd{position:relative;flex:none;padding:14px 54px 11px 18px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#f7f9fd,#fff)}
+  .cm-ttl{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .cm-ttl .uno{flex:none;font-size:11.5px;font-weight:800;color:#2557b0;background:#e8eefb;border-radius:7px;padding:2px 8px}
+  .cm-ttl .unm{font-size:15.5px;font-weight:800;color:var(--ink-1)}
+  .cm-ttl .uph{font-size:11px;font-weight:600;color:var(--ink-3);background:#f2f5fa;border-radius:20px;padding:2px 9px;white-space:nowrap}
+  .cm-sub{font-size:11.5px;color:var(--ink-3);margin-top:4px;line-height:1.6}
+  .cm-x{position:absolute;right:12px;top:12px;width:30px;height:30px;border:1px solid var(--line);background:#fff;border-radius:9px;cursor:pointer;font-size:13px;color:var(--ink-2);line-height:1;font-family:inherit}
+  .cm-x:hover{background:#fdf0ef;border-color:#f0c4c0;color:var(--danger)}
+  .cm-nav{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
+  .cm-nav button{font-family:inherit;font-size:11.5px;font-weight:600;color:#2557b0;background:#eef3fc;border:1px solid #dbe6f8;border-radius:20px;padding:4px 11px;cursor:pointer}
+  .cm-nav button:hover{background:#e2ebfa;border-color:#c6d8f4}
+  .cm-bd{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:15px 18px 20px;scroll-behavior:smooth}
+  .cm-sec{margin:0 0 16px;scroll-margin-top:6px}
+  .cm-sec:last-child{margin-bottom:0}
+  .cm-sh{font-size:12.5px;font-weight:800;color:var(--ink-1);margin:0 0 8px;padding-left:9px;border-left:3px solid #2557b0;line-height:1.4}
+  .cm-ft{flex:none;display:flex;gap:9px;align-items:center;justify-content:flex-end;padding:11px 18px;border-top:1px solid var(--line);background:#fafbfe}
+  .cm-hint{margin-right:auto;font-size:11.5px;color:var(--ink-3)}
+  .cmodal .ubg{font-size:12.5px;color:#8a6116;background:#fffaf0;border:1px solid #f0d9a8;border-radius:9px;padding:10px 13px;line-height:1.85}
+  .cmodal .ubg b{color:#7a530f}
+  .cmodal .udet{margin:2px 0 0 18px;font-size:12.5px;color:var(--ink-2);line-height:1.9}
+  @media (max-width:760px){.cmask{padding:0}.cmodal{max-height:100vh;border-radius:0;width:100%}.cm-hd{padding:12px 50px 10px 14px}.cm-bd{padding:12px 14px 16px}.cm-ft{padding:9px 14px}}
+  @media print{.tabs,.g-top .g-desc,footer,.gbtns,.ggd,.ucbar,.ubtns,.cm-nav,.cm-x,.cm-ft,.cm-hint{display:none!important}.gcase,.uccard .ubg{display:block!important}.uftab,.upath{break-inside:avoid}
+    body.case-open>*:not(#cmask){display:none!important}
+    body.case-open #cmask{position:static;display:block!important;background:none;padding:0;backdrop-filter:none}
+    body.case-open .cmodal{max-height:none;width:100%;box-shadow:none;border-radius:0;overflow:visible;display:block}
+    body.case-open .cm-hd{background:none;border:none;padding:0 0 10px}
+    body.case-open .cm-bd{overflow:visible;max-height:none;padding:0}}
   .sheet-pane{display:none}.sheet-pane.on{display:block}
   .guide{border:1px solid #d8e0f0;border-radius:10px;background:#f7f9fd;padding:10px 14px;margin-bottom:14px;font-size:13px;color:var(--ink-2)}
   .guide summary{cursor:pointer;font-weight:700;color:var(--header);font-size:13.5px}
@@ -564,7 +594,7 @@
   <!-- ① 案例展示 -->
   <div class="card" id="uc_card">
     <h3><span class="bar"></span><span class="sec-no">1</span>案例展示 <span class="hint">37 个工具的实战案例——先看别人怎么做，再照着套表做一遍</span></h3>
-    <div class="sec-lead">每张卡片是一个工具的<b>真实项目案例</b>：点「📖 查看案例」展开背景与关键数据；点「🧭 用此套表」直接跳到第 ② 步，用该工具的引导式标准套表做一遍。</div>
+    <div class="sec-lead">每张卡片是一个工具的<b>真实项目案例</b>：点卡片（或「📖 查看案例」）会弹出<b>案例查看窗口</b>——固定大小、内容在窗口内向下滚动，包含<b>案例背景 + 标准表单结构与填写内容 + 整体分析思路（含 5Why）</b>三段；窗口内可直接点「🧭 用此套表做一次」跳到第 ② 步。</div>
     <div class="ucbar">
       <input id="uc_q" type="text" placeholder="搜索工具名称 / 缩写 / 案例关键词，如 FMEA、QFD、垂直启动…" oninput="ucRender()">
       <select id="uc_phase" onchange="ucRender()"></select>
@@ -937,6 +967,9 @@
 <!-- 工具详情弹窗 -->
 <div class="modal-mask" id="mask" onclick="closeM(event)"><div class="modal" id="modal"></div></div>
 
+<!-- 案例查看窗口（固定尺寸 + 内部向下滚动） -->
+<div class="cmask" id="cmask" onclick="closeCase(event)"><div class="cmodal" id="cmodal"></div></div>
+
 <!-- DR 关卡弹窗 -->
 <div class="modal-mask" id="drmask" onclick="closeDr(event)"><div class="modal" id="drmodal"></div></div>
 
@@ -1144,7 +1177,7 @@ function gotoSheet(sheet){
   closeM();document.querySelector('.tabs button[data-tab="sheets"]').click();
   const b=document.querySelector('.sheettabs button[data-sheet="'+sheet+'"]');if(b)b.click();
 }
-document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeM();closeDr();}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeM();closeDr();closeCase();}});
 
 /* ---------- 下拉初始化 ---------- */
 (function initSelects(){
@@ -1863,8 +1896,7 @@ async function saveDr(pid){
 
 /* ================= 工具使用：① 案例展示 / ② 引导式标准套表 / ③ 使用记录 ================= */
 let US_ROWS=[];        // 全量使用记录缓存（供筛选 / 导出）
-let UC_OPEN={};        // 案例卡片展开状态
-let UC_HI=null;        // 从工具弹窗跳入时高亮的卡片
+let UC_HI=null;        // 从工具弹窗跳入时高亮的卡片（案例查看窗口不内联展开，保持页面紧凑）
 
 /* ---- ① 案例展示：37 个工具的案例卡片墙 ---- */
 function ucInit(){
@@ -1888,20 +1920,62 @@ function ucRender(){
   const cEl=$('#uc_cnt');if(cEl)cEl.textContent=list.length;
   if(!list.length){grid.innerHTML='<div style="grid-column:1/-1;text-align:center;color:var(--ink-3);padding:34px 0;font-size:13.5px">未找到匹配的工具案例，请更换关键词。</div>';return;}
   grid.innerHTML=list.map(t=>{
-    const bg=ucBg(t),open=!!UC_OPEN[t.n],plain=bg.replace(/<[^>]*>/g,'');
-    return '<div class="uccard'+(open?' open':'')+(UC_HI===t.n?' hi':'')+'" id="ucc_'+t.n+'">'+
+    const bg=ucBg(t),plain=bg.replace(/<[^>]*>/g,'');
+    return '<div class="uccard'+(UC_HI===t.n?' hi':'')+'" id="ucc_'+t.n+'" onclick="ucOpenCase('+t.n+')" title="点击查看案例详情">'+
       '<div class="uchd"><span class="uno">#'+t.n+'</span><span class="unm">'+gesc(t.name)+'</span><span class="uph">'+gesc(t.phase)+'</span></div>'+
       '<div class="uen">'+gesc(t.en)+'</div>'+
       '<div class="ubr">'+gesc(t.brief)+'</div>'+
-      (bg?'<div class="ubg">'+(open?bg:gesc(gSh(plain,88)))+'</div>':'')+
-      (open&&t.detail?'<ul class="udet">'+t.detail.map(x=>'<li>'+gesc(x)+'</li>').join('')+'</ul>':'')+
-      (open?ucForm(t)+ucPath(t):'')+
-      '<div class="ubtns">'+
-        '<button class="btn ghost sm" onclick="ucToggle('+t.n+')">'+(open?'▲ 收起案例':'📖 查看案例')+'</button>'+
+      (bg?'<div class="ubg">'+gesc(gSh(plain,88))+'</div>':'')+
+      '<div class="ubtns" onclick="event.stopPropagation()">'+
+        '<button class="btn ghost sm" onclick="ucOpenCase('+t.n+')">📖 查看案例</button>'+
         '<button class="btn primary sm" onclick="ucUse('+t.n+')">🧭 用此套表</button>'+
       '</div></div>';
   }).join('');
 }
+/* ---- 案例查看窗口：固定尺寸弹窗 + 内容内部向下滚动（替代原内联展开，避免页面过长） ---- */
+function ucOpenCase(n){
+  const t=TOOLS.filter(x=>x.n===+n)[0];if(!t)return;
+  const box=$('#cmodal'),mask=$('#cmask');if(!box||!mask)return;
+  const bg=ucBg(t);
+  const nav=[];
+  if(bg)nav.push('<button onclick="cmGo(\'cm_bg\')">📖 案例背景</button>');
+  if(t.detail&&t.detail.length)nav.push('<button onclick="cmGo(\'cm_pt\')">🔧 方法要点</button>');
+  nav.push('<button onclick="cmGo(\'cm_form\')">📋 标准表单结构</button>');
+  nav.push('<button onclick="cmGo(\'cm_path\')">🧠 整体分析思路</button>');
+  box.innerHTML=
+    '<div class="cm-hd">'+
+      '<div class="cm-ttl"><span class="uno">#'+t.n+'</span><span class="unm">'+gesc(t.name)+'</span><span class="uph">'+gesc(t.phase)+'</span></div>'+
+      '<div class="cm-sub">'+gesc(t.en)+(t.brief?' · '+gesc(t.brief):'')+'</div>'+
+      '<div class="cm-nav">'+nav.join('')+'</div>'+
+      '<button class="cm-x" onclick="closeCase()" title="关闭（Esc）">✕</button>'+
+    '</div>'+
+    '<div class="cm-bd" id="cm_bd">'+
+      (bg?'<div class="cm-sec" id="cm_bg"><div class="cm-sh">📖 案例背景</div><div class="ubg">'+bg+'</div></div>':'')+
+      ((t.detail&&t.detail.length)?'<div class="cm-sec" id="cm_pt"><div class="cm-sh">🔧 方法要点</div><ul class="udet">'+t.detail.map(x=>'<li>'+gesc(x)+'</li>').join('')+'</ul></div>':'')+
+      '<div class="cm-sec" id="cm_form">'+ucForm(t)+'</div>'+
+      '<div class="cm-sec" id="cm_path">'+ucPath(t)+'</div>'+
+    '</div>'+
+    '<div class="cm-ft">'+
+      '<span class="cm-hint">内容可在窗口内向下滚动 · 按 Esc 关闭</span>'+
+      '<button class="btn ghost" onclick="cmPrint()">🖨 打印本案例</button>'+
+      '<button class="btn ghost" onclick="closeCase()">关闭</button>'+
+      '<button class="btn primary" onclick="ucUseFromCase('+t.n+')">🧭 用此套表做一次</button>'+
+    '</div>';
+  mask.classList.add('on');
+  document.body.classList.add('case-open');
+  const bd=$('#cm_bd');if(bd)bd.scrollTop=0;
+}
+function closeCase(e){
+  if(e&&e.target!==e.currentTarget)return;
+  const m=$('#cmask');if(m)m.classList.remove('on');
+  document.body.classList.remove('case-open');
+}
+function cmGo(id){
+  const bd=$('#cm_bd'),el=document.getElementById(id);
+  if(bd&&el)bd.scrollTo({top:Math.max(0,el.offsetTop-8),behavior:'smooth'});
+}
+function cmPrint(){window.print();}
+function ucUseFromCase(n){closeCase();ucUse(n);}
 /* ---- ① 案例展开：标准表单结构 + 案例填写内容（由套表定义自动生成，与第②部分一一对应） ---- */
 function ucType(st){
   if(st.type==='select')return '下拉选择'+(st.opts&&st.opts.length?'（'+st.opts.length+' 项）':'');
@@ -1946,15 +2020,15 @@ function ucAutoPath(g,t){
     {t:'④ 结论：形成可执行的下一步',d:'按偏离程度排序资源投入，输出结论后回到「② 引导式使用标准套表」正式填写，由系统自动登记使用记录。'}
   ];
 }
-function ucToggle(n){UC_OPEN[n]=!UC_OPEN[n];ucRender();}
+function ucToggle(n){ucOpenCase(n);}   /* 兼容旧调用：查看案例 = 打开案例查看窗口 */
 function ucUse(n){UC_HI=null;gSelect(n);scrollToGuide();}
 function scrollToGuide(){setTimeout(()=>{const w=$('#g_wrap');if(w)w.scrollIntoView({behavior:'smooth',block:'start'});},80);}
 function gotoCase(n){
   const b=document.querySelector('.tabs button[data-tab="usage"]');
   if(b)b.click();
   if(!gInited){gInited=true;gInit();}
-  UC_OPEN[n]=true;UC_HI=n;ucRender();
-  setTimeout(()=>{const c=$('#ucc_'+n);if(c)c.scrollIntoView({behavior:'smooth',block:'center'});},140);
+  UC_HI=n;ucRender();
+  ucOpenCase(n);
 }
 
 /* ---- ③ 使用记录：由第 ② 步引导式套表自动登记，支持筛选 / 导出 / 删除 ---- */
