@@ -4,6 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EM早期管理专业工具在线使用平台</title>
+<script>
+/* 全局兜底错误横幅：任何脚本异常都立刻可见，避免页面静默瘫痪（点了没反应却无提示） */
+(function(){
+  function show(msg){
+    try{
+      var b=document.getElementById('jsErrBar');
+      if(!b){b=document.createElement('div');b.id='jsErrBar';
+        b.style.cssText='position:fixed;left:0;right:0;top:0;z-index:99999;background:#d64550;color:#fff;padding:9px 16px;font:13px/1.5 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;box-shadow:0 2px 10px rgba(0,0,0,.25)';
+        (document.body||document.documentElement).appendChild(b);}
+      b.textContent='⚠️ 页面脚本出错：'+msg+'　（请截图反馈，或按 Ctrl/⌘+Shift+R 强制刷新）';
+    }catch(e){}
+  }
+  window.addEventListener('error',function(e){
+    var m=e&&(e.message||(e.error&&e.error.message));
+    if(m&&!/ResizeObserver|Script error/i.test(m))show(m);
+  });
+  window.addEventListener('unhandledrejection',function(e){
+    var r=e&&e.reason;var m=r&&(r.message||r);
+    if(m&&!/AbortError|请求超时/i.test(String(m)))show(String(m));
+  });
+})();
+</script>
 <style>
   :root{
     --header:#1f3a6e;--header-grad:#22407c;--bg:#f4f6fa;--card:#ffffff;
@@ -814,7 +836,12 @@ const tableOK={};
 async function api(path,method='GET',body=null,prefer=null){
   const headers={'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json'};
   if(method!=='GET') headers['Prefer']=prefer||'return=representation';
-  const res=await fetch(SB_URL+'/rest/v1/'+path,{method,headers,body:body?JSON.stringify(body):undefined});
+  const ctl=new AbortController();                 // 超时保护：请求挂起时不再无限等待
+  const timer=setTimeout(()=>ctl.abort(),12000);
+  let res;
+  try{res=await fetch(SB_URL+'/rest/v1/'+path,{method,headers,body:body?JSON.stringify(body):undefined,signal:ctl.signal});}
+  catch(e){clearTimeout(timer);throw new Error(e&&e.name==='AbortError'?'请求超时（12 秒无响应，请检查网络）':((e&&e.message)||'网络错误'));}
+  clearTimeout(timer);
   if(!res.ok){let msg='HTTP '+res.status;try{const j=await res.json();msg=j.message||msg;}catch(e){}throw new Error(msg);}
   const t=await res.text();return t?JSON.parse(t):null;
 }
@@ -895,10 +922,13 @@ const PHASES=[
 const $=s=>document.querySelector(s);
 
 /* ================= 四大系统一级导航切换 ================= */
+/* 注意：loadSys1/2/3 定义在下方第二个 <script> 块，此处必须用惰性箭头包一层，
+   否则本块执行到此处时 loadSys1 尚未定义，会抛 ReferenceError 并中断整个首块脚本
+   （后果：工具卡片不渲染、按钮全部无响应、连接状态栏卡在「正在检查…」）。 */
 const SYS_META={
- 1:{name:'项目审查与阶段控制',load:loadSys1},
- 2:{name:'基于检查表的设计审查系统',load:loadSys2},
- 3:{name:'MP 和设计反馈',load:loadSys3},
+ 1:{name:'项目审查与阶段控制',load:()=>loadSys1()},
+ 2:{name:'基于检查表的设计审查系统',load:()=>loadSys2()},
+ 3:{name:'MP 和设计反馈',load:()=>loadSys3()},
  4:{name:'方法和工具',load:null}
 };
 function showSystem(n){
