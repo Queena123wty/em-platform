@@ -337,6 +337,62 @@
   .mpstat .ms b{display:block;font-size:24px;font-weight:800;color:var(--header)}
   .mpstat .ms span{font-size:12px;color:var(--ink-3)}
   .feedbackitem{border:1px solid var(--line);border-radius:11px;padding:11px 14px;margin-bottom:8px;background:#fbfcff;font-size:12.5px;color:var(--ink-2);line-height:1.6}
+
+  /* ===== MP 情报录入表（还原 Excel「情报录入表」版式） ===== */
+  .mpform{border:1px solid #cfd9ea;border-radius:12px;overflow:hidden;background:#fff;box-shadow:var(--shadow)}
+  .mpbar{display:flex;align-items:center;gap:10px;padding:9px 12px;background:#eef3fb;border-bottom:1px solid #cfd9ea;font-size:12.5px;color:var(--ink-2);flex-wrap:wrap}
+  .mpbar .mpaux{font-size:11.5px;color:var(--ink-3);border:1px solid var(--line);border-radius:5px;padding:1px 6px;background:#fff}
+  .mpbar .sp{flex:1}
+  .mpbar-btn{border:none;border-radius:8px;padding:8px 20px;font-size:13px;font-weight:700;color:#fff;cursor:pointer;font-family:inherit;transition:.15s}
+  .mpbar-btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+  .mpform .hdr6{display:grid;grid-template-columns:1.15fr 1fr 1fr 1fr 1fr 1fr;background:#2f5aa8}
+  .mpform .hdr6 div{color:#fff;font-size:12.5px;font-weight:700;text-align:center;padding:8px 4px;border-right:1px solid rgba(255,255,255,.22)}
+  .mpform .hdr6 div:last-child{border-right:none}
+  .mpform .sel6{display:grid;grid-template-columns:1.15fr 1fr 1fr 1fr 1fr 1fr;gap:1px;background:#dbe3f0;border-bottom:1px solid #cfd9ea}
+  .mpform .sel6>div{background:#fff;padding:5px}
+  .mpform .sel6 select,.mpform .sel6 input{width:100%;border:1px solid var(--line);border-radius:6px;padding:6px 7px;font-size:12.5px;font-family:inherit;background:#fbfcfe;color:var(--ink)}
+  .mpform .id2{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#dbe3f0;border-bottom:1px solid #cfd9ea}
+  .mpform .id2>div{background:#fff;padding:8px 12px;font-size:13px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .mpform .id2 b{color:var(--ink-2);font-weight:600;font-size:12.5px;white-space:nowrap}
+  .mpid-box{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:700;font-size:13px;color:#8a6100;background:#fffbe8;border:1px solid #ffe0a3;border-radius:7px;padding:3px 10px;letter-spacing:.3px}
+  .mpform .mpTitle{text-align:center;font-size:15px;font-weight:800;color:#2f5aa8;background:#f2f6fd;padding:9px;border-bottom:1px solid #cfd9ea;letter-spacing:1px}
+  .mpform .row6{display:grid;grid-template-columns:1.15fr 1fr 1fr 1fr 1fr 1fr;gap:1px;background:#e7ecf5;border-bottom:1px solid #e7ecf5}
+  .mpform .row6>.lab{background:#f7f9fc;font-size:12.5px;font-weight:600;color:var(--ink-2);padding:9px 10px;display:flex;align-items:center}
+  .mpform .row6>.lab i{color:var(--danger);font-style:normal;margin-left:3px}
+  .mpform .row6>.val{background:#fff;padding:5px}
+  .mpform .row6>.val input,.mpform .row6>.val select{width:100%;border:1px solid var(--line);border-radius:7px;padding:7px 9px;font-size:13px;font-family:inherit;background:#fbfcfe;color:var(--ink)}
+  .mpform .row6>.val input:focus,.mpform .row6>.val select:focus{border-color:#2f5aa8;background:#fff;outline:none;box-shadow:0 0 0 3px rgba(47,90,168,.1)}
+  .mpform .catwrap{display:grid;grid-template-columns:96px 1fr auto;gap:10px;align-items:center;background:#fff;border-bottom:1px solid #e7ecf5;padding:9px 10px}
+  .mpform .catlab{font-size:12.5px;font-weight:600;color:var(--ink-2)}
+  .mpform .catgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(58px,1fr));gap:6px}
+  .catchip{border:1px solid var(--line);background:#fbfcfe;border-radius:7px;padding:6px 4px;font-size:12.5px;font-family:inherit;color:var(--ink-2);cursor:pointer;transition:.12s}
+  .catchip:hover{border-color:#2f5aa8;color:#2f5aa8}
+  .catchip.on{background:#2f5aa8;border-color:#2f5aa8;color:#fff;font-weight:700}
+  .mpform .catval{font-size:12.5px;color:var(--ink-2);white-space:nowrap}
+  .mpform .catval b{color:#2f5aa8}
+  .mpform .desc4{display:grid;grid-template-columns:1.15fr 1fr 1fr 1.3fr;gap:1px;background:#dbe3f0}
+  .mpform .desc4>.dh{background:#eef3fb;font-size:12.5px;font-weight:700;color:#2f5aa8;text-align:center;padding:8px 6px}
+  .mpform .desc4>div:not(.dh){background:#fff;padding:5px}
+  .mpform .desc4 textarea{width:100%;border:1px solid var(--line);border-radius:7px;padding:8px 9px;font-size:13px;font-family:inherit;background:#fbfcfe;color:var(--ink);resize:vertical;line-height:1.6}
+  .mpform .desc4 textarea:focus{border-color:#2f5aa8;background:#fff;outline:none;box-shadow:0 0 0 3px rgba(47,90,168,.1)}
+  /* 查询表筛选条 */
+  .mpqf{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin-bottom:10px}
+  .mpqf .qf{display:flex;flex-direction:column;gap:4px}
+  .mpqf label{font-size:11.5px;font-weight:600;color:var(--ink-3)}
+  .mpqf select,.mpqf input{border:1px solid var(--line);border-radius:8px;padding:7px 9px;font-size:12.5px;font-family:inherit;background:#fbfcfe;color:var(--ink);min-width:120px}
+  /* 详情一览表 */
+  .mpdet{border:1px solid #cfd9ea;border-radius:11px;margin-bottom:10px;overflow:hidden;background:#fff}
+  .mpdet>summary{cursor:pointer;padding:10px 13px;background:#f7f9fc;font-size:13px;font-weight:700;color:#1f3a6e;display:flex;gap:10px;align-items:center;flex-wrap:wrap;list-style:none}
+  .mpdet>summary::-webkit-details-marker{display:none}
+  .mpdet>summary .dv{font-weight:500;color:var(--ink-3);font-size:12px}
+  .mpdet .dbody{padding:11px 13px;font-size:12.5px;color:var(--ink-2);line-height:1.75;border-top:1px solid var(--line)}
+  .mpdet .d4{display:grid;grid-template-columns:1.15fr 1fr 1fr 1.3fr;gap:8px;margin-top:9px}
+  .mpdet .d4>div{background:#fbfcff;border:1px solid var(--line);border-radius:9px;padding:8px 10px}
+  .mpdet .d4 h6{font-size:11.5px;color:#2f5aa8;font-weight:700;margin-bottom:4px}
+  .mpdet .d4 p{white-space:pre-wrap;word-break:break-word;color:var(--ink)}
+  .mpdet .kv{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:6px 14px}
+  .mpdet .kv span{color:var(--ink-3)}
+  .mpdet .kv b{color:var(--ink);font-weight:600}
 </style>
 </head>
 <body data-sys="4">
@@ -829,8 +885,8 @@
 /* ================= Supabase 连接配置 ================= */
 const SB_URL='https://lgohtkyiltxypvhydlbu.supabase.co';
 const SB_KEY='sb_publishable_KjUwI-HYgDIWgAnObNUdKQ_hcYTH6Bg'; // publishable key（公开，非管理密钥）
-const TABLES=['em_projects','em_dr_records','em_tool_usage','em_fmea','em_vsu','em_skills','em_mp_info','em_lcc','em_dsr_records','em_design_feedback'];
-const TABLE_NAMES={'em_projects':'项目台账','em_dr_records':'DR关卡','em_tool_usage':'使用台账','em_fmea':'FMEA','em_vsu':'VSU','em_skills':'技能矩阵','em_mp_info':'MP情报','em_lcc':'LCC成本','em_dsr_records':'设计审查记录','em_design_feedback':'设计反馈库'};
+const TABLES=['em_projects','em_dr_records','em_tool_usage','em_fmea','em_vsu','em_skills','em_mp_info','em_lcc','em_dsr_records','em_design_feedback','em_mp_intel'];
+const TABLE_NAMES={'em_projects':'项目台账','em_dr_records':'DR关卡','em_tool_usage':'使用台账','em_fmea':'FMEA','em_vsu':'VSU','em_skills':'技能矩阵','em_mp_info':'MP情报','em_lcc':'LCC成本','em_dsr_records':'设计审查记录','em_design_feedback':'设计反馈库','em_mp_intel':'MP情报录入'};
 const tableOK={};
 
 async function api(path,method='GET',body=null,prefer=null){
@@ -3340,6 +3396,11 @@ async function loadSys3(){
   let mpList=[];
   if(tableOK.em_mp_info){try{mpList=await api("em_mp_info?select=*&order=created_at.desc");PROJECTS; }catch(e){}}
   else mpList=mpRow;
+  // MP 情报录入表数据（em_mp_intel，还原 Excel《情报录入表》→ 汇总/查询/详情一览）
+  let mpIntel=[];
+  if(tableOK.em_mp_intel){try{mpIntel=await api("em_mp_intel?select=*&order=ts.desc")||[];}catch(e){mpIntel=fbGet('fb_mp_intel');}}
+  else mpIntel=fbGet('fb_mp_intel');
+  window.MP_INTEL=mpIntel;
   // 标准载体 / 产品规格：云端优先，表未创建时回退 localStorage
   let stds=[],specs=[];
   if(tableOK.em_design_feedback){
@@ -3357,19 +3418,24 @@ async function loadSys3(){
    '<b>MP（Maintainability Prevention）</b>是设备变更与改善的<b>沉淀系统</b>：把项目/设备上发现的问题，转化为可复用的工程标准（MP情报库 → 标准 → 产品规格 → MP数据表）。'+
    'DR7 结案时把项目缺陷<b>回传 MP 情报库</b>（7.2 MP 信息上传），完成「设计反馈」闭环——同类设备选型即可复用，避免重蹈覆辙。</div>'+
    '<div class="mpstat" style="margin-top:14px">'+
-   '<div class="ms"><b>'+mpList.length+'</b><span>MP 情报</span></div>'+
+   '<div class="ms"><b>'+mpIntel.length+'</b><span>MP 录入情报</span></div>'+
+   '<div class="ms"><b>'+mpList.length+'</b><span>MP 情报(PAD)</span></div>'+
    '<div class="ms"><b>'+stds.length+'</b><span>标准载体</span></div>'+
    '<div class="ms"><b>'+specs.length+'</b><span>产品规格</span></div>'+
    '<div class="ms"><b>'+mpStd+'</b><span>情报类别</span></div>'+
    '</div></div>'+
-   '<div class="sys-card"><h3><span class="bar"></span>① MP 情报库 <span class="hint">从「系统四 → 计算型工具 → MP 情报库」登记正式情报，此处汇总展示</span></h3>'+
+   mpIntelFormHTML()+
+   '<div class="sys-card"><h3><span class="bar"></span>① MP 情报汇总表 <span class="hint">全字段一览 · ⓪录入表保存后自动汇总（对应 Excel 情报汇总表）</span></h3>'+mpSumTable(mpIntel)+'</div>'+
+   '<div class="sys-card"><h3><span class="bar"></span>② MP 情报查询表 <span class="hint">按线别 / 类别 / 支柱 / 关键字筛选（对应 Excel 情报查询表）</span></h3>'+mpQueryHTML()+'</div>'+
+   '<div class="sys-card"><h3><span class="bar"></span>③ MP 详情一览表 <span class="hint">点开查看完整情报卡（对应 Excel 详情一览表）</span></h3><div style="max-height:520px;overflow:auto;padding-right:2px">'+mpDetailHTML(mpIntel)+'</div></div>'+
+   '<div class="sys-card"><h3><span class="bar"></span>④ MP 情报库（PAD 登记） <span class="hint">从「系统四 → 计算型工具 → MP 情报库」登记正式情报，此处汇总展示</span></h3>'+
    (mpList.length?('<div class="tblwrap" style="max-height:340px;overflow:auto"><table class="tbl"><thead><tr><th>情报ID</th><th>名称</th><th>类别</th><th>部门/线</th><th>设备</th><th>投入/收益</th><th>状态</th></tr></thead><tbody>'+
      mpList.slice(0,30).map(r=>'<tr><td>'+esc(r.info_no||'—')+'</td><td><b>'+esc(r.name||r.mp_name||'')+'</b></td><td>'+esc(r.category||'')+'</td><td>'+esc(r.dept||'')+'/'+esc(r.line||'')+'</td><td>'+esc(r.machine||'')+'</td><td>'+esc(r.cost||'0')+'/'+fmtBenefit(r.benefit)+'</td><td>'+esc(r.status||'')+'</td></tr>').join("")+
      '</tbody></table></div>')
    :'<div style="font-size:13px;color:var(--ink-3)">暂无 MP 情报。到「系统四 → 计算型工具 → MP 情报库」登记第一条。</div>')+
    '</div>'+
    '<div class="sys-grid" style="grid-template-columns:1fr 1fr;gap:16px">'+
-   '<div class="sys-card" style="margin-bottom:0"><h3><span class="bar"></span>② 标准载体 <span class="hint">OPL / CIL / SOP / 标准卡</span></h3>'+
+   '<div class="sys-card" style="margin-bottom:0"><h3><span class="bar"></span>⑤ 标准载体 <span class="hint">OPL / CIL / SOP / 标准卡</span></h3>'+
    '<div class="fgrid">'+
    '<div class="fld"><label>载体类型</label><select id="fb_stdtype"><option>OPL 一点课程</option><option>CIL 清洁点检润滑</option><option>SOP 标准作业</option><option>工艺标准卡</option></select></div>'+
    '<div class="fld"><label>载体名称</label><input id="fb_stdname" placeholder="如：充填压力标准卡"></div>'+
@@ -3377,7 +3443,7 @@ async function loadSys3(){
    '<div class="fld wide"><label>要点</label><textarea id="fb_stdnote" rows="2" placeholder="标准要点 / 适用范围"></textarea></div>'+
    '<div class="fbtns"><button class="btn primary" onclick="fbSaveStd()">保存标准</button></div></div>'+
    '<div id="fb_stdlist" style="margin-top:8px;font-size:12.5px;color:var(--ink-2)">'+(stds.length?stds.map((s,i)=>{const del=(s.id!==undefined&&s.id!==null)?s.id:('L'+i);return '<div class="feedbackitem"><b>'+esc(s.type)+'</b> · '+esc(s.name)+(s.ref?'<br>关联：'+esc(s.ref):'')+(s.note?'<br>'+esc(s.note):'')+'<div style="margin-top:4px"><button class="btn sm danger" onclick="fbDelStd(\''+del+'\')">删除</button></div></div>';}).join(""):'暂无标准载体')+'</div></div>'+
-   '<div class="sys-card" style="margin-bottom:0"><h3><span class="bar"></span>③ 产品规格 <span class="hint">新产品/新工艺的规格定义</span></h3>'+
+   '<div class="sys-card" style="margin-bottom:0"><h3><span class="bar"></span>⑥ 产品规格 <span class="hint">新产品/新工艺的规格定义</span></h3>'+
    '<div class="fgrid">'+
    '<div class="fld"><label>规格名称</label><input id="fb_spname" placeholder="如：无菌灌装机·夹心重量规格"></div>'+
    '<div class="fld"><label>产品</label><input id="fb_spprod" placeholder="如：果冻爽 200g"></div>'+
@@ -3385,10 +3451,11 @@ async function loadSys3(){
    '<div class="fbtns"><button class="btn primary" onclick="fbSaveSpec()">保存规格</button></div></div>'+
    '<div id="fb_speclist" style="margin-top:8px;font-size:12.5px;color:var(--ink-2)">'+(specs.length?specs.map((s,i)=>{const del=(s.id!==undefined&&s.id!==null)?s.id:('L'+i);return '<div class="feedbackitem"><b>'+esc(s.name)+'</b> · '+esc(s.prod||'—')+(s.note?'<br>'+esc(s.note):'')+'<div style="margin-top:4px"><button class="btn sm danger" onclick="fbDelSpec(\''+del+'\')">删除</button></div></div>';}).join(""):'暂无产品规格')+'</div></div>'+
    '</div>'+
-   '<div class="sys-card"><h3><span class="bar"></span>④ 设计反馈闭环 <span class="hint">项目缺陷 → 回传 MP，同类设备可复用</span></h3>'+
+   '<div class="sys-card"><h3><span class="bar"></span>⑦ 设计反馈闭环 <span class="hint">项目缺陷 → 回传 MP，同类设备可复用</span></h3>'+
    '<div style="font-size:13px;color:var(--ink-2);line-height:1.9;margin-bottom:10px">'+
    '把「系统二设计审查」与「系统四 PDA 缺陷分析」发现的问题，回传为 MP 情报——DR7 结案时（7.2 MP 信息上传）即可沉淀为可复用经验。</div>'+
    '<div id="fb_loop" style="font-size:13px;color:var(--ink-2)">'+(mpList.length?'当前 MP 情报库已有 <b>'+mpList.length+'</b> 条可复用经验，新设备 DR1-DR2 立项时应优先检索复用。<br><span style="color:var(--ink-3)">提示：到「系统四 → 计算型工具 → DR 关卡/项目台账」完成正式评审与缺陷回传。</span>':'当前情报库较空，建议在项目推进中持续回传改善经验。')+'</div></div>';
+  mpRefreshNos();mpCatSync();mpQueryRender();
 }
 async function fbSaveStd(){
   const name=$('#fb_stdname').value.trim();if(!name){toast('请填写载体名称','err');return;}
@@ -3425,6 +3492,199 @@ async function fbDelSpec(x){
   if(!confirm('确认删除该产品规格？'))return;
   try{await api("em_design_feedback?id=eq."+x,"DELETE");toast('产品规格已删除 ✓','ok');}catch(e){toast('删除失败：'+e.message,'err');}
   loadSys3();
+}
+
+/* ================= MP 情报录入表（还原 Excel《MP情报录制宏-立旺一厂》情报录入表 + 保存/清空宏） ================= */
+/* 参数数据源取自 Excel 参数设置表：B列类别 / C部门 / D线别 / E区域 / F支柱 / G·N厂商 / L设备 / M型号 */
+const MP_DEPTS=['立旺一厂'];
+const MP_LINES=['牛奶糖线'];
+const MP_AREAS=['单粒区','立式区','制造区','附属房','外包区'];
+const MP_PILLARS=['FI','AM','PM','QM','E&T','SH','ENV','OM','EM','AM/PM','AM/PM/QM','PM/FI','PM/SH','PM/ENV','PM/QM'];
+const MP_VENDORS=['创灵','上海创灵','靖江宝联','博世','如皋通达','美旺','石田','达和','金鸿','紫怡','瑞吉锦鸿','新天成','名瑞','温州名瑞','寿力','日立','BT','良机','梅特勒','梅特勒-托利多','广州飞越'];
+const MP_MACHINES=['BOSCH称量熬煮系统','香精奶粉添加系统','捏合机','成型系统','五层冷风隧道','金属检测机','低速包装机','高速包装机','高速枕式包装机','立式包装机','自动折叠机','立式散装包装机','自动贴标机','立式区自动供料系统','自动给袋机','连续式封口机','重量检测机','多规格检重机','寿力空压机','日立空压机','冰水机','电动堆高车','冷却水塔','热缩膜机'];
+const MP_MODELS=['BKK0750','NHG-600','BPK0160DB','ISD-6008-PB','FW340','FW3201','JH-Z2000','TT2001A','LB-01-NNT','RL720','TBJ-2000Y','24000*530','MR6-300','FRKS1100-WQ','DACS-FS-050-SB/PB-1','美旺定制','55KW','RCU40WHZ-A','RCU100WHZ-A','RCU120WHZ-A','S-12','LBC80RT','LBC125RT','LBC150RT','M31R'];
+function mpOpt(arr,sel){return arr.map(v=>'<option'+(v===sel?' selected':'')+'>'+esc(v)+'</option>').join('');}
+/* 情报ID = "MP"+YYMMDDHHMMSS（Excel 公式 ="MP"&TEXT(NOW(),"yymmddhhmmss") 网页版） */
+function mpGenInfoId(){const d=new Date(),p=n=>String(n).padStart(2,'0');return 'MP'+String(d.getFullYear()).slice(2)+p(d.getMonth()+1)+p(d.getDate())+p(d.getHours())+p(d.getMinutes())+p(d.getSeconds());}
+/* 提案编号 / 构建唯一值：按线别累计计数（Excel COUNTIFS 语义） */
+function mpRefreshNos(){
+  if(!$('#mpi_infoid'))return;
+  const line=$('#mpi_line').value||MP_LINES[0];
+  const list=window.MP_INTEL||[];
+  const n=list.filter(r=>(r.line||'')===line).length+1;
+  const infoId=mpGenInfoId();
+  $('#mpi_infoid').textContent=infoId;$('#mpi_infoid').dataset.v=infoId;
+  $('#mpi_propno').textContent='MP-HBLW1-'+String(n).padStart(4,'0');
+  $('#mpi_uniq').textContent=line+n;
+}
+function mpCatToggle(el){el.classList.toggle('on');mpCatSync();}
+function mpCatSync(){
+  if(!$('#mpi_cat'))return;
+  const sel=[...document.querySelectorAll('.catchip.on')].map(c=>c.dataset.v);
+  $('#mpi_cat').textContent=sel.length?sel.join('/'):'— 点击下方类别多选 —';
+  $('#mpi_cat').style.color=sel.length?'#2f5aa8':'#8a93a6';
+  if($('#mpi_catn'))$('#mpi_catn').textContent=sel.length;
+}
+/* ⓪ 情报录入表表单（版式还原 Excel sheet4） */
+function mpIntelFormHTML(){
+  const d=new Date(),p=n=>String(n).padStart(2,'0');
+  const today=d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());
+  return '<div class="sys-card" style="margin-bottom:16px">'+
+   '<h3><span class="bar"></span>⓪ MP 情报录入表 <span class="hint">还原 Excel《情报录入表》· 一键保存自动分发至 ①汇总表 ②查询表 ③详情一览表</span></h3>'+
+   '<div class="mpform">'+
+   '<div class="mpTitle">MP 情报录入表（立旺一厂）</div>'+
+   '<div class="mpbar"><span class="mpaux">💾 保存并分发 = Excel「保存优化版」宏</span><span class="mpaux">🔄 清空继续 = Excel「清空MP情报内容」宏</span><span class="sp"></span>'+
+     '<button class="mpbar-btn" style="background:#2f5aa8" onclick="mpIntelSave()">💾 保存并分发</button>'+
+     '<button class="mpbar-btn" style="background:#7c8698" onclick="mpIntelClear()">🔄 清空继续填写</button></div>'+
+   '<div class="hdr6"><div>提案类别</div><div>部门</div><div>线别</div><div>区域</div><div>支柱</div><div>设备厂商</div></div>'+
+   '<div class="sel6">'+
+     '<div><div id="mpi_cat" class="mpid-box" style="background:#f7f9fc;border-color:#cfd9ea;font-size:12px;padding:6px 8px">— 点击下方类别多选 —</div></div>'+
+     '<div><select id="mpi_dept">'+mpOpt(MP_DEPTS)+'</select></div>'+
+     '<div><select id="mpi_line" onchange="mpRefreshNos()">'+mpOpt(MP_LINES)+'</select></div>'+
+     '<div><select id="mpi_area">'+mpOpt(MP_AREAS)+'</select></div>'+
+     '<div><select id="mpi_pillar">'+mpOpt(MP_PILLARS)+'</select></div>'+
+     '<div><select id="mpi_vendor">'+mpOpt(MP_VENDORS)+'</select></div>'+
+   '</div>'+
+   '<div class="id2">'+
+     '<div><b>情报ID</b><span class="mpid-box" id="mpi_infoid">—</span></div>'+
+     '<div><b>提案编号</b><span class="mpid-box" id="mpi_propno" style="color:#2f5aa8;background:#eef3fb;border-color:#c3d4ef">—</span>'+
+       '<b style="margin-left:12px">构建唯一值</b><span class="mpid-box" id="mpi_uniq" style="color:#556;background:#f7f9fc;border-color:#dbe3f0">—</span></div>'+
+   '</div>'+
+   '<div class="row6">'+
+     '<div class="lab">MP情报名称<i>*</i></div><div class="val" style="grid-column:span 5"><input id="mpi_name" placeholder="如：熬煮系统搅拌轴密封渗漏改善"></div>'+
+     '<div class="lab">提案时间</div><div class="val"><input id="mpi_propdate" type="date" value="'+today+'"></div>'+
+     '<div class="lab">提案人</div><div class="val"><input id="mpi_proposer" placeholder="姓名"></div>'+
+     '<div class="lab">改善人</div><div class="val"><input id="mpi_improver" placeholder="姓名"></div>'+
+     '<div class="lab">设备</div><div class="val" style="grid-column:span 3"><select id="mpi_machine"><option value="">— 请选择 —</option>'+mpOpt(MP_MACHINES)+'</select></div>'+
+   '</div>'+
+   '<div class="row6">'+
+     '<div class="lab">设备型号</div><div class="val"><input id="mpi_model" list="mpi_model_list" placeholder="选择或手填"><datalist id="mpi_model_list">'+MP_MODELS.map(m=>'<option value="'+esc(m)+'">').join('')+'</datalist></div>'+
+     '<div class="lab">等级</div><div class="val"><select id="mpi_grade"><option value="">—</option><option>A</option><option>B</option><option>C</option></select></div>'+
+     '<div class="lab">改善投入费用(元)</div><div class="val"><input id="mpi_cost" type="number" step="0.01" placeholder="如 800"></div>'+
+     '<div class="lab">改善收益(元)</div><div class="val"><input id="mpi_benefit" type="number" step="0.01" placeholder="如 36000"></div>'+
+     '<div class="lab">备注</div><div class="val"><input id="mpi_remark" placeholder="其他说明"></div>'+
+   '</div>'+
+   '<div class="catwrap"><div class="catlab">提案类别<br><span style="font-weight:400;color:var(--ink-3);font-size:11px">可多选</span></div>'+
+     '<div class="catgrid">'+MP_STD_CAT.map(c=>'<button type="button" class="catchip" data-v="'+esc(c)+'" onclick="mpCatToggle(this)">'+esc(c)+'</button>').join('')+'</div>'+
+     '<div class="catval">已选 <b id="mpi_catn">0</b> 类</div></div>'+
+   '<div class="desc4">'+
+     '<div class="dh">⚠ 异常描述</div><div class="dh">改善前</div><div class="dh">改善后</div><div class="dh">改善后说明</div>'+
+     '<div><textarea id="mpi_defect" rows="4" placeholder="现象 + 位置 + 频次 + 影响，四要素写全"></textarea></div>'+
+     '<div><textarea id="mpi_fix_before" rows="4" placeholder="改善前的状况 / 缺陷表现"></textarea></div>'+
+     '<div><textarea id="mpi_fix_after" rows="4" placeholder="改善后的对策 / 结构变化"></textarea></div>'+
+     '<div><textarea id="mpi_after_note" rows="4" placeholder="标准化 / 横向展开 / 保持方式（点检基准·PM·OPL）"></textarea></div>'+
+   '</div>'+
+   '<div class="row6">'+
+     '<div class="lab">部门意见</div><div class="val" style="grid-column:span 2"><input id="mpi_dept_opinion" placeholder="部门审核意见"></div>'+
+     '<div class="lab">接收方意见</div><div class="val" style="grid-column:span 2"><input id="mpi_recv_opinion" placeholder="接收 / 使用方意见"></div>'+
+   '</div>'+
+   '</div></div>';
+}
+/* 💾 保存并分发（= Excel 保存优化版宏：一条记录同时进 ①汇总 ②查询 ③详情一览） */
+async function mpIntelSave(){
+  const name=($('#mpi_name').value||'').trim();
+  if(!name){toast('请填写 MP 情报名称','err');return;}
+  const chips=[...document.querySelectorAll('.catchip.on')].map(c=>c.dataset.v);
+  const infoId=($('#mpi_infoid').dataset&&$('#mpi_infoid').dataset.v)||mpGenInfoId();
+  const rec={
+    info_id:infoId,prop_no:$('#mpi_propno').textContent,uniq_no:$('#mpi_uniq').textContent,
+    name,cat:chips.join('/')||null,
+    dept:$('#mpi_dept').value,line:$('#mpi_line').value,area:$('#mpi_area').value,pillar:$('#mpi_pillar').value,vendor:$('#mpi_vendor').value,
+    machine:$('#mpi_machine').value||null,model:($('#mpi_model').value||'').trim()||null,grade:$('#mpi_grade').value||null,
+    prop_date:$('#mpi_propdate').value||null,
+    proposer:($('#mpi_proposer').value||'').trim()||null,improver:($('#mpi_improver').value||'').trim()||null,
+    defect:($('#mpi_defect').value||'').trim()||null,fix_before:($('#mpi_fix_before').value||'').trim()||null,
+    fix_after:($('#mpi_fix_after').value||'').trim()||null,after_note:($('#mpi_after_note').value||'').trim()||null,
+    cost:($('#mpi_cost').value||'').trim()||null,benefit:($('#mpi_benefit').value||'').trim()||null,
+    dept_opinion:($('#mpi_dept_opinion').value||'').trim()||null,recv_opinion:($('#mpi_recv_opinion').value||'').trim()||null,
+    remark:($('#mpi_remark').value||'').trim()||null,
+    src:'情报录入表',ts:Date.now()};
+  if(tableOK.em_mp_intel){
+    try{
+      await api("em_mp_intel?on_conflict=info_id","POST",rec,"return=representation,resolution=merge-duplicates");
+      toast('✅ 情报 '+infoId+' 已保存并分发至 ①汇总表 ②查询表 ③详情一览表','ok');
+    }catch(e){
+      toast('云端保存失败：'+e.message+' — 已转存本地','err');
+      const a=fbGet('fb_mp_intel');a.unshift(rec);fbSet('fb_mp_intel',a);
+    }
+  }else{
+    const a=fbGet('fb_mp_intel');a.unshift(rec);fbSet('fb_mp_intel',a);
+    toast('已保存本地 ✓ —— em_mp_intel 表未创建，暂不能云端共享','ok');
+  }
+  await loadSys3(); // 重新渲染：三视图即时更新，表单自动清空并生成新 ID，可继续填写下一条
+}
+/* 🔄 一键清空继续填写（= Excel 清空MP情报内容宏） */
+function mpIntelClear(){
+  ['mpi_name','mpi_proposer','mpi_improver','mpi_model','mpi_cost','mpi_benefit','mpi_remark','mpi_defect','mpi_fix_before','mpi_fix_after','mpi_after_note','mpi_dept_opinion','mpi_recv_opinion'].forEach(id=>{const el=$('#'+id);if(el)el.value='';});
+  const g=$('#mpi_grade');if(g)g.value='';
+  const m=$('#mpi_machine');if(m)m.value='';
+  document.querySelectorAll('.catchip.on').forEach(c=>c.classList.remove('on'));
+  mpCatSync();mpRefreshNos();
+  toast('已清空，可继续填写下一条情报 ✓','ok');
+}
+async function mpIntelDel(infoId){
+  if(!confirm('确认删除该 MP 情报（'+infoId+'）？删除后汇总/查询/详情同步移除。'))return;
+  if(tableOK.em_mp_intel){
+    try{await api("em_mp_intel?info_id=eq."+encodeURIComponent(infoId),"DELETE");toast('已删除 ✓','ok');}
+    catch(e){toast('删除失败：'+e.message,'err');return;}
+  }else{
+    fbSet('fb_mp_intel',fbGet('fb_mp_intel').filter(r=>r.info_id!==infoId));toast('已删除（本地）✓','ok');
+  }
+  loadSys3();
+}
+/* ① 情报汇总表（对应 Excel sheet3：序号为公式列，网页按时间顺序生成） */
+function mpSumTable(list){
+  if(!list.length)return '<div style="font-size:13px;color:var(--ink-3)">暂无情报。在上方「⓪ MP 情报录入表」录入第一条。</div>';
+  const asc=[].concat(list).sort((a,b)=>(a.ts||0)-(b.ts||0));
+  return '<div class="tblwrap" style="max-height:360px;overflow:auto"><table class="tbl"><thead><tr>'+
+   '<th>序号</th><th>情报ID</th><th>MP情报名称</th><th>提案类别</th><th>部门</th><th>线别</th><th>区域</th><th>支柱</th><th>设备</th><th>提案编号</th><th>提案时间</th><th>提案人</th><th>改善人</th><th>设备厂商</th><th>投入(元)</th><th>收益(元)</th><th>唯一值</th></tr></thead><tbody>'+
+   asc.map((r,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(r.info_id)+'</td><td><b>'+esc(r.name)+'</b></td><td>'+esc(r.cat||'')+'</td><td>'+esc(r.dept||'')+'</td><td>'+esc(r.line||'')+'</td><td>'+esc(r.area||'')+'</td><td>'+esc(r.pillar||'')+'</td><td>'+esc(r.machine||'')+'</td><td>'+esc(r.prop_no||'')+'</td><td>'+esc(r.prop_date||'')+'</td><td>'+esc(r.proposer||'')+'</td><td>'+esc(r.improver||'')+'</td><td>'+esc(r.vendor||'')+'</td><td>'+esc(r.cost||'—')+'</td><td>'+esc(r.benefit||'—')+'</td><td>'+esc(r.uniq_no||'')+'</td></tr>').join('')+
+   '</tbody></table></div>';
+}
+/* ② 情报查询表（对应 Excel sheet1：线别筛选 + 关键字） */
+function mpQueryHTML(){
+  const lines=[...new Set(MP_LINES.concat((window.MP_INTEL||[]).map(r=>r.line).filter(Boolean)))];
+  return '<div class="mpqf">'+
+   '<div class="qf"><label>线别</label><select id="mpqi_line" onchange="mpQueryRender()"><option value="">全部</option>'+lines.map(l=>'<option>'+esc(l)+'</option>').join('')+'</select></div>'+
+   '<div class="qf"><label>提案类别</label><select id="mpqi_cat" onchange="mpQueryRender()"><option value="">全部</option>'+MP_STD_CAT.map(c=>'<option>'+esc(c)+'</option>').join('')+'</select></div>'+
+   '<div class="qf"><label>支柱</label><select id="mpqi_pillar" onchange="mpQueryRender()"><option value="">全部</option>'+MP_PILLARS.map(c=>'<option>'+esc(c)+'</option>').join('')+'</select></div>'+
+   '<div class="qf"><label>关键字</label><input id="mpqi_kw" placeholder="名称 / 设备 / 编号 / 人员" oninput="mpQueryRender()"></div>'+
+   '</div><div id="mpqi_body"></div>';
+}
+function mpQueryRender(){
+  const body=$('#mpqi_body');if(!body)return;
+  const L=($('#mpqi_line')||{}).value||'',C=($('#mpqi_cat')||{}).value||'',P=($('#mpqi_pillar')||{}).value||'',K=((($('#mpqi_kw')||{}).value)||'').trim().toLowerCase();
+  const all=window.MP_INTEL||[];
+  const rows=all.filter(r=>(!L||r.line===L)&&(!C||(r.cat||'').indexOf(C)>=0)&&(!P||r.pillar===P)&&
+    (!K||[r.name,r.machine,r.model,r.prop_no,r.proposer,r.improver,r.info_id,r.defect,r.vendor].join(' ').toLowerCase().indexOf(K)>=0));
+  body.innerHTML=rows.length?
+   '<div style="font-size:12px;color:var(--ink-3);margin-bottom:6px">匹配 <b style="color:var(--header)">'+rows.length+'</b> / '+all.length+' 条</div>'+
+   '<div class="tblwrap" style="max-height:320px;overflow:auto"><table class="tbl"><thead><tr><th>情报ID</th><th>名称</th><th>类别</th><th>线别</th><th>区域</th><th>支柱</th><th>设备</th><th>提案人</th><th>改善人</th><th>提案时间</th><th>投入/收益</th></tr></thead><tbody>'+
+   rows.map(r=>'<tr><td>'+esc(r.info_id)+'</td><td><b>'+esc(r.name)+'</b></td><td>'+esc(r.cat||'')+'</td><td>'+esc(r.line||'')+'</td><td>'+esc(r.area||'')+'</td><td>'+esc(r.pillar||'')+'</td><td>'+esc(r.machine||'')+'</td><td>'+esc(r.proposer||'')+'</td><td>'+esc(r.improver||'')+'</td><td>'+esc(r.prop_date||'')+'</td><td>'+esc(r.cost||'—')+' / '+esc(r.benefit||'—')+'</td></tr>').join('')+
+   '</tbody></table></div>'
+   :'<div style="font-size:13px;color:var(--ink-3)">无匹配情报（库中共 '+all.length+' 条）</div>';
+}
+/* ③ 详情一览表（对应 Excel sheet5：19 行一块的情报卡 → details 卡片） */
+function mpDetailHTML(list){
+  if(!list.length)return '<div style="font-size:13px;color:var(--ink-3)">暂无情报详情。</div>';
+  const kv=(k,v)=>'<div><span>'+k+'：</span><b>'+esc(v||'—')+'</b></div>';
+  return list.map((r,i)=>'<details class="mpdet"'+(i===0?' open':'')+'>'+
+   '<summary><span class="mpid-box" style="font-size:11.5px">'+esc(r.info_id)+'</span><b>'+esc(r.name)+'</b>'+
+   '<span class="dv">'+esc(r.cat||'')+' · '+esc(r.line||'')+' · '+esc(r.area||'')+' · '+esc(r.prop_no||'')+'</span>'+
+   '<span style="flex:1"></span><button class="btn sm danger" onclick="event.preventDefault();mpIntelDel(\''+esc(r.info_id)+'\')">删除</button></summary>'+
+   '<div class="dbody"><div class="kv">'+
+   kv('提案编号',r.prop_no)+kv('构建唯一值',r.uniq_no)+kv('部门',r.dept)+kv('线别',r.line)+kv('区域',r.area)+
+   kv('支柱',r.pillar)+kv('设备',(r.machine||'')+((r.model&&r.machine)?' · ':'')+(r.model||''))+kv('设备厂商',r.vendor)+
+   kv('等级',r.grade)+kv('提案时间',r.prop_date)+kv('提案人',r.proposer)+kv('改善人',r.improver)+
+   kv('改善投入费用',(r.cost||'—')+' 元')+kv('改善收益',(r.benefit||'—')+' 元')+
+   (r.dept_opinion?kv('部门意见',r.dept_opinion):'')+(r.recv_opinion?kv('接收方意见',r.recv_opinion):'')+
+   '</div><div class="d4">'+
+   '<div><h6>⚠ 异常描述</h6><p>'+esc(r.defect||'—')+'</p></div>'+
+   '<div><h6>🔧 改善前</h6><p>'+esc(r.fix_before||'—')+'</p></div>'+
+   '<div><h6>✅ 改善后</h6><p>'+esc(r.fix_after||'—')+'</p></div>'+
+   '<div><h6>📌 改善后说明</h6><p>'+esc(r.after_note||'—')+'</p></div>'+
+   '</div>'+(r.remark?'<div style="margin-top:8px"><span style="color:var(--ink-3)">备注：</span>'+esc(r.remark)+'</div>':'')+
+   '</div></details>').join('');
 }
 
 /* ---------- 旧数据一次性迁移上云（localStorage → Supabase，失败下次重试） ---------- */
