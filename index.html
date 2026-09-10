@@ -1107,7 +1107,7 @@
 <!-- ============ Tab 6: 🔍 设计审查系统 ============ -->
 <section class="tab" id="tab-review">
   <div class="card">
-    <h3><span class="bar"></span>🔍 基于检查表的设计审查系统 <span class="hint">DR1-DR7 检查清单 694 题 · EQC 专家问题 180 题 · PQCDSM 风险评估 · EM 审核 51 项（源自 EM 支柱标准表单）</span></h3>
+    <h3><span class="bar"></span>🔍 基于检查表的设计审查系统 <span class="hint">DR1-DR7 检查清单 694 题 · 项目换步审核 180 题 · PQCDSM 风险评估 · EM 审核 51 项（源自 EM 支柱标准表单）</span></h3>
     <div class="rvtop">
       <div class="fld"><label>当前评审项目</label><select id="rv_prj" onchange="rvSelPrj()"><option value="">（请选择 EM 项目）</option></select></div>
       <div id="rv_prjinfo"><span style="color:var(--ink-3);font-size:13px">选择项目后：检查表将按项目类型（EEM/EPM）与设备等级（A/B/C）自动过滤适用问题，作答自动保存到云端。</span></div>
@@ -1120,7 +1120,7 @@
     </div>
     <div class="rvmods" id="rv_mods">
       <button data-mod="dr" class="on" onclick="rvMod('dr')">📋 ① DR 检查清单</button>
-      <button data-mod="eqc" onclick="rvMod('eqc')">💬 ② EQC 专家问题</button>
+      <button data-mod="eqc" onclick="rvMod('eqc')">💬 ② 项目换步审核</button>
       <button data-mod="risk" onclick="rvMod('risk')">⚠️ ③ 风险登记评估</button>
       <button data-mod="audit" onclick="rvMod('audit')">🎯 ④ EM 审核评分</button>
     </div>
@@ -1133,7 +1133,7 @@
 
 <!-- ============ 「引导式套表」已合并至「🧭 工具使用」页签（第 ② 部分） ============ -->
 
-<footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥<br><span style="color:var(--ink-3)">当前版本 v3.07（优化 DR 检查清单分组排版：进度条 + 已答/总数 + 状态徽章）· 提示：若页面仍显示旧版，请强制刷新（Mac: ⌘+Shift+R / Windows: Ctrl+F5）</span></footer>
+<footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥<br><span style="color:var(--ink-3)">当前版本 v3.08（「EQC 专家问题」模块更名为「项目换步审核」）· 提示：若页面仍显示旧版，请强制刷新（Mac: ⌘+Shift+R / Windows: Ctrl+F5）</span></footer>
 </div>
 
 <!-- 工具详情弹窗 -->
@@ -5267,13 +5267,13 @@ async function loadSys2(){
    '<div style="font-size:13px;color:var(--ink-2);line-height:2;margin-top:4px">'+
    '本模块已按 <b>5 份 EM 支柱标准表单</b> 整合为完整版，含四个部分：<br>'+
    '① <b>DR 检查清单</b> —— DR1-DR7 七关卡共 <b>694 题</b>，四态作答（符合 / 部分符合 / 不符合 / 不适用），支持分类筛选与关键字搜索<br>'+
-   '② <b>EQC 专家问题</b> —— <b>180 条</b> 跨职能专家检查问题（含湖北补充 47 题）<br>'+
+   '② <b>项目换步审核（EQC）</b> —— <b>180 条</b> 跨职能专家检查问题（含湖北补充 47 题）<br>'+
    '③ <b>风险登记评估</b> —— PQCDSM 六维登记，R = L×S，5×5 矩阵热力图，低 1-4 绿 / 中 5-10 黄 / 高 11-25 红<br>'+
    '④ <b>EM 审核评分</b> —— <b>51 项</b> 审核条款，权重合计 100 分，自动算分与分级'+
    '</div>'+
    '<div class="mpstat" style="margin-top:14px">'+
    '<div class="ms"><b>694</b><span>检查题库（7 关）</span></div>'+
-   '<div class="ms"><b>180</b><span>专家问题</span></div>'+
+   '<div class="ms"><b>180</b><span>项目换步审核</span></div>'+
    '<div class="ms"><b>51</b><span>审核条款 / 100 分</span></div>'+
    '<div class="ms"><b>'+projects.length+'</b><span>在管项目</span></div>'+
    '</div>'+
@@ -6129,7 +6129,7 @@ function rvExportDr(){
   toast('已导出 DR'+RV.dr+' 检查清单 '+rows.length+' 条 ✓','ok');
 }
 
-/* ---------- ② EQC 专家问题 ---------- */
+/* ---------- ② 项目换步审核（EQC） ---------- */
 function rvEqc(){
   const host=$('#rv_eqc');if(!host)return;
   const cards=RV_PHASES.map(ph=>{
@@ -6149,10 +6149,10 @@ function rvEqc(){
   list.forEach(e=>{const ar=e[3];if(!groups[ar]){groups[ar]=[];areas.push(ar);}groups[ar].push(e);});
   const meta=RV_PHASES.filter(x=>x[0]===RV.eqc)[0];
   host.innerHTML=
-    '<div class="card"><h3><span class="bar"></span>'+RV.eqc+' '+meta[1]+' · 专家问题清单（EQC）<span class="hint">'+meta[2]+' · 源自《专家问题检查清单-湖北EM11》</span></h3>'+
+    '<div class="card"><h3><span class="bar"></span>'+RV.eqc+' '+meta[1]+' · 项目换步审核（EQC）<span class="hint">'+meta[2]+' · 源自《专家问题检查清单-湖北EM11》</span></h3>'+
     (RV.prj?'':'<div class="rvwarn">⚠️ 请先在上方选择 EM 项目，选择后才能填写与保存。</div>')+
     '<div class="rvstages rv6">'+cards+'</div>'+
-    '<div class="rveqc-tip">💡 EQC 问题用于激发讨论（非简单是/否）——整个项目团队在每个阶段早期将其作为讨论指南，逐项评论并标记「需要行动」。专家领域：安全SH / 质量QM / 可靠性PM / 可维护性AM / 成本FI / 可操作性E&T / 食品安全QM / 环境ENV。</div>'+
+    '<div class="rveqc-tip">💡 项目换步审核（EQC）问题用于激发讨论（非简单是/否）——整个项目团队在每个阶段早期将其作为讨论指南，逐项评论并标记「需要行动」。专家领域：安全SH / 质量QM / 可靠性PM / 可维护性AM / 成本FI / 可操作性E&T / 食品安全QM / 环境ENV。</div>'+
     areas.map(ar=>{
       const g=groups[ar];
       return '<details class="rvgrp" open><summary><b>'+esc(ar)+'</b><span class="rvgrp-meta">'+g.length+' 题</span></summary>'+
