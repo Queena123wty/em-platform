@@ -806,7 +806,7 @@
       <div class="eg-st" id="egSt"><span class="d"></span><span id="egStTxt">正在检查云端连接…</span></div>
       <div class="eg-ft">
         登录信息仅用于区分操作人，项目数据实时存入公司 EM 云数据库。<br>
-        <span style="opacity:.82">当前版本 <b>v3.12</b> · 新增 6 个项目管理工具（共 43 个）</span><span class="eg-adm" id="egAdmLnk" onclick="egMode('admin')" title="系统管理员入口（也可直达 ?admin=1）">管理员</span>
+        <span style="opacity:.82">当前版本 <b>v3.13</b> · DR 关卡门禁支持 EEM/EPM 双版本切换</span><span class="eg-adm" id="egAdmLnk" onclick="egMode('admin')" title="系统管理员入口（也可直达 ?admin=1）">管理员</span>
       </div>
     </div>
   </div>
@@ -1335,7 +1335,7 @@
 
 <!-- ============ 「引导式套表」已合并至「🧭 工具使用」页签（第 ② 部分） ============ -->
 
-<footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥<br><span style="color:var(--ink-3)">当前版本 v3.12（新增 6 个项目管理工具：#38 WBS 工作分解结构、#39 BSC 平衡记分卡、#40 RACI 责任矩阵、#41 EVM 挣值管理、#42 时间管理四象限、#43 GRAI/AAR 复盘工具；在线工具总数 37 → 43。管理员入口仍为隐藏式小链接）· 提示：若页面仍显示旧版，请强制刷新（Mac: ⌘+Shift+R / Windows: Ctrl+F5）</span></footer>
+<footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥<br><span style="color:var(--ink-3)">当前版本 v3.13（系统一「DR 关卡门禁」新增 EEM 设备类 / EPM 产品类双版本切换，与七步流程口径一致；v3.12 新增 6 个项目管理工具，在线工具总数 43。管理员入口仍为隐藏式小链接）· 提示：若页面仍显示旧版，请强制刷新（Mac: ⌘+Shift+R / Windows: Ctrl+F5）</span></footer>
 </div>
 
 <!-- 工具详情弹窗 -->
@@ -6077,7 +6077,7 @@ function s1Mod(m,silent){
   else if(m==='kpi')s1Kpi();
   else s1Proj();
 }
-function s1Var(v){S1.v=v;s1Flow();}
+function s1Var(v){S1.v=v;s1Flow();s1Dr();}
 /* ---------- ① 七步流程 ---------- */
 function s1Flow(){
   const host=document.getElementById('s1_flow');if(!host)return;
@@ -6119,9 +6119,15 @@ function s1Flow(){
 /* ---------- ② DR 关卡门禁 ---------- */
 function s1Dr(){
   const host=document.getElementById('s1_dr');if(!host)return;
-  let h='<div class="sys-card"><h3><span class="bar"></span>DR1–DR7 关卡门禁 <span class="hint">源自《EM小组每步产出》· 每关的前置子步骤、产出物与责任职能</span></h3>'+
+  const v=S1.v;
+  let h='<div class="sys-card"><h3><span class="bar"></span>DR1–DR7 关卡门禁 <span class="hint">源自《EM小组流程》EEM设备 / EPM产品 双表 +《EM小组每步产出》</span></h3>'+
+   '<div class="s1-seg" id="s1_seg2">'+
+   '<button data-v="EEM" class="'+(v==='EEM'?'on':'')+'" onclick="s1Var(\'EEM\')">🔧 EEM 设备类</button>'+
+   '<button data-v="EPM" class="'+(v==='EPM'?'on':'')+'" onclick="s1Var(\'EPM\')">🧪 EPM 产品类</button>'+
+   '</div>'+
    '<div style="font-size:13px;color:var(--ink-2);line-height:1.95">'+
    'DR 关卡是七步法每一步末端的<b>设计评审门禁</b>：本步子步骤全部完成、产出物齐备并通过评审后，才放行进入下一步。'+
+   '<b>前置子步骤随项目类型切换</b>——EEM（设备类）与 EPM（产品类）源自《EM小组流程》的两个工作表，差异集中在 2.3（供应商选择 / 新品分析）、3.3-3.4（设备厂家与辅料 / 新增物料与质量控制点）、第 5 步（安装 / 样品测试）等；任务分工与产出物为两类项目通用口径。'+
    'A 类项目（1 级优先）<b>逐关评审、不可跳关</b>；B/C 类项目相邻关卡可合并评审。'+
    '检查中答「不符合」的条款可一键登记为风险，形成「检查 → 风险 → 措施 → 闭环」链路。'+
    '<span style="color:#b47a00;font-weight:700">α 节点</span>为事前检出问题统计点，'+
@@ -6134,7 +6140,7 @@ function s1Dr(){
    '</div></div>';
   h+='<div class="s1-flow">';
   for(let n=1;n<=7;n++){
-    const subs=EM7_SUB.EEM[n]||[],tasks=EM7_TASK[n]||[];
+    const subs=EM7_SUB[S1.v][n]||[],tasks=EM7_TASK[n]||[];
     const outs=s1Uniq(tasks.map(function(t){return t[3];}));
     const owns=s1Uniq(tasks.map(function(t){return t[2];}));
     const alpha=tasks.some(function(t){return t[3].indexOf('α')>=0;});
@@ -6142,7 +6148,7 @@ function s1Dr(){
     let tag='';
     if(alpha||beta)tag='<div class="s1-dr" style="background:#fff6e5;color:#b47a00;border-color:#ffe0a3">'+(alpha?'α':'')+(alpha&&beta?' / ':'')+(beta?'β':'')+' 节点</div>';
     h+='<div class="s1-step"><div class="s1-hd"><div class="s1-no" style="background:'+S1_COLOR[n]+'">DR'+n+'</div>'+
-      '<div class="s1-nm">'+esc(EM7_STEPS[n])+'</div>'+tag+'</div>'+
+      '<div class="s1-nm">'+esc(s1StepName(n,S1.v))+'</div>'+tag+'</div>'+
       '<div class="s1-sub">'+
       '<div class="s1-lbl">前置子步骤（'+subs.length+' 项）</div>'+
       subs.map(function(s){return '<div class="s1-row"><span class="s1-code">'+esc(s[0])+'</span><span>'+esc(s[1])+'</span></div>';}).join('')+
@@ -6150,7 +6156,7 @@ function s1Dr(){
       outs.map(function(o){return '<div class="s1-row"><span class="s1-chk">✓</span><span>'+esc(o)+'</span></div>';}).join('')+
       '<div class="s1-lbl">责任职能</div>'+
       '<div class="s1-owns">'+owns.map(function(o){return '<span class="s1-own">'+esc(o)+'</span>';}).join('')+'</div>'+
-      '<div class="s1-gate">门禁规则：本关未通过 → <b>不放行</b>进入第 '+(n<7?(n+1):'—')+' 步'+(n<7?'（'+esc(EM7_STEPS[n+1])+'）':'（项目结案）')+'</div>'+
+      '<div class="s1-gate">门禁规则：本关未通过 → <b>不放行</b>进入第 '+(n<7?(n+1):'—')+' 步'+(n<7?'（'+esc(s1StepName(n+1,S1.v))+'）':'（项目结案）')+'</div>'+
       '</div></div>';
   }
   h+='</div>';
