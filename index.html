@@ -701,6 +701,59 @@
   .um-sql{display:none;margin-top:10px;background:#fff;border:1px solid var(--line);border-radius:9px;padding:10px;
     font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;line-height:1.6;overflow:auto;white-space:pre-wrap;color:#334155}
   .um-sql.on{display:block}
+  /* ===== v3.10 系统一：项目审查与阶段控制（七步流程 / DR 关卡 / EM 指标） ===== */
+  .s1-seg{display:inline-flex;background:#eef2f9;border-radius:11px;padding:4px;gap:4px;margin:10px 0 0}
+  .s1-seg button{font-family:inherit;font-size:13px;font-weight:700;color:var(--ink-2);background:transparent;border:none;border-radius:8px;padding:8px 18px;cursor:pointer;transition:.15s}
+  .s1-seg button:hover{color:var(--header)}
+  .s1-seg button.on{background:#fff;color:var(--header);box-shadow:0 2px 8px rgba(31,58,110,.16)}
+  .s1-prep{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:14px}
+  .s1-prep>div{background:#f7f9fd;border:1px dashed #cfdcef;border-radius:11px;padding:11px 14px;font-size:13px;font-weight:800;color:var(--header)}
+  .s1-flow{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px;margin-bottom:4px}
+  .s1-step{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:.18s;box-shadow:var(--shadow)}
+  .s1-step:hover{box-shadow:var(--shadow-hover);border-color:#c9d6ea}
+  .s1-hd{display:flex;align-items:center;gap:11px;padding:12px 16px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#f8fafd,#fff)}
+  .s1-no{height:27px;min-width:27px;border-radius:9px;flex:none;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:12.5px;padding:0 7px}
+  .s1-nm{flex:1;font-weight:800;font-size:14px;color:var(--header);line-height:1.3;min-width:0}
+  .s1-dr{font-size:11px;font-weight:800;border-radius:20px;padding:3px 10px;background:#eef4ff;color:#2563eb;border:1px solid #cddffb;flex:none;white-space:nowrap}
+  .s1-sub{padding:10px 16px 12px}
+  .s1-row{display:flex;gap:9px;font-size:12.8px;color:var(--ink-2);line-height:1.75;padding:2.5px 0}
+  .s1-code{font-weight:800;color:var(--header);flex:none;min-width:31px}
+  .s1-chk{color:#0e8a5f;font-weight:800;flex:none;min-width:31px;text-align:center}
+  .s1-lbl{font-size:12.2px;font-weight:800;color:var(--ink-2);margin:10px 0 4px;padding-top:8px;border-top:1px dashed var(--line)}
+  .s1-sub>.s1-lbl:first-child{margin-top:0;padding-top:0;border-top:none}
+  .s1-own{display:inline-block;font-size:11px;font-weight:700;border-radius:6px;padding:1.5px 7px;background:#eef4ff;color:#2563eb;white-space:nowrap}
+  .s1-owns{display:flex;gap:6px;flex-wrap:wrap;padding-bottom:2px}
+  .s1-gate{margin-top:11px;font-size:12px;color:var(--ink-3);background:#fafbfe;border-left:3px solid #cfdcef;border-radius:6px;padding:7px 11px;line-height:1.7}
+  .s1-gate b{color:var(--danger)}
+  .s1-det{padding:0 16px 13px}
+  .s1-det>summary{cursor:pointer;font-size:12px;font-weight:800;color:#4c7bd9;outline:none;list-style:none;padding:5px 0}
+  .s1-det>summary::-webkit-details-marker{display:none}
+  .s1-det>summary:before{content:"▸ ";font-weight:800}
+  .s1-det[open]>summary:before{content:"▾ ";}
+  .s1-tbl{width:100%;border-collapse:collapse;font-size:12.3px;margin-top:2px}
+  .s1-tbl th{background:#f5f8fc;color:var(--ink-2);font-weight:800;text-align:left;padding:6px 9px;border-bottom:1px solid var(--line);white-space:nowrap}
+  .s1-tbl td{padding:6px 9px;border-bottom:1px solid #f0f3f8;color:var(--ink-2);vertical-align:top;line-height:1.6}
+  .s1-tbl tr:last-child td{border-bottom:none}
+  .s1-chain{display:flex;align-items:stretch;flex-wrap:wrap;gap:6px;margin-top:13px}
+  .s1-node{flex:1 1 110px;background:#f7f9fd;border:1px solid #dbe5f3;border-radius:11px;padding:10px 8px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px}
+  .s1-node b{width:24px;height:24px;border-radius:8px;color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center}
+  .s1-node span{font-size:12px;font-weight:800;color:var(--header);line-height:1.35}
+  .s1-node i{font-style:normal;font-size:10.5px;font-weight:800;color:#2563eb;background:#eef4ff;border-radius:20px;padding:1px 8px}
+  .s1-chain em{font-style:normal;align-self:center;color:#a8b6cc;font-weight:800;font-size:13px}
+  .s1-kpi{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;margin-top:14px}
+  .s1-k{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px 17px}
+  .s1-k h4{font-size:13.6px;color:var(--header);margin-bottom:9px;display:flex;align-items:center;gap:8px;line-height:1.4}
+  .s1-ix{width:22px;height:22px;border-radius:7px;background:var(--header);color:#fff;font-size:11.5px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
+  .s1-f{background:#f7f9fd;border-left:3px solid #4c7bd9;border-radius:8px;padding:8px 12px;font-size:12.4px;color:var(--header);font-weight:800;margin:7px 0;line-height:1.7}
+  .s1-line{font-size:12.5px;color:var(--ink-2);line-height:1.85}
+  .s1-line b{color:var(--ink)}
+  .s1-tag{font-size:11px;font-weight:800;border-radius:6px;padding:2px 8px;margin-left:auto;flex:none}
+  .s1-tag.r{background:#eef4ff;color:#2563eb}
+  .s1-tag.c{background:#e9f7f0;color:#0e8a5f}
+  .s1-chart{background:#fbfcfe;border:1px solid var(--line);border-radius:12px;padding:10px 6px 2px;margin-top:12px;text-align:center}
+  .s1-empty{text-align:center;padding:34px 16px 26px}
+  @media(max-width:1024px){.s1-flow{grid-template-columns:1fr}.s1-kpi{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body data-sys="4">
@@ -749,7 +802,7 @@
       <div class="eg-ft">
         登录信息仅用于区分操作人，项目数据实时存入公司 EM 云数据库。<br>
         管理员入口：<span class="lnk" onclick="egMode('admin')">在卡片上方切换</span> · 直达链接 <code>?admin=1</code><br>
-        <span style="opacity:.82">当前版本 <b>v3.09</b> · 新增「工号 + 姓名」身份登录</span>
+        <span style="opacity:.82">当前版本 <b>v3.10</b> · 系统一按三份 EM 标准资料重建</span>
       </div>
     </div>
   </div>
@@ -1278,7 +1331,7 @@
 
 <!-- ============ 「引导式套表」已合并至「🧭 工具使用」页签（第 ② 部分） ============ -->
 
-<footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥<br><span style="color:var(--ink-3)">当前版本 v3.09（新增「工号 + 姓名」身份登录与管理员入口）· 提示：若页面仍显示旧版，请强制刷新（Mac: ⌘+Shift+R / Windows: Ctrl+F5）</span></footer>
+<footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥<br><span style="color:var(--ink-3)">当前版本 v3.10（系统一「项目审查与阶段控制」按《EM小组流程》《EM小组每步产出》《EM指标定义及计算和举例》三份标准资料重建）· 提示：若页面仍显示旧版，请强制刷新（Mac: ⌘+Shift+R / Windows: Ctrl+F5）</span></footer>
 </div>
 
 <!-- 工具详情弹窗 -->
@@ -5317,6 +5370,396 @@ concl(c){
 }};
 
 /* ================= 系统一：项目审查与阶段控制 ================= */
+/* v3.10：本模块按三份 EM 支柱标准资料重建 ——
+   《EM小组流程》《EM小组每步产出》《EM指标定义及计算和举例》
+   四个子页签：① 七步流程　② DR 关卡门禁　③ EM 指标　④ 项目推进看板 */
+
+const EM7_STEPS={1:'早期调研',2:'项目范围定义',3:'详细分析',4:'建立行动解决方案',5:'安装',6:'调试及试生产',7:'反馈'};
+const S1_COLOR={1:'#2563eb',2:'#7c3aed',3:'#0f6e56',4:'#b47a00',5:'#0e8a5f',6:'#d97706',7:'#d64550'};
+const EM7_PREP=[
+ {t:'小组成员',d:'跨职能小组组建：EM 主导，AM / PM / FI / QM / SH / ET / CM / SC 协同'},
+ {t:'小组目标',d:'α、β、安装时间（EEM）/ 项目时间（EPM）等量化目标'},
+ {t:'方法论',d:'QFD、DOE、FMEA / FMECA、TT&T 及七步法工具链'},
+ {t:'小组计划',d:'七步推进节奏、里程碑与 DR1–DR7 关卡排期'}
+];
+/* 七步子步骤与要点（源自《EM小组流程》EEM设备 / EPM产品 两个工作表） */
+const EM7_SUB={
+ EEM:{
+  1:[['1.1','项目背景 · 投入回报计算'],['1.2','基本信息收集（大目标：产能、质量、成本、操作要求与期望）'],['1.3','项目计划（立项、招标、采购、安装调试）'],['1.4','风险评估（过程中关键点）']],
+  2:[['2.1','了解现状（一期质量、效率、安全、环保等）'],['2.2','详细目标 —— 项目目标（OEE、停机率）'],['2.3','供应商选择（3 家比价）'],['2.4','细化项目计划']],
+  3:[['3.1','目标差距分析（现状与理想的差距）'],['3.2','制定改善计划'],['3.3','设备厂家详细信息'],['3.4','确认辅料、备件等供应情况'],['3.5','人员培训（who / when）']],
+  4:[['4.1','跟踪供应商改善（制造阶段）'],['4.2','详细培训方案（培训内容）'],['4.3','安装计划（工具、人员）· 调试计划'],['4.4','到货验收标准及实际情况']],
+  5:[['5.1','实施和验证安装计划'],['5.2','验证调试计划'],['5.3','培训执行（实施安装阶段培训）']],
+  6:[['6.1','调试计划实施'],['6.2','试生产'],['6.3','验证改善行动'],['6.4','评估（完成评估各项指标总结）']],
+  7:[['7.1','结果跟踪'],['7.2','MP 信息上传'],['7.3','移交（交付各部门）'],['7.4','小组成果（α、β 等）']]
+ },
+ EPM:{
+  1:[['1.1','项目背景 · 投入回报计算'],['1.2','基本信息收集（大目标：产能、质量、成本、操作要求与期望）'],['1.3','项目计划（立项、差距分析、标准文件准备、上线调试）'],['1.4','风险评估（项目实施过程中关键点、变更管理）']],
+  2:[['2.1','了解现状（一期质量、效率、安全、环保等）'],['2.2','详细目标 —— 项目目标（OEE、缺陷率）'],['2.3','新品分析（客户需求、产品概念、与现有产品的区别与联系、标准更新等）'],['2.4','细化项目计划']],
+  3:[['3.1','目标差距分析'],['3.2','制定改善计划'],['3.3','新增物料（原料、辅料、备件等）详细信息 —— 供应商厂家、物料规格等'],['3.4','关键质量控制点识别及管控（食品安全风险点识别、QA / QM 矩阵建立）'],['3.5','人员培训计划']],
+  4:[['4.1','跟踪新物料、备件、设计等供应商改善（跟踪工厂改善部分）'],['4.2','详细培训方案（操作标准、维护标准、质量控制标准）'],['4.3','上线测试计划（工具、人员）· 调试计划'],['4.4','关键质量控制点评估及改进（使用 QM 矩阵）']],
+  5:[['5.1','实施和验证测试计划（单设备测试、整线测试）'],['5.2','验证调试计划'],['5.3','测试结果评估及改进'],['5.4','培训执行（实施生产培训）']],
+  6:[['6.1','调试计划实施'],['6.2','试生产（乳业 — 无菌实验）'],['6.3','验证改善行动（改善行动是否达到预期）'],['6.4','评估（完成评估各项指标总结）']],
+  7:[['7.1','结果跟踪'],['7.2','MP 信息上传'],['7.3','移交（交付各部门）'],['7.4','小组成果（α、β 等）']]
+ }
+};
+/* 七步任务分工与产出（源自《EM小组每步产出》「项目任务分布图」）
+   每行 = [子步骤, 任务, 负责人, 产出] */
+const EM7_TASK={
+ 1:[['1.1 项目背景调查','项目背景调查','EM','初步投资决定'],
+    ['1.1 项目背景调查','投资回报计算','CM','投资回报年限'],
+    ['1.2 基本信息收集','兄弟工厂同类产品收集','EM','MP 数量、OEE 等数据'],
+    ['1.2 基本信息收集','布局图制作','EM','布局图'],
+    ['1.2 基本信息收集','确认布局图合理性','AM','操作初步符合'],
+    ['1.2 基本信息收集','（同上）确认布局图合理性','FI','效率初步符合'],
+    ['1.2 基本信息收集','（同上）确认布局图合理性','SH','路线安全初步符合'],
+    ['1.3 项目初步计划','项目初步计划制定','EM','项目初步计划'],
+    ['1.4 项目风险评估','项目风险评估','专家组','风险登记册 / 风险评估表'],
+    ['1.5 DR1 回顾','DR 清单确认','—','全部按照 DR 清单完成（这一步 α）']],
+ 2:[['2.1 目标设定','效率目标设定','FI','VSU 目标'],
+    ['2.1 目标设定','成本目标设定','CM','—'],
+    ['2.1 目标设定','质量效率目标设定','QM','—'],
+    ['2.1 目标设定','可靠性目标设定','PM','—'],
+    ['2.1 目标设定','安全目标设定','SH','—'],
+    ['2.2 评估和选择供应商','确认供应商是否符合项目要求','EM','输出了安全、成本、效率要求'],
+    ['2.2 评估和选择供应商','确认价格','EM & 供应','中标供应商'],
+    ['2.3 技术转让 & 培训计划','确定需要技术','ET','项目培训课件'],
+    ['2.3 技术转让 & 培训计划','确定培训范围','ET','针对维修和操作人员制定培训'],
+    ['2.4 项目计划更新','更新项目计划','EM','依据供应商交货细化'],
+    ['2.5 DR2 回顾','DR 清单确认','—','DR 清单内有一项未完成（这一步 α）']],
+ 3:[['3.1 差距分析','目标差距分析','供应商','—'],
+    ['3.1 差距分析','目标差距分析','EM','—'],
+    ['3.2 改善计划制定','制定改善计划','EM','行动整改计划'],
+    ['3.3 确定物料交付计划','新增原辅料交付计划','EM & SC','辅材交付计划'],
+    ['3.4 确定初步培训计划','制定培训计划','EM & ET','确定培训内容和人员'],
+    ['3.5 DR3 回顾','DR 清单确认','—','这一步全部按照 DR 清单完成']],
+ 4:[['4.1 建立系统','标准制定','EM & SH','安全操作规范和作业指导书'],
+    ['4.1 建立系统','（同上）标准制定','EM & AM','建立 CILT 标准'],
+    ['4.1 建立系统','（同上）标准制定','EM & QM','QA / QM 矩阵、关键质量条件'],
+    ['4.1 建立系统','（同上）标准制定','EM & PM','建立维护计划'],
+    ['4.1 建立系统','（同上）标准制定','EM & FI','操作说明'],
+    ['4.2 到货验收标准及实际情况','建立到货验收标准','EM','到货验收标准'],
+    ['4.3 确定详细培训计划','制定培训计划','EM & ET','更新的培训内容和人员'],
+    ['4.4 详细的安装计划（工具、人员）','项目初步计划制定','EM','项目初步安装计划（含人员安全培训、安装内容、具体排期）'],
+    ['4.5 DR4 回顾','DR 清单确认','—','在这一步中有一项未完成（这一步 α）']],
+ 5:[['5.1 实施和验证安装计划','按计划进行设备安装','EM','安装计划表'],
+    ['5.2 实施安装','设备安装','供应商','—'],
+    ['5.3 培训计划实施','对生产操作人员及维修人员实施培训','EM','培训记录'],
+    ['5.4 DR5 回顾','DR 清单确认','—','全部按照 DR 清单完成（这一步的 α）']],
+ 6:[['6.1 调试计划实施','确定测试内容','EM','测试内容计划'],
+    ['6.1 调试计划实施','测试过程','SH','安全性能测试及结果'],
+    ['6.2 试生产','制定试生产计划并实施','EM','输出试生产内容'],
+    ['6.2 试生产','（同上）制定试生产计划并实施','SH','过程测试及运行安全'],
+    ['6.3 验证改善行动','验证前期问题是否改善完成并消除','EM','问题跟踪数据表单；MP 表单'],
+    ['6.4 DR6 回顾','DR 清单确认','—','DR 清单有一项未完成（这一步的 α 或 β）']],
+ 7:[['7.1 结果跟踪','安全指标达成','SH','无高安全风险点'],
+    ['7.1 结果跟踪','核算成本','CM','—'],
+    ['7.1 结果跟踪','核算效率','FI','—'],
+    ['7.1 结果跟踪','核算不良和客诉','QM','—'],
+    ['7.2 MP 信息上传','确认汇总 MP 信息','EM','MP 清单'],
+    ['7.3 移交交付各部门','移交各类标准','EM','标准文件移交使用'],
+    ['7.4 小组成果','核算项目时间','EM','项目时间（月）'],
+    ['7.4 小组成果','核算项目投资','CM','项目投资（万）'],
+    ['7.4 小组成果','核算 αβ 值','EM','αβ 比率'],
+    ['7.5 DR7 回顾','DR 清单确认','—','全部按照 DR 清单完成（这一步的 β）']]
+};
+/* EM 支柱指标（源自《EM指标定义及计算和举例》）—— 比率型 3 项 + 数量型 5 项 */
+const EM7_KPI=[
+ {i:1,t:'项目预算达成率',short:'预算达成率',type:'rate',unit:'%',
+  def:'费用在预算范围内且已完成的项目占已关闭项目的比例。',
+  f:'（预算内完成项目数 ÷ 已关闭项目总数）× 100%',
+  ex:'全年关闭项目共 10 个，其中 7 个在预算内完成。',
+  calc:'7 ÷ 10 × 100%',result:'70%',val:70,
+  mean:'衡量项目成本控制能力，数值越高说明预算管理越好。'},
+ {i:2,t:'垂直启动率',short:'垂直启动率',type:'rate',unit:'%',
+  def:'A/B 类项目中实现垂直启动的项目占比。',
+  f:'（A/B 类且垂直启动项目数 ÷ 已关闭项目总数）× 100%',
+  ex:'全年关闭项目共 10 个，其中 5 个是 A/B 类项目，且 3 个实现了垂直启动。',
+  calc:'3 ÷ 10 × 100%',result:'30%',val:30,
+  mean:'反映高优先级项目的垂直启动效率。'},
+ {i:3,t:'事前检出率 α/(α+β)',short:'事前检出率',type:'rate',unit:'%',
+  def:'A/B 类项目在试运行前发现的问题占比（α 为事前问题数，β 为事后问题数）。',
+  f:'各项目 α ÷ (α+β) 的平均值 × 100%',
+  ex:'项目 1：α=2、β=3 → 40%；项目 2：α=5、β=5 → 50%。',
+  calc:'(40% + 50%) ÷ 2',result:'45%',val:45,
+  mean:'衡量早期问题发现能力，数值越高风险控制越强。'},
+ {i:4,t:'符合预算且完成的项目数量',short:'完成项目数',type:'count',unit:'个',
+  def:'累计符合预算并完成验收的项目总数。',
+  f:'直接累加各季度完成数',
+  ex:'Q1 完成 2 个，Q2 完成 3 个，Q3 完成 2 个，Q4 完成 1 个。',
+  calc:'2 + 3 + 2 + 1',result:'8 个',
+  mean:'直观体现预算合规项目的执行量。',
+  series:[{k:'Q1',v:2},{k:'Q2',v:3},{k:'Q3',v:2},{k:'Q4',v:1}],
+  chartTitle:'各季度完成数（个）· 全年累计 8 个'},
+ {i:5,t:'垂直启动项目完成数量',short:'垂直启动完成数',type:'count',unit:'个',
+  def:'按时完成垂直启动并验收的项目总数。',
+  f:'直接累加各季度完成数',
+  ex:'每季度完成 1 个垂直启动项目。',
+  calc:'1 + 1 + 1 + 1',result:'4 个',
+  mean:'衡量垂直启动项目的执行效率。',
+  series:[{k:'Q1',v:1},{k:'Q2',v:1},{k:'Q3',v:1},{k:'Q4',v:1}],
+  chartTitle:'各季度完成数（个）· 全年累计 4 个'},
+ {i:6,t:'事前检出问题数量',short:'α 数量',type:'count',unit:'个',
+  def:'垂直启动前累计发现的问题总数（α 数量）。',
+  f:'直接累加所有项目启动前的问题数',
+  ex:'各项目启动前分别发现 5、3、2 个问题。',
+  calc:'5 + 3 + 2',result:'10 个',
+  mean:'反映前期风险排查能力。',
+  series:[{k:'项目1',v:5},{k:'项目2',v:3},{k:'项目3',v:2}],
+  chartTitle:'各项目启动前问题数（个）· 累计 10 个'},
+ {i:7,t:'事后检查问题数量（β 数量）',short:'β 数量',type:'count',unit:'个',
+  def:'垂直启动期间及之后累计发现的问题总数（β 数量）。',
+  f:'直接累加所有项目启动后的问题数',
+  ex:'各项目启动后分别发现 8、5 个问题。',
+  calc:'8 + 5',result:'13 个',
+  mean:'暴露项目执行中的后期问题，需优化流程以减少 β。',
+  series:[{k:'项目1',v:8},{k:'项目2',v:5}],
+  chartTitle:'各项目启动后问题数（个）· 累计 13 个'},
+ {i:8,t:'MP 情报系统的输出',short:'MP 情报输出',type:'count',unit:'条',
+  def:'累计产出符合规范并通过审核的精准决策数据。',
+  f:'累加有效数据条数',
+  ex:'每季度产出 25 条有效数据。',
+  calc:'25 × 4',result:'100 条',
+  mean:'评估情报系统对决策的支持能力。',
+  series:[{k:'Q1',v:25},{k:'Q2',v:25},{k:'Q3',v:25},{k:'Q4',v:25}],
+  chartTitle:'各季度有效数据条数（条）· 全年累计 100 条'}
+];
+const S1={mod:'flow',v:'EEM',prj:[],dr:[]};
+function s1StepName(n,v){return (n===5&&v==='EPM')?'样品测试':EM7_STEPS[n];}
+function s1Uniq(arr){const o=[];arr.forEach(x=>{if(x&&x!=='—'&&o.indexOf(x)<0)o.push(x);});return o;}
+/* 带数据标签的横向柱状图（纯内联 SVG，不依赖任何 CDN） */
+function s1Bars(data,opt){
+  opt=opt||{};if(!data||!data.length)return '';
+  data=data.map(function(d){return {k:d.k,v:(Number(d.v)||0)};});
+  const unit=opt.unit||'',color=opt.color||'#2563eb';
+  const W=opt.w||440,H=182,pl=42,pr=14,pt=30,pb=42;
+  const n=data.length;let mx=0;data.forEach(d=>{if(d.v>mx)mx=d.v;});
+  mx=mx>0?mx:1;const nice=mx*1.2;
+  const iw=(W-pl-pr)/n,bw=Math.min(48,iw*0.52),ih=H-pt-pb;
+  const intOnly=data.every(function(d){return Number.isInteger(d.v);});
+  let g='';
+  for(let i=0;i<=4;i++){
+    const y=pt+ih*i/4,val=nice*(4-i)/4;
+    const lab=intOnly?Math.round(val):((nice<=8)?(Math.round(val*10)/10):Math.round(val));
+    g+='<line x1="'+pl+'" y1="'+y.toFixed(1)+'" x2="'+(W-pr)+'" y2="'+y.toFixed(1)+'" stroke="#e9eef6" stroke-width="1"/>'+
+       '<text x="'+(pl-6)+'" y="'+(y+3.4).toFixed(1)+'" text-anchor="end" font-size="9.5" fill="#8a94a6">'+lab+'</text>';
+  }
+  data.forEach(function(d,i){
+    const h=Math.max(2,ih*d.v/nice);
+    const x=pl+iw*i+(iw-bw)/2,y=pt+ih-h;
+    g+='<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+h.toFixed(1)+'" rx="4" fill="'+color+'" opacity="0.92"/>'+
+       '<text x="'+(x+bw/2).toFixed(1)+'" y="'+(y-7).toFixed(1)+'" text-anchor="middle" font-size="11.5" font-weight="800" fill="#17202e">'+d.v+unit+'</text>'+
+       '<text x="'+(x+bw/2).toFixed(1)+'" y="'+(H-pb+17).toFixed(1)+'" text-anchor="middle" font-size="10.5" fill="#5b6676">'+esc(d.k)+'</text>';
+  });
+  return '<div class="s1-chart"><svg viewBox="0 0 '+W+' '+H+'" width="100%" style="max-width:'+W+'px;height:auto" role="img" aria-label="'+esc(opt.title||'柱状图')+'">'+g+'</svg>'+
+   (opt.title?'<div style="font-size:11.5px;color:var(--ink-3);padding:0 0 10px">'+esc(opt.title)+'</div>':'')+'</div>';
+}
+function s1KCard(k,withChart){
+  let h='<div class="s1-k"><h4><span class="s1-ix">'+k.i+'</span>'+esc(k.t)+
+   '<span class="s1-tag '+(k.type==='rate'?'r':'c')+'">'+esc(k.unit)+'</span></h4>'+
+   '<div class="s1-line"><b>定义：</b>'+esc(k.def)+'</div>'+
+   '<div class="s1-f">公式：'+esc(k.f)+'</div>'+
+   '<div class="s1-line"><b>示例：</b>'+esc(k.ex)+'</div>'+
+   '<div class="s1-line"><b>计算：</b>'+esc(k.calc)+' = <b style="color:#0e8a5f">'+esc(k.result)+'</b></div>'+
+   '<div class="s1-line" style="color:var(--ink-3);margin-top:5px"><b>意义：</b>'+esc(k.mean)+'</div>';
+  if(withChart&&k.series)h+=s1Bars(k.series,{unit:k.unit,title:k.chartTitle||'',color:'#0e8a5f',w:420});
+  h+='</div>';
+  return h;
+}
+function s1Mod(m,silent){
+  S1.mod=m;
+  const bs=document.querySelectorAll('#s1_mods button');
+  for(let i=0;i<bs.length;i++)bs[i].classList.toggle('on',bs[i].dataset.m===m);
+  ['flow','dr','kpi','proj'].forEach(function(k){const el=document.getElementById('s1_'+k);if(el)el.style.display=(k===m?'':'none');});
+  if(m==='flow')s1Flow();
+  else if(m==='dr')s1Dr();
+  else if(m==='kpi')s1Kpi();
+  else s1Proj();
+}
+function s1Var(v){S1.v=v;s1Flow();}
+/* ---------- ① 七步流程 ---------- */
+function s1Flow(){
+  const host=document.getElementById('s1_flow');if(!host)return;
+  const v=S1.v;
+  let h='<div class="sys-card">'+
+   '<h3><span class="bar"></span>EM 小组七步流程 <span class="hint">源自《EM小组流程》· 设备类（EEM）与产品类（EPM）子步骤略有差异</span></h3>'+
+   '<div class="s1-seg" id="s1_seg">'+
+   '<button data-v="EEM" class="'+(v==='EEM'?'on':'')+'" onclick="s1Var(\'EEM\')">🔧 EEM 设备类</button>'+
+   '<button data-v="EPM" class="'+(v==='EPM'?'on':'')+'" onclick="s1Var(\'EPM\')">🧪 EPM 产品类</button>'+
+   '</div>'+
+   '<div style="font-size:12.8px;color:var(--ink-2);line-height:1.9;margin-top:10px">'+
+   '进入第 1 步之前须先完成<b>小组准备</b>四件事：'+EM7_PREP.map(function(x){return esc(x.t);}).join(' → ')+
+   '。七步走完后由 DR7 反馈把关，α / β 数据回传到 EM 指标看板。</div>'+
+   '<div class="s1-prep">'+EM7_PREP.map(function(x){
+     return '<div>'+esc(x.t)+'<span style="display:block;font-weight:400;font-size:11.8px;color:var(--ink-3);margin-top:4px;line-height:1.7">'+esc(x.d)+'</span></div>';
+   }).join('')+'</div></div>';
+  h+='<div class="s1-flow">';
+  for(let n=1;n<=7;n++){
+    const subs=EM7_SUB[v][n]||[],tasks=EM7_TASK[n]||[],owns=s1Uniq(tasks.map(function(t){return t[2];}));
+    h+='<div class="s1-step">'+
+      '<div class="s1-hd"><div class="s1-no" style="background:'+S1_COLOR[n]+'">'+n+'</div>'+
+      '<div class="s1-nm">'+esc(s1StepName(n,v))+'</div><div class="s1-dr">DR'+n+'</div></div>'+
+      '<div class="s1-sub">'+subs.map(function(s){
+        return '<div class="s1-row"><span class="s1-code">'+esc(s[0])+'</span><span>'+esc(s[1])+'</span></div>';
+      }).join('')+'</div>'+
+      '<details class="s1-det"><summary>任务分工与产出（'+tasks.length+' 项 · 涉及 '+owns.length+' 个职能）</summary>'+
+      '<table class="s1-tbl"><thead><tr><th>任务</th><th>负责</th><th>产出</th></tr></thead><tbody>'+
+      tasks.map(function(t){
+        return '<tr><td>'+esc(t[1])+'</td><td><span class="s1-own">'+esc(t[2])+'</span></td><td>'+esc(t[3])+'</td></tr>';
+      }).join('')+'</tbody></table></details></div>';
+  }
+  h+='</div>';
+  h+='<div class="sys-card" style="margin-top:16px"><h3><span class="bar"></span>七步推进总览 <span class="hint">每步末端 DR 关卡通过后才放行下一步</span></h3>'+
+   '<div class="s1-chain">'+[1,2,3,4,5,6,7].map(function(n){
+     return '<div class="s1-node"><b style="background:'+S1_COLOR[n]+'">'+n+'</b><span>'+esc(EM7_STEPS[n])+'</span><i>DR'+n+'</i></div>';
+   }).join('<em>→</em>')+'</div></div>';
+  host.innerHTML=h;
+}
+/* ---------- ② DR 关卡门禁 ---------- */
+function s1Dr(){
+  const host=document.getElementById('s1_dr');if(!host)return;
+  let h='<div class="sys-card"><h3><span class="bar"></span>DR1–DR7 关卡门禁 <span class="hint">源自《EM小组每步产出》· 每关的前置子步骤、产出物与责任职能</span></h3>'+
+   '<div style="font-size:13px;color:var(--ink-2);line-height:1.95">'+
+   'DR 关卡是七步法每一步末端的<b>设计评审门禁</b>：本步子步骤全部完成、产出物齐备并通过评审后，才放行进入下一步。'+
+   'A 类项目（1 级优先）<b>逐关评审、不可跳关</b>；B/C 类项目相邻关卡可合并评审。'+
+   '检查中答「不符合」的条款可一键登记为风险，形成「检查 → 风险 → 措施 → 闭环」链路。'+
+   '<span style="color:#b47a00;font-weight:700">α 节点</span>为事前检出问题统计点，'+
+   '<span style="color:#0e8a5f;font-weight:700">β 节点</span>为事后问题统计点，最终汇入 EM 指标第 3 项 α/(α+β)。</div>'+
+   '<div class="mpstat" style="margin-top:14px">'+
+   '<div class="ms"><b>7</b><span>DR 关卡</span></div>'+
+   '<div class="ms"><b>'+[1,2,3,4,5,6,7].reduce(function(s,n){return s+EM7_TASK[n].length;},0)+'</b><span>任务条目</span></div>'+
+   '<div class="ms"><b>'+[1,2,3,4,5,6,7].reduce(function(s,n){return s+s1Uniq(EM7_TASK[n].map(function(t){return t[3];})).length;},0)+'</b><span>产出物</span></div>'+
+   '<div class="ms"><b>'+s1Uniq([].concat.apply([], [1,2,3,4,5,6,7].map(function(n){return EM7_TASK[n].map(function(t){return t[2];});}))).length+'</b><span>责任职能</span></div>'+
+   '</div></div>';
+  h+='<div class="s1-flow">';
+  for(let n=1;n<=7;n++){
+    const subs=EM7_SUB.EEM[n]||[],tasks=EM7_TASK[n]||[];
+    const outs=s1Uniq(tasks.map(function(t){return t[3];}));
+    const owns=s1Uniq(tasks.map(function(t){return t[2];}));
+    const alpha=tasks.some(function(t){return t[3].indexOf('α')>=0;});
+    const beta=tasks.some(function(t){return t[3].indexOf('β')>=0;});
+    let tag='';
+    if(alpha||beta)tag='<div class="s1-dr" style="background:#fff6e5;color:#b47a00;border-color:#ffe0a3">'+(alpha?'α':'')+(alpha&&beta?' / ':'')+(beta?'β':'')+' 节点</div>';
+    h+='<div class="s1-step"><div class="s1-hd"><div class="s1-no" style="background:'+S1_COLOR[n]+'">DR'+n+'</div>'+
+      '<div class="s1-nm">'+esc(EM7_STEPS[n])+'</div>'+tag+'</div>'+
+      '<div class="s1-sub">'+
+      '<div class="s1-lbl">前置子步骤（'+subs.length+' 项）</div>'+
+      subs.map(function(s){return '<div class="s1-row"><span class="s1-code">'+esc(s[0])+'</span><span>'+esc(s[1])+'</span></div>';}).join('')+
+      '<div class="s1-lbl">本关产出物（'+outs.length+' 项）</div>'+
+      outs.map(function(o){return '<div class="s1-row"><span class="s1-chk">✓</span><span>'+esc(o)+'</span></div>';}).join('')+
+      '<div class="s1-lbl">责任职能</div>'+
+      '<div class="s1-owns">'+owns.map(function(o){return '<span class="s1-own">'+esc(o)+'</span>';}).join('')+'</div>'+
+      '<div class="s1-gate">门禁规则：本关未通过 → <b>不放行</b>进入第 '+(n<7?(n+1):'—')+' 步'+(n<7?'（'+esc(EM7_STEPS[n+1])+'）':'（项目结案）')+'</div>'+
+      '</div></div>';
+  }
+  h+='</div>';
+  host.innerHTML=h;
+}
+/* ---------- ③ EM 指标 ---------- */
+function s1Kpi(){
+  const host=document.getElementById('s1_kpi');if(!host)return;
+  const rates=EM7_KPI.filter(function(k){return k.type==='rate';});
+  const counts=EM7_KPI.filter(function(k){return k.type==='count';});
+  let h='<div class="sys-card"><h3><span class="bar"></span>EM 支柱指标定义与计算 <span class="hint">源自《EM指标定义及计算和举例》· 比率型 3 项 + 数量型 5 项</span></h3>'+
+   '<div style="font-size:13px;color:var(--ink-2);line-height:1.95">'+
+   '比率型指标（%）反映管控能力，数量型指标（个 / 条）反映执行量。'+
+   '改进方向：比率指标需提升分子（增加合规 / 垂直启动项目、提高事前检出），数量指标需<b>增加 α、压降 β</b>。'+
+   '下方所有图表<b>均标注数值标签</b>，无需悬停即可直接读数。</div>'+
+   '<div class="mpstat" style="margin-top:14px">'+
+   '<div class="ms"><b>3</b><span>比率型指标（%）</span></div>'+
+   '<div class="ms"><b>5</b><span>数量型指标（个 / 条）</span></div>'+
+   '<div class="ms"><b>2</b><span>α / β 相关指标</span></div>'+
+   '</div></div>';
+  h+='<div class="sys-card"><h3><span class="bar"></span>一、比率型指标（3 项） <span class="hint">定义 · 公式 · 示例 · 计算</span></h3>'+
+   '<div class="s1-kpi">'+rates.map(function(k){return s1KCard(k);}).join('')+'</div>'+
+   s1Bars(rates.map(function(k){return {k:k.short,v:k.val};}),{unit:'%',color:'#2563eb',w:520,
+     title:'三项比率型指标对照（示例值 %，柱顶为数据标签）'})+'</div>';
+  h+='<div class="sys-card"><h3><span class="bar"></span>二、数量型指标（5 项） <span class="hint">累计口径 · 逐项示例与分布</span></h3>'+
+   '<div class="s1-kpi">'+counts.map(function(k){return s1KCard(k,true);}).join('')+'</div></div>';
+  h+='<div class="sys-card"><h3><span class="bar"></span>三、指标口径小结</h3>'+
+   '<table class="s1-tbl"><thead><tr><th>序号</th><th>指标名称</th><th>类型</th><th>单位</th><th>口径 / 公式</th><th>示例结果</th></tr></thead><tbody>'+
+   EM7_KPI.map(function(k){
+     return '<tr><td>'+k.i+'</td><td>'+esc(k.t)+'</td><td>'+esc(k.type==='rate'?'比率型':'数量型')+'</td><td>'+esc(k.unit)+'</td><td>'+esc(k.f)+'</td><td><b style="color:#0e8a5f">'+esc(k.result)+'</b></td></tr>';
+   }).join('')+'</tbody></table>'+
+   '<div style="font-size:12.3px;color:var(--ink-3);margin-top:10px;line-height:1.85">'+
+   '注：第 4、5 项为数量型（单位「个」）；原始资料中个别单位标注为「%」属笔误，录入时应按「个」处理。</div></div>';
+  host.innerHTML=h;
+}
+/* ---------- ④ 项目推进看板（沿用项目台账 + DR 关卡记录） ---------- */
+function s1Proj(){
+  const host=document.getElementById('s1_proj');if(!host)return;
+  const projects=S1.prj||[],drAll=S1.dr||[];
+  const drMap={};
+  drAll.forEach(function(r){if(!drMap[r.project_id])drMap[r.project_id]=[];drMap[r.project_id].push(r);});
+  const active=projects.filter(function(p){return p.status!=='closed';});
+  const closed=projects.filter(function(p){return p.status==='closed';});
+  let gateSum=0;
+  projects.forEach(function(p){
+    const recs=drMap[p.id]||[];let lp=0;
+    [1,2,3,4,5,6,7].forEach(function(n){
+      const r=recs.filter(function(x){return x.dr_no===n;})[0];
+      if(r&&(r.result==='pass'||r.result==='conditional_pass'))lp=n;
+    });
+    gateSum+=lp;
+  });
+  const gatePct=projects.length?(gateSum/(projects.length*7)*100):0;
+  let h='<div class="sys-card"><h3><span class="bar"></span>项目推进看板 <span class="hint">按 EM 项目台账实时显示 DR1–DR7 关卡门禁进度</span></h3>'+
+   '<div class="mpstat" style="margin-top:4px">'+
+   '<div class="ms"><b>'+projects.length+'</b><span>在管项目</span></div>'+
+   '<div class="ms"><b>'+active.length+'</b><span>进行中</span></div>'+
+   '<div class="ms"><b>'+closed.length+'</b><span>已结案</span></div>'+
+   '<div class="ms"><b>'+Math.round(gatePct)+'%</b><span>平均关卡进度</span></div>'+
+   '</div>'+
+   '<div style="font-size:12.5px;color:var(--ink-3);line-height:1.85;margin-top:6px">'+
+   '门禁规则：前序关卡未通过不放行下一阶段；A 类项目逐关评审不可跳关，B/C 类相邻关卡可合并。'+
+   '</div></div>';
+  if(!projects.length){
+    h+='<div class="sys-card"><div class="s1-empty">'+
+     '<div style="font-size:15px;font-weight:800;color:var(--header);margin-bottom:8px">📁 项目台账暂无项目</div>'+
+     '<div style="font-size:13px;color:var(--ink-2);line-height:1.95">'+
+     '登记第一个 EM 项目后，此处会按 <b>DR1–DR7</b> 自动生成关卡进度条与门禁放行判定。<br>'+
+     '登记项目时填写项目类型（EEM 设备 / EPM 产品）与 ABC 等级，系统会自动套用对应的七步流程与过滤规则。'+
+     '</div>'+
+     '<div class="fbtns" style="justify-content:center;margin-top:16px">'+
+     '<button class="btn primary" onclick="gotoProjTab()">📁 去新建 EM 项目</button>'+
+     '<button class="btn" onclick="s1Mod(\'flow\')">🗺 先看七步流程</button>'+
+     '</div></div></div>';
+    host.innerHTML=h;return;
+  }
+  h+='<div class="sys-grid" id="s1_cards"></div>';
+  host.innerHTML=h;
+  const cw=host.querySelector('#s1_cards');
+  cw.innerHTML=projects.map(function(p){
+    const recs=drMap[p.id]||[];
+    let passedMax=0;
+    recs.forEach(function(x){if(x.result==='pass'||x.result==='conditional_pass')passedMax=Math.max(passedMax,Number(x.dr_no)||0);});
+    let curStage=Number(p.dr_stage)||1;
+    if(passedMax>=curStage)curStage=Math.min(7,passedMax+1);
+    let gates='',preOk=true;
+    for(let n=1;n<=7;n++){
+      const r=recs.filter(function(x){return x.dr_no===n;})[0];
+      const passed=r&&(r.result==='pass'||r.result==='conditional_pass');
+      const isCur=(n===curStage);
+      let cls;
+      if(passed)cls='done';
+      else if(isCur)cls='cur';
+      else cls='lock';
+      if(n<curStage&&!passed)preOk=false;
+      gates+='<div class="g '+cls+'" title="DR'+n+' '+DR_META[n]+'"><b>DR'+n+'</b><small>'+DR_META[n].slice(0,4)+'</small></div>';
+    }
+    let verdict;
+    if(p.status==='closed'){verdict='<div class="gateverdict ok">✅ 项目已结案，DR7 反馈完成，产出 MP 情报回传。</div>';}
+    else if(preOk){verdict='<div class="gateverdict ok">✅ 前序关卡已放行，可推进至 <b>'+DR_META[curStage]+'</b>。</div>';}
+    else{verdict='<div class="gateverdict block">⛔ 存在未通过的前序关卡，按门禁控制<b>不得放行</b>下一阶段（A 类须逐关评审）。</div>';}
+    const acBadge=(p.abc_class&&ABC_CLASS[p.abc_class])?('<span class="tagp" style="background:'+(p.abc_class==='A'?'#fde8e8;color:#b02a2a':p.abc_class==='B'?'#fff3e0;color:#b07b1e':'#e7f6ec;color:#1d7a3a')+'">'+p.abc_class+' 类</span>'):'<span class="tagp" style="background:#eef1f7;color:#7c8698">未分级</span>';
+    return '<div class="projcard">'+
+     '<div class="ph"><div style="min-width:0"><div class="nm">'+esc(p.name)+'</div><div class="meta">'+esc(p.code||'—')+' · '+esc(p.ptype)+' · 负责：'+esc(p.leader||'—')+'</div></div>'+acBadge+'</div>'+
+     '<div class="gateflow">'+gates+'</div>'+
+     '<div class="projmeta">当前阶段：<b>'+DR_META[curStage]+'（DR'+curStage+'）</b></div>'+
+     verdict+
+     '<div class="fbtns" style="margin-top:10px"><button class="btn sm primary" onclick="openDr('+p.id+')">🔓 打开关卡登记</button><button class="btn sm ghost" onclick="gotoProjTab()">📁 项目台账</button></div></div>';
+  }).join('');
+}
 async function loadSys1(){
   const root=document.getElementById('sysview-1');
   root.innerHTML='<div class="sys-hero"></div>';
@@ -5325,57 +5768,35 @@ async function loadSys1(){
   if(tableOK.em_projects&&PROJECTS.length){projects=PROJECTS.slice();}
   else if(tableOK.em_projects){try{projects=await api("em_projects?select=*&order=created_at.desc");PROJECTS=projects.slice();refreshProjectSelects();}catch(e){}}
   if(tableOK.em_dr_records){try{drAll=await api("em_dr_records?select=*");}catch(e){}}
-  const drMap={};
-  drAll.forEach(r=>{if(!drMap[r.project_id])drMap[r.project_id]=[];drMap[r.project_id].push(r);});
-  const active=projects.filter(p=>p.status!=="closed");
-  const closed=projects.filter(p=>p.status==="closed");
-  let gateSum=0;
-  projects.forEach(p=>{const recs=drMap[p.id]||[];let lp=0;[1,2,3,4,5,6,7].forEach(n=>{const r=recs.filter(x=>x.dr_no===n)[0];if(r&&(r.result==="pass"||r.result==="conditional_pass"))lp=n;});gateSum+=lp;});
-  const gatePct=(projects.length&&projects.length>0)?(gateSum/(projects.length*7)*100):0;
+  S1.prj=projects;S1.dr=drAll;
   hero.innerHTML=
    '<div class="sys-card">'+
-   '<h3><span class="bar"></span>项目审查与阶段控制 <span class="hint">DR1-DR7 关卡门禁 · 未通过不放行下一阶段</span></h3>'+
-   '<div style="font-size:13px;color:var(--ink-2);line-height:1.9;margin-top:4px">'+
-   'EM 项目按 <b>DR1 早期调研 → DR7 反馈</b> 七步推进，每阶段末端设<b>设计评审关卡</b>（DR 门禁）。A 类项目（1 级优先）要求<b>逐关评审、不可跳关</b>；B/C 类相邻关卡可合并。'+
-   '下方「打开关卡登记」复用项目台账的 DR 评审弹窗，登记通过后系统自动推进项目阶段。</div>'+
+   '<h3><span class="bar"></span>项目审查与阶段控制 <span class="hint">EM 小组七步法 · DR1–DR7 关卡门禁 · 未通过不放行下一阶段</span></h3>'+
+   '<div style="font-size:13px;color:var(--ink-2);line-height:1.95;margin-top:4px">'+
+   'EM 项目按 <b>① 早期调研 → ⑦ 反馈</b> 七步推进，每阶段末端设<b>设计评审关卡（DR 门禁）</b>。'+
+   'A 类项目（1 级优先）要求<b>逐关评审、不可跳关</b>；B/C 类相邻关卡可合并。'+
+   '本模块内容源自三份 EM 支柱标准资料：《EM 小组流程》《EM 小组每步产出》《EM 指标定义及计算和举例》。'+
+   '</div>'+
    '<div class="mpstat" style="margin-top:14px">'+
+   '<div class="ms"><b>7</b><span>推进步骤（七步法）</span></div>'+
+   '<div class="ms"><b>7</b><span>DR 关卡门禁</span></div>'+
+   '<div class="ms"><b>'+EM7_KPI.length+'</b><span>EM 支柱指标</span></div>'+
    '<div class="ms"><b>'+projects.length+'</b><span>在管项目</span></div>'+
-   '<div class="ms"><b>'+active.length+'</b><span>进行中</span></div>'+
-   '<div class="ms"><b>'+closed.length+'</b><span>已结案</span></div>'+
-   '<div class="ms"><b>'+Math.round(gatePct)+'%</b><span>平均关卡进度</span></div>'+
-   '</div></div>'+
-   '<div class="sys-card"><h3><span class="bar"></span>项目全景看板 <span class="hint">点击「打开关卡登记」记录该项目的 DR 评审</span></h3>'+
-   '<div class="sys-grid" id="s1_cards"></div></div>';
-  const cw=hero.querySelector('#s1_cards');
-  if(!projects.length){cw.innerHTML='<div class="nodata2">暂无项目。请到「系统四 → EM项目台账」登记第一个 EM 项目。</div>';return;}
-  cw.innerHTML=projects.map(p=>{
-    const recs=drMap[p.id]||[];
-    const curStage=p.dr_stage||1;
-    let gates='';let preOk=true;
-    for(let n=1;n<=7;n++){
-      const r=recs.filter(x=>x.dr_no===n)[0];
-      const passed=r&&(r.result==="pass"||r.result==="conditional_pass");
-      const isCur=(n===curStage);
-      let cls;
-      if(passed)cls="done";
-      else if(isCur)cls="cur";
-      else cls="lock";
-      if(n<curStage&&!passed)preOk=false;
-      gates+='<div class="g '+cls+'" title="DR'+n+' '+DR_META[n]+'"><b>DR'+n+'</b><small>'+DR_META[n].slice(0,4)+'</small></div>';
-    }
-    let verdict;
-    if(p.status==="closed"){verdict='<div class="gateverdict ok">✅ 项目已结案，DR7 反馈完成，产出 MP 情报回传。</div>';}
-    else if(preOk){verdict='<div class="gateverdict ok">✅ 前序关卡已放行，可推进至 <b>'+DR_META[curStage]+'</b>。</div>';}
-    else{verdict='<div class="gateverdict block">⛔ 存在未通过的前序关卡，按门禁控制<b>不得放行</b>下一阶段（A 类须逐关评审）。</div>';}
-    const acBadge=(p.abc_class&&ABC_CLASS[p.abc_class])?('<span class="tagp" style="background:'+(p.abc_class==="A"?"#fde8e8;color:#b02a2a":p.abc_class==="B"?"#fff3e0;color:#b07b1e":"#e7f6ec;color:#1d7a3a")+'">'+p.abc_class+' 类</span>'):'<span class="tagp" style="background:#eef1f7;color:#7c8698">未分级</span>';
-    return '<div class="projcard">'+
-     '<div class="ph"><div style="min-width:0"><div class="nm">'+esc(p.name)+'</div><div class="meta">'+esc(p.code||"—")+' · '+esc(p.ptype)+' · 负责：'+esc(p.leader||"—")+'</div></div>'+acBadge+'</div>'+
-     '<div class="gateflow">'+gates+'</div>'+
-     '<div class="projmeta">当前阶段：<b>'+DR_META[curStage]+'（DR'+curStage+'）</b></div>'+
-     verdict+
-     '<div class="fbtns" style="margin-top:10px"><button class="btn sm primary" onclick="openDr('+p.id+')">🔓 打开关卡登记</button><button class="btn sm ghost" onclick="gotoProjTab()">📁 项目台账</button></div></div>';
-  }).join("");
+   '</div>'+
+   '<div class="rvmods" id="s1_mods">'+
+   '<button data-m="flow" class="on" onclick="s1Mod(\'flow\')">🗺 ① 七步流程</button>'+
+   '<button data-m="dr" onclick="s1Mod(\'dr\')">🚪 ② DR 关卡门禁</button>'+
+   '<button data-m="kpi" onclick="s1Mod(\'kpi\')">📊 ③ EM 指标</button>'+
+   '<button data-m="proj" onclick="s1Mod(\'proj\')">🏭 ④ 项目推进看板</button>'+
+   '</div>'+
+   '</div>'+
+   '<div id="s1_flow"></div>'+
+   '<div id="s1_dr" style="display:none"></div>'+
+   '<div id="s1_kpi" style="display:none"></div>'+
+   '<div id="s1_proj" style="display:none"></div>';
+  s1Mod('flow',true);
 }
+
 function gotoProjTab(){showSystem(4);setTimeout(function(){var b=document.querySelector('.tabs button[data-tab="projects"]');if(b)b.click();},60);}
 
 /* ================= 系统二：基于检查表的设计审查系统 ================= */
