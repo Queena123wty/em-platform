@@ -812,7 +812,7 @@
       <div class="eg-st" id="egSt"><span class="d"></span><span id="egStTxt">正在检查云端连接…</span></div>
       <div class="eg-ft">
         登录信息仅用于区分操作人，项目数据实时存入公司 EM 云数据库。<br>
-        <span style="opacity:.82">当前版本 <b>v3.18</b> · 项目批量 Excel 导入 · 七步名称统一</span><span class="eg-adm" id="egAdmLnk" onclick="egMode('admin')" title="系统管理员入口（也可直达 ?admin=1）">管理员</span>
+        <span style="opacity:.82">当前版本 <b>v3.19</b> · 新增 PDA 缺陷分析表与成本损失统计表</span><span class="eg-adm" id="egAdmLnk" onclick="egMode('admin')" title="系统管理员入口（也可直达 ?admin=1）">管理员</span>
       </div>
     </div>
   </div>
@@ -1180,6 +1180,8 @@
     <button data-sheet="dr">🚦 DR 关卡检查表（28 项）</button>
     <button data-sheet="lcc">💰 LCC 投资决策表</button>
     <button data-sheet="mp">📝 MP 情报 PAD 表</button>
+    <button data-sheet="pda">🧩 PDA 缺陷分析表</button>
+    <button data-sheet="loss">💸 成本损失统计表</button>
   </div>
 
   <!-- ===== 套表 1：EEM ABC 评分卡 ===== -->
@@ -1310,6 +1312,60 @@
     </div>
     <div class="card"><h3><span class="bar"></span>练习记录 <span class="hint">存本机浏览器；正式情报请到「计算型工具 → MP 情报库」登记</span></h3><div id="wb_recs_mp" class="wbreclist">暂无记录</div></div>
   </div>
+
+  <!-- ===== 套表 6：PDA 项目缺陷分析表 ===== -->
+  <div class="sheet-pane" id="sheet-pda">
+    <div class="card">
+      <h3><span class="bar"></span>PDA 项目缺陷分析表 <span class="hint">对齐公司《EM 缺陷收集追踪表》：缺陷 → 损失 → 阶段归位 → 本可避免的工具</span></h3>
+      <details class="guide" open>
+        <summary>📖 使用指引（PDA 怎么填、怎么判）</summary>
+        <ol>
+          <li>每条项目缺陷登记一行：<b>项目缺陷</b>写标题（如「设备管路脏污」），<b>额外成本（元）/ 延迟（天）</b>至少量化一项——不量化＝看不见＝改不了。</li>
+          <li><b>发生阶段</b>＝什么时候才发现；<b>应避免阶段</b>＝哪个 DR 关卡本应拦住它。发现越晚损失越大，两个阶段的落差就是 EM 的价值空间。</li>
+          <li><b>本可避免工具</b>填「若当时部署了就不会发生」的工具（FMEA / 风险评估 / 专家点检表…，多个用顿号分隔）。</li>
+          <li>自动结论：损失合计、平均可前移步数、发现阶段分布图、TOP 缺失工具。⚠️ 同一工具反复出现 ≥2 次＝那道关卡形同虚设——要改流程（把工具补进检查表并强制执行），不是改人。</li>
+        </ol>
+      </details>
+      <div class="tblwrap"><table class="tbl score-tbl"><thead><tr>
+        <th style="width:3.5%">#</th><th style="width:7%">部门</th><th style="width:10%">项目名称</th><th style="width:14%">项目缺陷</th><th style="width:8%">额外成本（元）</th><th style="width:6.5%">延迟（天）</th><th style="width:10.5%">发生阶段</th><th style="width:10.5%">应避免阶段</th><th style="width:11%">本可避免工具</th><th style="width:13%">对策与排期</th><th style="width:7%">改善进度</th>
+      </tr></thead><tbody id="wb_pda_rows"></tbody></table></div>
+      <div class="fbtns">
+        <button class="btn ghost sm" onclick="wbPdaAdd()">＋ 加一行</button>
+        <button class="btn ghost" onclick="wbPdaDemo()">📋 填入示例（含公司真实案例）</button>
+        <button class="btn ghost" onclick="wbPdaClear()">🔄 清空</button>
+        <button class="btn primary" onclick="wbSave('pda')">💾 存练习记录</button>
+      </div>
+      <div class="verdict" id="wb_pda_verdict"></div>
+    </div>
+    <div class="card"><h3><span class="bar"></span>练习记录 <span class="hint">存本机浏览器；正式缺陷台账建议导出 Excel 存档、随项目 DR7 结案资料一并提交</span></h3><div id="wb_recs_pda" class="wbreclist">暂无记录</div></div>
+  </div>
+
+  <!-- ===== 套表 7：成本损失统计表 ===== -->
+  <div class="sheet-pane" id="sheet-loss">
+    <div class="card">
+      <h3><span class="bar"></span>成本损失统计表 <span class="hint">十六大损失口径分类归集 · 数量×单价自动折算 · 帕累托聚焦改善</span></h3>
+      <details class="guide" open>
+        <summary>📖 使用指引（怎么填、怎么判）</summary>
+        <ol>
+          <li>每笔损失一行：<b>数量</b>填损失量（停机小时 / 报废 kg / 返工件数…），<b>单价</b>填单位折算成本（元/单位），<b>损失金额自动 = 数量 × 单价</b>；只有总额时：数量填 1、单价填金额。</li>
+          <li><b>损失类别</b>按十六大损失口径选择：故障停机 / 换模调整 / 小停机空转 / 速度损失 / 开始结束 / 不良报废 / 返工 / 降级 / 物流等待 / 能源浪费 / 管理损失 / 人员损失。</li>
+          <li>自动结论：损失合计、类别汇总图（带数据标签）、最大类别占比与 TOP2 帕累托判定（合计 ≥70% 即符合 80/20 律，集中资源打前两类）。</li>
+          <li>改善闭环：TOP 类别立项改善（FI 焦点课题 / PM 对策 / QM 管控）；缺陷类损失同步用「PDA 缺陷分析表」归因到应避免阶段，回传 MP 情报。</li>
+        </ol>
+      </details>
+      <div class="tblwrap"><table class="tbl score-tbl"><thead><tr>
+        <th style="width:3.5%">#</th><th style="width:9%">日期</th><th style="width:10%">项目 / 产线</th><th style="width:10%">损失类别</th><th style="width:18%">损失描述</th><th style="width:9%">数量</th><th style="width:9%">单价（元）</th><th style="width:10.5%">损失金额（元·自动）</th><th style="width:21%">改善对策</th>
+      </tr></thead><tbody id="wb_loss_rows"></tbody></table></div>
+      <div class="fbtns">
+        <button class="btn ghost sm" onclick="wbLossAdd()">＋ 加一行</button>
+        <button class="btn ghost" onclick="wbLossDemo()">📋 填入示例（灌装线 8 月损失盘点）</button>
+        <button class="btn ghost" onclick="wbLossClear()">🔄 清空</button>
+        <button class="btn primary" onclick="wbSave('loss')">💾 存练习记录</button>
+      </div>
+      <div class="verdict" id="wb_loss_verdict"></div>
+    </div>
+    <div class="card"><h3><span class="bar"></span>练习记录 <span class="hint">存本机浏览器；正式损失核算请走 FI 支柱损失科目归集</span></h3><div id="wb_recs_loss" class="wbreclist">暂无记录</div></div>
+  </div>
 </section>
 
 <!-- ============ Tab 6: 🔍 设计审查系统 ============ -->
@@ -1341,7 +1397,7 @@
 
 <!-- ============ 「引导式套表」已合并至「🧭 工具使用」页签（第 ② 部分） ============ -->
 
-<footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥<br><span style="color:var(--ink-3)">当前版本 v3.18（EM 项目台账新增「批量 Excel 导入」：下载模板 → 上传 xlsx/xls/csv → 逐行预览校验（重名/类型/阶段/日期）→ 一键写入云端，组件 xlsx.full.min.js 同桶本地托管；v3.17 七步标准名称全库统一：早期调研 / 范围定义 / 详细分析 / 行动方案 / 安装培训 / 调试试产 / 交付反馈，七步推进总览置顶；v3.16 5C0D 评分准则按公司资料按人机料法分列：机再细分「工序（工艺参数·Q 点）」与「机器设置（C 条件）」两套，人 / 料 / 法各一套，评分套表归类选择后五问维度自动联动；v3.15 依据 2025/2026 班组长培训课件更新 10 个工具：5C0D 升级为公司 2025 版「五条件零缺陷法」口径——4M1E 五套评分维度、总分 ≥21 可靠判定、Q 点 / C 条件区分，并同步 QA/QM 矩阵阈值；风险评估 / SOP / 问题三部曲 / ECRS / 十六大损失 / 标准化 / 5S / DMS 补充公司培训要点；v3.14 EEM/EPM 差异高亮；v3.13 DR 门禁 EEM/EPM 双版本；v3.12 新增 6 个项目管理工具，在线工具总数 43。管理员入口仍为隐藏式小链接）· 提示：若页面仍显示旧版，请强制刷新（Mac: ⌘+Shift+R / Windows: Ctrl+F5）</span></footer>
+<footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥<br><span style="color:var(--ink-3)">当前版本 v3.19（标准套表新增「PDA 项目缺陷分析表」与「成本损失统计表」：PDA 对齐公司《EM缺陷收集追踪表》口径——逐行登记缺陷、损失（额外成本＋延迟天数）、发生阶段/应避免阶段、本可避免工具，自动汇总损失合计、发现阶段分布、TOP 缺失工具与平均可前移步数；成本损失表按十六大损失口径分类归集，数量×单价自动折算金额，类别汇总图与 TOP 帕累托自动聚焦改善；v3.18 EM 项目台账新增「批量 Excel 导入」：下载模板 → 上传 xlsx/xls/csv → 逐行预览校验（重名/类型/阶段/日期）→ 一键写入云端，组件 xlsx.full.min.js 同桶本地托管；v3.17 七步标准名称全库统一：早期调研 / 范围定义 / 详细分析 / 行动方案 / 安装培训 / 调试试产 / 交付反馈，七步推进总览置顶；v3.16 5C0D 评分准则按公司资料按人机料法分列：机再细分「工序（工艺参数·Q 点）」与「机器设置（C 条件）」两套，人 / 料 / 法各一套，评分套表归类选择后五问维度自动联动；v3.15 依据 2025/2026 班组长培训课件更新 10 个工具：5C0D 升级为公司 2025 版「五条件零缺陷法」口径——4M1E 五套评分维度、总分 ≥21 可靠判定、Q 点 / C 条件区分，并同步 QA/QM 矩阵阈值；风险评估 / SOP / 问题三部曲 / ECRS / 十六大损失 / 标准化 / 5S / DMS 补充公司培训要点；v3.14 EEM/EPM 差异高亮；v3.13 DR 门禁 EEM/EPM 双版本；v3.12 新增 6 个项目管理工具，在线工具总数 43。管理员入口仍为隐藏式小链接）· 提示：若页面仍显示旧版，请强制刷新（Mac: ⌘+Shift+R / Windows: Ctrl+F5）</span></footer>
 </div>
 
 <!-- 工具详情弹窗 -->
@@ -1446,7 +1502,7 @@ const TOOLS=[
  {n:16,en:"MP Maintainability Prevention",name:"MP 维护预防系统",phase:"DR3 详细设计与分析",brief:"设备变更与改善沉淀为可复用工程标准。",detail:["MP 数据表（PAD 结构）：问题定义、改善描述、保持措施、成本/收益","跨项目沟通减少同类损失，是 MTBF 基线来源"],fields:["关联支柱：AM / PM / QM / SHE / FI / EM"]},
  {n:17,en:"Commissioning & Validation",name:"调试验证",phase:"DR4—DR5 制造与验证",brief:"FAT/SAT → IQ/OQ/PQ 逐级确认放行。",detail:["FAT→SAT→IQ→OQ→PQ 五级确认","良率目标 ≥90% 爬坡至 98%"],fields:["CMK ≥1.67 满足公差后放行"]},
  {n:18,en:"5C0D Five Conditions 0 Defect",name:"5C0D 五条件零缺陷法",phase:"DR4—DR5 制造与验证",brief:"评估质量条件可靠性的评分工具：按人机料法取对应准则（机再分工序 / 机器设置），5 问 × 1/3/5 分，总分 ≥21 可靠、＜21 必须改善并复评。",detail:["5C0D（5 Conditions 0 Defect）＝五条件零缺陷法：评估质量条件可靠性的独立工具，为改善做优先分级（不是 QM 矩阵的一部分）","评分准则按人机料法分列：机再细分「工序（工艺参数·Q 点）」与「机器设置（C 条件）」两套，均按清楚 / 易设定 / 易测量 / 易监控 / 易恢复五问；人（技能 / 经验 / 一致性 / 出错 / 激励）、料（规格 / 追溯 / 测量 / 监控 / 分类）、法（可用 / 理解 / 执行 / 偏差检测 / 偏差避免）各一套，每问 1/3/5 三档，满分 25","判定口径唯一：总分 ≥21 质量条件可靠，＜21 必须改善并复评","主动应用（关键条件可靠性排查）与被动应用（缺陷 / 客诉回溯评分找薄弱条件）两类场景"],fields:["承接 QA/QM 矩阵（#14）Q 点 / C 条件清单，与调试验证、SOP 预发布配套"]},
- {n:19,en:"PDA Project Defect Analysis",name:"PDA 项目缺陷分析",phase:"DR4—DR5 制造与验证",brief:"按阶段与工具双向部署，识别可避免缺陷。",detail:["损失按阶段（DR1-DR7）与工具双向部署","识别「若使用了该工具本可避免的缺陷」"],fields:["所有按 EM 方法论执行的项目均须做 PDA"]},
+ {n:19,en:"PDA Project Defect Analysis",name:"PDA 项目缺陷分析",phase:"DR4—DR5 制造与验证",brief:"按阶段与工具双向部署，识别可避免缺陷。",detail:["损失按阶段（DR1-DR7）与工具双向部署","识别「若使用了该工具本可避免的缺陷」"],fields:["所有按 EM 方法论执行的项目均须做 PDA","→ 前往「标准套表 → PDA 缺陷分析表」逐行登记练习"],sheet:'pda'},
  {n:20,en:"SOP Pre-release",name:"标准作业程序（SOP）预发布",phase:"DR4—DR5 制造与验证",brief:"量产前预先发布工艺参数与 CCP 作业标准。",detail:["输出《工艺参数标准卡》《CCP 作业指导书》","杜绝研发与生产脱节","标准作业三要素（节拍时间 / 作业顺序 / 标准手持）＋标准工时五大制定法（秒表 / PTS / 抽样 / 标准资料 / 估工）"],fields:["Gate5 大货试产关键交付物"]},
  {n:21,en:"VSU Vertical Start-Up",name:"VSU 垂直启动",phase:"DR6—DR7 启动与移交",brief:"用 α/β 比率衡量问题前置暴露度。",detail:["α = VSU 前暴露问题数；β = VSU 期间及之后问题数","早期暴露率 = α/(α+β)，≥0.6 为优"],fields:["→ 前往「计算型工具」在线登记 VSU"],calc:'vsu'},
  {n:22,en:"SUM Start-Up Management",name:"SUM 启动管理",phase:"DR6—DR7 启动与移交",brief:"启动全过程管理与达产评价。",detail:["监控垂直启动时间与产能/良率达标","节拍平衡（Line Balancing）"],fields:["里程碑：设计产能与良率双达标"]},
@@ -1457,7 +1513,7 @@ const TOOLS=[
  {n:27,en:"Pareto Chart",name:"帕累托图/柏拉图",phase:"通用改善工具",brief:"80/20 原则找出主要损失。",detail:["以频次/损失金额排序","主攻主要损失、最小化停产损失"],fields:["为改善优先级提供依据"]},
  {n:28,en:"Poka Yoke",name:"Poka Yoke 防愚措施",phase:"通用改善工具",brief:"防止人为差错的防呆设计。",detail:["在源头防止误操作/漏操作","用于安全与质量关键点位"],fields:["与 FMEA 联动"]},
  {n:29,en:"OEE Overall Equipment Effectiveness",name:"OEE 设备综合效率",phase:"效率与损失管理",brief:"可用率 × 性能 × 质量三要素。",detail:["时间开动率×性能开动率×合格品率","量化设备真实产出效率"],fields:["与十六大损失、MTBF 基线联动"]},
- {n:30,en:"16 Losses",name:"损失概念（十六大损失）",phase:"效率与损失管理",brief:"系统识别设备/人员的十六大损失类型。",detail:["覆盖停机、性能、质量三大类损失","按损失类型定位改善重点","七大浪费（Muda）对应损失地图（过量生产为万恶之首）；OEE 每提升 1% 制造成本约降 0.5%-0.8%"],fields:["作为损失地图，指导 OEE 与改善立项"]},
+ {n:30,en:"16 Losses",name:"损失概念（十六大损失）",phase:"效率与损失管理",brief:"系统识别设备/人员的十六大损失类型。",detail:["覆盖停机、性能、质量三大类损失","按损失类型定位改善重点","七大浪费（Muda）对应损失地图（过量生产为万恶之首）；OEE 每提升 1% 制造成本约降 0.5%-0.8%"],fields:["作为损失地图，指导 OEE 与改善立项","→ 前往「标准套表 → 成本损失统计表」分类归集损失金额"],sheet:'loss'},
  {n:31,en:"Standardization OPL / CIL / SOP",name:"标准化（OPL/CIL/SOP）",phase:"标准化与日常管理",brief:"一点课程、清洁点检、作业标准沉淀知识。",detail:["OPL：一点课程（One Point Lesson）","CIL：清洁·点检·润滑","SOP：标准作业程序","维护策略三分：CIL 日常保全 / TBM 定期更换 / CBM 状态更换；设备约 70% 故障可由自主维护预防"],fields:["改善固化与防止回退的关键"]},
  {n:32,en:"5S Workplace",name:"5S 现场管理",phase:"标准化与日常管理",brief:"整理、整顿、清扫、清洁、素养。",detail:["建立可视化现场，消除寻找与浪费","为 AM/MP 体系落地提供基础","要与不要按使用频率定处置（每天 / 每周 / 每月 / 年余一次）；目视化 8 大方法让异常一眼可见"],fields:["现场问题可视化"]},
  {n:33,en:"DMS Daily Management System",name:"DMS 日常管理系统",phase:"标准化与日常管理",brief:"以日清会等机制把管理落到每天。",detail:["四级计划管控逐层分解到周/日清会","KPI/KAI 指标逐层跟踪","三级指标承接（厂长一级 / 课长企划二级 / 班组长三级）＋「三定」原则（定位 / 定时 / 定人）；维持与改善双循环"],fields:["与目标管理、EVM 联动"]},
@@ -2303,6 +2359,16 @@ function wbSave(kind){
   }else if(kind==='mp'){
     const r=wbMpData();if(!r.cost&&!r.benefit&&!r.p){toast('请先填写 PAD 内容');return;}
     rec={k:kind,txt:(r.payback?'回收期 '+r.payback+' 年 · ':'')+(r.p?'P/A/D 已填写':'PAD 未填写完整')};
+  }else if(kind==='pda'){
+    const rows=wbPdaRead().filter(r=>r.defect&&String(r.defect).trim());
+    if(!rows.length){toast('请先填写至少一条项目缺陷');return;}
+    const cost=Math.round(rows.reduce((a,r)=>a+(+r.cost||0),0)),delay=rows.reduce((a,r)=>a+(+r.delay||0),0);
+    rec={k:kind,txt:'缺陷 '+rows.length+' 条 · 额外成本 '+cost.toLocaleString('zh-CN')+' 元 · 延迟 '+delay+' 天'};
+  }else if(kind==='loss'){
+    const rows=wbLossRead().filter(r=>(r.desc&&String(r.desc).trim())||(((+r.qty)||0)*((+r.price)||0)>0));
+    if(!rows.length){toast('请先填写至少一条损失');return;}
+    const tot=Math.round(rows.reduce((a,r)=>a+(((+r.qty)||0)*((+r.price)||0)),0));
+    rec={k:kind,txt:'损失 '+rows.length+' 条 · 合计 '+tot.toLocaleString('zh-CN')+' 元'};
   }
   rec.at=new Date().toLocaleString('zh-CN',{hour12:false});
   const arr=JSON.parse(localStorage.getItem('em_wb_recs')||'[]');
@@ -2312,7 +2378,7 @@ function wbSave(kind){
 }
 function wbRecs(){
   const arr=JSON.parse(localStorage.getItem('em_wb_recs')||'[]');
-  const names={eem:'EEM 评分',epm:'EPM 评分',lcc:'LCC 决策',mp:'MP 情报'};
+  const names={eem:'EEM 评分',epm:'EPM 评分',lcc:'LCC 决策',mp:'MP 情报',pda:'PDA 缺陷分析',loss:'成本损失'};
   Object.keys(names).forEach(k=>{
     const el=document.getElementById('wb_recs_'+k);if(!el)return;
     const list=arr.filter(r=>r.k===k);
@@ -2435,8 +2501,181 @@ function wbMpDemo(){
   wbMpCalc();
 }
 
+/* ================= 套表 6/7：PDA 缺陷分析表 + 成本损失统计表（v3.19） ================= */
+const WB_PDA_STAGES=['DR1 早期调研','DR2 范围定义','DR3 详细分析','DR4 行动方案','DR5 安装培训','DR6 调试试产','DR7 交付反馈'];
+const WB_PDA_PROG=['未启动','进行中','已完成'];
+const WB_LOSS_CATS=['故障停机','换模调整','小停机空转','速度损失','开始结束损失','不良报废','返工损失','降级损失','物流等待','能源浪费','管理损失','人员损失'];
+function wbEsc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+/* 迷你柱状图（每根柱子必带数据标签） */
+function wbMiniBars(items,color){
+  items=(items||[]).filter(x=>(+x[1])>0);
+  if(!items.length)return '';
+  const W=460,H=152,pl=38,pr=10,pt=22,pb=30;
+  const n=items.length;let mx=0;items.forEach(x=>{if(x[1]>mx)mx=x[1];});
+  mx=mx>0?mx:1;const nice=mx*1.15;
+  const iw=(W-pl-pr)/n,bw=Math.min(56,iw*0.56),ih=H-pt-pb;
+  let g='';
+  for(let i=0;i<=3;i++){
+    const y=pt+ih*i/3,val=nice*(3-i)/3;
+    g+='<line x1="'+pl+'" y1="'+y.toFixed(1)+'" x2="'+(W-pr)+'" y2="'+y.toFixed(1)+'" stroke="#e9eef6"/>'+
+       '<text x="'+(pl-5)+'" y="'+(y+3.2).toFixed(1)+'" text-anchor="end" font-size="9" fill="#8a94a6">'+(Math.round(val*10)/10)+'</text>';
+  }
+  items.forEach(function(x,i){
+    const h=Math.max(2,ih*x[1]/nice),xx=pl+iw*i+(iw-bw)/2,yy=pt+ih-h;
+    const lab=(Math.round(x[1]*10)/10);
+    g+='<rect x="'+xx.toFixed(1)+'" y="'+yy.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+h.toFixed(1)+'" rx="3" fill="'+color+'"/>'+
+       '<text x="'+(xx+bw/2).toFixed(1)+'" y="'+(yy-4).toFixed(1)+'" text-anchor="middle" font-size="10.5" font-weight="700" fill="#253247">'+lab+'</text>'+
+       '<text x="'+(xx+bw/2).toFixed(1)+'" y="'+(H-11)+'" text-anchor="middle" font-size="9.5" fill="#5b6b83">'+wbEsc(x[0])+'</text>';
+  });
+  return '<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;max-width:'+W+'px;height:auto;display:block;margin-top:6px">'+g+'</svg>';
+}
+/* ---- PDA 项目缺陷分析表 ---- */
+function wbPdaLoad(){try{return JSON.parse(localStorage.getItem('em_wb_pda')||'[]');}catch(e){return [];}}
+function wbPdaStore(a){localStorage.setItem('em_wb_pda',JSON.stringify(a||[]));}
+function wbPdaInit(){wbPdaRender();}
+function wbPdaRead(){
+  const out=[];
+  [].forEach.call(document.querySelectorAll('#wb_pda_rows tr'),function(tr){
+    const o={};[].forEach.call(tr.querySelectorAll('[data-k]'),function(el){o[el.dataset.k]=el.value;});
+    out.push(o);
+  });
+  return out;
+}
+function wbPdaRow(r,i){
+  const inp=function(k,val,ph){return '<input data-k="'+k+'" value="'+wbEsc(val)+'" placeholder="'+ph+'" style="width:100%;box-sizing:border-box" oninput="wbPdaEdit()">';};
+  const num=function(k,val,ph){return '<input data-k="'+k+'" type="number" step="any" value="'+(val!=null&&val!==''?val:'')+'" placeholder="'+ph+'" style="width:100%;box-sizing:border-box" oninput="wbPdaEdit()">';};
+  const sel=function(k,val,opts){return '<select data-k="'+k+'" onchange="wbPdaEdit()">'+opts.map(function(o){return '<option'+(o===val?' selected':'')+'>'+o+'</option>';}).join('')+'</select>';};
+  return '<tr><td style="text-align:center;font-weight:700">'+(i+1)+
+    '<button type="button" title="删除本行" style="border:none;background:none;color:#c33;cursor:pointer;font-size:13px;display:block;margin:2px auto 0;padding:0" onclick="wbPdaDel('+i+')">×</button></td>'+
+    '<td>'+inp('dept',r.dept||'','如 品保部')+'</td>'+
+    '<td>'+inp('proj',r.proj||'','项目名称')+'</td>'+
+    '<td>'+inp('defect',r.defect||'','如 设备管路脏污')+'</td>'+
+    '<td>'+num('cost',r.cost,'元')+'</td>'+
+    '<td>'+num('delay',r.delay,'天')+'</td>'+
+    '<td>'+sel('disc',r.disc||WB_PDA_STAGES[5],WB_PDA_STAGES)+'</td>'+
+    '<td>'+sel('avoid',r.avoid||WB_PDA_STAGES[2],WB_PDA_STAGES)+'</td>'+
+    '<td>'+inp('tool',r.tool||'','如 FMEA、专家点检表')+'</td>'+
+    '<td>'+inp('act',r.act||'','对策 · 排期')+'</td>'+
+    '<td>'+sel('prog',r.prog||'未启动',WB_PDA_PROG)+'</td></tr>';
+}
+function wbPdaRender(){
+  const rows=wbPdaLoad();
+  document.getElementById('wb_pda_rows').innerHTML=(rows.length?rows:[{}]).map(function(r,i){return wbPdaRow(r,i);}).join('');
+  wbPdaCalc();
+}
+function wbPdaEdit(){wbPdaStore(wbPdaRead());wbPdaCalc();}
+function wbPdaAdd(){const a=wbPdaRead();a.push({});wbPdaStore(a);wbPdaRender();}
+function wbPdaDel(i){const a=wbPdaRead();a.splice(i,1);if(!a.length)a.push({});wbPdaStore(a);wbPdaRender();}
+function wbPdaClear(){localStorage.removeItem('em_wb_pda');wbPdaRender();}
+function wbPdaDemo(){
+  wbPdaStore([
+   {dept:'品保部',proj:'激光粒度分析仪',defect:'设备管路脏污',cost:500,delay:2,disc:'DR6 调试试产',avoid:'DR3 详细分析',tool:'FMEA、专家点检表',act:'①汰换失效管路；②管路维保纳入周期管理',prog:'进行中'},
+   {dept:'生产部',proj:'高速理瓶线改造',defect:'护栏规格与瓶型不匹配导致倒瓶',cost:8600,delay:6,disc:'DR6 调试试产',avoid:'DR2 范围定义',tool:'FMEA、风险评估',act:'重新开模护栏＋加装倒瓶检测光电',prog:'已完成'},
+   {dept:'工程部',proj:'新包装机导入',defect:'随机备件清单漏订易损件',cost:3200,delay:4,disc:'DR5 安装培训',avoid:'DR3 详细分析',tool:'专家点检表',act:'紧急采购补订＋设定安全库存',prog:'已完成'}
+  ]);
+  wbPdaRender();
+}
+function wbPdaCalc(){
+  const v=document.getElementById('wb_pda_verdict');
+  const all=wbPdaRead();
+  const rows=all.filter(function(r){return (r.defect&&String(r.defect).trim())||(+r.cost>0)||(+r.delay>0);});
+  if(!rows.length){v.classList.remove('on');v.innerHTML='';return;}
+  const cost=Math.round(rows.reduce(function(a,r){return a+(+r.cost||0);},0));
+  const delay=rows.reduce(function(a,r){return a+(+r.delay||0);},0);
+  const shifts=rows.filter(function(r){return r.disc&&r.avoid;}).map(function(r){return WB_PDA_STAGES.indexOf(r.disc)-WB_PDA_STAGES.indexOf(r.avoid);}).filter(function(x){return x>0;});
+  const avgShift=shifts.length?Math.round(shifts.reduce(function(a,b){return a+b;},0)/shifts.length*10)/10:null;
+  const late=rows.filter(function(r){return WB_PDA_STAGES.indexOf(r.disc)>=5;}).length;
+  const openN=rows.filter(function(r){return r.prog!=='已完成';}).length;
+  const dist=WB_PDA_STAGES.map(function(s){return [s.slice(0,3),rows.filter(function(r){return r.disc===s;}).length];}).filter(function(x){return x[1]>0;});
+  const tmap={};
+  rows.forEach(function(r){String(r.tool||'').split(/[,，、;；]+/).forEach(function(t){t=String(t).trim();if(t)tmap[t]=(tmap[t]||0)+1;});});
+  const tools=Object.keys(tmap).map(function(t){return [t,tmap[t]];}).sort(function(a,b){return b[1]-a[1];}).slice(0,5);
+  const rep=tools.filter(function(x){return x[1]>=2;});
+  v.classList.add('on');
+  v.innerHTML='<div class="v-top"><div class="v-cls v-B">PDA</div><div class="v-score">缺陷 <b>'+rows.length+'</b> 条　额外成本合计 <b>¥ '+cost.toLocaleString('zh-CN')+'</b>　延迟合计 <b>'+delay+'</b> 天'+
+    (avgShift!==null?'<br>平均可前移 <b>'+avgShift+'</b> 个 DR 关卡（若在「应避免阶段」部署对应工具）':'')+'</div></div>'+
+    '<div class="v-ctrl"><b>分析结论：</b>TOP 缺失工具 <b>'+(tools.length?tools[0][0]+'（'+tools[0][1]+' 次）':'—')+'</b>'+
+    (late?'；<b>'+late+'</b> 条缺陷拖到 DR6 及以后才发现（晚期发现，损失已放大）':'；缺陷均在早期发现，损失可控')+
+    (openN?'；仍有 <b>'+openN+'</b> 条改善未结案':'；全部对策已闭环')+'。</div>'+
+    '<div class="v-next"><b>📊 发现阶段分布（条）</b>'+wbMiniBars(dist,'#2563eb')+
+    (tools.length?'<b style="display:block;margin-top:10px">📊 本可避免工具缺失频次（次）</b>'+wbMiniBars(tools,'#c2410c'):'')+'</div>'+
+    (rep.length?'<div class="v-next" style="border-color:#f3c8c8;background:#fdf3f3">⚠️ 工具「'+rep.map(function(x){return x[0]+' ×'+x[1];}).join('、')+'」反复缺失——对应关卡形同虚设：<b>要把该工具补进下个项目的 DR 检查表并强制执行</b>（改流程，不是改人）。</div>':'')+
+    '<div class="v-next" style="font-size:12.5px;color:var(--ink-3)">口径：对齐公司《EM 缺陷收集追踪表》与集团 PDA 模板（损失 = 额外成本 ＋ 延迟天数；发生阶段 vs 应避免阶段）。正式台账建议在 DR7 结案时随项目资料一并存档。</div>';
+}
+/* ---- 成本损失统计表 ---- */
+function wbLossLoad(){try{return JSON.parse(localStorage.getItem('em_wb_loss')||'[]');}catch(e){return [];}}
+function wbLossStore(a){localStorage.setItem('em_wb_loss',JSON.stringify(a||[]));}
+function wbLossInit(){wbLossRender();}
+function wbLossRead(){
+  const out=[];
+  [].forEach.call(document.querySelectorAll('#wb_loss_rows tr'),function(tr){
+    const o={};[].forEach.call(tr.querySelectorAll('[data-k]'),function(el){o[el.dataset.k]=el.value;});
+    out.push(o);
+  });
+  return out;
+}
+function wbLossRow(r,i){
+  const inp=function(k,val,ph,type){return '<input data-k="'+k+'" '+(type?'type="'+type+'" ':'')+'value="'+wbEsc(val)+'" placeholder="'+ph+'" style="width:100%;box-sizing:border-box" oninput="wbLossEdit()">';};
+  const sel='<select data-k="cat" onchange="wbLossEdit()">'+WB_LOSS_CATS.map(function(o){return '<option'+(o===r.cat?' selected':'')+'>'+o+'</option>';}).join('')+'</select>';
+  return '<tr><td style="text-align:center;font-weight:700">'+(i+1)+
+    '<button type="button" title="删除本行" style="border:none;background:none;color:#c33;cursor:pointer;font-size:13px;display:block;margin:2px auto 0;padding:0" onclick="wbLossDel('+i+')">×</button></td>'+
+    '<td>'+inp('date',r.date||'','日期','date')+'</td>'+
+    '<td>'+inp('proj',r.proj||'','项目 / 产线')+'</td>'+
+    '<td>'+sel+'</td>'+
+    '<td>'+inp('desc',r.desc||'','损失描述')+'</td>'+
+    '<td>'+inp('qty',r.qty!=null?r.qty:'','数量 h/kg/件')+'</td>'+
+    '<td>'+inp('price',r.price!=null?r.price:'','元/单位')+'</td>'+
+    '<td class="loss-amt" style="text-align:right;font-weight:700;font-variant-numeric:tabular-nums">0</td>'+
+    '<td>'+inp('act',r.act||'','改善对策')+'</td></tr>';
+}
+function wbLossRender(){
+  const rows=wbLossLoad();
+  document.getElementById('wb_loss_rows').innerHTML=(rows.length?rows:[{}]).map(function(r,i){return wbLossRow(r,i);}).join('');
+  wbLossCalc();
+}
+function wbLossEdit(){wbLossStore(wbLossRead());wbLossCalc();}
+function wbLossAdd(){const a=wbLossRead();a.push({});wbLossStore(a);wbLossRender();}
+function wbLossDel(i){const a=wbLossRead();a.splice(i,1);if(!a.length)a.push({});wbLossStore(a);wbLossRender();}
+function wbLossClear(){localStorage.removeItem('em_wb_loss');wbLossRender();}
+function wbLossDemo(){
+  wbLossStore([
+   {date:'2026-08-05',proj:'灌装线 B',cat:'速度损失',desc:'实际节拍仅为设计节拍 82%',qty:120,price:65,act:'模流仿真优化＋传动链保养'},
+   {date:'2026-08-11',proj:'灌装线 B',cat:'故障停机',desc:'灌装阀突发故障停机',qty:3.5,price:980,act:'PM 计划提前＋备件常备'},
+   {date:'2026-08-14',proj:'包装线',cat:'小停机空转',desc:'卡料微停机累计',qty:5.2,price:210,act:'导轨抛光＋传感器防呆'},
+   {date:'2026-08-20',proj:'灌装线 B',cat:'不良报废',desc:'封口不良报废',qty:400,price:12,act:'封口温度参数 SPC 管控'},
+   {date:'2026-08-26',proj:'包装线',cat:'返工损失',desc:'贴标偏移返工',qty:6,price:240,act:'贴标机对射光电校准'}
+  ]);
+  wbLossRender();
+}
+function wbLossCalc(){
+  const v=document.getElementById('wb_loss_verdict');
+  const trs=[].slice.call(document.querySelectorAll('#wb_loss_rows tr'));
+  const rows=trs.map(function(tr){const o={};[].forEach.call(tr.querySelectorAll('[data-k]'),function(el){o[el.dataset.k]=el.value;});return o;});
+  rows.forEach(function(r,i){
+    const amt=Math.round(((+r.qty)||0)*((+r.price)||0));
+    const c=trs[i].querySelector('.loss-amt');if(c)c.textContent=amt?amt.toLocaleString('zh-CN'):'0';
+  });
+  const filled=rows.filter(function(r){return (r.desc&&String(r.desc).trim())||(((+r.qty)||0)*((+r.price)||0)>0);});
+  if(!filled.length){v.classList.remove('on');v.innerHTML='';return;}
+  const total=Math.round(filled.reduce(function(a,r){return a+(((+r.qty)||0)*((+r.price)||0));},0));
+  const cmap={};
+  filled.forEach(function(r){const amt=((+r.qty)||0)*((+r.price)||0);const k=r.cat||WB_LOSS_CATS[0];if(amt>0)cmap[k]=(cmap[k]||0)+amt;});
+  const cats=Object.keys(cmap).map(function(k){return [k,Math.round(cmap[k])];}).sort(function(a,b){return b[1]-a[1];});
+  const top1=cats[0],top2=cats[1];
+  const p1=top1?Math.round(top1[1]/total*100):0;
+  const p2=top2?Math.round((top1[1]+top2[1])/total*100):0;
+  v.classList.add('on');
+  v.innerHTML='<div class="v-top"><div class="v-cls v-C">¥</div><div class="v-score">损失 <b>'+filled.length+'</b> 条　合计 <b>¥ '+total.toLocaleString('zh-CN')+'</b>'+
+    (top1?'<br>最大类别 <b>'+top1[0]+'</b> ¥ '+top1[1].toLocaleString('zh-CN')+'（占 '+p1+'%）'+(top2?'　TOP2 合计占 '+p2+'%':''):'')+'</div></div>'+
+    '<div class="v-ctrl"><b>帕累托结论：</b>'+(top1?top1[0]:'—')+'是最大损失科目（占 '+p1+'%）——优先立项改善。'+
+    (p2>=70?'TOP2 类别合计已占 '+p2+'%（≥70%）：符合 80/20 律，集中资源打前两类即可撬动大头损失。':'损失结构较分散：按类别逐项核定额，再把 TOP3 纳入月度损失盘点跟踪。')+
+    '改善后回填本表对比效果；缺陷类损失同步用「PDA 缺陷分析表」做阶段归位归因，并回传 MP 情报。</div>'+
+    '<div class="v-next"><b>📊 损失类别汇总（元）</b>'+wbMiniBars(cats,'#b45309')+'</div>'+
+    '<div class="v-next" style="font-size:12.5px;color:var(--ink-3)">口径：按十六大损失合并归集（故障停机/换模调整/小停机空转/速度损失/开始结束/不良报废/返工/降级/物流等待/能源/管理/人员）；金额 = 数量 × 单价（只填总额时：数量填 1、单价填金额）。</div>';
+}
+
 /* ---- 套表初始化 ---- */
-wbRows('EEM');wbRows('EPM');wbLccGrid();wbDrRender();wbRecs();
+wbRows('EEM');wbRows('EPM');wbLccGrid();wbDrRender();wbPdaInit();wbLossInit();wbRecs();
 document.querySelectorAll(".sheettabs button").forEach(b=>b.addEventListener("click",()=>{
   document.querySelectorAll(".sheettabs button").forEach(x=>x.classList.remove("on"));b.classList.add("on");
   document.querySelectorAll(".sheet-pane").forEach(p=>p.classList.remove("on"));
