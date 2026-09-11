@@ -634,10 +634,13 @@
   .eg-hd h2{font-size:16.5px;font-weight:800;line-height:1.25}
   .eg-hd p{font-size:11.5px;opacity:.82;margin-top:4px;letter-spacing:.2px}
   .eg-bd{padding:20px 24px 4px}
-  .eg-role{display:flex;background:#f1f4fa;border-radius:11px;padding:4px;margin-bottom:18px}
-  .eg-role button{flex:1;border:0;background:transparent;font-family:inherit;font-size:13px;font-weight:700;color:var(--ink-2);
-    padding:9px 0;border-radius:8px;cursor:pointer;transition:.15s}
-  .eg-role button.on{background:#fff;color:var(--header);box-shadow:0 2px 8px rgba(28,45,84,.12)}
+  /* v3.11 起：管理员不做专门入口/页签，仅保留卡片底部一枚低调小链接（隐藏式） */
+  .eg-adm{margin-left:9px;font-size:10.5px;color:#ccd3de;cursor:pointer;letter-spacing:.3px;
+    transition:.2s;user-select:none;font-weight:600}
+  .eg-adm:hover{color:#7c8ba5;text-decoration:underline}
+  .eg-panehd{font-size:11.5px;color:var(--ink-3);margin-bottom:14px;padding-bottom:10px;border-bottom:1px dashed var(--line)}
+  .eg-back{display:block;text-align:center;margin-top:11px;font-size:11px;color:var(--ink-3);cursor:pointer;transition:.15s}
+  .eg-back:hover{color:#2f5aa8;text-decoration:underline}
   .eg-fld{margin-bottom:14px}
   .eg-fld label{display:block;font-size:12px;font-weight:700;color:var(--ink-2);margin-bottom:6px}
   .eg-fld label i{color:var(--danger);font-style:normal}
@@ -667,6 +670,10 @@
   .em-me button{border:1px solid rgba(255,255,255,.34);background:rgba(255,255,255,.1);color:#fff;font-family:inherit;
     font-size:11.5px;font-weight:600;padding:5px 11px;border-radius:999px;cursor:pointer;transition:.15s}
   .em-me button:hover{background:rgba(255,255,255,.26)}
+  /* 管理员专属入口一律用低调小链接，不做专门按钮 */
+  .em-me .lnkadm{font-size:11px;font-weight:600;color:rgba(255,255,255,.66);cursor:pointer;padding:0 2px;
+    text-decoration:none;border-bottom:1px dotted rgba(255,255,255,.34);transition:.15s}
+  .em-me .lnkadm:hover{color:#fff;border-bottom-color:rgba(255,255,255,.7)}
   /* 用户管理弹窗 */
   .umask{position:fixed;inset:0;z-index:99998;background:rgba(14,22,40,.5);display:none;align-items:flex-start;
     justify-content:center;padding:38px 16px;overflow:auto}
@@ -770,10 +777,6 @@
         </div>
       </div>
       <div class="eg-bd">
-        <div class="eg-role">
-          <button id="egTabU" class="on" onclick="egMode('user')">👤 员工登录</button>
-          <button id="egTabA" onclick="egMode('admin')">🛡 管理员登录</button>
-        </div>
         <div class="eg-err" id="egErr"></div>
 
         <div id="egPaneU">
@@ -790,19 +793,20 @@
         </div>
 
         <div id="egPaneA" style="display:none">
+          <div class="eg-panehd">🛡 系统管理员登录 · 仅限运营企划部</div>
           <div class="eg-fld">
             <label>管理员密码 <i>*</i></label>
             <input id="egPwd" type="password" autocomplete="off" maxlength="32" placeholder="请输入管理员密码" onkeydown="if(event.key==='Enter')egAdmin()">
             <div class="tip">仅限平台管理员使用，密码由运营企划部保管；管理员可维护登录名单与查看登录记录</div>
           </div>
           <button class="eg-btn" id="egGoA" onclick="egAdmin()">管理员进入 →</button>
+          <span class="eg-back" onclick="egMode('user')">← 返回员工登录</span>
         </div>
       </div>
       <div class="eg-st" id="egSt"><span class="d"></span><span id="egStTxt">正在检查云端连接…</span></div>
       <div class="eg-ft">
         登录信息仅用于区分操作人，项目数据实时存入公司 EM 云数据库。<br>
-        管理员入口：<span class="lnk" onclick="egMode('admin')">在卡片上方切换</span> · 直达链接 <code>?admin=1</code><br>
-        <span style="opacity:.82">当前版本 <b>v3.10</b> · 系统一按三份 EM 标准资料重建</span>
+        <span style="opacity:.82">当前版本 <b>v3.11</b> · 系统一按三份 EM 标准资料重建</span><span class="eg-adm" id="egAdmLnk" onclick="egMode('admin')" title="系统管理员入口（也可直达 ?admin=1）">管理员</span>
       </div>
     </div>
   </div>
@@ -1331,7 +1335,7 @@
 
 <!-- ============ 「引导式套表」已合并至「🧭 工具使用」页签（第 ② 部分） ============ -->
 
-<footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥<br><span style="color:var(--ink-3)">当前版本 v3.10（系统一「项目审查与阶段控制」按《EM小组流程》《EM小组每步产出》《EM指标定义及计算和举例》三份标准资料重建）· 提示：若页面仍显示旧版，请强制刷新（Mac: ⌘+Shift+R / Windows: Ctrl+F5）</span></footer>
+<footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥<br><span style="color:var(--ink-3)">当前版本 v3.11（管理员入口改为隐藏式小链接，不再做专门页签/按钮；系统一「项目审查与阶段控制」按《EM小组流程》《EM小组每步产出》《EM指标定义及计算和举例》三份标准资料重建）· 提示：若页面仍显示旧版，请强制刷新（Mac: ⌘+Shift+R / Windows: Ctrl+F5）</span></footer>
 </div>
 
 <!-- 工具详情弹窗 -->
@@ -7015,11 +7019,13 @@ function rvAuditSet(no,v,w){
 </script>
 <script>
 /* ==================================================================
-   v3.09 身份登录门禁（新增第 5 个 script 块，置于最末）
+   v3.09 身份登录门禁（第 5 个 script 块，置于最末）
    · 员工：工号 + 姓名（无密码）
-   · 管理员：密码 hbww，入口 ?admin=1 或登录卡上方切换
+   · 管理员：密码 hbww —— v3.11 起**不做专门入口/页签**，
+     仅登录卡底部一枚低调小链接（#egAdmLnk，浅灰 10.5px）+ 直达 ?admin=1
    · 名单校验：Supabase em_users 表；表未创建时自动降级为「开放模式」
    · 登录记录：写入 em_login_logs 表（表不存在则静默跳过）
+   约定：后续所有管理员专属入口一律用低调小链接，不做专门按钮/页签。
    注意：本块只依赖块 A 的 api()/esc()/toast()/tableOK（块 A 已先执行）。
    ================================================================== */
 var ADM_PWD='hbww';
@@ -7037,12 +7043,15 @@ function egErr(m){
 }
 function egMode(m){
   EG.mode=m;
+  /* v3.11 起不再有专门的管理员页签，仅在卡片底部挂一枚低调小链接 */
   var u=egEl('egTabU'),a=egEl('egTabA');
   if(u)u.classList.toggle('on',m!=='admin');
   if(a)a.classList.toggle('on',m==='admin');
   var pu=egEl('egPaneU'),pa=egEl('egPaneA');
   if(pu)pu.style.display=(m==='admin')?'none':'block';
   if(pa)pa.style.display=(m==='admin')?'block':'none';
+  var lk=egEl('egAdmLnk');
+  if(lk)lk.style.display=(m==='admin')?'none':'';
   egErr('');
   setTimeout(function(){
     var t=(m==='admin')?egEl('egPwd'):egEl('egId');
@@ -7147,7 +7156,7 @@ function emChip(){
   c.innerHTML=(AUTH.admin
       ? '<span>🛡 <b>管理员</b></span><span class="adm">ADMIN</span>'
       : '<span>👤 <b>'+esc(AUTH.id)+'</b> '+esc(AUTH.name)+'</span>')
-    + (AUTH.admin?'<button onclick="umOpen()">👥 用户管理</button>':'')
+    + (AUTH.admin?'<span class="lnkadm" onclick="umOpen()" title="用户管理 · 登录名单与登录记录">用户管理</span>':'')
     + '<button onclick="emLogout()">退出</button>';
 }
 function emLogout(){
