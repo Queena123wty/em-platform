@@ -812,7 +812,7 @@
       <div class="eg-st" id="egSt"><span class="d"></span><span id="egStTxt">正在检查云端连接…</span></div>
       <div class="eg-ft">
         登录信息仅用于区分操作人，项目数据实时存入公司 EM 云数据库。<br>
-        <span style="opacity:.82">当前版本 <b>v3.17</b> · 七步标准名称全库统一 · 推进总览置顶</span><span class="eg-adm" id="egAdmLnk" onclick="egMode('admin')" title="系统管理员入口（也可直达 ?admin=1）">管理员</span>
+        <span style="opacity:.82">当前版本 <b>v3.18</b> · 项目批量 Excel 导入 · 七步名称统一</span><span class="eg-adm" id="egAdmLnk" onclick="egMode('admin')" title="系统管理员入口（也可直达 ?admin=1）">管理员</span>
       </div>
     </div>
   </div>
@@ -927,7 +927,7 @@
     </div>
   </div>
   <div class="card">
-    <h3><span class="bar"></span>项目列表 <span class="hint">点击「DR关卡」登记 DR1-DR7 评审记录</span></h3>
+    <h3><span class="bar"></span>项目列表 <span class="hint">点击「DR关卡」登记 DR1-DR7 评审记录</span><span style="float:right;display:flex;gap:8px;margin-top:-3px"><button class="btn sm ghost" onclick="pjImpTpl()">⬇ 模板</button><button class="btn sm primary" onclick="pjImpOpen()">📥 批量导入</button></span></h3>
     <div class="tblwrap"><table class="tbl"><thead><tr>
       <th>编号</th><th>项目名称</th><th>类型</th><th>分级</th><th>负责人</th><th>当前阶段</th><th>状态</th><th>起止日期</th><th>操作</th>
     </tr></thead><tbody id="pj_tbody"></tbody></table></div>
@@ -1341,7 +1341,7 @@
 
 <!-- ============ 「引导式套表」已合并至「🧭 工具使用」页签（第 ② 部分） ============ -->
 
-<footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥<br><span style="color:var(--ink-3)">当前版本 v3.17（七步标准名称全库统一：早期调研 / 范围定义 / 详细分析 / 行动方案 / 安装培训 / 调试试产 / 交付反馈，七步推进总览置顶；v3.16 5C0D 评分准则按公司资料按人机料法分列：机再细分「工序（工艺参数·Q 点）」与「机器设置（C 条件）」两套，人 / 料 / 法各一套，评分套表归类选择后五问维度自动联动；v3.15 依据 2025/2026 班组长培训课件更新 10 个工具：5C0D 升级为公司 2025 版「五条件零缺陷法」口径——4M1E 五套评分维度、总分 ≥21 可靠判定、Q 点 / C 条件区分，并同步 QA/QM 矩阵阈值；风险评估 / SOP / 问题三部曲 / ECRS / 十六大损失 / 标准化 / 5S / DMS 补充公司培训要点；v3.14 EEM/EPM 差异高亮；v3.13 DR 门禁 EEM/EPM 双版本；v3.12 新增 6 个项目管理工具，在线工具总数 43。管理员入口仍为隐藏式小链接）· 提示：若页面仍显示旧版，请强制刷新（Mac: ⌘+Shift+R / Windows: Ctrl+F5）</span></footer>
+<footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥<br><span style="color:var(--ink-3)">当前版本 v3.18（EM 项目台账新增「批量 Excel 导入」：下载模板 → 上传 xlsx/xls/csv → 逐行预览校验（重名/类型/阶段/日期）→ 一键写入云端，组件 xlsx.full.min.js 同桶本地托管；v3.17 七步标准名称全库统一：早期调研 / 范围定义 / 详细分析 / 行动方案 / 安装培训 / 调试试产 / 交付反馈，七步推进总览置顶；v3.16 5C0D 评分准则按公司资料按人机料法分列：机再细分「工序（工艺参数·Q 点）」与「机器设置（C 条件）」两套，人 / 料 / 法各一套，评分套表归类选择后五问维度自动联动；v3.15 依据 2025/2026 班组长培训课件更新 10 个工具：5C0D 升级为公司 2025 版「五条件零缺陷法」口径——4M1E 五套评分维度、总分 ≥21 可靠判定、Q 点 / C 条件区分，并同步 QA/QM 矩阵阈值；风险评估 / SOP / 问题三部曲 / ECRS / 十六大损失 / 标准化 / 5S / DMS 补充公司培训要点；v3.14 EEM/EPM 差异高亮；v3.13 DR 门禁 EEM/EPM 双版本；v3.12 新增 6 个项目管理工具，在线工具总数 43。管理员入口仍为隐藏式小链接）· 提示：若页面仍显示旧版，请强制刷新（Mac: ⌘+Shift+R / Windows: Ctrl+F5）</span></footer>
 </div>
 
 <!-- 工具详情弹窗 -->
@@ -1349,6 +1349,30 @@
 
 <!-- 案例查看窗口（固定尺寸 + 内部向下滚动） -->
 <div class="cmask" id="cmask" onclick="closeCase(event)"><div class="cmodal" id="cmodal"></div></div>
+
+<!-- 项目批量导入弹窗（v3.18） -->
+<div class="cmask" id="im_mask" onclick="pjImpClose(event)"><div class="cmodal" style="width:min(880px,100%)">
+  <div class="cm-hd"><div class="cm-ttl"><span class="uno">📥</span><span class="unm">EM 项目批量导入</span><span class="uph">Excel / CSV</span></div>
+  <div class="cm-sub">支持 .xlsx / .xls / .csv——第一行须为表头，至少包含「项目名称」列，其余列可省略</div>
+  <button class="cm-x" onclick="pjImpClose()" title="关闭">✕</button></div>
+  <div class="cm-bd">
+    <div style="font-size:13px;color:var(--ink-2);line-height:2;background:#f6f8fc;border:1px solid #e3e9f5;border-radius:10px;padding:10px 14px;margin-bottom:12px">
+      ① 点 <b>⬇ 下载导入模板</b>（或沿用自有表格，表头名称一致即可自动识别）；<br>
+      ② 选择文件后下方即时预览解析结果与逐行校验（重名 / 类型 / 阶段 / 日期）；<br>
+      ③ 点「开始导入」——仅写入校验通过的行，导入后自动刷新项目台账与各处下拉。
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px">
+      <button class="btn ghost" onclick="pjImpTpl()">⬇ 下载导入模板</button>
+      <input type="file" id="im_file" accept=".xlsx,.xls,.csv" style="display:none" onchange="pjImpFile(this)">
+      <button class="btn primary" onclick="document.getElementById('im_file').click()">📄 选择 Excel 文件</button>
+      <span id="im_fn" style="font-size:12px;color:var(--ink-3)"></span>
+    </div>
+    <div id="im_prev"></div>
+  </div>
+  <div class="cm-ft"><span id="im_stat" style="margin-right:auto;font-size:13px;color:var(--ink-2)"></span>
+  <button class="btn ghost" onclick="pjImpClose()">取消</button>
+  <button class="btn primary" id="im_go" onclick="pjImpGo()" disabled>开始导入</button></div>
+</div></div>
 
 <!-- DR 关卡弹窗 -->
 <div class="modal-mask" id="drmask" onclick="closeDr(event)"><div class="modal" id="drmodal"></div></div>
@@ -1970,6 +1994,192 @@ async function delProject(id){
   if(!confirm("确认删除项目「"+p.name+"」？\n其关联的 DR 关卡记录将一并删除，工具使用记录将解除关联。"))return;
   try{await api("em_projects?id=eq."+id,"DELETE");toast("项目已删除","ok");loadProjects();loadUsage();}
   catch(e){toast("删除失败："+e.message,"err");}
+}
+
+/* ---------- v3.18 项目批量 Excel 导入 ---------- */
+const IMP_COLS=[
+  {k:'name',hd:['项目名称','名称']},
+  {k:'code',hd:['项目编号','编号','项目编码']},
+  {k:'ptype',hd:['项目类型','类型']},
+  {k:'leader',hd:['负责人','负责人姓名']},
+  {k:'stage',hd:['当前阶段','阶段','当前步骤']},
+  {k:'status',hd:['项目状态','状态']},
+  {k:'start_date',hd:['开始日期','开始时间','起始日期']},
+  {k:'target_date',hd:['目标日期','结束日期','截止日期','完成日期']},
+  {k:'abc',hd:['分级','ABC分级','ABC','等级']},
+  {k:'description',hd:['项目说明','说明','备注','项目描述']}
+];
+const IMP_STAGES=['早期调研','范围定义','详细分析','行动方案','安装培训','调试试产','交付反馈'];
+let IMP_ROWS=[];
+function pjImpOpen(){
+  if(!tableOK.em_projects){toast('em_projects 表未创建，请先执行建表 SQL','err');return;}
+  IMP_ROWS=[];$("#im_prev").innerHTML="";$("#im_stat").textContent="";$("#im_fn").textContent="";$("#im_file").value="";$("#im_go").disabled=true;
+  $("#im_mask").classList.add('on');
+}
+function pjImpClose(e){
+  if(e&&e.target!==e.currentTarget)return;
+  const m=document.getElementById('im_mask');if(m)m.classList.remove('on');
+}
+function pjImpLib(cb){                    // 惰性加载本地托管的 SheetJS（同桶文件，规避公共 CDN 不稳）
+  if(typeof XLSX!=='undefined')return cb();
+  const sc=document.createElement('script');sc.src='xlsx.full.min.js';
+  sc.onload=()=>cb();sc.onerror=()=>{toast('本地组件 xlsx.full.min.js 加载失败，请检查网络后重试','err');$("#im_stat").textContent='';};
+  document.head.appendChild(sc);
+}
+function pjImpTpl(){
+  pjImpLib(()=>{
+    const aoa=[['项目名称','项目编号','项目类型','负责人','当前阶段','项目状态','开始日期','目标日期','分级','项目说明'],
+      ['示例：二线无菌灌装机导入','EM-2026-001','EEM','张三','DR3 详细分析','进行中','2026-01-10','2026-12-31','B','新产线设备导入项目'],
+      ['示例：新品礼盒包装上市','EM-2026-002','EPM','李四','DR2 范围定义','规划中','2026-03-01','2026-10-01','','2026 春节礼盒']];
+    const wb=XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(aoa),'EM项目导入');
+    XLSX.writeFile(wb,'EM项目批量导入模板.xlsx');
+    toast('模板已下载，填写后选择该文件即可导入','ok');
+  });
+}
+function pjImpCsv(t){                      // 简易 CSV 解析（支持引号包裹、双引号转义、CRLF）
+  const rows=[];let row=[],cur='',q=false;
+  for(let i=0;i<t.length;i++){const c=t[i];
+    if(q){if(c==='"'){if(t[i+1]==='"'){cur+='"';i++;}else q=false;}else cur+=c;}
+    else if(c==='"')q=true;
+    else if(c===','){row.push(cur);cur='';}
+    else if(c==='\n'){row.push(cur);rows.push(row);row=[];cur='';}
+    else if(c!=='\r')cur+=c;}
+  if(cur!==''||row.length){row.push(cur);rows.push(row);}
+  return rows.filter(r=>r.some(x=>String(x).trim()!==''));
+}
+function pjImpFile(el){
+  const f=el.files&&el.files[0];if(!f)return;
+  $("#im_fn").textContent=f.name;$("#im_stat").textContent='解析中…';$("#im_prev").innerHTML='';$("#im_go").disabled=true;
+  const fail=()=>{$("#im_stat").textContent='';toast('解析失败：文件格式无法识别','err');};
+  const done=aoa=>{try{pjImpAoa(aoa);}catch(e){$("#im_stat").textContent='';toast('解析失败：'+e.message,'err');}};
+  if(/\.csv$/i.test(f.name)){
+    const r=new FileReader();
+    r.onload=()=>done(pjImpCsv(String(r.result).replace(/^\uFEFF/,'')));
+    r.onerror=fail;r.readAsText(f,'utf-8');return;}
+  pjImpLib(()=>{
+    const r=new FileReader();
+    r.onload=()=>{try{
+      const wb=XLSX.read(new Uint8Array(r.result),{type:'array'});
+      const ws=wb.Sheets[wb.SheetNames[0]];
+      if(!ws)throw new Error('工作簿没有工作表');
+      done(XLSX.utils.sheet_to_json(ws,{header:1,raw:true,defval:''}));
+    }catch(e){$("#im_stat").textContent='';toast('解析失败：'+e.message,'err');}};
+    r.onerror=fail;r.readAsArrayBuffer(f);});
+}
+function pjImpNorm(v){return v==null?'':String(v).trim();}
+function pjImpMatch(head){
+  const idx={};
+  IMP_COLS.forEach(c=>head.forEach((h,i)=>{       // 先精确匹配
+    if(idx[c.k]===undefined){const hh=h.replace(/\s+/g,'');if(hh!==''&&c.hd.indexOf(hh)>=0)idx[c.k]=i;}
+  }));
+  IMP_COLS.forEach(c=>{                            // 再包含匹配（如「项目名称（必填）」）
+    if(idx[c.k]!==undefined)return;
+    head.forEach((h,i)=>{if(idx[c.k]!==undefined)return;
+      const hh=h.replace(/\s+/g,'');
+      if(hh!==''&&c.hd.some(a=>a.length>=2&&hh.indexOf(a)>=0))idx[c.k]=i;});
+  });
+  return idx;
+}
+function pjImpDate(v){
+  if(v==null||v==='')return null;
+  if(v instanceof Date&&!isNaN(v))return v.toISOString().slice(0,10);
+  const s=String(v).trim();
+  const m=s.match(/^(\d{4})[-\/.年](\d{1,2})[-\/.月](\d{1,2})/);
+  if(m)return m[1]+'-'+('0'+m[2]).slice(-2)+'-'+('0'+m[3]).slice(-2);
+  if(/^\d+(\.\d+)?$/.test(s)){const n=+s;
+    if(n>25544&&n<80000)return new Date(Math.round((n-25569)*86400000)).toISOString().slice(0,10);}
+  return {err:'日期「'+s+'」无法识别'};
+}
+function pjImpType(v){
+  const s=pjImpNorm(v).toUpperCase();if(!s)return 'EEM';
+  if(s.indexOf('EPM')>=0||s.indexOf('产品')>=0)return 'EPM';
+  if(s.indexOf('EEM')>=0||s.indexOf('设备')>=0)return 'EEM';
+  return {err:'类型「'+s+'」应填 EEM 或 EPM'};
+}
+function pjImpStage(v){
+  const s=pjImpNorm(v);if(!s)return 1;
+  if(/^[1-7]$/.test(s))return +s;
+  const m=s.toUpperCase().match(/DR\s*([1-7])/);if(m)return +m[1];
+  for(let i=0;i<7;i++)if(s.indexOf(IMP_STAGES[i])>=0)return i+1;
+  return {err:'阶段「'+s+'」无法识别'};
+}
+function pjImpStatus(v){
+  const s=pjImpNorm(v);if(!s)return 'in_progress';
+  if(s==='进行中'||s==='in_progress')return 'in_progress';
+  if(s==='规划中'||s==='计划中'||s==='planning')return 'planning';
+  if(s==='暂停'||s==='已暂停'||s==='paused')return 'paused';
+  if(s==='已结案'||s==='结案'||s==='已完成'||s==='closed')return 'closed';
+  return {err:'状态「'+s+'」无法识别'};
+}
+function pjImpAoa(aoa){
+  if(!aoa||!aoa.length)throw new Error('表格内容为空');
+  const dataRows=aoa.slice(1).filter(r=>r.some(x=>pjImpNorm(x)!==''));   // 跳过整行空行
+  if(!dataRows.length)throw new Error('表格没有数据行');
+  const idx=pjImpMatch(aoa[0].map(pjImpNorm));
+  if(idx.name===undefined)throw new Error('未识别到「项目名称」列——请确认第一行是表头且含「项目名称」');
+  const exist=PROJECTS.map(p=>(p.name||'').trim());
+  const seen={};IMP_ROWS=[];
+  aoa.slice(1).forEach((r,oi)=>{
+    if(!r.some(x=>pjImpNorm(x)!==''))return;
+    const errs=[];
+    const g=k=>idx[k]===undefined?'':r[idx[k]];
+    const name=pjImpNorm(g('name'));
+    if(!name)errs.push('名称为空');
+    else if(exist.indexOf(name)>=0)errs.push('与台账现有项目重名');
+    else if(seen[name])errs.push('与文件第 '+seen[name]+' 行重名');
+    else seen[name]=oi+2;
+    const ptype=pjImpType(g('ptype'));if(ptype.err)errs.push(ptype.err);
+    const stage=pjImpStage(g('stage'));if(stage.err)errs.push(stage.err);
+    const status=pjImpStatus(g('status'));if(status.err)errs.push(status.err);
+    const sd=pjImpDate(g('start_date'));if(sd&&sd.err)errs.push(sd.err);
+    const td=pjImpDate(g('target_date'));if(td&&td.err)errs.push(td.err);
+    let abc=pjImpNorm(g('abc')).toUpperCase();
+    if(abc&&!['A','B','C'].includes(abc)){errs.push('分级应为 A/B/C');abc='';}
+    IMP_ROWS.push({name,ok:!errs.length,errs,
+      body:!errs.length?{name,code:pjImpNorm(g('code'))||null,ptype,
+        leader:pjImpNorm(g('leader'))||null,dr_stage:stage,status,
+        start_date:sd||null,target_date:td||null,
+        abc_class:abc||null,abc_score:null,abc_factors:null,
+        description:pjImpNorm(g('description'))||null,
+        updated_at:new Date().toISOString()}:null});
+  });
+  pjImpRender();
+}
+function pjImpRender(){
+  const okn=IMP_ROWS.filter(r=>r.ok).length;
+  $("#im_stat").innerHTML=IMP_ROWS.length?
+    '共 <b>'+IMP_ROWS.length+'</b> 行 · ✅ 可导入 <b style="color:#1a9c62">'+okn+'</b> · ⚠️ 将跳过 <b style="color:#c77700">'+(IMP_ROWS.length-okn)+'</b>':'';
+  $("#im_go").disabled=!okn;
+  $("#im_prev").innerHTML=IMP_ROWS.length?
+    '<div class="tblwrap"><table class="tbl"><thead><tr><th>项目名称</th><th>类型</th><th>当前阶段</th><th>状态</th><th>开始</th><th>目标</th><th>分级</th><th>校验</th></tr></thead><tbody>'+
+    IMP_ROWS.map(r=>'<tr'+(r.ok?'':' style="background:#fff6f2"')+'><td><b>'+esc(r.name||'—')+'</b></td>'+
+      '<td>'+(r.body?esc(r.body.ptype):'—')+'</td>'+
+      '<td>'+(r.body?esc(STAGE_TXT[r.body.dr_stage]):'—')+'</td>'+
+      '<td>'+(r.body?esc((STATUS_TXT[r.body.status]||['—'])[0]):'—')+'</td>'+
+      '<td style="font-size:12px">'+(r.body&&r.body.start_date?esc(r.body.start_date):'—')+'</td>'+
+      '<td style="font-size:12px">'+(r.body&&r.body.target_date?esc(r.body.target_date):'—')+'</td>'+
+      '<td>'+(r.body&&r.body.abc_class?esc(r.body.abc_class):'—')+'</td>'+
+      '<td>'+(r.ok?'<span style="color:#1a9c62;font-size:12px">✓ 可导入</span>'
+        :'<span style="color:#d0483a;font-size:12px">✗ '+esc(r.errs.join('；'))+'</span>')+'</td></tr>').join('')+
+    '</tbody></table></div>':'';
+}
+async function pjImpGo(){
+  const rows=IMP_ROWS.filter(r=>r.ok);if(!rows.length)return;
+  const btn=$("#im_go");btn.disabled=true;btn.textContent='导入中…';
+  let okc=0,fc=0;const fails=[];
+  for(const r of rows){
+    try{await api('em_projects','POST',r.body);okc++;r.done=true;}
+    catch(e){fc++;fails.push('「'+r.name+'」：'+e.message);}
+  }
+  btn.textContent='开始导入';
+  IMP_ROWS=IMP_ROWS.filter(r=>!r.done);
+  pjImpRender();
+  $("#im_stat").innerHTML='导入完成：✅ 成功 <b style="color:#1a9c62">'+okc+'</b> 条'+
+    (fc?' · ❌ 失败 <b style="color:#d0483a">'+fc+'</b> 条':'');
+  if(fails.length)$("#im_stat").innerHTML+='<div style="color:#d0483a;margin-top:4px">'+fails.map(esc).join('<br>')+'</div>';
+  if(okc){toast('成功导入 '+okc+' 个项目 ✓','ok');loadProjects();loadUsage();}
+  if(!fc&&IMP_ROWS.length===0)setTimeout(()=>pjImpClose(),900);
 }
 
 /* ---------- DR 关卡弹窗（对齐公司《DR步骤管理》口径） ---------- */
