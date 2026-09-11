@@ -730,6 +730,12 @@
   .s1-sub>.s1-lbl:first-child{margin-top:0;padding-top:0;border-top:none}
   .s1-own{display:inline-block;font-size:11px;font-weight:700;border-radius:6px;padding:1.5px 7px;background:#eef4ff;color:#2563eb;white-space:nowrap}
   .s1-owns{display:flex;gap:6px;flex-wrap:wrap;padding-bottom:2px}
+  .s1-row.s1-diff{background:#fff7e8;border:1px solid #ffe3ae;border-radius:8px;padding:2.5px 8px}
+  .s1-row.s1-diff .s1-code{color:#b47a00}
+  .s1-difftag{flex:none;margin-left:auto;align-self:center;font-size:10.5px;font-weight:800;color:#b47a00;background:#fff;border:1px solid #ffd98a;border-radius:999px;padding:0 8px;line-height:1.7;white-space:nowrap}
+  .s1-nmdiff{font-size:10.5px;font-weight:800;color:#b47a00;background:#fff7e8;border:1px solid #ffd98a;border-radius:999px;padding:1px 8px;margin-left:8px;vertical-align:1px;white-space:nowrap}
+  .s1-legend{display:inline-flex;align-items:center;gap:6px;margin:12px 0 0 8px;font-size:11.8px;color:#b47a00;font-weight:700;line-height:1.6}
+  .s1-legend i{display:inline-block;width:14px;height:14px;border-radius:4px;background:#fff7e8;border:1px solid #ffe3ae;flex:none}
   .s1-gate{margin-top:11px;font-size:12px;color:var(--ink-3);background:#fafbfe;border-left:3px solid #cfdcef;border-radius:6px;padding:7px 11px;line-height:1.7}
   .s1-gate b{color:var(--danger)}
   .s1-det{padding:0 16px 13px}
@@ -806,7 +812,7 @@
       <div class="eg-st" id="egSt"><span class="d"></span><span id="egStTxt">正在检查云端连接…</span></div>
       <div class="eg-ft">
         登录信息仅用于区分操作人，项目数据实时存入公司 EM 云数据库。<br>
-        <span style="opacity:.82">当前版本 <b>v3.13</b> · DR 关卡门禁支持 EEM/EPM 双版本切换</span><span class="eg-adm" id="egAdmLnk" onclick="egMode('admin')" title="系统管理员入口（也可直达 ?admin=1）">管理员</span>
+        <span style="opacity:.82">当前版本 <b>v3.14</b> · EEM/EPM 差异子步骤琥珀色高亮</span><span class="eg-adm" id="egAdmLnk" onclick="egMode('admin')" title="系统管理员入口（也可直达 ?admin=1）">管理员</span>
       </div>
     </div>
   </div>
@@ -1335,7 +1341,7 @@
 
 <!-- ============ 「引导式套表」已合并至「🧭 工具使用」页签（第 ② 部分） ============ -->
 
-<footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥<br><span style="color:var(--ink-3)">当前版本 v3.13（系统一「DR 关卡门禁」新增 EEM 设备类 / EPM 产品类双版本切换，与七步流程口径一致；v3.12 新增 6 个项目管理工具，在线工具总数 43。管理员入口仍为隐藏式小链接）· 提示：若页面仍显示旧版，请强制刷新（Mac: ⌘+Shift+R / Windows: Ctrl+F5）</span></footer>
+<footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥<br><span style="color:var(--ink-3)">当前版本 v3.14（系统一「七步流程 / DR 关卡门禁」中 EEM 与 EPM 内容不一致的子步骤以琥珀色高亮并带「差异」徽章，切换 EEM/EPM 即可对照；v3.13 新增 DR 关卡 EEM/EPM 双版本切换；v3.12 新增 6 个项目管理工具，在线工具总数 43。管理员入口仍为隐藏式小链接）· 提示：若页面仍显示旧版，请强制刷新（Mac: ⌘+Shift+R / Windows: Ctrl+F5）</span></footer>
 </div>
 
 <!-- 工具详情弹窗 -->
@@ -6027,6 +6033,27 @@ const EM7_KPI=[
 ];
 const S1={mod:'flow',v:'EEM',prj:[],dr:[]};
 function s1StepName(n,v){return (n===5&&v==='EPM')?'样品测试':EM7_STEPS[n];}
+/* EEM/EPM 差异判定（v3.14）：同一编号在两表文本不同、或仅存在于其中一表 → 高亮 */
+function s1DiffCode(n,code){
+  const A=EM7_SUB.EEM[n]||[],B=EM7_SUB.EPM[n]||[];
+  const a=A.filter(function(s){return s[0]===code;})[0];
+  const b=B.filter(function(s){return s[0]===code;})[0];
+  return !a||!b||a[1]!==b[1];
+}
+/* 取同一编号在两个版本中的原文：[EEM 文本, EPM 文本]（v3.14） */
+function s1DiffPair(n,code){
+  const pick=function(tbl){
+    const hit=(EM7_SUB[tbl][n]||[]).filter(function(s){return s[0]===code;})[0];
+    return hit?hit[1]:'';
+  };
+  return [pick('EEM'),pick('EPM')];
+}
+/* 高亮行的 title 提示：直接给出「另一版本」的原文，免切换对照（v3.14） */
+function s1DiffTip(n,code,cur){
+  const p=s1DiffPair(n,code),other=(cur==='EEM')?p[1]:p[0],tag=(cur==='EEM')?'EPM':'EEM';
+  if(!other)return (cur==='EEM'?'EPM':'EEM')+' 无此子步骤（'+cur+' 独有）';
+  return tag+'：'+other;
+}
 function s1Uniq(arr){const o=[];arr.forEach(x=>{if(x&&x!=='—'&&o.indexOf(x)<0)o.push(x);});return o;}
 /* 带数据标签的横向柱状图（纯内联 SVG，不依赖任何 CDN） */
 function s1Bars(data,opt){
@@ -6088,6 +6115,7 @@ function s1Flow(){
    '<button data-v="EEM" class="'+(v==='EEM'?'on':'')+'" onclick="s1Var(\'EEM\')">🔧 EEM 设备类</button>'+
    '<button data-v="EPM" class="'+(v==='EPM'?'on':'')+'" onclick="s1Var(\'EPM\')">🧪 EPM 产品类</button>'+
    '</div>'+
+   '<div class="s1-legend"><i></i>琥珀色高亮 = EEM 与 EPM 在该子步骤内容不一致，鼠标悬停行可看另一版本原文</div>'+
    '<div style="font-size:12.8px;color:var(--ink-2);line-height:1.9;margin-top:10px">'+
    '进入第 1 步之前须先完成<b>小组准备</b>四件事：'+EM7_PREP.map(function(x){return esc(x.t);}).join(' → ')+
    '。七步走完后由 DR7 反馈把关，α / β 数据回传到 EM 指标看板。</div>'+
@@ -6099,9 +6127,10 @@ function s1Flow(){
     const subs=EM7_SUB[v][n]||[],tasks=EM7_TASK[n]||[],owns=s1Uniq(tasks.map(function(t){return t[2];}));
     h+='<div class="s1-step">'+
       '<div class="s1-hd"><div class="s1-no" style="background:'+S1_COLOR[n]+'">'+n+'</div>'+
-      '<div class="s1-nm">'+esc(s1StepName(n,v))+'</div><div class="s1-dr">DR'+n+'</div></div>'+
+      '<div class="s1-nm">'+esc(s1StepName(n,v))+'</div>'+(s1StepName(n,'EEM')!==s1StepName(n,'EPM')?'<span class="s1-nmdiff" title="EEM 与 EPM 步骤名不同">EEM↔EPM</span>':'')+'<div class="s1-dr">DR'+n+'</div></div>'+
       '<div class="s1-sub">'+subs.map(function(s){
-        return '<div class="s1-row"><span class="s1-code">'+esc(s[0])+'</span><span>'+esc(s[1])+'</span></div>';
+        const df=s1DiffCode(n,s[0]);
+        return '<div class="s1-row'+(df?' s1-diff':'')+'"'+(df?' title="'+esc(s1DiffTip(n,s[0],v)) +'"':'')+'><span class="s1-code">'+esc(s[0])+'</span><span>'+esc(s[1])+'</span>'+(df?'<span class="s1-difftag">差异</span>':'')+'</div>';
       }).join('')+'</div>'+
       '<details class="s1-det"><summary>任务分工与产出（'+tasks.length+' 项 · 涉及 '+owns.length+' 个职能）</summary>'+
       '<table class="s1-tbl"><thead><tr><th>任务</th><th>负责</th><th>产出</th></tr></thead><tbody>'+
@@ -6125,6 +6154,7 @@ function s1Dr(){
    '<button data-v="EEM" class="'+(v==='EEM'?'on':'')+'" onclick="s1Var(\'EEM\')">🔧 EEM 设备类</button>'+
    '<button data-v="EPM" class="'+(v==='EPM'?'on':'')+'" onclick="s1Var(\'EPM\')">🧪 EPM 产品类</button>'+
    '</div>'+
+   '<div class="s1-legend"><i></i>琥珀色高亮 = EEM 与 EPM 在该子步骤内容不一致，鼠标悬停行可看另一版本原文</div>'+
    '<div style="font-size:13px;color:var(--ink-2);line-height:1.95">'+
    'DR 关卡是七步法每一步末端的<b>设计评审门禁</b>：本步子步骤全部完成、产出物齐备并通过评审后，才放行进入下一步。'+
    '<b>前置子步骤随项目类型切换</b>——EEM（设备类）与 EPM（产品类）源自《EM小组流程》的两个工作表，差异集中在 2.3（供应商选择 / 新品分析）、3.3-3.4（设备厂家与辅料 / 新增物料与质量控制点）、第 5 步（安装 / 样品测试）等；任务分工与产出物为两类项目通用口径。'+
@@ -6148,10 +6178,13 @@ function s1Dr(){
     let tag='';
     if(alpha||beta)tag='<div class="s1-dr" style="background:#fff6e5;color:#b47a00;border-color:#ffe0a3">'+(alpha?'α':'')+(alpha&&beta?' / ':'')+(beta?'β':'')+' 节点</div>';
     h+='<div class="s1-step"><div class="s1-hd"><div class="s1-no" style="background:'+S1_COLOR[n]+'">DR'+n+'</div>'+
-      '<div class="s1-nm">'+esc(s1StepName(n,S1.v))+'</div>'+tag+'</div>'+
+      '<div class="s1-nm">'+esc(s1StepName(n,S1.v))+'</div>'+(s1StepName(n,'EEM')!==s1StepName(n,'EPM')?'<span class="s1-nmdiff" title="EEM 与 EPM 关卡名不同">EEM↔EPM</span>':'')+tag+'</div>'+
       '<div class="s1-sub">'+
-      '<div class="s1-lbl">前置子步骤（'+subs.length+' 项）</div>'+
-      subs.map(function(s){return '<div class="s1-row"><span class="s1-code">'+esc(s[0])+'</span><span>'+esc(s[1])+'</span></div>';}).join('')+
+      '<div class="s1-lbl">前置子步骤（'+subs.length+' 项'+(subs.some(function(x){return s1DiffCode(n,x[0]);})?' · 含 EEM/EPM 差异':'')+'）</div>'+
+      subs.map(function(s){
+        const df=s1DiffCode(n,s[0]);
+        return '<div class="s1-row'+(df?' s1-diff':'')+'"'+(df?' title="'+esc(s1DiffTip(n,s[0],S1.v))+'"':'')+'><span class="s1-code">'+esc(s[0])+'</span><span>'+esc(s[1])+'</span>'+(df?'<span class="s1-difftag">差异</span>':'')+'</div>';
+      }).join('')+
       '<div class="s1-lbl">本关产出物（'+outs.length+' 项）</div>'+
       outs.map(function(o){return '<div class="s1-row"><span class="s1-chk">✓</span><span>'+esc(o)+'</span></div>';}).join('')+
       '<div class="s1-lbl">责任职能</div>'+
