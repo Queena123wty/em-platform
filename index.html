@@ -812,7 +812,7 @@
       <div class="eg-st" id="egSt"><span class="d"></span><span id="egStTxt">正在检查云端连接…</span></div>
       <div class="eg-ft">
         登录信息仅用于区分操作人，项目数据实时存入公司 EM 云数据库。<br>
-        <span style="opacity:.82">当前版本 <b>v3.19</b> · 新增 PDA 缺陷分析表与成本损失统计表</span><span class="eg-adm" id="egAdmLnk" onclick="egMode('admin')" title="系统管理员入口（也可直达 ?admin=1）">管理员</span>
+        <span style="opacity:.82">当前版本 <b>v3.20</b> · 标准套表接入云端多人实时同步</span><span class="eg-adm" id="egAdmLnk" onclick="egMode('admin')" title="系统管理员入口（也可直达 ?admin=1）">管理员</span>
       </div>
     </div>
   </div>
@@ -1319,6 +1319,7 @@
       <h3><span class="bar"></span>PDA 项目缺陷分析表 <span class="hint">对齐公司《EM 缺陷收集追踪表》：缺陷 → 损失 → 阶段归位 → 本可避免的工具</span></h3>
       <details class="guide" open>
         <summary>📖 使用指引（PDA 怎么填、怎么判）</summary>
+        <div class="wbrec" style="margin-bottom:8px">🔴 <b>本表已接入云端多人实时同步</b>：登录后编辑约 1 秒自动上推 Supabase，其他同事的页面自动刷新；<b>后保存者整表覆盖</b>，多人同时维护请按行分工或错开填写。</div>
         <ol>
           <li>每条项目缺陷登记一行：<b>项目缺陷</b>写标题（如「设备管路脏污」），<b>额外成本（元）/ 延迟（天）</b>至少量化一项——不量化＝看不见＝改不了。</li>
           <li><b>发生阶段</b>＝什么时候才发现；<b>应避免阶段</b>＝哪个 DR 关卡本应拦住它。发现越晚损失越大，两个阶段的落差就是 EM 的价值空间。</li>
@@ -1346,6 +1347,7 @@
       <h3><span class="bar"></span>成本损失统计表 <span class="hint">十六大损失口径分类归集 · 数量×单价自动折算 · 帕累托聚焦改善</span></h3>
       <details class="guide" open>
         <summary>📖 使用指引（怎么填、怎么判）</summary>
+        <div class="wbrec" style="margin-bottom:8px">🔴 <b>本表已接入云端多人实时同步</b>：登录后编辑约 1 秒自动上推 Supabase，其他同事的页面自动刷新；<b>后保存者整表覆盖</b>，多人同时维护请按行分工或错开填写。</div>
         <ol>
           <li>每笔损失一行：<b>数量</b>填损失量（停机小时 / 报废 kg / 返工件数…），<b>单价</b>填单位折算成本（元/单位），<b>损失金额自动 = 数量 × 单价</b>；只有总额时：数量填 1、单价填金额。</li>
           <li><b>损失类别</b>按十六大损失口径选择：故障停机 / 换模调整 / 小停机空转 / 速度损失 / 开始结束 / 不良报废 / 返工 / 降级 / 物流等待 / 能源浪费 / 管理损失 / 人员损失。</li>
@@ -1397,7 +1399,7 @@
 
 <!-- ============ 「引导式套表」已合并至「🧭 工具使用」页签（第 ② 部分） ============ -->
 
-<footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥<br><span style="color:var(--ink-3)">当前版本 v3.19（标准套表新增「PDA 项目缺陷分析表」与「成本损失统计表」：PDA 对齐公司《EM缺陷收集追踪表》口径——逐行登记缺陷、损失（额外成本＋延迟天数）、发生阶段/应避免阶段、本可避免工具，自动汇总损失合计、发现阶段分布、TOP 缺失工具与平均可前移步数；成本损失表按十六大损失口径分类归集，数量×单价自动折算金额，类别汇总图与 TOP 帕累托自动聚焦改善；v3.18 EM 项目台账新增「批量 Excel 导入」：下载模板 → 上传 xlsx/xls/csv → 逐行预览校验（重名/类型/阶段/日期）→ 一键写入云端，组件 xlsx.full.min.js 同桶本地托管；v3.17 七步标准名称全库统一：早期调研 / 范围定义 / 详细分析 / 行动方案 / 安装培训 / 调试试产 / 交付反馈，七步推进总览置顶；v3.16 5C0D 评分准则按公司资料按人机料法分列：机再细分「工序（工艺参数·Q 点）」与「机器设置（C 条件）」两套，人 / 料 / 法各一套，评分套表归类选择后五问维度自动联动；v3.15 依据 2025/2026 班组长培训课件更新 10 个工具：5C0D 升级为公司 2025 版「五条件零缺陷法」口径——4M1E 五套评分维度、总分 ≥21 可靠判定、Q 点 / C 条件区分，并同步 QA/QM 矩阵阈值；风险评估 / SOP / 问题三部曲 / ECRS / 十六大损失 / 标准化 / 5S / DMS 补充公司培训要点；v3.14 EEM/EPM 差异高亮；v3.13 DR 门禁 EEM/EPM 双版本；v3.12 新增 6 个项目管理工具，在线工具总数 43。管理员入口仍为隐藏式小链接）· 提示：若页面仍显示旧版，请强制刷新（Mac: ⌘+Shift+R / Windows: Ctrl+F5）</span></footer>
+<footer>EM 早期管理专业工具在线使用平台 · 方法论依据 WCM/TPM EM 支柱通用框架，落地须结合企业现行制度与法规裁剪<br>数据存储于公司 Supabase 云数据库（项目 lgohtkyiltxypvhydlbu）· 页面使用公开 publishable key，不含任何管理密钥<br><span style="color:var(--ink-3)">当前版本 v3.20（标准套表（EEM/EPM/DR/LCC/MP/PDA/成本损失）接入云端多人实时同步：登录后编辑自动上推 Supabase 表 em_wb_sheets，他人改动经 Realtime 推送自动刷新，云端优先 + 本机镜像，后保存者整表覆盖；v3.19 标准套表新增「PDA 项目缺陷分析表」与「成本损失统计表」：PDA 对齐公司《EM缺陷收集追踪表》口径——逐行登记缺陷、损失（额外成本＋延迟天数）、发生阶段/应避免阶段、本可避免工具，自动汇总损失合计、发现阶段分布、TOP 缺失工具与平均可前移步数；成本损失表按十六大损失口径分类归集，数量×单价自动折算金额，类别汇总图与 TOP 帕累托自动聚焦改善；v3.18 EM 项目台账新增「批量 Excel 导入」：下载模板 → 上传 xlsx/xls/csv → 逐行预览校验（重名/类型/阶段/日期）→ 一键写入云端，组件 xlsx.full.min.js 同桶本地托管；v3.17 七步标准名称全库统一：早期调研 / 范围定义 / 详细分析 / 行动方案 / 安装培训 / 调试试产 / 交付反馈，七步推进总览置顶；v3.16 5C0D 评分准则按公司资料按人机料法分列：机再细分「工序（工艺参数·Q 点）」与「机器设置（C 条件）」两套，人 / 料 / 法各一套，评分套表归类选择后五问维度自动联动；v3.15 依据 2025/2026 班组长培训课件更新 10 个工具：5C0D 升级为公司 2025 版「五条件零缺陷法」口径——4M1E 五套评分维度、总分 ≥21 可靠判定、Q 点 / C 条件区分，并同步 QA/QM 矩阵阈值；风险评估 / SOP / 问题三部曲 / ECRS / 十六大损失 / 标准化 / 5S / DMS 补充公司培训要点；v3.14 EEM/EPM 差异高亮；v3.13 DR 门禁 EEM/EPM 双版本；v3.12 新增 6 个项目管理工具，在线工具总数 43。管理员入口仍为隐藏式小链接）· 提示：若页面仍显示旧版，请强制刷新（Mac: ⌘+Shift+R / Windows: Ctrl+F5）</span></footer>
 </div>
 
 <!-- 工具详情弹窗 -->
@@ -1442,8 +1444,8 @@
 /* ================= Supabase 连接配置 ================= */
 const SB_URL='https://lgohtkyiltxypvhydlbu.supabase.co';
 const SB_KEY='sb_publishable_KjUwI-HYgDIWgAnObNUdKQ_hcYTH6Bg'; // publishable key（公开，非管理密钥）
-const TABLES=['em_projects','em_dr_records','em_tool_usage','em_fmea','em_vsu','em_skills','em_mp_info','em_lcc','em_dsr_records','em_design_feedback','em_mp_intel','em_review_sessions','em_review_risks'];
-const TABLE_NAMES={'em_projects':'项目台账','em_dr_records':'DR关卡','em_tool_usage':'使用台账','em_fmea':'FMEA','em_vsu':'VSU','em_skills':'技能矩阵','em_mp_info':'MP情报','em_lcc':'LCC成本','em_dsr_records':'设计审查记录','em_design_feedback':'设计反馈库','em_mp_intel':'MP情报录入','em_review_sessions':'审查会话','em_review_risks':'风险登记'};
+const TABLES=['em_projects','em_dr_records','em_tool_usage','em_fmea','em_vsu','em_skills','em_mp_info','em_lcc','em_dsr_records','em_design_feedback','em_mp_intel','em_review_sessions','em_review_risks','em_wb_sheets'];
+const TABLE_NAMES={'em_projects':'项目台账','em_dr_records':'DR关卡','em_tool_usage':'使用台账','em_fmea':'FMEA','em_vsu':'VSU','em_skills':'技能矩阵','em_mp_info':'MP情报','em_lcc':'LCC成本','em_dsr_records':'设计审查记录','em_design_feedback':'设计反馈库','em_mp_intel':'MP情报录入','em_review_sessions':'审查会话','em_review_risks':'风险登记','em_wb_sheets':'标准套表'};
 const tableOK={};
 
 async function api(path,method='GET',body=null,prefer=null){
@@ -2347,7 +2349,7 @@ function wbClear(kind){
   if(kind==='mp'){['wb_mp_p','wb_mp_a','wb_mp_d'].forEach(id=>{document.getElementById(id).value='';});['wb_mp_cost','wb_mp_benefit'].forEach(id=>{document.getElementById(id).value='';});wbMpCalc();return;}
 }
 
-/* ---- 练习记录（localStorage，仅本机） ---- */
+/* ---- 练习记录（本机 + 云端同步） ---- */
 function wbSave(kind){
   let rec=null;
   if(kind==='eem'||kind==='epm'){
@@ -2374,7 +2376,8 @@ function wbSave(kind){
   const arr=JSON.parse(localStorage.getItem('em_wb_recs')||'[]');
   arr.unshift(rec);if(arr.length>30)arr.length=30;
   localStorage.setItem('em_wb_recs',JSON.stringify(arr));
-  wbRecs();toast('已保存练习记录（本机）');
+  wbCloudPush('recs');
+  wbRecs();toast('已保存练习记录 ✓');
 }
 function wbRecs(){
   const arr=JSON.parse(localStorage.getItem('em_wb_recs')||'[]');
@@ -2415,15 +2418,17 @@ function wbDrToggle(k,i){
   const state=JSON.parse(localStorage.getItem('em_wb_dr')||'{}');
   if(state[t])delete state[t];else state[t]=1;
   localStorage.setItem('em_wb_dr',JSON.stringify(state));
+  wbCloudPush('dr');
   wbDrRender();
 }
 function wbDrDemo(){
   const state=JSON.parse(localStorage.getItem('em_wb_dr')||'{}');
   DR_TASKS[1].forEach(t=>state[t]=1);
   localStorage.setItem('em_wb_dr',JSON.stringify(state));
+  wbCloudPush('dr');
   wbDrRender();
 }
-function wbDrReset(){localStorage.removeItem('em_wb_dr');wbDrRender();}
+function wbDrReset(){localStorage.removeItem('em_wb_dr');wbCloudPush('dr');wbDrRender();}
 
 /* ---- LCC 投资决策表 ---- */
 function wbLccGrid(){
@@ -2501,7 +2506,64 @@ function wbMpDemo(){
   wbMpCalc();
 }
 
-/* ================= 套表 6/7：PDA 缺陷分析表 + 成本损失统计表（v3.19） ================= */
+/* ================= 标准套表云端同步（v3.20：em_wb_sheets · 云端优先 + 本机镜像 + 防抖上推） ================= */
+const WB_CLOUD_KINDS=['pda','loss','dr','recs'];
+const WB_CLOUD_KEY={pda:'em_wb_pda',loss:'em_wb_loss',dr:'em_wb_dr',recs:'em_wb_recs'};
+const WB_CLOUD_EMPTY={pda:[],loss:[],dr:{},recs:[]};
+const WB_CLOUD_RD={pda:'wbPdaRender',loss:'wbLossRender',dr:'wbDrRender',recs:'wbRecs'};
+let wbCloudOK=null;                 /* null=未探测 true=云端表可用 false=表未建/不可达（降级纯本机） */
+const wbCloudDeb={},wbCloudSelf={};
+function wbCloudWho(){
+  try{if(typeof AUTH!=='undefined'&&AUTH)return (AUTH.name&&AUTH.id)?(AUTH.name+'('+AUTH.id+')'):(AUTH.name||AUTH.id||'匿名');}catch(e){}
+  return '匿名';
+}
+function wbCloudMark(){
+  const el=document.getElementById('conntxt');if(!el||wbCloudOK===null)return;
+  let tag=el.querySelector('.wb-ctag');
+  if(wbCloudOK){if(tag)tag.remove();return;}
+  if(!tag){tag=document.createElement('span');tag.className='wb-ctag';tag.style.marginLeft='8px';tag.style.color='#b3661a';
+    tag.textContent='（标准套表云端表未建，暂存本机——请管理员在 Supabase SQL Editor 执行建表脚本）';el.appendChild(tag);}
+}
+async function wbCloudPull(force){
+  if(wbCloudOK===false&&!force)return;
+  let rows=null;
+  try{rows=await api('em_wb_sheets?select=kind,data,updated_by,updated_at');wbCloudOK=true;}
+  catch(e){wbCloudOK=false;wbCloudMark();return;}
+  (rows||[]).forEach(r=>{
+    const k=r.kind;if(!WB_CLOUD_KEY[k])return;
+    let val=r.data;try{val=(typeof val==='string')?JSON.parse(val):val;}catch(e){val=null;}
+    if(val==null)val=WB_CLOUD_EMPTY[k];
+    try{localStorage.setItem(WB_CLOUD_KEY[k],JSON.stringify(val));}catch(e){}
+    if(wbCloudSelf[k]&&Date.now()-wbCloudSelf[k]<3000)return;   /* 自己刚上推的内容不回渲染 */
+    const fn=WB_CLOUD_RD[k];
+    if(typeof window[fn]==='function'){
+      const pane=document.getElementById('sheet-'+k);
+      const ae=document.activeElement;
+      const busy=pane&&ae&&pane.contains(ae)&&ae.tagName==='INPUT';  /* 正在该表输入时跳过重渲染 */
+      if(!busy)window[fn]();
+    }
+  });
+  wbCloudMark();
+}
+function wbCloudPush(kind){
+  if(!WB_CLOUD_KEY[kind])return;
+  clearTimeout(wbCloudDeb[kind]);
+  wbCloudDeb[kind]=setTimeout(function(){wbCloudDoPush(kind);},1200);   /* 防抖：连续编辑只推最后一次 */
+}
+async function wbCloudDoPush(kind){
+  if(wbCloudOK===false)return;
+  let data;try{data=JSON.parse(localStorage.getItem(WB_CLOUD_KEY[kind])||JSON.stringify(WB_CLOUD_EMPTY[kind]));}catch(e){return;}
+  wbCloudSelf[kind]=Date.now();
+  try{
+    await api('em_wb_sheets','POST',[{kind:kind,data:data,updated_by:wbCloudWho(),updated_at:new Date().toISOString()}],'return=representation,resolution=merge-duplicates');
+    if(wbCloudOK!==true){wbCloudOK=true;wbCloudMark();}
+  }catch(e){
+    const m=String((e&&e.message)||e);
+    if(m.indexOf('does not exist')>=0||m.indexOf('schema cache')>=0){wbCloudOK=false;wbCloudMark();}  /* 表未建 → 停止重试 */
+  }
+}
+
+/* ================= 套表 6/7：PDA 缺陷分析表 + 成本损失统计表（v3.19 新增，v3.20 接入云端同步） ================= */
 const WB_PDA_STAGES=['DR1 早期调研','DR2 范围定义','DR3 详细分析','DR4 行动方案','DR5 安装培训','DR6 调试试产','DR7 交付反馈'];
 const WB_PDA_PROG=['未启动','进行中','已完成'];
 const WB_LOSS_CATS=['故障停机','换模调整','小停机空转','速度损失','开始结束损失','不良报废','返工损失','降级损失','物流等待','能源浪费','管理损失','人员损失'];
@@ -2536,7 +2598,7 @@ function wbMiniBars(items,color){
 }
 /* ---- PDA 项目缺陷分析表 ---- */
 function wbPdaLoad(){try{return JSON.parse(localStorage.getItem('em_wb_pda')||'[]');}catch(e){return [];}}
-function wbPdaStore(a){localStorage.setItem('em_wb_pda',JSON.stringify(a||[]));}
+function wbPdaStore(a){localStorage.setItem('em_wb_pda',JSON.stringify(a||[]));wbCloudPush('pda');}
 function wbPdaInit(){wbPdaRender();}
 function wbPdaRead(){
   const out=[];
@@ -2571,7 +2633,7 @@ function wbPdaRender(){
 function wbPdaEdit(){wbPdaStore(wbPdaRead());wbPdaCalc();}
 function wbPdaAdd(){const a=wbPdaRead();a.push({});wbPdaStore(a);wbPdaRender();}
 function wbPdaDel(i){const a=wbPdaRead();a.splice(i,1);if(!a.length)a.push({});wbPdaStore(a);wbPdaRender();}
-function wbPdaClear(){localStorage.removeItem('em_wb_pda');wbPdaRender();}
+function wbPdaClear(){wbPdaStore([]);wbPdaRender();}
 function wbPdaDemo(){
   wbPdaStore([
    {dept:'品保部',proj:'激光粒度分析仪',defect:'设备管路脏污',cost:500,delay:2,disc:'DR6 调试试产',avoid:'DR3 详细分析',tool:'FMEA、专家点检表',act:'①汰换失效管路；②管路维保纳入周期管理',prog:'进行中'},
@@ -2609,7 +2671,7 @@ function wbPdaCalc(){
 }
 /* ---- 成本损失统计表 ---- */
 function wbLossLoad(){try{return JSON.parse(localStorage.getItem('em_wb_loss')||'[]');}catch(e){return [];}}
-function wbLossStore(a){localStorage.setItem('em_wb_loss',JSON.stringify(a||[]));}
+function wbLossStore(a){localStorage.setItem('em_wb_loss',JSON.stringify(a||[]));wbCloudPush('loss');}
 function wbLossInit(){wbLossRender();}
 function wbLossRead(){
   const out=[];
@@ -2641,7 +2703,7 @@ function wbLossRender(){
 function wbLossEdit(){wbLossStore(wbLossRead());wbLossCalc();}
 function wbLossAdd(){const a=wbLossRead();a.push({});wbLossStore(a);wbLossRender();}
 function wbLossDel(i){const a=wbLossRead();a.splice(i,1);if(!a.length)a.push({});wbLossStore(a);wbLossRender();}
-function wbLossClear(){localStorage.removeItem('em_wb_loss');wbLossRender();}
+function wbLossClear(){wbLossStore([]);wbLossRender();}
 function wbLossDemo(){
   wbLossStore([
    {date:'2026-08-05',proj:'灌装线 B',cat:'速度损失',desc:'实际节拍仅为设计节拍 82%',qty:120,price:65,act:'模流仿真优化＋传动链保养'},
@@ -2680,7 +2742,7 @@ function wbLossCalc(){
 }
 
 /* ---- 套表初始化 ---- */
-wbRows('EEM');wbRows('EPM');wbLccGrid();wbDrRender();wbPdaInit();wbLossInit();wbRecs();
+wbRows('EEM');wbRows('EPM');wbLccGrid();wbDrRender();wbPdaInit();wbLossInit();wbRecs();if(typeof wbCloudPull==='function')wbCloudPull();
 document.querySelectorAll(".sheettabs button").forEach(b=>b.addEventListener("click",()=>{
   document.querySelectorAll(".sheettabs button").forEach(x=>x.classList.remove("on"));b.classList.add("on");
   document.querySelectorAll(".sheet-pane").forEach(p=>p.classList.remove("on"));
@@ -3135,7 +3197,8 @@ function setupRealtime(){
     const cli=window.supabase.createClient(SB_URL,SB_KEY,{realtime:{params:{eventsPerSecond:10}}});
     const ch=cli.channel("em-live-rt");
     ch.on("postgres_changes",{event:"*",schema:"public"},(p)=>{
-      if(!p||!TABLES.includes(p.table))return;  // 只关心 6 张业务表
+      if(p&&p.table==='em_wb_sheets'){if(typeof wbCloudPull==='function')wbCloudPull(true);return;}  // 标准套表：他人改动实时拉取
+      if(!p||!TABLES.includes(p.table))return;  // 只关心业务表
       if(rtThrottle)return;                      // 节流：400ms 合并突发写入
       rtThrottle=setTimeout(()=>{rtThrottle=null;refreshActiveView();},400);
     }).subscribe((st)=>{
